@@ -1,16 +1,16 @@
 ---
 import '../styles/global.css';
 import '../styles/transitions.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   title: string;
-  description?: string;
+  description: string;
 }
 
 const { 
   title, 
-  description = "Modern SaaS landing page template with responsive design and modular sections."
+  description,
 } = Astro.props;
 ---
 
@@ -26,8 +26,14 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <ViewTransitions />
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+
+    <ClientRouter />
   </head>
+  
   <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300">
     <div id="page-wrapper" class="page-transition-wrapper">
       <slot />
@@ -42,6 +48,13 @@ const {
         } else {
           localStorage.setItem('darkMode', 'false');
         }
+      }
+
+      const lang = navigator.language || navigator.userLanguage;
+      if (lang.startsWith('de')) {
+        console.log("GERMAN")
+      } else {
+        console.log("ENGLISH")
       }
 
       // Handle page transitions
