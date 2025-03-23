@@ -5,12 +5,12 @@ import { ClientRouter } from 'astro:transitions';
 
 export interface Props {
   title: string;
-  description: string;
+  description?: string;
 }
 
 const { 
   title, 
-  description,
+  description="Effizienz steigern. Fehler reduzieren. Mitarbeiter entlasten.",
 } = Astro.props;
 ---
 
