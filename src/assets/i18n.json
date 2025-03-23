@@ -50,6 +50,26 @@
             "solution_6": "KI-generierte Dashboards – Diese visualisieren Daten, erkennen Trends und liefern fundierte Entscheidungsvorschläge.",
             "solution_7": "KI-gestützter Kundenservice – Chatbots übernehmen repetitive Anfragen, sodass sich Ihr Support-Team auf das Wesentliche konzentrieren kann.",
             "solution_8": "Automatische Segmentierung & personalisierte Inhalte – KI analysiert Kundenverhalten und erstellt maßgeschneiderte Inhalte für gezieltes Marketing."
+        },
+        "solution_details": {
+            "intro": "Sie wissen bereits, welche KI-Technologie Ihr Unternehmen voranbringen kann – jetzt geht es um die optimale Umsetzung. Ich unterstütze Sie dabei, moderne generative KI-Lösungen wie Chatbots, Automatisierungs-Tools oder Content-Generatoren effizient und datenschutzkonform zu integrieren.",
+            "solution_1_headline": "Lösungspräsentation & Feinanpassung",
+            "solution_1_text": "Ich stelle Ihnen die gewählte KI-Lösung in einer Demo vor, angepasst an Ihre individuellen Anforderungen. Gemeinsam legen wir fest, welche spezifischen Funktionen und Schnittstellen benötigt werden.",
+            "solution_2_headline": "Technische Einrichtung & Integration",
+            "solution_2_text": "Ich begleite Ihr Team Schritt für Schritt dabei, die Lösung selbst zu integrieren. Dabei stelle ich sicher, dass sich die Software nahtlos in Ihre bestehenden Systeme und Workflows einfügt.",
+            "solution_3_headline": "Datenschutz & Compliance",
+            "solution_3_text": "Ihre Daten bleiben sicher! Ich setze auf Technologien, die DSGVO-konform sind und entwickle eine passende Strategie für den verantwortungsvollen Umgang mit KI-generierten Inhalten.",
+            "solution_4_headline": "Testing & Optimierung",
+            "solution_4_text": "Nach der Implementierung testen wir die Lösung intensiv und optimieren sie für maximale Performance und Benutzerfreundlichkeit. So stellen wir sicher, dass sie genau die gewünschten Ergebnisse liefert.",
+            "solution_5_headline": "Support & Weiterentwicklung",
+            "solution_5_text": "Auch nach der Einführung stehe ich Ihnen zur Seite. Ob regelmäßige Updates, neue Features oder Performance-Optimierung – ich sorge dafür, dass Ihre KI-Lösung langfristig erfolgreich bleibt.",
+            "outro_question": "Warum mit mir?",
+            "outro_bullets": [
+                "Schnelle und reibungslose Implementierung Ihrer Wunschlösung",
+                "Datenschutz & Sicherheit von Anfang an berücksichtigt",
+                "Flexibler Support, damit Ihr Team die Lösung optimal nutzen kann"
+            ],
+            "outro_call_to_action": "Starten Sie jetzt mit modernster KI-Technologie – effizient, sicher und ohne Umwege!"
         }
     }
 }
