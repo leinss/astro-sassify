@@ -11,7 +11,7 @@
             "subline": "Effiziente Verwaltung mit KI – Prozesse automatisieren, Fehler reduzieren, Mitarbeiter entlasten.",
             "headline_start": "Automatisierung mit KI",
             "headline_end": "Weniger Aufwand, mehr Zeit für das Wesentliche",
-            "intro_text": "Manuelle Prozesse kosten Zeit, Geld und Nerven. Mit generativer KI automatisiere ich Datenverarbeitung, Marktanalysen und Kundenservice, damit dein Unternehmen schneller, fehlerfreier und produktiver arbeitet – ohne komplizierte Umstellungen.",
+            "intro_text": "Manuelle Prozesse kosten Zeit, Geld und Nerven. Mit generativer KI automatisieren wir Datenverarbeitung, Marktanalysen und Kundenservice, damit dein Unternehmen schneller, fehlerfreier und produktiver arbeitet – ohne komplizierte Umstellungen.",
             "point_1_start": "Datenverarbeitung",
             "point_1_end": "Automatisierte Analyse, Strukturierung und Verarbeitung von Dokumenten wie Rechnungen, Verträgen oder Bewerbungen – weniger Fehler, mehr Effizienz.",
             "point_2_start": "Marktanalysen",
@@ -19,6 +19,22 @@
             "point_3_start": "Kundenservice",
             "point_3_end": "Implementierung intelligenter Chatbots und KI-Assistenten, die Anfragen automatisiert bearbeiten, Kundenanliegen schneller lösen und Support-Teams entlasten.",
             "cta": "Jetzt Erstgespräch vereinbaren"
+        },
+        "problem_solution": {
+            "intro": "Täglich verschwenden Unternehmen wertvolle Zeit mit manuellen Prozessen, die sich längst automatisieren ließen. Fehleranfällige Dateneingaben, ineffiziente Marktanalysen und überlastete Kundenservices bremsen das Wachstum – und kosten bares Geld.",
+            "problem_headline": "Das größte Problem",
+            "problem_point_1_headline": "Zeitfresser & Fehlerquellen",
+            "problem_point_1_text": "Rechnungen manuell prüfen, Markttrends analysieren oder Kundenanfragen beantworten – all das kostet enorm viel Zeit und birgt ein hohes Fehlerpotenzial.",
+            "problem_point_2_headline": "Mangelnde Effizienz & Skalierbarkeit",
+            "problem_point_2_text": "Wachsende Datenmengen und steigende Anforderungen machen es schwer, Prozesse schnell und zuverlässig zu managen, ohne mehr Personal einzustellen.",
+            "solution_headline": "Die Lösung",
+            "solution_text": "Mit generativer KI automatisieren wir zeitintensive Prozesse, reduzieren Fehler und entlasten dein Team – ohne komplizierte Systemwechsel.",
+            "solution_point_1_headline": "Automatisierte Datenverarbeitung",
+            "solution_point_1_text": "KI liest und verarbeitet Rechnungen, Verträge und Formulare blitzschnell und fehlerfrei.",
+            "solution_point_2_headline": "Intelligente Marktanalysen",
+            "solution_point_2_text": "Relevante Trends und Wettbewerbsinformationen automatisch extrahieren – ohne stundenlange Recherchen.",
+            "solution_point_3_headline": "KI-gestützter Kundenservice",
+            "solution_point_3_text": "Chatbots übernehmen repetitive Anfragen, sodass dein Support-Team sich auf das Wesentliche konzentrieren kann."
         }
     }
 }
