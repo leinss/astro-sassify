@@ -1,0 +1,24 @@
+{
+    "en": {
+        "header": {},
+        "hero": {}
+    },
+    "de": {
+        "header": {
+            "book_a_call": "Gespräch buchen"
+        },
+        "hero": {
+            "subline": "Effiziente Verwaltung mit KI – Prozesse automatisieren, Fehler reduzieren, Mitarbeiter entlasten.",
+            "headline_start": "Automatisierung mit KI",
+            "headline_end": "Weniger Aufwand, mehr Zeit für das Wesentliche",
+            "intro_text": "Manuelle Prozesse kosten Zeit, Geld und Nerven. Mit generativer KI automatisiere ich Datenverarbeitung, Marktanalysen und Kundenservice, damit dein Unternehmen schneller, fehlerfreier und produktiver arbeitet – ohne komplizierte Umstellungen.",
+            "point_1_start": "Datenverarbeitung",
+            "point_1_end": "Automatisierte Analyse, Strukturierung und Verarbeitung von Dokumenten wie Rechnungen, Verträgen oder Bewerbungen – weniger Fehler, mehr Effizienz.",
+            "point_2_start": "Marktanalysen",
+            "point_2_end": "KI-gestützte Recherche und Auswertung großer Datenmengen, um schneller relevante Markttrends, Wettbewerbsanalysen und Kundenbedürfnisse zu identifizieren.",
+            "point_3_start": "Kundenservice",
+            "point_3_end": "Implementierung intelligenter Chatbots und KI-Assistenten, die Anfragen automatisiert bearbeiten, Kundenanliegen schneller lösen und Support-Teams entlasten.",
+            "cta": "Jetzt Erstgespräch vereinbaren"
+        }
+    }
+}
