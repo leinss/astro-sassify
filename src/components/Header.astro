@@ -1,4 +1,7 @@
 ---
+import { config } from '../assets/config';
+import i18n from '../assets/i18n.json';
+
 const allPages = [
   { text: "Home", url: "/" },
   { text: "Features", url: "/features" },
@@ -10,7 +13,7 @@ const allPages = [
   { text: "Case Studies", url: "/case-study" },
   { text: "About Us", url: "/company" },
   { text: "Careers", url: "/career" },
-  { text: "Contact", url: "/contact" },
+  { text: "Contact", url: config.external_links.strategy_call },
   { text: "Reviews", url: "/reviews" },
   { text: "Privacy Policy", url: "/privacy-policy" },
   { text: "Terms of Service", url: "/terms-conditions" },
@@ -20,7 +23,7 @@ const allPages = [
 <header class="fixed w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm z-50 py-4 transition-colors duration-300">
   <div class="container-custom flex items-center justify-between">
     <a href="/" class="flex items-center" aria-label="Go to homepage">
-      LOGO
+      <img src={'logo.png'} alt="Logo" class="h-12 w-auto" />
     </a>
     
     <nav class="hidden md:flex items-center space-x-8">
@@ -28,7 +31,7 @@ const allPages = [
       <a href="/features" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Features</a>
       <a href="/pricing" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Pricing</a>
       <a href="/blog" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Blog</a>
-      <a href="/contact" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Contact</a>
+      <a href={config.external_links.strategy_call} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Contact</a>
       
       <!-- All Pages Dropdown -->
       <div x-data="{ open: false }" class="relative">
@@ -79,7 +82,7 @@ const allPages = [
         </svg>
       </button>
       
-      <a href="#signup" class="hidden sm:inline-flex btn-primary">Get Started</a>
+      <a href={config.external_links.strategy_call} class="hidden sm:inline-flex btn-primary">{i18n.de.header.book_a_call}</a>
       
       <!-- Mobile Menu Button and Dropdown -->
       <div x-data="{ open: false, showAllPages: false }">
@@ -110,7 +113,7 @@ const allPages = [
           <a href="/features" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Features</a>
           <a href="/pricing" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Pricing</a>
           <a href="/blog" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Blog</a>
-          <a href="/contact" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Contact</a>
+          <a href={config.external_links.strategy_call} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Contact</a>
           
           <!-- Mobile All Pages Dropdown -->
           <button 
