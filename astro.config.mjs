@@ -8,7 +8,7 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://leinss.xyz",
-  // base: "/astro-sassify",
+  base: "/astro-sassify",
   integrations: [tailwind(), alpinejs(), react()],
   i18n: {
     locales: ["en", "de"],
