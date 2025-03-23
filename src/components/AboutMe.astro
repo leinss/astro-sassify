@@ -2,7 +2,7 @@
 import i18n from "../assets/i18n.json"
 ---
 
-<section class="relative py-20 bg-white dark:bg-gray-900">
+<section class="relative py-20 bg-white dark:bg-gray-900" id="about">
   <div class="container-custom">
     <div class="space-y-12 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
@@ -14,21 +14,21 @@ import i18n from "../assets/i18n.json"
       <div class="text-center space-y-4 max-w-3xl mx-auto">
         <picture>
           <source
-            srcset="astro-sassify/profile.jpg?w=256 1x, astro-sassify/profile.jpg?w=512 2x"
+            srcset="/astro-sassify/profile.jpg?w=256 1x, /astro-sassify/profile.jpg?w=512 2x"
             type="image/jpeg"
             media="(min-width: 1024px)"
           />
           <source
-            srcset="astro-sassify/profile.jpg?w=224 1x, astro-sassify/profile.jpg?w=448 2x"
+            srcset="/astro-sassify/profile.jpg?w=224 1x, /astro-sassify/profile.jpg?w=448 2x"
             type="image/jpeg"
             media="(min-width: 640px)"
           />
           <source
-            srcset="astro-sassify/profile.jpg?w=192 1x, astro-sassify/profile.jpg?w=384 2x"
+            srcset="/astro-sassify/profile.jpg?w=192 1x, /astro-sassify/profile.jpg?w=384 2x"
             type="image/jpeg"
           />
           <img
-            src="astro-sassify/profile.jpg"
+            src="/astro-sassify/profile.jpg"
             alt="Portrait of Tobias"
             class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
             width="256"
@@ -37,7 +37,7 @@ import i18n from "../assets/i18n.json"
             decoding="async"
             fetchpriority="high"
             onload="this.classList.add('loaded')"
-            onerror="this.onerror=null; this.src='astro-sassify/logo.png'; this.classList.add('error')"
+            onerror="this.onerror=null; this.src='/astro-sassify/logo.png'; this.classList.add('error')"
           />
         </picture>
       </div>

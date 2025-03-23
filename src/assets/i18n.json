@@ -5,6 +5,13 @@
     },
     "de": {
         "header": {
+            "home": "Startseite",
+            "problem": "Probleme",
+            "solution": "Lösungen",
+            "about": "Über mich",
+            "services": "Leistungen",
+            "faq": "FAQ",
+            "contact": "Kontakt",
             "book_a_call": "Gespräch buchen"
         },
         "hero": {
