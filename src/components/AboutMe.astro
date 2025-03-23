@@ -11,43 +11,104 @@ import i18n from "../assets/i18n.json"
         </h2>
       </div>
 
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <picture>
+          <source
+            srcset="/profile.jpg?w=256 1x, /profile.jpg?w=512 2x"
+            type="image/jpeg"
+            media="(min-width: 1024px)"
+          />
+          <source
+            srcset="/profile.jpg?w=224 1x, /profile.jpg?w=448 2x"
+            type="image/jpeg"
+            media="(min-width: 640px)"
+          />
+          <source
+            srcset="/profile.jpg?w=192 1x, /profile.jpg?w=384 2x"
+            type="image/jpeg"
+          />
+          <img
+            src="/profile.jpg"
+            alt="Portrait of Tobias"
+            class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
+            width="256"
+            height="256"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="high"
+            onload="this.classList.add('loaded')"
+            onerror="this.onerror=null; this.src='/logo.png'; this.classList.add('error')"
+          />
+        </picture>
+      </div>
+
       <div x-data="{ activeTab: 'mission' }" class="space-y-6">
-       <!-- Tab Navigation -->
-       <div class="flex justify-center space-x-4 border-b border-gray-200 dark:border-gray-700">
-         <button
-           @click="activeTab = 'mission'"
-           :class="activeTab === 'mission' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
-           class="px-4 py-2 font-medium border-b-2 transition-colors"
-         >
-           Mission & Vision
-         </button>
-         <button
-           @click="activeTab = 'career'"
-           :class="activeTab === 'career' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
-           class="px-4 py-2 font-medium border-b-2 transition-colors"
-         >
-           Werdegang
-         </button>
-       </div>
+        <!-- Tab Navigation -->
+        <div
+          class="flex justify-center space-x-4 border-b border-gray-200 dark:border-gray-700"
+        >
+          <button
+            @click="activeTab = 'mission'"
+            :class="activeTab === 'mission' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
+            class="px-4 py-2 font-medium border-b-2 transition-colors"
+          >
+            Mission & Vision
+          </button>
+          <button
+            @click="activeTab = 'career'"
+            :class="activeTab === 'career' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
+            class="px-4 py-2 font-medium border-b-2 transition-colors"
+          >
+            Werdegang
+          </button>
+        </div>
 
-       <!-- Tab Content -->
-       <div class="mt-6">
-         <!-- Mission & Vision Tab -->
-         <div x-show="activeTab === 'mission'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-           <div class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-             <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Mission & Vision</h3>
-             <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">{i18n.de.about_me.mission_statement}</p>
-           </div>
-         </div>
+        <!-- Tab Content -->
+        <div class="mt-6">
+          <!-- Mission & Vision Tab -->
+          <div
+            x-show="activeTab === 'mission'"
+            x-cloak
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+          >
+            <div
+              class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
+            >
+              <h3
+                class="text-xl font-semibold mb-4 text-gray-900 dark:text-white"
+              >
+                Mission & Vision
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                {i18n.de.about_me.mission_statement}
+              </p>
+            </div>
+          </div>
 
-         <!-- Career Tab -->
-         <div x-show="activeTab === 'career'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
-           <div class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-             <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Werdegang</h3>
-             <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">{i18n.de.about_me.career}</p>
-           </div>
-         </div>
-       </div>
+          <!-- Career Tab -->
+          <div
+            x-show="activeTab === 'career'"
+            x-cloak
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+          >
+            <div
+              class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
+            >
+              <h3
+                class="text-xl font-semibold mb-4 text-gray-900 dark:text-white"
+              >
+                Werdegang
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                {i18n.de.about_me.career}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
