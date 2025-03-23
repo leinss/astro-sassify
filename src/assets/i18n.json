@@ -74,6 +74,34 @@
         "about_me": {
             "mission_statement": "Ich glaube an die transformative Kraft der KI und digitale Innovationen, um Unternehmen nicht nur effizienter, sondern auch zukunftssicher zu machen.\n\nMeine Mission ist es, Dienstleistungsunternehmen durch maßgeschneiderte KI-Lösungen zu unterstützen, damit sie ihre Prozesse optimieren, Wettbewerbsvorteile sichern und nachhaltig wachsen können.\n\nDabei setze ich auf Integrität, Innovation und individuelle Lösungen, die genau auf die Bedürfnisse meiner Kunden abgestimmt sind.\nMit einem klaren Fokus auf Zuverlässigkeit, Ehrlichkeit und Entwicklung begleite ich Unternehmen auf ihrem Weg zur digitalen Exzellenz – pragmatisch, vorausschauend und mit echter Leidenschaft für technologische Fortschritte.",
             "career": "Tobias Leinss ist ein erfahrener Software Engineer mit einem Schwerpunkt auf künstlicher Intelligenz, Blockchain und Fullstack-Entwicklung.\n\nMit einem Hintergrund im Wirtschaftsingenieurwesen (Schwerpunkt IT) und mehr als sechs Jahren Berufserfahrung hat er in verschiedenen internationalen Unternehmen und Forschungsinstitutionen gearbeitet.\nZu seinen beruflichen Stationen zählen unter anderem das Fraunhofer-Institut, Blockchain-Projekte im Ethereum- und Cosmos-Ökosystem sowie die Entwicklung KI-gestützter Softwarelösungen. Darüber hinaus war er als Mitgründer an innovativen Startups beteiligt und konnte durch zahlreiche erfolgreiche Teilnahmen an Hackathons seine Expertise unter Beweis stellen.\n\nSein Fokus liegt auf der Entwicklung skalierbarer Softwarelösungen, der Automatisierung digitaler Prozesse und der Integration von KI in Geschäftsabläufe.\nDabei beherrscht er sowohl Backend- als auch Frontend-Technologien und verfügt über umfassende Erfahrung in den Bereichen DevOps, Data Engineering und Software-Architektur."
+        },
+        "faq": {
+            "q_1": "An wen richtet sich unser Angebot?",
+            "a_1": "Unser Angebot richtet sich an mittelständische Unternehmen, insbesondere digitale Dienstleister und Verwaltungen, die den Einsatz von generativer KI für ihre internen Prozesse oder Kundenkommunikation optimieren möchten. Wir helfen Unternehmen, moderne KI-Technologien effizient und datenschutzkonform zu nutzen.",
+            "q_2": "Was genau bieten wir an?",
+            "a_2": "Wir bieten Beratung und Schulungen zur Implementierung generativer KI-Software an. Unser Fokus liegt darauf, Unternehmen beizubringen, wie sie KI-gestützte Chatbots und Automatisierungslösungen eigenständig anpassen und in ihre Systeme integrieren können.",
+            "q_3": "Welche Vorteile bietet generative KI für den Mittelstand?",
+            "a_3": "Effizienzsteigerung:\nReduzierung manueller Prozesse durch KI-Automatisierung\n\nKostenersparnis:\nWeniger Zeitaufwand durch automatisierte Kundenkommunikation und Prozessoptimierung\n\nSkalierbarkeit:\nUnternehmenswachstum unterstützen, ohne dass Personalkosten unverhältnismäßig steigen\n\nDatenschutzkonforme Lösungen:\nNutzung moderner Technologien im Einklang mit DSGVO und unter Wahrung der Unternehmensdaten",
+            "q_4": "Was unterscheidet unser Angebot von anderen?",
+            "a_4": "Wir setzen auf die neuesten Entwicklungen in generativer KI und legen besonderen Wert auf Datenschutz und Individualisierbarkeit. Unternehmen erhalten nicht nur eine fertige Softwarelösung, sondern auch das Wissen, um diese eigenständig anzupassen und weiterzuentwickeln.",
+            "q_5": "Ist technisches Vorwissen erforderlich?",
+            "a_5": "Nein. Unser Kurs ist so gestaltet, dass sowohl IT-affine als auch nicht-technische Teams die Implementierung und Anpassung einer KI-gestützten Lösung umsetzen können. Wir vermitteln praxisnahes Wissen, das direkt angewendet werden kann.",
+            "q_6": "Welche Arten von KI-Anwendungen können Unternehmen umsetzen?",
+            "a_6": "Automatisierte Kundenkommunikation via Chatbots\n\nIntelligente Dokumentenanalyse und Datenverarbeitung\n\nAutomatisierte Textgenerierung für Berichte, E-Mails oder Support-Anfragen\n\nProzessautomatisierung durch KI-gestützte Workflows",
+            "q_7": "Wie ist der Ablauf unserer Schulung?",
+            "a_7": "Unser Kurs ist in mehrere Module unterteilt:\n\nGrundlagen generativer KI und Anwendungsfälle\nAuswahl und Implementierung einer passenden KI-Software\nAnpassung und Training der KI auf unternehmensspezifische Daten\nSicherstellung von Datenschutz und Compliance\nWartung und Optimierung der KI-Lösung",
+            "q_8": "Was kostet die Teilnahme an der Schulung?",
+            "a_8": "Die Kosten variieren je nach Umfang der gewählten Module und dem individuellen Beratungsbedarf. Kontaktieren Sie uns für ein unverbindliches Angebot.",
+            "q_9": "Ich bin interessiert – wie geht es weiter?",
+            "a_9": "Großartig! Buchen Sie ein Erstgespräch. Wir besprechen gemeinsam Ihre Anforderungen und klären, wie generative KI Ihrem Unternehmen konkret helfen kann."
+        },
+        "footer": {
+            "contact": {
+                "headline": "Kontakt",
+                "address": "Musterstraße 123, 12345 Musterstadt",
+                "phone": "+49 123 4567890",
+                "email": ""
+            }
         }
     }
 }
