@@ -1,113 +1,86 @@
 ---
 import i18n from "../assets/i18n.json"
-import { BsExclamationTriangle, BsClockHistory } from "react-icons/bs"
-import { MdOutlineSpeed } from "react-icons/md"
-import { AiOutlineSolution, AiOutlineRobot } from "react-icons/ai"
-import { BiAnalyse } from "react-icons/bi"
+import { BsSearch, BsFileText, BsLightbulb, BsClockHistory, BsSpeedometer } from "react-icons/bs"
+import { MdOutlinePeople, MdOutlineChat, MdOutlineAnalytics } from "react-icons/md"
+import { AiOutlineRobot, AiOutlineDashboard } from "react-icons/ai"
+import { BiAnalyse, BiTargetLock } from "react-icons/bi"
 import { RiCustomerService2Line } from "react-icons/ri"
+import { FaRegComments, FaChartLine } from "react-icons/fa"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900">
   <div class="container-custom">
-    <div class="text-center max-w-3xl mx-auto mb-16 slide-up">
-      <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-        {i18n.de.problem_solution.intro}
-      </p>
-    </div>
-
     <div class="grid lg:grid-cols-2 gap-16 items-start">
       <!-- Problems Section -->
       <div class="space-y-8 slide-up">
-        <div class="text-center lg:text-left">
-          <h2 class="text-3xl font-bold text-red-600 dark:text-red-400 mb-8">
+        <div class="text-center lg:text-left space-y-4">
+          <h2 class="text-3xl font-bold text-red-600 dark:text-red-400">
             {i18n.de.problem_solution.problem_headline}
           </h2>
+          <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            {i18n.de.problem_solution.problem_subline}
+          </p>
         </div>
         
-        <div class="space-y-8">
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800">
-            <span class="text-red-600 dark:text-red-400 mt-1">
-              <BsClockHistory size={24} />
-            </span>
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution.problem_point_1_headline}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution.problem_point_1_text}
-              </p>
+        <div class="grid gap-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
+              <span class="text-red-600 dark:text-red-400 mt-1 shrink-0">
+                {num === 1 ? <BsSearch size={24} /> :
+                 num === 2 ? <MdOutlinePeople size={24} /> :
+                 num === 3 ? <BsFileText size={24} /> :
+                 num === 4 ? <BsClockHistory size={24} /> :
+                 num === 5 ? <BsSpeedometer size={24} /> :
+                 num === 6 ? <MdOutlineAnalytics size={24} /> :
+                 num === 7 ? <FaRegComments size={24} /> :
+                 <BiTargetLock size={24} />
+                }
+              </span>
+              <div>
+                <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                  {i18n.de.problem_solution[`problem_${num}_headline` as keyof typeof i18n.de.problem_solution]}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  {i18n.de.problem_solution[`problem_${num}_text` as keyof typeof i18n.de.problem_solution]}
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800">
-            <span class="text-red-600 dark:text-red-400 mt-1">
-              <MdOutlineSpeed size={24} />
-            </span>
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution.problem_point_2_headline}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution.problem_point_2_text}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       <!-- Solutions Section -->
       <div class="space-y-8 slide-up">
-        <div class="text-center lg:text-left">
-          <h2 class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-8">
+        <div class="text-center lg:text-left space-y-4">
+          <h2 class="text-3xl font-bold text-primary-600 dark:text-primary-400">
             {i18n.de.problem_solution.solution_headline}
           </h2>
-          <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            {i18n.de.problem_solution.solution_text}
+          <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            {i18n.de.problem_solution.solution_subline}
           </p>
         </div>
 
-        <div class="space-y-6">
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800">
-            <span class="text-primary-600 dark:text-primary-400 mt-1">
-              <AiOutlineRobot size={24} />
-            </span>
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution.solution_point_1_headline}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution.solution_point_1_text}
-              </p>
+        <div class="grid gap-6">
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+              <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+                {num === 1 ? <BsSearch size={24} /> :
+                 num === 2 ? <BsLightbulb size={24} /> :
+                 num === 3 ? <BsFileText size={24} /> :
+                 num === 4 ? <AiOutlineRobot size={24} /> :
+                 num === 5 ? <BiAnalyse size={24} /> :
+                 num === 6 ? <AiOutlineDashboard size={24} /> :
+                 num === 7 ? <RiCustomerService2Line size={24} /> :
+                 <FaChartLine size={24} />
+                }
+              </span>
+              <div>
+                <p class="text-gray-600 dark:text-gray-300">
+                  {i18n.de.problem_solution[`solution_${num}` as keyof typeof i18n.de.problem_solution]}
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800">
-            <span class="text-primary-600 dark:text-primary-400 mt-1">
-              <BiAnalyse size={24} />
-            </span>
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution.solution_point_2_headline}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution.solution_point_2_text}
-              </p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800">
-            <span class="text-primary-600 dark:text-primary-400 mt-1">
-              <RiCustomerService2Line size={24} />
-            </span>
-            <div>
-              <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution.solution_point_3_headline}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution.solution_point_3_text}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
