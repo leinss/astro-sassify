@@ -3,43 +3,43 @@ import { config } from '../assets/config';
 import i18n from '../assets/i18n.json';
 
 const allPages = [
-  { text: "Home", url: "/" },
+  { text: i18n.de.header.home, url: "/" },
   { text: "Features", url: "/features" },
   { text: "Pricing", url: "/pricing" },
-  { text: "FAQ", url: "/faqs" },
+  { text: i18n.de.header.faq, url: "/faqs" },
   { text: "Changelog", url: "/changelog" },
   { text: "Integrations", url: "/integrations" },
   { text: "Blog", url: "/blog" },
   { text: "Case Studies", url: "/case-study" },
-  { text: "About Us", url: "/company" },
+  { text: i18n.de.header.about, url: "/company" },
   { text: "Careers", url: "/career" },
-  { text: "Contact", url: config.external_links.strategy_call },
+  { text: "Contact", url: "/contact" },
   { text: "Reviews", url: "/reviews" },
   { text: "Privacy Policy", url: "/privacy-policy" },
   { text: "Terms of Service", url: "/terms-conditions" },
   { text: "404 Page", url: "/404" }
 ];
 ---
-<!-- x-bind:src={`${Astro.base} + ${darkMode ? 'logo-white.png' : 'logo.png'}`} -->
+
 <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300" id="header">
   <div class="container-custom flex items-center justify-between">
     <a href="/" class="flex items-center" aria-label="Go to homepage">
       <img
-        x-bind:src="darkMode ? 'astro-sassify/logo-white.png' : 'astro-sassify/logo.png'"
+        x-bind:src="darkMode ? '/astro-sassify/logo-white.png' : '/astro-sassify/logo.png'"
         alt="Logo"
         class="h-12 w-auto"
       />
     </a>
     
     <nav class="hidden md:flex items-center space-x-8">
-      <a href="/" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Home</a>
-      <a href="/features" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Features</a>
-      <a href="/pricing" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Pricing</a>
-      <a href="/blog" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Blog</a>
-      <a href={config.external_links.strategy_call} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Contact</a>
+      <!-- <a href="/" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Home</a> -->
+      <a href="#problem" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.problem}</a>
+      <a href="#solution" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.solution}</a>
+      <a href="#about" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.about}</a>
+      <a href="#faq" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.faq}</a>
       
       <!-- All Pages Dropdown -->
-      <div x-data="{ open: false }" class="relative">
+      <!-- <div x-data="{ open: false }" class="relative">
         <button 
           @click="open = !open" 
           @click.away="open = false"
@@ -70,7 +70,7 @@ const allPages = [
             ))}
           </div>
         </div>
-      </div>
+      </div> -->
     </nav>
     
     <div class="flex items-center space-x-4">
