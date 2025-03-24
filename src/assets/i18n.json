@@ -4,6 +4,13 @@
         "hero": {}
     },
     "de": {
+        "meta": {
+            "title": "Automatisierung mit KI – Weniger Aufwand, mehr Zeit für das Wesentliche",
+            "description": "Effizienz steigern. Fehler reduzieren. Mitarbeiter entlasten.",
+            "privacy_policy": "Datenschutzerklärung",
+            "terms_of_service": "Nutzungsbedingungen",
+            "cookie_policy": "Cookie-Richtlinie"
+        },
         "header": {
             "home": "Start",
             "problem": "Probleme",

@@ -1,45 +1,47 @@
 ---
+import i18n from "../assets/i18n.json";
+
 const currentYear = new Date().getFullYear()
 
-const footerLinks = [
-  {
-    title: "Home",
-    links: [
-      { text: "Home", url: "/" },
-      { text: "Features", url: "/features" },
-      { text: "Pricing", url: "/pricing" },
-      { text: "Contact", url: "/contact" },
-    ],
-  },
-  {
-    title: "Product",
-    links: [
-      { text: "Features", url: "/features" },
-      { text: "Pricing", url: "/pricing" },
-      { text: "FAQ", url: "/faqs" },
-      { text: "Changelog", url: "/changelog" },
-      { text: "Integrations", url: "/integrations" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { text: "Blog", url: "/blog" },
-      { text: "Case Studies", url: "/case-study" },
-      { text: "404 Page", url: "/404" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { text: "About Us", url: "/company" },
-      { text: "Careers", url: "/career" },
-      { text: "Contact", url: "/contact" },
-      { text: "Reviews", url: "/reviews" },
-      { text: "Privacy Policy", url: "/privacy-policy" },
-      { text: "Terms of Service", url: "/terms-conditions" },
-    ],
-  },
+const footerLinks: { title: string; links: { text: string; url: string }[] }[] = [
+  // {
+  //   title: "Home",
+  //   links: [
+  //     { text: "Home", url: "/" },
+  //     { text: "Features", url: "/features" },
+  //     { text: "Pricing", url: "/pricing" },
+  //     { text: "Contact", url: "/contact" },
+  //   ],
+  // },
+  // {
+  //   title: "Product",
+  //   links: [
+  //     { text: "Features", url: "/features" },
+  //     { text: "Pricing", url: "/pricing" },
+  //     { text: "FAQ", url: "/faqs" },
+  //     { text: "Changelog", url: "/changelog" },
+  //     { text: "Integrations", url: "/integrations" },
+  //   ],
+  // },
+  // {
+  //   title: "Resources",
+  //   links: [
+  //     { text: "Blog", url: "/blog" },
+  //     { text: "Case Studies", url: "/case-study" },
+  //     { text: "404 Page", url: "/404" },
+  //   ],
+  // },
+  // {
+  //   title: "Company",
+  //   links: [
+  //     { text: "About Us", url: "/company" },
+  //     { text: "Careers", url: "/career" },
+  //     { text: "Contact", url: "/contact" },
+  //     { text: "Reviews", url: "/reviews" },
+  //     { text: "Privacy Policy", url: "/privacy-policy" },
+  //     { text: "Terms of Service", url: "/terms-conditions" },
+  //   ],
+  // },
 ]
 ---
 
@@ -47,27 +49,21 @@ const footerLinks = [
   <div class="container-custom">
     <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
       <div class="md:col-span-2 lg:col-span-2">
-        <a href="/" class="flex items-center mb-6" aria-label="Go to homepage">
-          <svg
-            class="h-8 w-auto text-primary-400"
-            viewBox="0 0 40 40"
-            fill="currentColor"
-          >
-            <path
-              d="M20 5C11.716 5 5 11.716 5 20C5 28.284 11.716 35 20 35C28.284 35 35 28.284 35 20C35 11.716 28.284 5 20 5ZM20 10C22.761 10 25 12.239 25 15C25 17.761 22.761 20 20 20C17.239 20 15 17.761 15 15C15 12.239 17.239 10 20 10ZM20 32C16.218 32 12.848 30.154 10.859 27.307C12.839 24.663 16.159 23 20 23C23.841 23 27.161 24.663 29.141 27.307C27.152 30.154 23.782 32 20 32Z"
-            ></path>
-          </svg>
-          <span class="ml-2 text-xl font-display font-semibold text-white"
-            >SaaSify</span
-          >
-        </a>
-        <p class="text-gray-400 mb-6 max-w-md">
-          Empowering businesses with innovative SaaS solutions that drive
-          growth, efficiency, and success in the digital age.
-        </p>
+        <div class="flex items-center mb-6">
+          <a href="#hero" class="flex items-center" aria-label="Go to homepage">
+            <img
+              src="/astro-sassify/logo-white.png"
+              alt="Logo"
+              class="h-24 w-64"
+            />
+          </a>
+          <p class="text-gray-400 ml-10 self-center text-2xl font-medium leading-normal">
+            {i18n.de.meta.title}
+          </p>
+        </div>
         <div class="flex space-x-4">
           <a
-            href="#"
+            href="https://twitter.com/t_leinss"
             class="text-gray-400 hover:text-primary-400 transition-colors"
             aria-label="Twitter"
           >
@@ -83,7 +79,7 @@ const footerLinks = [
             </svg>
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/tobias-leinss/"
             class="text-gray-400 hover:text-primary-400 transition-colors"
             aria-label="LinkedIn"
           >
@@ -98,10 +94,11 @@ const footerLinks = [
               ></path>
             </svg>
           </a>
+
           <a
-            href="#"
+            href="https://www.youtube.com/@t_leinss"
             class="text-gray-400 hover:text-primary-400 transition-colors"
-            aria-label="Facebook"
+            aria-label="YouTube"
           >
             <svg
               class="w-6 h-6"
@@ -110,12 +107,13 @@ const footerLinks = [
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
               ></path>
             </svg>
           </a>
+          
           <a
-            href="#"
+            href="https://github.com/leinss"
             class="text-gray-400 hover:text-primary-400 transition-colors"
             aria-label="GitHub"
           >
@@ -163,17 +161,17 @@ const footerLinks = [
           <a
             href="/privacy-policy"
             class="text-gray-400 hover:text-primary-400 text-sm transition-colors"
-            >Privacy Policy</a
+            >{i18n.de.meta.privacy_policy}</a
           >
           <a
             href="/terms-conditions"
             class="text-gray-400 hover:text-primary-400 text-sm transition-colors"
-            >Terms of Service</a
+            >{i18n.de.meta.terms_of_service}</a
           >
           <a
-            href="#"
+            href="/cookie-policy"
             class="text-gray-400 hover:text-primary-400 text-sm transition-colors"
-            >Cookie Policy</a
+            >{i18n.de.meta.cookie_policy}</a
           >
         </div>
       </div>
