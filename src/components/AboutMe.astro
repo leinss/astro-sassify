@@ -52,21 +52,21 @@ import i18n from "../assets/i18n.json"
             :class="activeTab === 'mission' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="px-4 py-2 font-medium border-b-2 transition-colors"
           >
-            Mission & Vision
+            {i18n.de.about_me.mission_title}
           </button>
           <button
             @click="activeTab = 'career'"
             :class="activeTab === 'career' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="px-4 py-2 font-medium border-b-2 transition-colors"
           >
-            Werdegang
+            {i18n.de.about_me.career_title}
           </button>
           <button
             @click="activeTab = 'background'"
             :class="activeTab === 'background' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="px-4 py-2 font-medium border-b-2 transition-colors"
           >
-            Hintergrund
+            {i18n.de.about_me.background_title}
           </button>
         </div>
 
