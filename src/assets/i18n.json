@@ -56,14 +56,22 @@
             "solution_headline": "Die Lösung",
             "solution_subline": "Mit generativer KI automatisieren wir zeitintensive Prozesse, reduzieren Fehler und entlasten Ihr Team – ohne komplizierte Systemwechsel.",
             "solution_footer": "Lassen Sie uns gemeinsam herausfinden, wie wir KI optimal in Ihre Abläufe integrieren und Ihr Unternehmen zukunftssicher aufstellen.",
-            "solution_1": "Intelligente Suche mit KI – Relevante Inhalte aus verschiedenen Quellen werden automatisch extrahiert und zusammengefasst.",
-            "solution_2": "Interaktive KI-Coaches & Chatbots – Diese führen Mitarbeiter durch Prozesse und beantworten häufige Fragen in Echtzeit.",
-            "solution_3": "Automatische Dokumentenerstellung & KI-Prüfung – KI generiert Dokumente basierend auf Vorlagen und prüft sie auf Inkonsistenzen oder Fehler.",
-            "solution_4": "Automatisierte Datenverarbeitung – KI liest und verarbeitet Rechnungen, Verträge und Formulare blitzschnell und fehlerfrei.",
-            "solution_5": "Intelligente Marktanalysen – Relevante Trends und Wettbewerbsinformationen werden automatisch extrahiert – ohne stundenlange Recherchen.",
-            "solution_6": "KI-generierte Dashboards – Diese visualisieren Daten, erkennen Trends und liefern fundierte Entscheidungsvorschläge.",
-            "solution_7": "KI-gestützter Kundenservice – Chatbots übernehmen repetitive Anfragen, sodass sich Ihr Support-Team auf das Wesentliche konzentrieren kann.",
-            "solution_8": "Automatische Segmentierung & personalisierte Inhalte – KI analysiert Kundenverhalten und erstellt maßgeschneiderte Inhalte für gezieltes Marketing."
+            "solution_1_headline": "Intelligente Suche mit KI",
+            "solution_1_text": "Relevante Inhalte aus verschiedenen Quellen werden automatisch extrahiert und zusammengefasst.",
+            "solution_2_headline": "Interaktive KI-Coaches & Chatbots",
+            "solution_2_text": "Diese führen Mitarbeiter durch Prozesse und beantworten häufige Fragen in Echtzeit.",
+            "solution_3_headline": "Automatische Dokumentenerstellung & KI-Prüfung",
+            "solution_3_text": "KI generiert Dokumente basierend auf Vorlagen und prüft sie auf Inkonsistenzen oder Fehler.",
+            "solution_4_headline": "Automatisierte Datenverarbeitung",
+            "solution_4_text": "KI liest und verarbeitet Rechnungen, Verträge und Formulare blitzschnell und fehlerfrei.",
+            "solution_5_headline": "Intelligente Marktanalysen",
+            "solution_5_text": "Relevante Trends und Wettbewerbsinformationen werden automatisch extrahiert – ohne stundenlange Recherchen.",
+            "solution_6_headline": "KI-generierte Dashboards",
+            "solution_6_text": "Diese visualisieren Daten, erkennen Trends und liefern fundierte Entscheidungsvorschläge.",
+            "solution_7_headline": "KI-gestützter Kundenservice",
+            "solution_7_text": "Chatbots übernehmen repetitive Anfragen, sodass sich Ihr Support-Team auf das Wesentliche konzentrieren kann.",
+            "solution_8_headline": "Automatische Segmentierung & personalisierte Inhalte",
+            "solution_8_text": "KI analysiert Kundenverhalten und erstellt maßgeschneiderte Inhalte für gezieltes Marketing."
         },
         "solution_details": {
             "intro_1": "Sie wissen bereits, welche KI-Technologie Ihr Unternehmen voranbringen kann – jetzt geht es um die optimale Umsetzung.",
@@ -84,7 +92,7 @@
                 "Datenschutz & Sicherheit von Anfang an berücksichtigt",
                 "Flexibler Support, damit Ihr Team die Lösung optimal nutzen kann"
             ],
-            "outro_call_to_action": "Starten Sie jetzt mit modernster KI-Technologie – effizient, sicher und ohne Umwege!"
+            "outro_claim": "Starten Sie jetzt mit modernster KI-Technologie – effizient, sicher und ohne Umwege!"
         },
         "about_me": {
             "title": "Über Mich",
