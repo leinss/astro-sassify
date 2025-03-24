@@ -23,7 +23,7 @@ const allPages: { text: string; url: string }[] = [
 
 <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300" id="header">
   <div class="container-custom flex items-center justify-between">
-    <a href="/" class="flex items-center" aria-label="Go to homepage">
+    <a href="#hero" class="flex items-center" aria-label="Go to homepage">
       <img
         x-bind:src="darkMode ? '/astro-sassify/logo-white.png' : '/astro-sassify/logo.png'"
         alt="Logo"
@@ -74,9 +74,10 @@ const allPages: { text: string; url: string }[] = [
     </nav>
     
     <div class="flex items-center space-x-4">
-      <button 
-        x-on:click="darkMode = !darkMode" 
-        class="p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+      <!-- Dark mode toggle - visible on larger screens -->
+      <button
+        x-on:click="darkMode = !darkMode"
+        class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
         aria-label="Toggle dark mode"
       >
         <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,7 +87,7 @@ const allPages: { text: string; url: string }[] = [
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       </button>
-      
+
       <a href={config.external_links.strategy_call} class="btn-primary">{i18n.de.header.book_a_call}</a>
       
       <!-- Mobile Menu Button and Dropdown -->
@@ -115,10 +116,26 @@ const allPages: { text: string; url: string }[] = [
           class="absolute top-16 right-4 w-48 py-2 bg-white dark:bg-secondary-900 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           x-cloak
         >
-          <a href="#problem" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.problem}</a>
-          <a href="#solution" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.solution}</a>
-          <a href="#about" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.about}</a>
-          <a href="#faq" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.faq}</a>
+          <a href="#problem" @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.problem}</a>
+          <a href="#solution" @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.solution}</a>
+          <a href="#about" @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.about}</a>
+          <a href="#faq" @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.faq}</a>
+          
+          <!-- Dark Mode Toggle Button -->
+          <button
+            x-on:click="darkMode = !darkMode; open = false"
+            class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 sm:hidden"
+          >
+            <div class="flex items-center">
+              <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+              <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"></span>
+            </div>
+          </button>
           
           <!-- Mobile All Pages Dropdown -->
           <!-- <button 
