@@ -13,7 +13,7 @@ import i18n from "../assets/i18n.json"
   <div class="container-custom relative z-10">
     <div class="slide-up" transition:animate="slide">
       <p
-        class="text-2xl text-secondary-600 dark:text-secondary-300 mb-4 font-light tracking-wide"
+        class="text-lg sm:text-xl md:text-2xl text-secondary-600 dark:text-secondary-300 mb-4 font-light tracking-wide"
       >
         {i18n.de.hero.subline}
       </p>
@@ -26,7 +26,7 @@ import i18n from "../assets/i18n.json"
         >
       </h1>
       <p
-        class="text-xl text-secondary-600 dark:text-secondary-300 mb-8 max-w-2xl leading-relaxed"
+        class="text-base sm:text-lg md:text-xl text-secondary-600 dark:text-secondary-300 mb-8 max-w-2xl leading-relaxed"
       >
         {i18n.de.hero.intro_text}
       </p>
@@ -46,7 +46,7 @@ import i18n from "../assets/i18n.json"
                       <AiOutlineRobot size={24} />
                     )}
                   </span>
-                  <strong class="block text-lg text-secondary-900 dark:text-secondary-100">
+                  <strong class="block text-base sm:text-lg md:text-xl text-secondary-900 dark:text-secondary-100">
                     {
                       i18n.de.hero[
                         `point_${num}_start` as keyof typeof i18n.de.hero
@@ -55,7 +55,7 @@ import i18n from "../assets/i18n.json"
                   </strong>
                 </div>
                 <div>
-                  <span class="text-md">
+                  <span class="text-sm sm:text-base md:text-lg">
                     {
                       i18n.de.hero[
                         `point_${num}_end` as keyof typeof i18n.de.hero
