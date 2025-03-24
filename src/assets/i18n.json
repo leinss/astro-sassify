@@ -25,7 +25,7 @@
             "subline": "Effiziente Verwaltung mit KI – Prozesse automatisieren, Fehler reduzieren, Mitarbeiter entlasten.",
             "headline_start": "Automatisierung mit KI",
             "headline_end": "Weniger Aufwand, mehr Zeit für das Wesentliche",
-            "intro_text": "Manuelle Prozesse kosten Zeit, Geld und Nerven. Mit generativer KI automatisieren wir Datenverarbeitung, Marktanalysen und Kundenservice, damit dein Unternehmen schneller, fehlerfreier und produktiver arbeitet – ohne komplizierte Umstellungen.",
+            "intro_text": "Manuelle Prozesse kosten Zeit, Geld und Nerven. Mit generativer KI automatisieren wir Datenverarbeitung, Marktanalysen und Kundenservice, damit Ihr Unternehmen schneller, fehlerfreier und produktiver arbeitet – ohne komplizierte Umstellungen.",
             "point_1_start": "Datenverarbeitung",
             "point_1_end": "Automatisierte Analyse, Strukturierung und Verarbeitung von Dokumenten wie Rechnungen, Verträgen oder Bewerbungen – weniger Fehler, mehr Effizienz.",
             "point_2_start": "Marktanalysen",
@@ -55,7 +55,7 @@
             "problem_8_text": "Marketingkampagnen sind oft zu allgemein und sprechen potenzielle Kunden nicht gezielt an.",
             "solution_headline": "Die Lösung",
             "solution_subline": "Mit generativer KI automatisieren wir zeitintensive Prozesse, reduzieren Fehler und entlasten Ihr Team – ohne komplizierte Systemwechsel.",
-            "solution_footer": "Lassen Sie uns gemeinsam herausfinden, wie wir KI optimal in deine Abläufe integrieren und Ihr Unternehmen zukunftssicher aufstellen.",
+            "solution_footer": "Lassen Sie uns gemeinsam herausfinden, wie wir KI optimal in Ihre Abläufe integrieren und Ihr Unternehmen zukunftssicher aufstellen.",
             "solution_1": "Intelligente Suche mit KI – Relevante Inhalte aus verschiedenen Quellen werden automatisch extrahiert und zusammengefasst.",
             "solution_2": "Interaktive KI-Coaches & Chatbots – Diese führen Mitarbeiter durch Prozesse und beantworten häufige Fragen in Echtzeit.",
             "solution_3": "Automatische Dokumentenerstellung & KI-Prüfung – KI generiert Dokumente basierend auf Vorlagen und prüft sie auf Inkonsistenzen oder Fehler.",
@@ -66,7 +66,8 @@
             "solution_8": "Automatische Segmentierung & personalisierte Inhalte – KI analysiert Kundenverhalten und erstellt maßgeschneiderte Inhalte für gezieltes Marketing."
         },
         "solution_details": {
-            "intro": "Sie wissen bereits, welche KI-Technologie Ihr Unternehmen voranbringen kann – jetzt geht es um die optimale Umsetzung. Ich unterstütze Sie dabei, moderne generative KI-Lösungen wie Chatbots, Automatisierungs-Tools oder Content-Generatoren effizient und datenschutzkonform zu integrieren.",
+            "intro_1": "Sie wissen bereits, welche KI-Technologie Ihr Unternehmen voranbringen kann – jetzt geht es um die optimale Umsetzung.",
+            "intro_2": "Ich unterstütze Sie dabei, moderne generative KI-Lösungen wie Chatbots, Automatisierungs-Tools oder Content-Generatoren effizient und datenschutzkonform zu integrieren.",
             "solution_1_headline": "Lösungspräsentation & Feinanpassung",
             "solution_1_text": "Ich stelle Ihnen die gewählte KI-Lösung in einer Demo vor, angepasst an Ihre individuellen Anforderungen. Gemeinsam legen wir fest, welche spezifischen Funktionen und Schnittstellen benötigt werden.",
             "solution_2_headline": "Technische Einrichtung & Integration",
