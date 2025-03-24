@@ -64,7 +64,6 @@ export default {
         },
       },
       fontFamily: {
-        merriweather: ["Merriweather", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Lexend", "system-ui", "sans-serif"],
       },
