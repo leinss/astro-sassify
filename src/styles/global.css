@@ -24,7 +24,7 @@
   }
   
   p {
-    @apply text-sm sm:text-base md:text-base lg:text-lg leading-relaxed;
+    @apply text-sm sm:text-base md:text-lg leading-relaxed;
   }
 }
 

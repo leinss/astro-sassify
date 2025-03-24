@@ -9,9 +9,10 @@ import i18n from "../assets/i18n.json"
   </div>
   <div class="container-custom relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-16 slide-up">
-      <p class="text-xl text-secondary-600 dark:text-secondary-300 mb-8 leading-relaxed">
-        {i18n.de.solution_details.intro}
-      </p>
+      <h4 class="font-medium text-secondary-600 dark:text-secondary-300 mb-8 mx-4 leading-relaxed">
+        {i18n.de.solution_details.intro_1}<br/><br/>
+        {i18n.de.solution_details.intro_2}
+      </>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 slide-up">
@@ -26,7 +27,7 @@ import i18n from "../assets/i18n.json"
             }
           </span>
           <div>
-            <h3 class="text-xl font-semibold mb-2 text-secondary-900 dark:text-white">
+            <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white">
               {i18n.de.solution_details[`solution_${num}_headline` as keyof typeof i18n.de.solution_details]}
             </h3>
             <p class="text-secondary-600 dark:text-secondary-300">
@@ -38,7 +39,7 @@ import i18n from "../assets/i18n.json"
     </div>
 
     <div class="mt-16 text-center max-w-3xl mx-auto slide-up">
-      <h3 class="text-2xl font-bold mb-6 text-secondary-900 dark:text-white">
+      <h3 class="mb-6 text-secondary-900 dark:text-white">
         {i18n.de.solution_details.outro_question}
       </h3>
       <ul class="space-y-4 text-left mb-8">
@@ -51,9 +52,9 @@ import i18n from "../assets/i18n.json"
           </li>
         ))}
       </ul>
-      <p class="mt-12 text-2xl font-semibold text-secondary-900 dark:text-white">
+      <h4 class="mx-12 mt-12 text-secondary-900 dark:text-white">
         {i18n.de.solution_details.outro_call_to_action}
-      </p>
+      </h4>
     </div>
   </div>
 </section>
