@@ -2,22 +2,22 @@
 import { config } from '../assets/config';
 import i18n from '../assets/i18n.json';
 
-const allPages = [
-  { text: i18n.de.header.home, url: "/" },
-  { text: "Features", url: "/features" },
-  { text: "Pricing", url: "/pricing" },
-  { text: i18n.de.header.faq, url: "/faqs" },
-  { text: "Changelog", url: "/changelog" },
-  { text: "Integrations", url: "/integrations" },
-  { text: "Blog", url: "/blog" },
-  { text: "Case Studies", url: "/case-study" },
-  { text: i18n.de.header.about, url: "/company" },
-  { text: "Careers", url: "/career" },
-  { text: "Contact", url: "/contact" },
-  { text: "Reviews", url: "/reviews" },
-  { text: "Privacy Policy", url: "/privacy-policy" },
-  { text: "Terms of Service", url: "/terms-conditions" },
-  { text: "404 Page", url: "/404" }
+const allPages: { text: string; url: string }[] = [
+  // { text: i18n.de.header.home, url: "/" },
+  // { text: "Features", url: "/features" },
+  // { text: "Pricing", url: "/pricing" },
+  // { text: i18n.de.header.faq, url: "/faqs" },
+  // { text: "Changelog", url: "/changelog" },
+  // { text: "Integrations", url: "/integrations" },
+  // { text: "Blog", url: "/blog" },
+  // { text: "Case Studies", url: "/case-study" },
+  // { text: i18n.de.header.about, url: "/company" },
+  // { text: "Careers", url: "/career" },
+  // { text: "Contact", url: "/contact" },
+  // { text: "Reviews", url: "/reviews" },
+  // { text: "Privacy Policy", url: "/privacy-policy" },
+  // { text: "Terms of Service", url: "/terms-conditions" },
+  // { text: "404 Page", url: "/404" }
 ];
 ---
 
@@ -31,8 +31,8 @@ const allPages = [
       />
     </a>
     
-    <nav class="hidden md:flex items-center space-x-8">
-      <!-- <a href="/" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">Home</a> -->
+    <nav class="hidden lg:flex items-center space-x-8">
+      <a href="#hero" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.home}</a>
       <a href="#problem" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.problem}</a>
       <a href="#solution" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.solution}</a>
       <a href="#about" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.about}</a>
@@ -87,13 +87,13 @@ const allPages = [
         </svg>
       </button>
       
-      <a href={config.external_links.strategy_call} class="hidden sm:inline-flex btn-primary">{i18n.de.header.book_a_call}</a>
+      <a href={config.external_links.strategy_call} class="btn-primary">{i18n.de.header.book_a_call}</a>
       
       <!-- Mobile Menu Button and Dropdown -->
       <div x-data="{ open: false, showAllPages: false }">
         <button 
           @click="open = !open"
-          class="md:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+          class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle menu"
         >
           <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -115,13 +115,13 @@ const allPages = [
           class="absolute top-16 right-4 w-48 py-2 bg-white dark:bg-secondary-900 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           x-cloak
         >
-          <a href="/features" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Features</a>
-          <a href="/pricing" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Pricing</a>
-          <a href="/blog" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Blog</a>
-          <a href={config.external_links.strategy_call} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">Contact</a>
+          <a href="#problem" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.problem}</a>
+          <a href="#solution" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.solution}</a>
+          <a href="#about" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.about}</a>
+          <a href="#faq" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.faq}</a>
           
           <!-- Mobile All Pages Dropdown -->
-          <button 
+          <!-- <button 
             @click="showAllPages = !showAllPages" 
             class="w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 font-semibold border-t border-gray-200 dark:border-gray-700 mt-1 pt-1 flex items-center justify-between"
           >
@@ -139,7 +139,7 @@ const allPages = [
               <a href={page.url} class="block px-6 py-1 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700">
                 {page.text}
               </a>
-            ))}
+            ))} -->
           </div>
         </div>
       </div>
