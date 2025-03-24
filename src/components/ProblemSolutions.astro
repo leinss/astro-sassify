@@ -1,7 +1,17 @@
 ---
 import i18n from "../assets/i18n.json"
-import { BsSearch, BsFileText, BsLightbulb, BsClockHistory, BsSpeedometer } from "react-icons/bs"
-import { MdOutlinePeople, MdOutlineChat, MdOutlineAnalytics } from "react-icons/md"
+import {
+  BsSearch,
+  BsFileText,
+  BsLightbulb,
+  BsClockHistory,
+  BsSpeedometer,
+} from "react-icons/bs"
+import {
+  MdOutlinePeople,
+  MdOutlineChat,
+  MdOutlineAnalytics,
+} from "react-icons/md"
 import { AiOutlineRobot, AiOutlineDashboard } from "react-icons/ai"
 import { BiAnalyse, BiTargetLock } from "react-icons/bi"
 import { RiCustomerService2Line } from "react-icons/ri"
@@ -20,31 +30,49 @@ import { FaRegComments, FaChartLine } from "react-icons/fa"
           {i18n.de.problem_solution.problem_subline}
         </p>
       </div>
-      
+
       <div class="grid md:grid-cols-2 gap-6">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
-            <span class="text-red-600 dark:text-red-400 mt-1 shrink-0">
-              {num === 1 ? <BsSearch size={24} /> :
-               num === 2 ? <MdOutlinePeople size={24} /> :
-               num === 3 ? <BsFileText size={24} /> :
-               num === 4 ? <BsClockHistory size={24} /> :
-               num === 5 ? <BsSpeedometer size={24} /> :
-               num === 6 ? <MdOutlineAnalytics size={24} /> :
-               num === 7 ? <FaRegComments size={24} /> :
-               <BiTargetLock size={24} />
-              }
-            </span>
-            <div>
-              <h3 class="font-semibold mb-2 text-gray-900 dark:text-white">
-                {i18n.de.problem_solution[`problem_${num}_headline` as keyof typeof i18n.de.problem_solution]}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution[`problem_${num}_text` as keyof typeof i18n.de.problem_solution]}
-              </p>
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
+              <span class="text-red-600 dark:text-red-400 mt-1 shrink-0">
+                {num === 1 ? (
+                  <BsSearch size={24} />
+                ) : num === 2 ? (
+                  <MdOutlinePeople size={24} />
+                ) : num === 3 ? (
+                  <BsFileText size={24} />
+                ) : num === 4 ? (
+                  <BsClockHistory size={24} />
+                ) : num === 5 ? (
+                  <BsSpeedometer size={24} />
+                ) : num === 6 ? (
+                  <MdOutlineAnalytics size={24} />
+                ) : num === 7 ? (
+                  <FaRegComments size={24} />
+                ) : (
+                  <BiTargetLock size={24} />
+                )}
+              </span>
+              <div>
+                <h3 class="mb-2 text-gray-900 dark:text-white">
+                  {
+                    i18n.de.problem_solution[
+                      `problem_${num}_headline` as keyof typeof i18n.de.problem_solution
+                    ]
+                  }
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  {
+                    i18n.de.problem_solution[
+                      `problem_${num}_text` as keyof typeof i18n.de.problem_solution
+                    ]
+                  }
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
@@ -63,26 +91,48 @@ import { FaRegComments, FaChartLine } from "react-icons/fa"
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-          <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-            <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
-              {num === 1 ? <BsSearch size={24} /> :
-               num === 2 ? <BsLightbulb size={24} /> :
-               num === 3 ? <BsFileText size={24} /> :
-               num === 4 ? <AiOutlineRobot size={24} /> :
-               num === 5 ? <BiAnalyse size={24} /> :
-               num === 6 ? <AiOutlineDashboard size={24} /> :
-               num === 7 ? <RiCustomerService2Line size={24} /> :
-               <FaChartLine size={24} />
-              }
-            </span>
-            <div>
-              <p class="text-gray-600 dark:text-gray-300">
-                {i18n.de.problem_solution[`solution_${num}` as keyof typeof i18n.de.problem_solution]}
-              </p>
+        {
+          [1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+              <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+                {num === 1 ? (
+                  <BsSearch size={24} />
+                ) : num === 2 ? (
+                  <BsLightbulb size={24} />
+                ) : num === 3 ? (
+                  <BsFileText size={24} />
+                ) : num === 4 ? (
+                  <AiOutlineRobot size={24} />
+                ) : num === 5 ? (
+                  <BiAnalyse size={24} />
+                ) : num === 6 ? (
+                  <AiOutlineDashboard size={24} />
+                ) : num === 7 ? (
+                  <RiCustomerService2Line size={24} />
+                ) : (
+                  <FaChartLine size={24} />
+                )}
+              </span>
+              <div>
+                <p class="text-gray-600 dark:text-gray-300">
+                  <span class="font-bold">
+                    {
+                      i18n.de.problem_solution[
+                        `solution_${num}_headline` as keyof typeof i18n.de.problem_solution
+                      ]
+                    }
+                  </span>{" "}
+                  -
+                  {
+                    i18n.de.problem_solution[
+                      `solution_${num}_text` as keyof typeof i18n.de.problem_solution
+                    ]
+                  }
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </div>
