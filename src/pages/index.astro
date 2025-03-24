@@ -6,13 +6,14 @@ import ProblemSolutions from "../components/ProblemSolutions.astro"
 import SolutionDetails from "../components/SolutionDetails.astro"
 import AboutMe from "../components/AboutMe.astro"
 import FAQ from "../components/FAQ.astro"
-import Testimonials from "../components/Testimonials.astro"
-import Newsletter from "../components/Newsletter.astro"
+// import Testimonials from "../components/Testimonials.astro"
+// import Newsletter from "../components/Newsletter.astro"
 import Footer from "../components/Footer.astro"
-import Follow from "../components/Follow.astro"
+// import Follow from "../components/Follow.astro"
+import i18n from "../assets/i18n.json"
 ---
 
-<Layout title="Tobias Leinss - Automatisierung mit KI – Weniger Aufwand, mehr Zeit für das Wesentliche">
+<Layout title={`Tobias Leinss - ${i18n.de.meta.title}`}>
   <Header />
   <main>
     <Hero />
@@ -22,8 +23,63 @@ import Follow from "../components/Follow.astro"
     <!-- <Testimonials /> -->
     <AboutMe />
     <FAQ />
-    <Newsletter />
-    <Follow />
+    <!-- <Newsletter />
+    <Follow /> -->
   </main>
   <Footer />
+  
+  <!-- Back to top button -->
+  <button
+    id="backToTop"
+    class="fixed bottom-8 right-8 p-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg transition-opacity duration-300 opacity-0 z-50"
+    aria-label="Back to top"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 10l7-7m0 0l7 7m-7-7v18"
+      />
+    </svg>
+  </button>
+
+  <script>
+    const backToTopButton = document.getElementById('backToTop');
+    
+    const toggleBackToTop = () => {
+      if (window.scrollY > 300) {
+        backToTopButton?.classList.remove('opacity-0');
+      } else {
+        backToTopButton?.classList.add('opacity-0');
+      }
+    };
+
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    };
+
+    // Add event listeners
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopButton?.addEventListener('click', scrollToTop);
+
+    // Initial check
+    toggleBackToTop();
+
+    // Clean up event listeners when the component is destroyed
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', toggleBackToTop);
+      backToTopButton?.removeEventListener('click', scrollToTop);
+    });
+  </script>
 </Layout>
+
