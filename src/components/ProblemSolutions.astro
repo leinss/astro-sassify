@@ -2,16 +2,29 @@
 import i18n from "../assets/i18n.json"
 import {
   BsSearch,
-  BsFileText,
-  BsLightbulb,
-  BsClockHistory,
-  BsSpeedometer,
+  BsDatabase,
+  BsFolderSymlink,
+  BsGraphUp,
+  BsPersonVcard
 } from "react-icons/bs"
-import { MdOutlinePeople, MdOutlineAnalytics } from "react-icons/md"
-import { AiOutlineRobot, AiOutlineDashboard } from "react-icons/ai"
-import { BiAnalyse, BiTargetLock } from "react-icons/bi"
-import { RiCustomerService2Line } from "react-icons/ri"
-import { FaRegComments, FaChartLine } from "react-icons/fa"
+import {
+  MdOutlinePeople,
+  MdOutlineIntegrationInstructions,
+  MdOutlineAutoGraph,
+  MdOutlineMarkEmailUnread
+} from "react-icons/md"
+import {
+  AiOutlineRobot,
+  AiOutlineCustomerService,
+  AiOutlineUserSwitch,
+  AiOutlineFundProjectionScreen
+} from "react-icons/ai"
+import {
+  TbBrandGravatar,
+  TbTargetArrow,
+  TbUsersGroup
+} from "react-icons/tb"
+import { BiMessageDetail } from "react-icons/bi"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -33,21 +46,25 @@ import { FaRegComments, FaChartLine } from "react-icons/fa"
             <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
               <span class="text-red-600 dark:text-red-400 mt-1 shrink-0">
                 {num === 1 ? (
-                  <BsSearch size={24} />
+                  <BsFolderSymlink className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
                 ) : num === 2 ? (
-                  <MdOutlinePeople size={24} />
+                  <AiOutlineUserSwitch className="w-5 h-5 md:w-6 md:h-6" /> // New employees/onboarding
                 ) : num === 3 ? (
-                  <BsFileText size={24} />
+                  <AiOutlineCustomerService className="w-5 h-5 md:w-6 md:h-6" /> // Customer service
                 ) : num === 4 ? (
-                  <BsClockHistory size={24} />
+                  <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Growth/scaling
                 ) : num === 5 ? (
-                  <BsSpeedometer size={24} />
+                  <BiMessageDetail className="w-5 h-5 md:w-6 md:h-6" /> // Communication channels
                 ) : num === 6 ? (
-                  <MdOutlineAnalytics size={24} />
+                  <MdOutlineMarkEmailUnread className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
                 ) : num === 7 ? (
-                  <FaRegComments size={24} />
+                  <TbBrandGravatar className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                ) : num === 8 ? (
+                  <AiOutlineFundProjectionScreen className="w-5 h-5 md:w-6 md:h-6" /> // Content scale
+                ) : num === 9 ? (
+                  <TbTargetArrow className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
                 ) : (
-                  <BiTargetLock size={24} />
+                  <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
                 )}
               </span>
               <div>
@@ -92,21 +109,17 @@ import { FaRegComments, FaChartLine } from "react-icons/fa"
             <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
               <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
                 {num === 1 ? (
-                  <BsSearch size={24} />
+                  <BsDatabase className="w-5 h-5 md:w-6 md:h-6" /> // Knowledge database
                 ) : num === 2 ? (
-                  <BsLightbulb size={24} />
+                  <AiOutlineRobot className="w-5 h-5 md:w-6 md:h-6" /> // AI-supported onboarding
                 ) : num === 3 ? (
-                  <BsFileText size={24} />
+                  <MdOutlineIntegrationInstructions className="w-5 h-5 md:w-6 md:h-6" /> // Omnichannel service
                 ) : num === 4 ? (
-                  <AiOutlineRobot size={24} />
+                  <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
                 ) : num === 5 ? (
-                  <BiAnalyse size={24} />
-                ) : num === 6 ? (
-                  <AiOutlineDashboard size={24} />
-                ) : num === 7 ? (
-                  <RiCustomerService2Line size={24} />
+                  <BsPersonVcard className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
                 ) : (
-                  <FaChartLine size={24} />
+                  <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
                 )}
               </span>
               <div>
