@@ -40,13 +40,20 @@ import { BiMessageDetail } from "react-icons/bi"
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-8 items-center">
-        <div class="order-2 lg:order-1">
-          <div class="grid sm:grid-cols-2 gap-6">
+      <div class="space-y-8">
+         <div class="max-w-4xl mx-auto">
+           <img
+             src="/astro-sassify/images/content/problems.png"
+             alt="Common Business Problems"
+             class="w-full h-auto rounded-lg shadow-lg"
+             loading="lazy"
+           />
+         </div>
+         <div class="grid sm:grid-cols-2 gap-6">
         {
           [1, 2, 3, 4, 5].map((num) => (
-            <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
-              <span class="text-red-600 dark:text-red-400 mt-1 shrink-0">
+            <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
+              <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
                 {num === 1 ? (
                   <BsFolderSymlink className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
                 ) : num === 2 ? (
@@ -69,8 +76,8 @@ import { BiMessageDetail } from "react-icons/bi"
                   <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
                 )}
               </span>
-              <div>
-                <h3 class="mb-2 text-gray-900 dark:text-white">
+              <div class="min-w-0 flex-1">
+                <h3 class="mb-2 text-gray-900 dark:text-white break-words">
                   {
                     i18n.de.problem_solution[
                       `problem_${num}_headline` as keyof typeof i18n.de.problem_solution
@@ -88,16 +95,7 @@ import { BiMessageDetail } from "react-icons/bi"
             </div>
           ))
         }
-          </div>
-        </div>
-        <div class="order-1 lg:order-2">
-          <img
-            src="/astro-sassify/images/content/problems.png"
-            alt="Common Business Problems"
-            class="w-full h-auto rounded-lg shadow-lg"
-            loading="lazy"
-          />
-        </div>
+         </div>
       </div>
     </div>
 
@@ -115,13 +113,20 @@ import { BiMessageDetail } from "react-icons/bi"
         </p>
       </div>
 
-      <div class="grid lg:grid-cols-2 gap-8 items-center">
-        <div class="order-2 lg:order-2">
-          <div class="grid sm:grid-cols-2 gap-6">
+      <div class="space-y-8">
+         <div class="max-w-4xl mx-auto">
+           <img
+             src="/astro-sassify/images/content/solutions.png"
+             alt="Our Business Solutions"
+             class="w-full h-auto rounded-lg shadow-lg"
+             loading="lazy"
+           />
+         </div>
+         <div class="grid sm:grid-cols-2 gap-6">
         {
           [1, 2, 3, 4, 5, 6].map((num) => (
-            <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-              <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+            <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+              <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
                 {num === 1 ? (
                   <BsDatabase className="w-5 h-5 md:w-6 md:h-6" /> // Knowledge database
                 ) : num === 2 ? (
@@ -136,8 +141,8 @@ import { BiMessageDetail } from "react-icons/bi"
                   <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
                 )}
               </span>
-              <div>
-                <p class="text-gray-600 dark:text-gray-300">
+              <div class="min-w-0 flex-1">
+                <p class="text-gray-600 dark:text-gray-300 break-words">
                   <span class="font-bold">
                     {
                       i18n.de.problem_solution[
@@ -154,18 +159,8 @@ import { BiMessageDetail } from "react-icons/bi"
                 </p>
               </div>
             </div>
-          ))
-        }
-          </div>
-        </div>
-        <div class="order-1 lg:order-1">
-          <img
-            src="/astro-sassify/images/content/solutions.png"
-            alt="Our Business Solutions"
-            class="w-full h-auto rounded-lg shadow-lg"
-            loading="lazy"
-          />
-        </div>
+          ))}
+         </div>
       </div>
     </div>
   </div>
