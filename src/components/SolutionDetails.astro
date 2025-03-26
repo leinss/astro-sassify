@@ -1,60 +1,102 @@
 ---
-import { FaRegLightbulb, FaCogs, FaUserShield, FaClipboardCheck, FaHeadset } from "react-icons/fa";
+import {
+  FaRegLightbulb,
+  FaCogs,
+  FaUserShield,
+  FaClipboardCheck,
+  FaHeadset,
+} from "react-icons/fa"
 import i18n from "../assets/i18n.json"
+import { config } from "../assets/config"
 ---
 
-<section class="relative pt-20 pb-20 md:pt-24 overflow-hidden hero-section bg-primary-50 dark:bg-primary-950" id="solution">
+<section
+  class="relative pt-20 pb-20 md:pt-24 overflow-hidden hero-section bg-primary-50 dark:bg-primary-950"
+  id="solution"
+>
   <div class="absolute inset-0 z-0 opacity-30">
     <div class="absolute inset-0 bg-grid-pattern"></div>
   </div>
   <div class="container-custom relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-16 slide-up">
-      <h4 class="font-medium text-secondary-600 dark:text-secondary-300 mb-8 mx-4 leading-relaxed">
-        {i18n.de.solution_details.intro_1}<br/><br/>
-        {i18n.de.solution_details.intro_2}
-      </>
+      <h2
+        class="font-bold text-secondary-600 dark:text-secondary-300 mb-8 mx-4 leading-relaxed"
+      >
+        {i18n.de.solution_details.intro_1}
+      </h2>
+      <h3>{i18n.de.solution_details.intro_2}</h3>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 slide-up">
-      {[1, 2, 3, 4, 5].map((num) => (
-        <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-          <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
-            {num === 1 ? <FaRegLightbulb size={24} /> :
-             num === 2 ? <FaCogs size={24} /> :
-             num === 3 ? <FaUserShield size={24} /> :
-             num === 4 ? <FaClipboardCheck size={24} /> :
-             <FaHeadset size={24} />
-            }
-          </span>
-          <div>
-            <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white">
-              {i18n.de.solution_details[`solution_${num}_headline` as keyof typeof i18n.de.solution_details]}
-            </h3>
-            <p class="text-secondary-600 dark:text-secondary-300">
-              {i18n.de.solution_details[`solution_${num}_text` as keyof typeof i18n.de.solution_details]}
-            </p>
+      {
+        [1, 2, 3, 4].map((num) => (
+          <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+            <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+              {num === 1 ? (
+                <FaRegLightbulb size={24} />
+              ) : num === 2 ? (
+                <FaCogs size={24} />
+              ) : num === 3 ? (
+                <FaUserShield size={24} />
+              ) : num === 4 ? (
+                <FaClipboardCheck size={24} />
+              ) : (
+                <FaHeadset size={24} />
+              )}
+            </span>
+            <div>
+              <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white">
+                {
+                  i18n.de.solution_details[
+                    `solution_${num}_headline` as keyof typeof i18n.de.solution_details
+                  ]
+                }
+              </h3>
+              <p class="text-secondary-600 dark:text-secondary-300">
+                {
+                  i18n.de.solution_details[
+                    `solution_${num}_text` as keyof typeof i18n.de.solution_details
+                  ]
+                }
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <div class="mt-16 text-center max-w-3xl mx-auto slide-up">
-      <h3 class="mb-6 text-secondary-900 dark:text-white">
+      <h3 class="mb-6 font-semibold text-secondary-900 dark:text-white">
         {i18n.de.solution_details.outro_question}
       </h3>
       <ul class="space-y-4 text-left mb-8">
-        {i18n.de.solution_details.outro_bullets.map((bullet) => (
-          <li class="flex items-center gap-3">
-            <span class="text-primary-600 dark:text-primary-400">
-              <FaRegLightbulb size={16} />
-            </span>
-            <span class="text-md md:text-lg text-secondary-600 dark:text-secondary-300">{bullet}</span>
-          </li>
-        ))}
+        {
+          i18n.de.solution_details.outro_bullets.map((bullet) => (
+            <li class="flex items-center gap-8">
+              <span class="text-primary-600 dark:text-primary-400">
+                <FaRegLightbulb size={24} />
+              </span>
+              <span class="text-lg md:text-xl font-bold text-secondary-600 dark:text-secondary-300">
+                {bullet}
+              </span>
+            </li>
+          ))
+        }
       </ul>
       <h3 class="mx-12 mt-12 text-secondary-900 dark:text-white">
         {i18n.de.solution_details.outro_claim}
       </h3>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mt-8 justify-start md:justify-center">
+      <a
+        href={config.external_links.strategy_call}
+        class="btn-primary mt-4"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {i18n.de.hero.cta}
+      </a>
     </div>
   </div>
 </section>
@@ -62,9 +104,12 @@ import i18n from "../assets/i18n.json"
 <style>
   .bg-grid-pattern {
     background-size: 20px 20px;
-    background-image: 
-      linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px);
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   }
 
   .hero-section {
