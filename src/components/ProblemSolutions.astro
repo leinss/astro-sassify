@@ -40,7 +40,9 @@ import { BiMessageDetail } from "react-icons/bi"
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="grid sm:grid-cols-2 gap-6">
         {
           [1, 2, 3, 4, 5].map((num) => (
             <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
@@ -86,6 +88,16 @@ import { BiMessageDetail } from "react-icons/bi"
             </div>
           ))
         }
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <img
+            src="/astro-sassify/images/content/problems.png"
+            alt="Common Business Problems"
+            class="w-full h-auto rounded-lg shadow-lg"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
 
@@ -103,7 +115,9 @@ import { BiMessageDetail } from "react-icons/bi"
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="order-2 lg:order-2">
+          <div class="grid sm:grid-cols-2 gap-6">
         {
           [1, 2, 3, 4, 5, 6].map((num) => (
             <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
@@ -142,6 +156,16 @@ import { BiMessageDetail } from "react-icons/bi"
             </div>
           ))
         }
+          </div>
+        </div>
+        <div class="order-1 lg:order-1">
+          <img
+            src="/astro-sassify/images/content/solutions.png"
+            alt="Our Business Solutions"
+            class="w-full h-auto rounded-lg shadow-lg"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </div>

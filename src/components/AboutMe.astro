@@ -14,21 +14,21 @@ import i18n from "../assets/i18n.json"
       <div class="text-center space-y-4 max-w-3xl mx-auto">
         <picture>
           <source
-            srcset="/astro-sassify/profile.jpg?w=256 1x, /astro-sassify/profile.jpg?w=512 2x"
+            srcset="/astro-sassify/images/content/profile.jpg?w=256 1x, /astro-sassify/images/content/profile.jpg?w=512 2x"
             type="image/jpeg"
             media="(min-width: 1024px)"
           />
           <source
-            srcset="/astro-sassify/profile.jpg?w=224 1x, /astro-sassify/profile.jpg?w=448 2x"
+            srcset="/astro-sassify/images/content/profile.jpg?w=224 1x, /astro-sassify/images/content/profile.jpg?w=448 2x"
             type="image/jpeg"
             media="(min-width: 640px)"
           />
           <source
-            srcset="/astro-sassify/profile.jpg?w=192 1x, /astro-sassify/profile.jpg?w=384 2x"
+            srcset="/astro-sassify/images/content/profile.jpg?w=192 1x, /astro-sassify/images/content/profile.jpg?w=384 2x"
             type="image/jpeg"
           />
           <img
-            src="/astro-sassify/profile.jpg"
+            src="/astro-sassify/images/content/profile.jpg"
             alt="Portrait of Tobias"
             class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
             width="256"
@@ -103,9 +103,7 @@ import i18n from "../assets/i18n.json"
             <div
               class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
             >
-              <h4
-                class="mb-4 text-gray-900 dark:text-white"
-              >
+              <h4 class="mb-4 text-gray-900 dark:text-white">
                 {i18n.de.about_me.career_title}
               </h4>
               <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
@@ -125,9 +123,7 @@ import i18n from "../assets/i18n.json"
             <div
               class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
             >
-              <h4
-                class="mb-4 text-gray-900 dark:text-white"
-              >
+              <h4 class="mb-4 text-gray-900 dark:text-white">
                 {i18n.de.about_me.background_title}
               </h4>
               <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
