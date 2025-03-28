@@ -3,10 +3,11 @@ import {
   BsHeadset,
   BsSpeedometer2,
   BsRobot,
-  BsGraphUpArrow
+  BsGraphUpArrow,
 } from "react-icons/bs"
 import i18n from "../assets/i18n.json"
 import { config } from "../assets/config"
+import { FaListOl, FaPhoneVolume, FaRobot, FaUserPlus } from "react-icons/fa"
 ---
 
 <section
@@ -28,7 +29,7 @@ import { config } from "../assets/config"
 
     <div class="grid md:grid-cols-2 gap-8 slide-up">
       {
-        [1, 2, 3, 4].map((num) => (
+        [1, 2, 3, 4, 5, 6].map((num) => (
           <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
             <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
               {num === 1 ? (
@@ -37,9 +38,13 @@ import { config } from "../assets/config"
                 <BsRobot className="w-5 h-5 md:w-6 md:h-6" /> // Internal processes automation
               ) : num === 3 ? (
                 <BsSpeedometer2 className="w-5 h-5 md:w-6 md:h-6" /> // Efficiency and productivity
-              ) : (
+              ) : num === 4 ? (
                 <BsGraphUpArrow className="w-5 h-5 md:w-6 md:h-6" /> // Data analysis and insights
-              )}
+              ) : num === 5 ? (
+                <FaUserPlus className="w-5 h-5 md:w-6 md:h-6" /> // Data analysis and insights
+              ) : num === 6 ? (
+                <FaPhoneVolume className="w-5 h-5 md:w-6 md:h-6" /> // Data analysis and insights
+              ) : null}
             </span>
             <div>
               <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white">
