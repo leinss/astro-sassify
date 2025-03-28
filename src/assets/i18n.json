@@ -22,17 +22,19 @@
       "book_a_call": "Gespräch buchen"
     },
     "hero": {
-      "subline": "Entfesseln Sie das Potenzial Ihres Unternehmenswissens – mit intelligenten KI-Chatbots und Wissensdatenbanken.",
-      "headline_start": "KI-Revolution für Ihre Kommunikation:",
-      "headline_end": " Wissen intelligent nutzen, Prozesse transformieren.",
-      "intro_text": "Vergessen Sie ineffiziente Informationssilos. Wir verwandeln Ihr Unternehmenswissen in einen dynamischen, KI-gestützten Vorteil. Ob Kundenservice-Chatbots oder interne Wissensplattformen – wir machen Ihre Daten zum Herzstück Ihrer effizienten Kommunikation.",
+      "subline": "Entfesseln Sie das Potenzial Ihrer Unternehmenskommunikation – mit intelligenten KI-Lösungen.",
+      "headline_start": "Revolutionieren Sie Ihre Kommunikation:",
+      "headline_end": " KI-gestützte Effizienz für Ihren Erfolg.",
+      "intro_text": "Verabschieden Sie sich von ineffizienten Informationssilos. Wir verwandeln Ihr Unternehmenswissen in einen dynamischen, KI-gestützten Vorteil.\n\nVon intelligenten Chatbots bis hin zu automatisierten Rezeptionisten – wir machen Ihre Daten zum Herzstück Ihrer effizienten Kommunikation.",
       "point_1_start": "Wissensautomatisierung",
-      "point_1_end": "Automatisierte Bereitstellung von Informationen aus Wissensdatenbanken, um Prozesse zu beschleunigen und Fehler zu reduzieren.",
+      "point_1_end": "Automatisierte Bereitstellung von Informationen aus Wissensdatenbanken für beschleunigte Prozesse und weniger Fehler.",
       "point_2_start": "Chatbot-Integration",
-      "point_2_end": "Nahtlose Integration von KI-Chatbots in bestehende Kommunikationskanäle, um die Effizienz zu steigern und die Erreichbarkeit zu verbessern.",
-      "point_3_start": "Personalisierter Service",
-      "point_3_end": "Nutzung von KI zur Personalisierung der Kundenkommunikation, basierend auf den in der Wissensdatenbank gespeicherten Informationen.",
-      "cta": "Jetzt Erstgespräch vereinbaren"
+      "point_2_end": "Nahtlose Integration von KI-Chatbots in Ihre Kommunikationskanäle für gesteigerte Effizienz und Erreichbarkeit.",
+      "point_3_start": "KI-Rezeptionist",
+      "point_3_end": "Automatisierte Begrüßung und Weiterleitung für einen professionellen ersten Eindruck und Ressourcenschonung.",
+      "point_4_start": "Personalisierter Service",
+      "point_4_end": "Maßgeschneiderte Kundenkommunikation durch KI-gestützte Personalisierung basierend auf Ihren Wissensdatenbanken.",
+      "cta": "Jetzt kostenloses Erstgespräch vereinbaren"
     },
     "problem_solution": {
       "problem_headline": "Kennen Sie das?",
