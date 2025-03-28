@@ -147,6 +147,12 @@
         "phone": "+49 123 4567890",
         "email": ""
       }
+    },
+    "page_not_found": {
+      "title": "404",
+      "headline": "Seite nicht gefunden",
+      "text": "Die von Ihnen gesuchte Seite existiert nicht oder wurde verschoben. Bitte überprüfen Sie die URL und versuchen Sie es erneut.",
+      "back_to_home": "Zurück zur Startseite"
     }
   }
 }
