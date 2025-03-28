@@ -22,6 +22,7 @@ import {
 import { TbBrandGravatar, TbTargetArrow, TbUsersGroup } from "react-icons/tb"
 import { BiMessageDetail } from "react-icons/bi"
 import { config } from "../assets/config"
+import { FaListOl, FaRobot, FaUserClock, FaUserSlash } from "react-icons/fa"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -48,7 +49,7 @@ import { config } from "../assets/config"
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
           {
-            [1, 2, 3, 4, 5].map((num) => (
+            [1, 2, 3, 4, 5, 6, 7].map((num) => (
               <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
                 <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
@@ -62,16 +63,10 @@ import { config } from "../assets/config"
                   ) : num === 5 ? (
                     <BiMessageDetail className="w-5 h-5 md:w-6 md:h-6" /> // Communication channels
                   ) : num === 6 ? (
-                    <MdOutlineMarkEmailUnread className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
+                    <FaUserSlash className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
                   ) : num === 7 ? (
-                    <TbBrandGravatar className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
-                  ) : num === 8 ? (
-                    <AiOutlineFundProjectionScreen className="w-5 h-5 md:w-6 md:h-6" /> // Content scale
-                  ) : num === 9 ? (
-                    <TbTargetArrow className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
-                  ) : (
-                    <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                  )}
+                    <FaUserClock className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                  ) : null}
                 </span>
                 <div class="min-w-0 flex-1">
                   <h3 class="mb-2 text-gray-900 dark:text-white break-words">
@@ -121,7 +116,7 @@ import { config } from "../assets/config"
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
           {
-            [1, 2, 3, 4, 5, 6].map((num) => (
+            [1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
               <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
                 <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
@@ -134,9 +129,13 @@ import { config } from "../assets/config"
                     <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
                   ) : num === 5 ? (
                     <BsPersonVcard className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
-                  ) : (
+                  ) : num === 6 ? (
                     <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                  )}
+                  ) : num === 7 ? (
+                    <FaRobot className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
+                  ) : num === 8 ? (
+                    <FaListOl className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                  ) : null}
                 </span>
                 <div class="min-w-0 flex-1">
                   <p class="text-gray-600 dark:text-gray-300 break-words">
