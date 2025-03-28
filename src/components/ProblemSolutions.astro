@@ -5,26 +5,23 @@ import {
   BsDatabase,
   BsFolderSymlink,
   BsGraphUp,
-  BsPersonVcard
+  BsPersonVcard,
 } from "react-icons/bs"
 import {
   MdOutlinePeople,
   MdOutlineIntegrationInstructions,
   MdOutlineAutoGraph,
-  MdOutlineMarkEmailUnread
+  MdOutlineMarkEmailUnread,
 } from "react-icons/md"
 import {
   AiOutlineRobot,
   AiOutlineCustomerService,
   AiOutlineUserSwitch,
-  AiOutlineFundProjectionScreen
+  AiOutlineFundProjectionScreen,
 } from "react-icons/ai"
-import {
-  TbBrandGravatar,
-  TbTargetArrow,
-  TbUsersGroup
-} from "react-icons/tb"
+import { TbBrandGravatar, TbTargetArrow, TbUsersGroup } from "react-icons/tb"
 import { BiMessageDetail } from "react-icons/bi"
+import { config } from "../assets/config"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -41,61 +38,61 @@ import { BiMessageDetail } from "react-icons/bi"
       </div>
 
       <div class="space-y-8">
-         <div class="max-w-4xl mx-auto">
-           <img
-             src="/astro-sassify/images/content/problems.png"
-             alt="Common Business Problems"
-             class="w-full h-auto rounded-lg shadow-lg"
-             loading="lazy"
-           />
-         </div>
-         <div class="grid sm:grid-cols-2 gap-6">
-        {
-          [1, 2, 3, 4, 5].map((num) => (
-            <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
-              <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
-                {num === 1 ? (
-                  <BsFolderSymlink className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
-                ) : num === 2 ? (
-                  <AiOutlineUserSwitch className="w-5 h-5 md:w-6 md:h-6" /> // New employees/onboarding
-                ) : num === 3 ? (
-                  <AiOutlineCustomerService className="w-5 h-5 md:w-6 md:h-6" /> // Customer service
-                ) : num === 4 ? (
-                  <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Growth/scaling
-                ) : num === 5 ? (
-                  <BiMessageDetail className="w-5 h-5 md:w-6 md:h-6" /> // Communication channels
-                ) : num === 6 ? (
-                  <MdOutlineMarkEmailUnread className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
-                ) : num === 7 ? (
-                  <TbBrandGravatar className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
-                ) : num === 8 ? (
-                  <AiOutlineFundProjectionScreen className="w-5 h-5 md:w-6 md:h-6" /> // Content scale
-                ) : num === 9 ? (
-                  <TbTargetArrow className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
-                ) : (
-                  <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                )}
-              </span>
-              <div class="min-w-0 flex-1">
-                <h3 class="mb-2 text-gray-900 dark:text-white break-words">
-                  {
-                    i18n.de.problem_solution[
-                      `problem_${num}_headline` as keyof typeof i18n.de.problem_solution
-                    ]
-                  }
-                </h3>
-                <p class="text-gray-600 dark:text-gray-300">
-                  {
-                    i18n.de.problem_solution[
-                      `problem_${num}_text` as keyof typeof i18n.de.problem_solution
-                    ]
-                  }
-                </p>
+        <div class="max-w-4xl mx-auto">
+          <img
+            src="/astro-sassify/images/content/problems.png"
+            alt="Common Business Problems"
+            class="w-full h-auto rounded-lg shadow-lg"
+            loading="lazy"
+          />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {
+            [1, 2, 3, 4, 5].map((num) => (
+              <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
+                <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
+                  {num === 1 ? (
+                    <BsFolderSymlink className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
+                  ) : num === 2 ? (
+                    <AiOutlineUserSwitch className="w-5 h-5 md:w-6 md:h-6" /> // New employees/onboarding
+                  ) : num === 3 ? (
+                    <AiOutlineCustomerService className="w-5 h-5 md:w-6 md:h-6" /> // Customer service
+                  ) : num === 4 ? (
+                    <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Growth/scaling
+                  ) : num === 5 ? (
+                    <BiMessageDetail className="w-5 h-5 md:w-6 md:h-6" /> // Communication channels
+                  ) : num === 6 ? (
+                    <MdOutlineMarkEmailUnread className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
+                  ) : num === 7 ? (
+                    <TbBrandGravatar className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                  ) : num === 8 ? (
+                    <AiOutlineFundProjectionScreen className="w-5 h-5 md:w-6 md:h-6" /> // Content scale
+                  ) : num === 9 ? (
+                    <TbTargetArrow className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
+                  ) : (
+                    <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
+                  )}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <h3 class="mb-2 text-gray-900 dark:text-white break-words">
+                    {
+                      i18n.de.problem_solution[
+                        `problem_${num}_headline` as keyof typeof i18n.de.problem_solution
+                      ]
+                    }
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    {
+                      i18n.de.problem_solution[
+                        `problem_${num}_text` as keyof typeof i18n.de.problem_solution
+                      ]
+                    }
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
-        }
-         </div>
+            ))
+          }
+        </div>
       </div>
     </div>
 
@@ -114,54 +111,66 @@ import { BiMessageDetail } from "react-icons/bi"
       </div>
 
       <div class="space-y-8">
-         <div class="max-w-4xl mx-auto">
-           <img
-             src="/astro-sassify/images/content/solutions.png"
-             alt="Our Business Solutions"
-             class="w-full h-auto rounded-lg shadow-lg"
-             loading="lazy"
-           />
-         </div>
-         <div class="grid sm:grid-cols-2 gap-6">
-        {
-          [1, 2, 3, 4, 5, 6].map((num) => (
-            <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
-              <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
-                {num === 1 ? (
-                  <BsDatabase className="w-5 h-5 md:w-6 md:h-6" /> // Knowledge database
-                ) : num === 2 ? (
-                  <AiOutlineRobot className="w-5 h-5 md:w-6 md:h-6" /> // AI-supported onboarding
-                ) : num === 3 ? (
-                  <MdOutlineIntegrationInstructions className="w-5 h-5 md:w-6 md:h-6" /> // Omnichannel service
-                ) : num === 4 ? (
-                  <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
-                ) : num === 5 ? (
-                  <BsPersonVcard className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
-                ) : (
-                  <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                )}
-              </span>
-              <div class="min-w-0 flex-1">
-                <p class="text-gray-600 dark:text-gray-300 break-words">
-                  <span class="font-bold">
+        <div class="max-w-4xl mx-auto">
+          <img
+            src="/astro-sassify/images/content/solutions.png"
+            alt="Our Business Solutions"
+            class="w-full h-auto rounded-lg shadow-lg"
+            loading="lazy"
+          />
+        </div>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {
+            [1, 2, 3, 4, 5, 6].map((num) => (
+              <div class="flex flex-col sm:flex-row items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+                <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
+                  {num === 1 ? (
+                    <BsDatabase className="w-5 h-5 md:w-6 md:h-6" /> // Knowledge database
+                  ) : num === 2 ? (
+                    <AiOutlineRobot className="w-5 h-5 md:w-6 md:h-6" /> // AI-supported onboarding
+                  ) : num === 3 ? (
+                    <MdOutlineIntegrationInstructions className="w-5 h-5 md:w-6 md:h-6" /> // Omnichannel service
+                  ) : num === 4 ? (
+                    <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
+                  ) : num === 5 ? (
+                    <BsPersonVcard className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
+                  ) : (
+                    <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
+                  )}
+                </span>
+                <div class="min-w-0 flex-1">
+                  <p class="text-gray-600 dark:text-gray-300 break-words">
+                    <span class="font-bold">
+                      {
+                        i18n.de.problem_solution[
+                          `solution_${num}_headline` as keyof typeof i18n.de.problem_solution
+                        ]
+                      }
+                    </span>{" "}
+                    -
                     {
                       i18n.de.problem_solution[
-                        `solution_${num}_headline` as keyof typeof i18n.de.problem_solution
+                        `solution_${num}_text` as keyof typeof i18n.de.problem_solution
                       ]
                     }
-                  </span>{" "}
-                  -
-                  {
-                    i18n.de.problem_solution[
-                      `solution_${num}_text` as keyof typeof i18n.de.problem_solution
-                    ]
-                  }
-                </p>
+                  </p>
+                </div>
               </div>
-            </div>
-          ))}
-         </div>
+            ))
+          }
+        </div>
       </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 mt-8 justify-center">
+      <a
+        href={config.external_links.strategy_call}
+        class="btn-primary mt-4 px-5 md:px-6 lg:px-7 py-2.5 md:py-3"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {i18n.de.hero.cta}
+      </a>
     </div>
   </div>
 </section>
