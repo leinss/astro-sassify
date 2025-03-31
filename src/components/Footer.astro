@@ -1,49 +1,50 @@
 ---
-import i18n from "../assets/i18n.json";
+import i18n from "../assets/i18n.json"
 import config from "../assets/config.ts"
 
 const currentYear = new Date().getFullYear()
 
-const footerLinks: { title: string; links: { text: string; url: string }[] }[] = [
-  // {
-  //   title: "Home",
-  //   links: [
-  //     { text: "Home", url: "/" },
-  //     { text: "Features", url: "/features" },
-  //     { text: "Pricing", url: "/pricing" },
-  //     { text: "Contact", url: "/contact" },
-  //   ],
-  // },
-  // {
-  //   title: "Product",
-  //   links: [
-  //     { text: "Features", url: "/features" },
-  //     { text: "Pricing", url: "/pricing" },
-  //     { text: "FAQ", url: "/faqs" },
-  //     { text: "Changelog", url: "/changelog" },
-  //     { text: "Integrations", url: "/integrations" },
-  //   ],
-  // },
-  // {
-  //   title: "Resources",
-  //   links: [
-  //     { text: "Blog", url: "/blog" },
-  //     { text: "Case Studies", url: "/case-study" },
-  //     { text: "404 Page", url: "/404" },
-  //   ],
-  // },
-  // {
-  //   title: "Company",
-  //   links: [
-  //     { text: "About Us", url: "/company" },
-  //     { text: "Careers", url: "/career" },
-  //     { text: "Contact", url: "/contact" },
-  //     { text: "Reviews", url: "/reviews" },
-  //     { text: "Privacy Policy", url: "/privacy-policy" },
-  //     { text: "Terms of Service", url: "/terms-conditions" },
-  //   ],
-  // },
-]
+const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
+  [
+    // {
+    //   title: "Home",
+    //   links: [
+    //     { text: "Home", url: "/" },
+    //     { text: "Features", url: "/features" },
+    //     { text: "Pricing", url: "/pricing" },
+    //     { text: "Contact", url: "/contact" },
+    //   ],
+    // },
+    // {
+    //   title: "Product",
+    //   links: [
+    //     { text: "Features", url: "/features" },
+    //     { text: "Pricing", url: "/pricing" },
+    //     { text: "FAQ", url: "/faqs" },
+    //     { text: "Changelog", url: "/changelog" },
+    //     { text: "Integrations", url: "/integrations" },
+    //   ],
+    // },
+    // {
+    //   title: "Resources",
+    //   links: [
+    //     { text: "Blog", url: "/blog" },
+    //     { text: "Case Studies", url: "/case-study" },
+    //     { text: "404 Page", url: "/404" },
+    //   ],
+    // },
+    // {
+    //   title: "Company",
+    //   links: [
+    //     { text: "About Us", url: "/company" },
+    //     { text: "Careers", url: "/career" },
+    //     { text: "Contact", url: "/contact" },
+    //     { text: "Reviews", url: "/reviews" },
+    //     { text: "Privacy Policy", url: "/privacy-policy" },
+    //     { text: "Terms of Service", url: "/terms-conditions" },
+    //   ],
+    // },
+  ]
 ---
 
 <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8">
@@ -58,7 +59,9 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
               class="h-24 w-auto min-w-16 object-contain"
             />
           </a>
-          <p class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal">
+          <p
+            class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal"
+          >
             {i18n.de.meta.title}
           </p>
         </div>
@@ -112,7 +115,7 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
               ></path>
             </svg>
           </a>
-          
+
           <!-- <a
             href="https://github.com/leinss"
             class="text-gray-400 hover:text-primary-400 transition-colors"
@@ -165,18 +168,12 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
             >{i18n.de.meta.privacy_policy}</a
           >
           <a
-            href={`/terms-conditions`}
+            href={`/imprint`}
             class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
-            >{i18n.de.meta.terms_of_service}</a
-          >
-          <a
-            href={`/cookie-policy`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
-            >{i18n.de.meta.cookie_policy}</a
+            >{i18n.de.meta.imprint}</a
           >
         </div>
       </div>
     </div>
   </div>
 </footer>
-
