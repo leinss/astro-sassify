@@ -6,8 +6,9 @@ import {
   BsGraphUpArrow,
 } from "react-icons/bs"
 import i18n from "../assets/i18n.json"
-import { config } from "../assets/config"
-import { FaListOl, FaPhoneVolume, FaRobot, FaUserPlus } from "react-icons/fa"
+import config from "../assets/config.ts"
+import { FaPhoneVolume, FaUserPlus } from "react-icons/fa"
+import astroConfig from "../../astro.config.mjs"
 ---
 
 <section
@@ -69,7 +70,7 @@ import { FaListOl, FaPhoneVolume, FaRobot, FaUserPlus } from "react-icons/fa"
 
     <div class="max-w-4xl mx-auto mt-16 mb-16 shadow-lg">
       <img
-        src="/ki/images/content/solution_details.png"
+        src={`${config.baseUrl}/images/content/solution_details.png`}
         alt="Our Solution Details"
         class="w-full h-auto rounded-lg shadow-lg"
         loading="lazy"
