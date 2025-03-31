@@ -16,4 +16,11 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        external: ["fsevents"],
+      },
+    },
+  },
 })
