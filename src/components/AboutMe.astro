@@ -20,12 +20,12 @@ import config from "../assets/config.ts"
             media="(min-width: 1024px)"
           />
           <source
-            srcset={`{config.baseUrl}/images/content/profile.jpg?w=224 1x, /images/content/profile.jpg?w=448 2x`}
+            srcset={`/images/content/profile.jpg?w=224 1x, /images/content/profile.jpg?w=448 2x`}
             type="image/jpeg"
             media="(min-width: 640px)"
           />
           <source
-            srcset={`{config.baseUrl}/images/content/profile.jpg?w=192 1x, /images/content/profile.jpg?w=384 2x`}
+            srcset={`/images/content/profile.jpg?w=192 1x, /images/content/profile.jpg?w=384 2x`}
             type="image/jpeg"
           />
           <img
@@ -38,7 +38,7 @@ import config from "../assets/config.ts"
             decoding="async"
             fetchpriority="high"
             onload="this.classList.add('loaded')"
-            onerror="this.onerror=null; this.src=`${config.baseUrl/logo.png`; this.classList.add('error')"
+            onerror="this.onerror=null; this.src='/logo.png'; this.classList.add('error')"
           />
         </picture>
       </div>
