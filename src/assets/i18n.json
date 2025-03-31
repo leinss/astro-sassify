@@ -8,7 +8,7 @@
       "title": "KI-Revolution für Ihre Kommunikation -  Wissen intelligent nutzen, Prozesse transformieren.",
       "description": "Effizienz steigern. Fehler reduzieren. Mitarbeiter entlasten.",
       "privacy_policy": "Datenschutzerklärung",
-      "terms_of_service": "Nutzungsbedingungen",
+      "imprint": "Impressum",
       "cookie_policy": "Cookie-Richtlinie"
     },
     "header": {
@@ -48,9 +48,8 @@
       "solution_headline": "Wie wäre es denn mit...",
       "solution_subline": "...intelligenteren Lösungen? Mit generativer KI optimieren wir Ihre Abläufe und reduzieren Ihren Aufwand – ohne komplizierte Systemwechsel.",
       "solution_footer": "Lassen Sie uns gemeinsam herausfinden, wie KI Ihre Prozesse beschleunigt und Ihr Unternehmen fit für die Zukunft macht.",
-    
       "solution_1_headline": "einer zentralen Wissensdatenbank?",
-      "solution_1_text": "Implementieren Sie eine zentrale Wissensdatenbank, die alle relevanten Informationen aus verschiedenen Systemen zusammenführt. Dies ermöglicht Ihren Mitarbeitern einen schnellen und einfachen Zugriff auf benötigte Daten, reduziert Suchzeiten und steigert die Effizienz.",      
+      "solution_1_text": "Implementieren Sie eine zentrale Wissensdatenbank, die alle relevanten Informationen aus verschiedenen Systemen zusammenführt. Dies ermöglicht Ihren Mitarbeitern einen schnellen und einfachen Zugriff auf benötigte Daten, reduziert Suchzeiten und steigert die Effizienz.",
       "solution_2_headline": "KI-gestütztem Onboarding?",
       "solution_2_text": "Nutzen Sie einen KI-Chatbot, der mit der zentralen Wissensdatenbank verbunden ist, um neue Mitarbeiter beim Onboarding zu unterstützen. Der Chatbot kann häufig gestellte Fragen beantworten, relevante Dokumente bereitstellen und den Einarbeitungsprozess beschleunigen.",
       "solution_3_headline": "personalisierter Kundenkommunikation mit KI-Analysen?",
