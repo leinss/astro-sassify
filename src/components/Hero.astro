@@ -1,10 +1,11 @@
 ---
+import { Image } from "astro:assets"
 import { AiOutlineRobot } from "react-icons/ai"
 import { BiAnalyse } from "react-icons/bi"
 import { RiCustomerService2Line } from "react-icons/ri"
 import config from "../assets/config.ts"
 import i18n from "../assets/i18n.json"
-import { FaUserCog } from "react-icons/fa"
+import hero from "../assets/images/content/hero.png"
 ---
 
 <section
@@ -34,10 +35,13 @@ import { FaUserCog } from "react-icons/fa"
       </p>
 
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6 h-[300px] md:h-full slide-up" transition:animate="slide">
-          <img
-            src={`/images/content/hero.png`}
-            alt="Hero Image"
+        <div
+          class="space-y-6 h-[300px] md:h-full slide-up"
+          transition:animate="slide"
+        >
+          <Image
+            src={hero}
+            alt="Hero"
             class="w-full h-full rounded-lg shadow-lg object-cover"
             loading="eager"
           />

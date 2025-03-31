@@ -1,50 +1,11 @@
 ---
+import { Image } from "astro:assets"
 import i18n from "../assets/i18n.json"
-import config from "../assets/config.ts"
+import logoWhite from "../assets/images/logos/logo-white.png"
 
 const currentYear = new Date().getFullYear()
-
 const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
-  [
-    // {
-    //   title: "Home",
-    //   links: [
-    //     { text: "Home", url: "/" },
-    //     { text: "Features", url: "/features" },
-    //     { text: "Pricing", url: "/pricing" },
-    //     { text: "Contact", url: "/contact" },
-    //   ],
-    // },
-    // {
-    //   title: "Product",
-    //   links: [
-    //     { text: "Features", url: "/features" },
-    //     { text: "Pricing", url: "/pricing" },
-    //     { text: "FAQ", url: "/faqs" },
-    //     { text: "Changelog", url: "/changelog" },
-    //     { text: "Integrations", url: "/integrations" },
-    //   ],
-    // },
-    // {
-    //   title: "Resources",
-    //   links: [
-    //     { text: "Blog", url: "/blog" },
-    //     { text: "Case Studies", url: "/case-study" },
-    //     { text: "404 Page", url: "/404" },
-    //   ],
-    // },
-    // {
-    //   title: "Company",
-    //   links: [
-    //     { text: "About Us", url: "/company" },
-    //     { text: "Careers", url: "/career" },
-    //     { text: "Contact", url: "/contact" },
-    //     { text: "Reviews", url: "/reviews" },
-    //     { text: "Privacy Policy", url: "/privacy-policy" },
-    //     { text: "Terms of Service", url: "/terms-conditions" },
-    //   ],
-    // },
-  ]
+  []
 ---
 
 <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8">
@@ -53,8 +14,8 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
       <div class="md:col-span-2 lg:col-span-2">
         <div class="flex items-center mb-6">
           <a href="#hero" class="flex items-center" aria-label="Go to homepage">
-            <img
-              src={`/images/logos/logo-white.png`}
+            <Image
+              src={logoWhite}
               alt="Logo"
               class="h-24 w-auto min-w-16 object-contain"
             />
