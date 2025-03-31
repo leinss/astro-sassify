@@ -3,7 +3,6 @@ import '../styles/global.css';
 import '../styles/transitions.css';
 import { ClientRouter } from 'astro:transitions';
 import i18n from '../assets/i18n.json';
-import astroConfig from "../../astro.config.mjs"
 
 export interface Props {
   title: string;
@@ -73,6 +72,6 @@ const {
         }
       });
     </script>
-    <script src="/scripts/transitions.js"></script>
+    <script src="../scripts/transitions.js"></script>
   </body>
 </html>

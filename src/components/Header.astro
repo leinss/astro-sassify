@@ -19,26 +19,24 @@ const allPages: { text: string; url: string }[] = [
   // { text: "Terms of Service", url: "/terms-conditions" },
   // { text: "404 Page", url: "/404" }
 ];
-import astroConfig from "../../astro.config.mjs"
 ---
 
 <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300" id="header">
   <div class="container-custom flex items-center justify-between">
-    <a href={`${config.baseUrl}/#hero`} class="flex items-center" aria-label="Go to homepage">
+    <a href={`/#hero`} class="flex items-center" aria-label="Go to homepage">
       <img
-        x-bind:src="darkMode ? `${config.baseUrl}/images/logos/logo-white-right.png` : `${config.baseUrl}/images/logos/logo-black-right.png`"
+        x-bind:src="darkMode ? '/images/logos/logo-white-right.png' : '/images/logos/logo-black-right.png'"
         alt="Logo"
         class="h-16 lg:h-20 w-auto"
       />
     </a>
     
     <nav class="hidden lg:flex items-center space-x-8">
-      {astroConfig.site}
-      <a href={`${config.baseUrl}/#hero`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.home}</a>
-      <a href={`${config.baseUrl}/#problem`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.problem}</a>
-      <a href={`${config.baseUrl}/#solution`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.solution}</a>
-      <a href={`${config.baseUrl}/#about`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.about}</a>
-      <a href={`${config.baseUrl}/#faq`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.faq}</a>
+      <a href={`/#hero`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.home}</a>
+      <a href={`/#problem`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.problem}</a>
+      <a href={`/#solution`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.solution}</a>
+      <a href={`/#about`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.about}</a>
+      <a href={`/#faq`} class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors">{i18n.de.header.faq}</a>
       
       <!-- All Pages Dropdown -->
       <!-- <div x-data="{ open: false }" class="relative">
@@ -118,10 +116,10 @@ import astroConfig from "../../astro.config.mjs"
           class="absolute top-16 right-4 w-48 py-2 bg-white dark:bg-secondary-900 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           x-cloak
         >
-          <a href={`${config.baseUrl}/#problem`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.problem}</a>
-          <a href={`${config.baseUrl}/#solution`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.solution}</a>
-          <a href={`${config.baseUrl}/#about`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.about}</a>
-          <a href={`${config.baseUrl}/#faq`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.faq}</a>
+          <a href={`/#problem`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.problem}</a>
+          <a href={`/#solution`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.solution}</a>
+          <a href={`/#about`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.about}</a>
+          <a href={`/#faq`} @click="open = false" class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800">{i18n.de.header.faq}</a>
           
           <!-- Dark Mode Toggle Button -->
           <button
