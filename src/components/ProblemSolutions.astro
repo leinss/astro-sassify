@@ -5,9 +5,6 @@ import {
   BsGraphUp,
 } from "react-icons/bs"
 import {
-  MdOutlineAutoGraph,
-} from "react-icons/md"
-import {
   RiCustomerService2Line,
 } from "react-icons/ri"
 import {
@@ -17,7 +14,10 @@ import {
 } from "react-icons/ai"
 import { TbUsersGroup } from "react-icons/tb"
 import config from "../assets/config.ts"
-import { FaListOl, FaRobot, FaUserClock } from "react-icons/fa"
+import { FaUserClock } from "react-icons/fa"
+import { Image } from 'astro:assets';
+import problems from "../assets/images/content/problems.png"
+import solutions from "../assets/images/content/solutions.png"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -35,8 +35,8 @@ import { FaListOl, FaRobot, FaUserClock } from "react-icons/fa"
 
       <div class="space-y-8">
         <div class="max-w-4xl mx-auto">
-          <img
-            src=`/images/content/problems.png`}
+          <Image
+            src={problems}
             alt="Common Business Problems"
             class="w-full h-auto rounded-lg shadow-lg"
             loading="lazy"
@@ -96,8 +96,8 @@ import { FaListOl, FaRobot, FaUserClock } from "react-icons/fa"
 
       <div class="space-y-8">
         <div class="max-w-4xl mx-auto">
-          <img
-            src={`/images/content/solutions.png`}
+          <Image
+            src={solutions}
             alt="Our Business Solutions"
             class="w-full h-auto rounded-lg shadow-lg"
             loading="lazy"
