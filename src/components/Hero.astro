@@ -2,9 +2,10 @@
 import { AiOutlineRobot } from "react-icons/ai"
 import { BiAnalyse } from "react-icons/bi"
 import { RiCustomerService2Line } from "react-icons/ri"
-import { config } from "../assets/config"
+import config from "../assets/config.ts"
 import i18n from "../assets/i18n.json"
 import { FaUserCog } from "react-icons/fa"
+import astroConfig from "../../astro.config.mjs";
 ---
 
 <section
@@ -74,7 +75,7 @@ import { FaUserCog } from "react-icons/fa"
 
         <div class="h-[300px] md:h-full slide-up" transition:animate="slide">
           <img
-            src="/ki/images/content/hero.png"
+            src={`${config.baseUrl}/images/content/hero.png`}
             alt="Hero Image"
             class="w-full h-full rounded-lg shadow-lg object-cover"
             loading="eager"

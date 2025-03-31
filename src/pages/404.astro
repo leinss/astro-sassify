@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro"
 import Header from "../components/Header.astro"
 import Footer from "../components/Footer.astro"
 import i18n from "../assets/i18n.json"
+import config from "../assets/config.ts"
 ---
 
 <Layout title="Page Not Found - Sassify">
@@ -26,7 +27,7 @@ import i18n from "../assets/i18n.json"
           {i18n.de.page_not_found.text}
         </p>
         <div class="flex justify-center gap-4 flex-wrap">
-          <a href="/ki/#hero" class="btn-primary">
+          <a href={`${config.baseUrl}/#hero`} class="btn-primary">
             {i18n.de.page_not_found.back_to_home}
           </a>
         </div>
