@@ -1,25 +1,23 @@
 ---
 import i18n from "../assets/i18n.json"
 import {
-  BsSearch,
   BsDatabase,
-  BsFolderSymlink,
   BsGraphUp,
-  BsPersonVcard,
 } from "react-icons/bs"
 import {
-  MdOutlineIntegrationInstructions,
   MdOutlineAutoGraph,
 } from "react-icons/md"
+import {
+  RiCustomerService2Line,
+} from "react-icons/ri"
 import {
   AiOutlineRobot,
   AiOutlineCustomerService,
   AiOutlineUserSwitch,
 } from "react-icons/ai"
 import { TbUsersGroup } from "react-icons/tb"
-import { BiMessageDetail } from "react-icons/bi"
 import config from "../assets/config.ts"
-import { FaListOl, FaRobot, FaUserClock, FaUserSlash } from "react-icons/fa"
+import { FaListOl, FaRobot, FaUserClock } from "react-icons/fa"
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -46,23 +44,17 @@ import { FaListOl, FaRobot, FaUserClock, FaUserSlash } from "react-icons/fa"
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
           {
-            [1, 2, 3, 4, 5, 6, 7].map((num) => (
+            [1, 2, 3, 4].map((num) => (
               <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
                 <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
-                    <BsFolderSymlink className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
+                    <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
                   ) : num === 2 ? (
                     <AiOutlineUserSwitch className="w-5 h-5 md:w-6 md:h-6" /> // New employees/onboarding
                   ) : num === 3 ? (
                     <AiOutlineCustomerService className="w-5 h-5 md:w-6 md:h-6" /> // Customer service
                   ) : num === 4 ? (
-                    <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Growth/scaling
-                  ) : num === 5 ? (
-                    <BiMessageDetail className="w-5 h-5 md:w-6 md:h-6" /> // Communication channels
-                  ) : num === 6 ? (
-                    <FaUserSlash className="w-5 h-5 md:w-6 md:h-6" /> // Marketing
-                  ) : num === 7 ? (
-                    <FaUserClock className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                    <FaUserClock className="w-5 h-5 md:w-6 md:h-6" /> // Growth/scaling
                   ) : null}
                 </span>
                 <div class="min-w-0 flex-1">
@@ -113,7 +105,7 @@ import { FaListOl, FaRobot, FaUserClock, FaUserSlash } from "react-icons/fa"
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
           {
-            [1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+            [1, 2, 3, 4].map((num) => (
               <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
                 <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
@@ -121,17 +113,9 @@ import { FaListOl, FaRobot, FaUserClock, FaUserSlash } from "react-icons/fa"
                   ) : num === 2 ? (
                     <AiOutlineRobot className="w-5 h-5 md:w-6 md:h-6" /> // AI-supported onboarding
                   ) : num === 3 ? (
-                    <MdOutlineIntegrationInstructions className="w-5 h-5 md:w-6 md:h-6" /> // Omnichannel service
+                    <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Omnichannel service
                   ) : num === 4 ? (
-                    <TbUsersGroup className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
-                  ) : num === 5 ? (
-                    <BsPersonVcard className="w-5 h-5 md:w-6 md:h-6" /> // Lead qualification
-                  ) : num === 6 ? (
-                    <MdOutlineAutoGraph className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                  ) : num === 7 ? (
-                    <FaRobot className="w-5 h-5 md:w-6 md:h-6" /> // Customer insights
-                  ) : num === 8 ? (
-                    <FaListOl className="w-5 h-5 md:w-6 md:h-6" /> // Brand communication
+                    <RiCustomerService2Line className="w-5 h-5 md:w-6 md:h-6" /> // Personalized communication
                   ) : null}
                 </span>
                 <div class="min-w-0 flex-1">
