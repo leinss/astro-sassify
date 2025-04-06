@@ -18,6 +18,10 @@ import { FaUserClock } from "react-icons/fa"
 import { Image } from 'astro:assets';
 import problems from "../assets/images/content/problems.png"
 import solutions from "../assets/images/content/solutions.png"
+
+// Get current language from URL
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
@@ -25,11 +29,11 @@ import solutions from "../assets/images/content/solutions.png"
     <!-- Problems Section -->
     <div class="space-y-12 mb-20 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <h2 class="font-bold text-red-600 dark:text-red-400 language-content" data-key-de="problem_solution.problem_headline" data-key-en="problem_solution.problem_headline">
-          {i18n.de.problem_solution.problem_headline}
+        <h2 class="font-bold text-red-600 dark:text-red-400">
+          {t.problem_solution.problem_headline}
         </h2>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.problem_subline" data-key-en="problem_solution.problem_subline">
-          {i18n.de.problem_solution.problem_subline}
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+          {t.problem_solution.problem_subline}
         </p>
       </div>
 
@@ -83,14 +87,14 @@ import solutions from "../assets/images/content/solutions.png"
     <!-- Solutions Section -->
     <div class="space-y-12 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <h2 class="font-bold text-primary-600 dark:text-primary-400 language-content" data-key-de="problem_solution.solution_headline" data-key-en="problem_solution.solution_headline">
-          {i18n.de.problem_solution.solution_headline}
+        <h2 class="font-bold text-primary-600 dark:text-primary-400">
+          {t.problem_solution.solution_headline}
         </h2>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.solution_subline" data-key-en="problem_solution.solution_subline">
-          {i18n.de.problem_solution.solution_subline}
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+          {t.problem_solution.solution_subline}
         </p>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.solution_footer" data-key-en="problem_solution.solution_footer">
-          {i18n.de.problem_solution.solution_footer}
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+          {t.problem_solution.solution_footer}
         </p>
       </div>
 

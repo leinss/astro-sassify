@@ -19,14 +19,8 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true', lang: localStorage.getItem('lang') || 'auto' }" x-init="
+<html lang={Astro.url.pathname.startsWith('/en') ? 'en' : 'de'} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
   $watch('darkMode', val => localStorage.setItem('darkMode', val));
-  $watch('lang', val => {
-    localStorage.setItem('lang', val);
-    document.documentElement.lang = val;
-    // Trigger a custom event that components can listen for
-    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: val } }));
-  });
 " :class="{ 'dark': darkMode }">
   <head>
     <meta charset="UTF-8" />
@@ -49,78 +43,7 @@ const {
 
     <script is:inline defer src="https://umami.funnel.leinss.xyz/script.js" data-website-id="7e363f6c-cc5b-4efe-9b1d-de01c1fda069"></script>
 
-    <script is:inline define:vars={{i18nData: i18n}}>
-      // Make i18n data available globally
-      window.i18n = i18nData;
-      console.log('i18n data loaded:', window.i18n);
-
-      // Function to update all language content elements
-      function updateLanguageContent(lang) {
-        // Update elements with language-content class
-        document.querySelectorAll('.language-content').forEach(el => {
-          const keyDe = el.getAttribute('data-key-de');
-          const keyEn = el.getAttribute('data-key-en');
-
-          if (!keyDe || !keyEn) return;
-
-          let value;
-          if (lang === 'de') {
-            // Handle nested keys like 'hero.cta'
-            if (keyDe.includes('.')) {
-              const parts = keyDe.split('.');
-              value = window.i18n.de;
-              for (const part of parts) {
-                value = value[part];
-              }
-            } else {
-              value = window.i18n.de.faq[keyDe];
-            }
-          } else {
-            // Handle nested keys like 'hero.cta'
-            if (keyEn.includes('.')) {
-              const parts = keyEn.split('.');
-              value = window.i18n.en;
-              for (const part of parts) {
-                value = value[part];
-              }
-            } else {
-              value = window.i18n.en.faq[keyEn];
-            }
-          }
-
-          if (value) {
-            el.textContent = value;
-          }
-        });
-
-        // Update elements with language-text class
-        document.querySelectorAll('.language-text').forEach(el => {
-          const textDe = el.getAttribute('data-text-de');
-          const textEn = el.getAttribute('data-text-en');
-
-          if (!textDe || !textEn) return;
-
-          el.textContent = lang === 'de' ? textDe : textEn;
-        });
-      }
-
-      // Update content when language changes
-      window.addEventListener('languageChanged', (e) => {
-        updateLanguageContent(e.detail.lang);
-      });
-
-      // Initial update based on stored language
-      document.addEventListener('DOMContentLoaded', () => {
-        const storedLang = localStorage.getItem('lang') || 'de';
-        updateLanguageContent(storedLang);
-      });
-    </script>
-
     <script is:inline>
-      // Extend window interface for TypeScript
-      // @ts-ignore
-      window.Alpine = window.Alpine || {};
-
       // Check for user preference
       if (localStorage.getItem('darkMode') === null) {
         // Check system preference
@@ -129,35 +52,6 @@ const {
           document.documentElement.classList.add('dark');
         } else {
           localStorage.setItem('darkMode', 'false');
-        }
-      }
-
-      // Check for language preference
-      if (localStorage.getItem('lang') === null || localStorage.getItem('lang') === 'auto') {
-        // Auto-detect German language variants (de, de-DE, de-AT, de-CH, etc.)
-        const browserLang = navigator.language.toLowerCase();
-        if (browserLang.startsWith('de')) {
-          localStorage.setItem('lang', 'de');
-          document.documentElement.lang = 'de';
-          // Update Alpine.js state if available
-          if (window.Alpine && typeof window.Alpine.store === 'function') {
-            const appStore = window.Alpine.store('app');
-            if (appStore) appStore.lang = 'de';
-          }
-        } else {
-          localStorage.setItem('lang', 'en');
-          document.documentElement.lang = 'en';
-          // Update Alpine.js state if available
-          if (window.Alpine && typeof window.Alpine.store === 'function') {
-            const appStore = window.Alpine.store('app');
-            if (appStore) appStore.lang = 'en';
-          }
-        }
-      } else {
-        // Set the HTML lang attribute to match the stored language
-        const storedLang = localStorage.getItem('lang');
-        if (storedLang) {
-          document.documentElement.lang = storedLang;
         }
       }
 
@@ -178,6 +72,23 @@ const {
         }
       });
     </script>
-    <script src="../scripts/transitions.js"></script>
+    <script is:inline>
+      // Dynamically load scripts with the correct path based on the current URL
+      const basePath = window.location.pathname.startsWith('/en') ? '/en' : '';
+      const scriptsPath = basePath ? '..' : '.';
+
+      // Create and append script elements
+      const scripts = ['transitions.js', 'scroll-tracking.js'];
+      scripts.forEach(script => {
+        // Check if script is already loaded to prevent duplicates
+        const existingScript = document.querySelector(`script[src*="${script}"]`);
+        if (!existingScript) {
+          const scriptEl = document.createElement('script');
+          scriptEl.src = `${scriptsPath}/scripts/${script}`;
+          document.body.appendChild(scriptEl);
+          console.log(`Loaded script: ${scriptsPath}/scripts/${script}`);
+        }
+      });
+    </script>
   </body>
 </html>

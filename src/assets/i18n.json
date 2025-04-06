@@ -83,6 +83,9 @@
       "background": "Growing up in the economically strong region of Stuttgart, Tobias has a deep understanding of the challenges and opportunities facing German SMEs.\nThese companies face the task of strategically advancing digitalization and increasing efficiency.\n\nTobias's goal is to support medium-sized companies in integrating modern technologies – especially generative AI – into their processes in a targeted manner in order to secure sustainable competitive advantages."
     },
     "faq": {
+      "tag": "FAQ",
+      "title": "Frequently asked questions",
+      "subtitle": "Here you will find answers to the most important questions about our services.",
       "q_1": "Who is your offer aimed at?",
       "a_1": "Our offer is specifically tailored to medium-sized companies, especially digital service providers and administrations, that want to use generative AI to optimize their internal processes or improve customer communication. We support you in implementing and using modern AI technologies efficiently and in compliance with data protection regulations.",
       "q_2": "What exactly do you offer?",
@@ -207,6 +210,9 @@
       "background": "Aufgewachsen in der wirtschaftsstarken Region Stuttgart, verfügt Tobias über ein tiefes Verständnis für die Herausforderungen und Chancen des deutschen Mittelstands.\nDiese Unternehmen stehen vor der Aufgabe, Digitalisierung und Effizienzsteigerung strategisch voranzutreiben.\n\nTobias Ziel ist es, mittelständische Unternehmen dabei zu unterstützen, moderne Technologien – insbesondere generative KI – gezielt in ihre Prozesse zu integrieren, um nachhaltige Wettbewerbsvorteile zu sichern."
     },
     "faq": {
+      "tag": "FAQ",
+      "title": "Häufig gestellte Fragen",
+      "subtitle": "Hier finden Sie Antworten auf die wichtigsten Fragen zu unseren Dienstleistungen.",
       "q_1": "An wen richtet sich Ihr Angebot?",
       "a_1": "Unser Angebot ist speziell auf mittelständische Unternehmen zugeschnitten, insbesondere digitale Dienstleister und Verwaltungen, die generative KI zur Optimierung ihrer internen Prozesse oder zur Verbesserung der Kundenkommunikation einsetzen möchten. Wir unterstützen Sie dabei, moderne KI-Technologien effizient und datenschutzkonform zu implementieren und zu nutzen.",
       "q_2": "Was genau bieten Sie an?",

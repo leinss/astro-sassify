@@ -6,6 +6,13 @@ import logoWhite from "../assets/images/logos/logo-white.png"
 const currentYear = new Date().getFullYear()
 const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
   []
+
+// Get current language from URL
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
+
+// Get the base path for links based on language
+const basePath = currentLang === "en" ? "/en" : ""
 ---
 
 <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8">
@@ -13,7 +20,7 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
     <div class="grid md:grid-cols-2 gap-8 mb-6 md:mb-12">
       <div class="md:col-span-2 lg:col-span-2">
         <div class="flex items-center mb-6">
-          <a href="#hero" class="flex items-center" aria-label="Go to homepage">
+          <a href={`${basePath}/#hero`} class="flex items-center" aria-label="Go to homepage">
             <Image
               src={logoWhite}
               alt="Logo"
@@ -21,10 +28,9 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
             />
           </a>
           <p
-            class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal language-content"
-            data-key-de="meta.title" data-key-en="meta.title"
+            class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal"
           >
-            {i18n.de.meta.title}
+            {t.meta.title}
           </p>
         </div>
         <div class="flex space-x-4">
@@ -121,16 +127,16 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
     <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
-          &copy; {currentYear} Tobias Leinss. <span class="language-text" data-text-de="Alle Rechte vorbehalten." data-text-en="All rights reserved.">Alle Rechte vorbehalten.</span>
+          &copy; {currentYear} Tobias Leinss. {currentLang === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."}
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a
-            href={`/privacy-policy`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors language-content" data-key-de="meta.privacy_policy" data-key-en="meta.privacy_policy">{i18n.de.meta.privacy_policy}</a
+            href={`${basePath}/privacy-policy`}
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">{t.meta.privacy_policy}</a
           >
           <a
-            href={`/imprint`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors language-content" data-key-de="meta.imprint" data-key-en="meta.imprint">{i18n.de.meta.imprint}</a
+            href={`${basePath}/imprint`}
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">{t.meta.imprint}</a
           >
         </div>
       </div>

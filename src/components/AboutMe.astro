@@ -2,46 +2,30 @@
 import i18n from "../assets/i18n.json"
 import { Image } from "astro:assets"
 import profile from "../assets/images/content/profile.jpg"
+
+// Get current language from URL
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="about">
   <div class="container-custom">
     <div class="space-y-12 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <h2 class="text-primary-600 dark:text-primary-400" x-text="lang === 'de' ? window.i18n.de.about_me.title : window.i18n.en.about_me.title">
-          {i18n.de.about_me.title}
+        <h2 class="text-primary-600 dark:text-primary-400">
+          {t.about_me.title}
         </h2>
       </div>
 
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <picture>
-          <Image
-            src={profile}
-            srcset={[
-              { width: 256, size: "1x" },
-              { width: 512, size: "2x" },
-              { width: 224, size: "1x" },
-              { width: 448, size: "2x" },
-              { width: 192, size: "1x" },
-              { width: 384, size: "2x" },
-            ]}
-            type="image/jpeg"
-            media={[
-              { minWidth: 1024, width: 256 },
-              { minWidth: 640, width: 224 },
-              { minWidth: 0, width: 192 },
-            ]}
-            alt="Portrait of Tobias"
-            class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
-            width="256"
-            height="256"
-            loading="lazy"
-            decoding="async"
-            fetchpriority="high"
-            onload="this.classList.add('loaded')"
-            onerror="this.onerror=null; this.src='/logo.png'; this.classList.add('error')"
-          />
-        </picture>
+        <Image
+          src={profile}
+          alt="Portrait of Tobias"
+          width={256}
+          height={256}
+          class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
+          loading="lazy"
+        />
       </div>
 
       <div x-data="{ activeTab: 'mission' }" class="space-y-6">
@@ -54,21 +38,21 @@ import profile from "../assets/images/content/profile.jpg"
             :class="activeTab === 'mission' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="text-sm sm:text-base md:text-lg px-4 md:px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 font-medium border-b-2 transition-colors"
           >
-            <span x-text="lang === 'de' ? window.i18n.de.about_me.mission_title : window.i18n.en.about_me.mission_title">{i18n.de.about_me.mission_title}</span>
+            {t.about_me.mission_title}
           </button>
           <button
             @click="activeTab = 'career'"
             :class="activeTab === 'career' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="text-sm sm:text-base md:text-lg px-4 md:px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 font-medium border-b-2 transition-colors"
           >
-            <span x-text="lang === 'de' ? window.i18n.de.about_me.career_title : window.i18n.en.about_me.career_title">{i18n.de.about_me.career_title}</span>
+            {t.about_me.career_title}
           </button>
           <button
             @click="activeTab = 'background'"
             :class="activeTab === 'background' ? 'text-primary-600 dark:text-primary-400 border-primary-600 dark:border-primary-400' : 'text-gray-500 dark:text-gray-400 border-transparent hover:text-primary-600 dark:hover:text-primary-400'"
             class="text-sm sm:text-base md:text-lg px-4 md:px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 font-medium border-b-2 transition-colors"
           >
-            <span x-text="lang === 'de' ? window.i18n.de.about_me.background_title : window.i18n.en.about_me.background_title">{i18n.de.about_me.background_title}</span>
+            {t.about_me.background_title}
           </button>
         </div>
 
@@ -85,11 +69,11 @@ import profile from "../assets/images/content/profile.jpg"
             <div
               class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
             >
-              <h4 class="mb-4 text-gray-900 dark:text-white" x-text="lang === 'de' ? window.i18n.de.about_me.mission_title : window.i18n.en.about_me.mission_title">
-                {i18n.de.about_me.mission_title}
+              <h4 class="mb-4 text-gray-900 dark:text-white">
+                {t.about_me.mission_title}
               </h4>
-              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line" x-text="lang === 'de' ? window.i18n.de.about_me.mission_statement : window.i18n.en.about_me.mission_statement">
-                {i18n.de.about_me.mission_statement}
+              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                {t.about_me.mission_statement}
               </p>
             </div>
           </div>
@@ -105,11 +89,11 @@ import profile from "../assets/images/content/profile.jpg"
             <div
               class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
             >
-              <h4 class="mb-4 text-gray-900 dark:text-white" x-text="lang === 'de' ? window.i18n.de.about_me.career_title : window.i18n.en.about_me.career_title">
-                {i18n.de.about_me.career_title}
+              <h4 class="mb-4 text-gray-900 dark:text-white">
+                {t.about_me.career_title}
               </h4>
-              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line" x-text="lang === 'de' ? window.i18n.de.about_me.career : window.i18n.en.about_me.career">
-                {i18n.de.about_me.career}
+              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                {t.about_me.career}
               </p>
             </div>
           </div>
@@ -125,11 +109,11 @@ import profile from "../assets/images/content/profile.jpg"
             <div
               class="p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md"
             >
-              <h4 class="mb-4 text-gray-900 dark:text-white" x-text="lang === 'de' ? window.i18n.de.about_me.background_title : window.i18n.en.about_me.background_title">
-                {i18n.de.about_me.background_title}
+              <h4 class="mb-4 text-gray-900 dark:text-white">
+                {t.about_me.background_title}
               </h4>
-              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line" x-text="lang === 'de' ? window.i18n.de.about_me.background : window.i18n.en.about_me.background">
-                {i18n.de.about_me.background}
+              <p class="text-gray-600 dark:text-gray-300 whitespace-pre-line">
+                {t.about_me.background}
               </p>
             </div>
           </div>

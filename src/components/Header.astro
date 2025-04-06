@@ -4,7 +4,15 @@ import i18n from "../assets/i18n.json"
 import { Image } from "astro:assets"
 import logoBlack from "../assets/images/logos/logo-black-right.png"
 import logoWhite from "../assets/images/logos/logo-white-right.png"
-import { IoLanguage } from "react-icons/io5";
+// import { IoLanguage } from "react-icons/io5" // Not used
+import LanguageSwitcher from "./LanguageSwitcher.astro"
+
+// Get current language from URL
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
+
+// Get the base path for links based on language
+const basePath = currentLang === "en" ? "/en" : ""
 ---
 
 <header
@@ -12,7 +20,11 @@ import { IoLanguage } from "react-icons/io5";
   id="header"
 >
   <div class="container-custom flex items-center justify-between">
-    <a href={`/#hero`} class="flex items-center" aria-label="Go to homepage">
+    <a
+      href={`${basePath}/#hero`}
+      class="flex items-center"
+      aria-label="Go to homepage"
+    >
       <Image
         src={logoBlack}
         x-show="!darkMode"
@@ -31,29 +43,29 @@ import { IoLanguage } from "react-icons/io5";
 
     <nav class="hidden lg:flex items-center space-x-8">
       <a
-        href={`/#hero`}
+        href={`${basePath}/#hero`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        x-text="lang === 'de' ? window.i18n.de.header.home : window.i18n.en.header.home"></a
+        >{t.header.home}</a
       >
       <a
-        href={`/#problem`}
+        href={`${basePath}/#problem`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        x-text="lang === 'de' ? window.i18n.de.header.problem : window.i18n.en.header.problem"></a
+        >{t.header.problem}</a
       >
       <a
-        href={`/#solution`}
+        href={`${basePath}/#solution`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        x-text="lang === 'de' ? window.i18n.de.header.solution : window.i18n.en.header.solution"></a
+        >{t.header.solution}</a
       >
       <a
-        href={`/#about`}
+        href={`${basePath}/#about`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        x-text="lang === 'de' ? window.i18n.de.header.about : window.i18n.en.header.about"></a
+        >{t.header.about}</a
       >
       <a
-        href={`/#faq`}
+        href={`${basePath}/#faq`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        x-text="lang === 'de' ? window.i18n.de.header.faq : window.i18n.en.header.faq"></a
+        >{t.header.faq}</a
       >
 
       <!-- All Pages Dropdown -->
@@ -92,14 +104,12 @@ import { IoLanguage } from "react-icons/io5";
     </nav>
 
     <div class="flex items-center space-x-4">
-      <!-- Language toggle - visible on larger screens -->
-      <button
-        x-on:click="lang = lang === 'en' ? 'de' : 'en'"
+      <!-- Language switcher - visible on larger screens -->
+      <div
         class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
-        aria-label="Toggle language"
       >
-        <IoLanguage className="h-5 w-5" />
-      </button>
+        <LanguageSwitcher />
+      </div>
 
       <!-- Dark mode toggle - visible on larger screens -->
       <button
@@ -139,8 +149,8 @@ import { IoLanguage } from "react-icons/io5";
         </svg>
       </button>
 
-      <a href={config.external_links.strategy_call} class="btn-primary min-w-48"
-        x-text="lang === 'de' ? window.i18n.de.header.book_a_call : window.i18n.en.header.book_a_call"></a
+      <a href={config.external_links.strategy_call} class="btn-primary"
+        >{t.header.book_a_call}</a
       >
 
       <!-- Mobile Menu Button and Dropdown -->
@@ -192,45 +202,41 @@ import { IoLanguage } from "react-icons/io5";
           x-cloak
         >
           <a
-            href={`/#problem`}
+            href={`${basePath}/#problem`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            x-text="lang === 'de' ? window.i18n.de.header.problem : window.i18n.en.header.problem"></a
+            >{t.header.problem}</a
           >
           <a
-            href={`/#solution`}
+            href={`${basePath}/#solution`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            x-text="lang === 'de' ? window.i18n.de.header.solution : window.i18n.en.header.solution"></a
+            >{t.header.solution}</a
           >
           <a
-            href={`/#about`}
+            href={`${basePath}/#about`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            x-text="lang === 'de' ? window.i18n.de.header.about : window.i18n.en.header.about"></a
+            >{t.header.about}</a
           >
           <a
-            href={`/#faq`}
+            href={`${basePath}/#faq`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            x-text="lang === 'de' ? window.i18n.de.header.faq : window.i18n.en.header.faq"></a
+            >{t.header.faq}</a
           >
 
-          <!-- Language Toggle Button -->
-          <button
-            x-on:click="lang = lang === 'en' ? 'de' : 'en'; open = false"
+          <!-- Language Switcher in Mobile Menu -->
+          <div
             class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
           >
-            <div class="flex items-center">
-              <IoLanguage className="h-4 w-4 mr-2" />
-              <span x-text="lang === 'en' ? 'Deutsch' : 'English'">English</span>
-            </div>
-          </button>
+            <LanguageSwitcher />
+          </div>
 
           <!-- Dark Mode Toggle Button -->
           <button
             x-on:click="darkMode = !darkMode; open = false"
-            class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 sm:hidden"
+            class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
           >
             <div class="flex items-center">
               <svg
@@ -263,7 +269,9 @@ import { IoLanguage } from "react-icons/io5";
                   d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                 ></path>
               </svg>
-              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'">Enable Dark Mode</span>
+              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"
+                >Enable Dark Mode</span
+              >
             </div>
           </button>
 

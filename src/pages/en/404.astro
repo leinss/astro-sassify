@@ -1,16 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
-import i18n from "../assets/i18n.json"
-// import config from "../assets/config.ts" // Not needed
+import Layout from "../../layouts/Layout.astro"
+import Header from "../../components/Header.astro"
+import Footer from "../../components/Footer.astro"
+import i18n from "../../assets/i18n.json"
 
-// Determine language based on URL
-const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+// English version
+const currentLang = "en"
 const t = i18n[currentLang]
 
 // Get the base path for links based on language
-const basePath = currentLang === "en" ? "/en" : ""
+const basePath = "/en"
 ---
 
 <Layout title="Page Not Found - Tobias Leinss">

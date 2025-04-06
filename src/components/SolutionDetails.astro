@@ -10,6 +10,10 @@ import config from "../assets/config.ts"
 import { FaUserPlus } from "react-icons/fa"
 import { Image } from 'astro:assets';
 import solutionDetails from "../assets/images/content/solution_details.png"
+
+// Get current language from URL
+const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
 ---
 
 <section
@@ -22,12 +26,11 @@ import solutionDetails from "../assets/images/content/solution_details.png"
   <div class="container-custom relative z-10">
     <div class="text-center max-w-3xl mx-auto mb-16 slide-up">
       <h2
-        class="font-bold text-secondary-600 dark:text-secondary-300 mb-8 mx-4 leading-relaxed language-content"
-        data-key-de="solution_details.intro_1" data-key-en="solution_details.intro_1"
+        class="font-bold text-secondary-600 dark:text-secondary-300 mb-8 mx-4 leading-relaxed"
       >
-        {i18n.de.solution_details.intro_1}
+        {t.solution_details.intro_1}
       </h2>
-      <h3 class="language-content" data-key-de="solution_details.intro_2" data-key-en="solution_details.intro_2">{i18n.de.solution_details.intro_2}</h3>
+      <h3>{t.solution_details.intro_2}</h3>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 slide-up">
@@ -46,17 +49,17 @@ import solutionDetails from "../assets/images/content/solution_details.png"
               ) : null}
             </span>
             <div>
-              <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white language-content" data-key-de={`solution_details.solution_${num}_headline`} data-key-en={`solution_details.solution_${num}_headline`}>
+              <h3 class="font-semibold mb-2 text-secondary-900 dark:text-white">
                 {
-                  i18n.de.solution_details[
-                    `solution_${num}_headline` as keyof typeof i18n.de.solution_details
+                  t.solution_details[
+                    `solution_${num}_headline` as keyof typeof t.solution_details
                   ]
                 }
               </h3>
-              <p class="text-secondary-600 dark:text-secondary-300 language-content" data-key-de={`solution_details.solution_${num}_text`} data-key-en={`solution_details.solution_${num}_text`}>
+              <p class="text-secondary-600 dark:text-secondary-300">
                 {
-                  i18n.de.solution_details[
-                    `solution_${num}_text` as keyof typeof i18n.de.solution_details
+                  t.solution_details[
+                    `solution_${num}_text` as keyof typeof t.solution_details
                   ]
                 }
               </p>
@@ -76,12 +79,12 @@ import solutionDetails from "../assets/images/content/solution_details.png"
     </div>
 
     <div class="mt-16 text-center max-w-3xl mx-auto slide-up">
-      <h3 class="mb-8 font-semibold text-secondary-900 dark:text-white language-content" data-key-de="solution_details.outro_question" data-key-en="solution_details.outro_question">
-        {i18n.de.solution_details.outro_question}
+      <h3 class="mb-8 font-semibold text-secondary-900 dark:text-white">
+        {t.solution_details.outro_question}
       </h3>
       <ul class="space-y-4 text-left mb-8">
         {
-          i18n.de.solution_details.outro_bullets.map((bullet) => (
+          t.solution_details.outro_bullets.map((bullet) => (
             <li class="flex items-center gap-6 md:gap-8">
               <span class="text-primary-600 dark:text-primary-400">
                 <BsSpeedometer2 className="w-5 h-5 md:w-6 md:h-6" />
@@ -93,8 +96,8 @@ import solutionDetails from "../assets/images/content/solution_details.png"
           ))
         }
       </ul>
-      <h2 class="mx-12 mt-16 text-secondary-900 dark:text-white language-content" data-key-de="solution_details.outro_claim" data-key-en="solution_details.outro_claim">
-        {i18n.de.solution_details.outro_claim}
+      <h2 class="mx-12 mt-16 text-secondary-900 dark:text-white">
+        {t.solution_details.outro_claim}
       </h2>
     </div>
 
@@ -105,7 +108,7 @@ import solutionDetails from "../assets/images/content/solution_details.png"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <span class="language-content" data-key-de="hero.cta" data-key-en="hero.cta">{i18n.de.hero.cta}</span>
+        {t.hero.cta}
       </a>
     </div>
   </div>
