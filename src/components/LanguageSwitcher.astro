@@ -1,37 +1,37 @@
 ---
-import { IoLanguage } from "react-icons/io5";
+import { IoLanguage } from "react-icons/io5"
 
 // Get the current URL path and hash
-const { pathname, hash } = Astro.url;
+const { pathname, hash } = Astro.url
 
 // Function to get the equivalent URL in another language
 function getLocalizedPath(targetLang: string) {
   // If we're on the default locale (de) with no prefix
-  if (!pathname.startsWith('/en') && targetLang === 'en') {
-    return `/en${pathname}${hash}`;
+  if (!pathname.startsWith("/en") && targetLang === "en") {
+    return `/en${pathname}${hash}`
   }
 
   // If we're on the English version and want to go to default (German)
-  if (pathname.startsWith('/en') && targetLang === 'de') {
-    return `${pathname.replace(/^\/en/, '')}${hash}`;
+  if (pathname.startsWith("/en") && targetLang === "de") {
+    return `${pathname.replace(/^\/en/, "")}${hash}`
   }
 
   // Return current path if something unexpected
-  return `${pathname}${hash}`;
+  return `${pathname}${hash}`
 }
 
 // Get the paths for each language
-const dePath = getLocalizedPath('de');
-const enPath = getLocalizedPath('en');
+const dePath = getLocalizedPath("de")
+const enPath = getLocalizedPath("en")
 
 // Determine current language
-const currentLang = pathname.startsWith('/en') ? 'en' : 'de';
+const currentLang = pathname.startsWith("/en") ? "en" : "de"
 
 // Get the other language
-const otherLang = currentLang === 'en' ? 'de' : 'en';
+const otherLang = currentLang === "en" ? "de" : "en"
 ---
 
-<a href={currentLang === 'en' ? dePath : enPath} class="language-switcher">
+<a href={currentLang === "en" ? dePath : enPath} class="language-switcher">
   <IoLanguage className="lang-icon" />
   <div class="lang-stack">
     <span class="current-lang">{currentLang.toUpperCase()}</span>
@@ -43,20 +43,20 @@ const otherLang = currentLang === 'en' ? 'de' : 'en';
   .language-switcher {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     text-decoration: none;
     cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 0.25rem;
     transition: all 0.2s ease;
   }
 
-  .language-switcher:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+  /* Base styles for all language switchers */
+  .language-switcher {
+    padding: 0.5rem 0.75rem;
+    width: auto;
+    justify-content: center;
   }
 
-  :global(.dark) .language-switcher:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+  .language-switcher:hover {
+    color: var(--text-secondary-700, #334155);
   }
 
   .lang-icon {
@@ -80,13 +80,13 @@ const otherLang = currentLang === 'en' ? 'de' : 'en';
 
   .other-lang {
     font-size: 0.75rem;
-    color: var(--text-primary-600, #0891B2);
+    color: var(--text-primary-600, #0891b2);
     transition: all 0.2s ease;
     transform-origin: center;
   }
 
   :global(.dark) .other-lang {
-    color: var(--text-primary-400, #22D3EE);
+    color: var(--text-primary-400, #22d3ee);
   }
 
   .language-switcher:hover .other-lang {
