@@ -15,6 +15,9 @@
       "services": "Services",
       "faq": "FAQ",
       "contact": "Contact",
+      "switch_theme_dark": "Dark Mode",
+      "switch_theme_light": "Light Mode",
+      "switch_language": "Auf Deutsch",
       "book_a_call": "Book a Call"
     },
     "hero": {
@@ -140,6 +143,9 @@
       "services": "Leistungen",
       "faq": "FAQ",
       "contact": "Kontakt",
+      "switch_theme_dark": "Dunkelmodus",
+      "switch_theme_light": "Hellmodus",
+      "switch_language": "Switch to English",
       "book_a_call": "Gespräch buchen"
     },
     "hero": {

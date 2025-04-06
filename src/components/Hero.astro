@@ -90,7 +90,7 @@ const t = i18n[currentLang];
     </div>
     <div class="flex flex-wrap gap-4 mt-12 md:mt-16 justify-center">
       <a
-        href={config.external_links.strategy_call}
+        href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
         class="btn-cta"
         target="_blank"
         rel="noopener noreferrer"

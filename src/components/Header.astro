@@ -4,15 +4,36 @@ import i18n from "../assets/i18n.json"
 import { Image } from "astro:assets"
 import logoBlack from "../assets/images/logos/logo-black-right.png"
 import logoWhite from "../assets/images/logos/logo-white-right.png"
-// import { IoLanguage } from "react-icons/io5" // Not used
+import { IoLanguage } from "react-icons/io5"
 import LanguageSwitcher from "./LanguageSwitcher.astro"
 
 // Get current language from URL
-const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
+const { pathname, hash } = Astro.url
+const currentLang = pathname.startsWith("/en") ? "en" : "de"
 const t = i18n[currentLang]
 
 // Get the base path for links based on language
 const basePath = currentLang === "en" ? "/en" : ""
+
+// Function to get the equivalent URL in another language
+function getLocalizedPath(targetLang: string) {
+  // If we're on the default locale (de) with no prefix
+  if (!pathname.startsWith("/en") && targetLang === "en") {
+    return `/en${pathname}${hash}`
+  }
+
+  // If we're on the English version and want to go to default (German)
+  if (pathname.startsWith("/en") && targetLang === "de") {
+    return `${pathname.replace(/^\/en/, "")}${hash}`
+  }
+
+  // Return current path if something unexpected
+  return `${pathname}${hash}`
+}
+
+// Get the paths for each language
+const dePath = getLocalizedPath("de")
+const enPath = getLocalizedPath("en")
 ---
 
 <header
@@ -105,9 +126,7 @@ const basePath = currentLang === "en" ? "/en" : ""
 
     <div class="flex items-center space-x-2">
       <!-- Language switcher - visible on larger screens -->
-      <div
-        class="hidden sm:flex items-center justify-center p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
-      >
+      <div class="hidden sm:block">
         <LanguageSwitcher />
       </div>
 
@@ -149,7 +168,7 @@ const basePath = currentLang === "en" ? "/en" : ""
         </svg>
       </button>
 
-      <a href={config.external_links.strategy_call} class="btn-primary"
+      <a href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en} class="btn-primary"
         >{t.header.book_a_call}</a
       >
 
@@ -227,11 +246,16 @@ const basePath = currentLang === "en" ? "/en" : ""
           >
 
           <!-- Language Switcher in Mobile Menu -->
-          <div
+          <a
+            href={currentLang === "en" ? dePath : enPath}
             class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+            @click="open = false"
           >
-            <LanguageSwitcher />
-          </div>
+            <div class="flex items-center">
+              <IoLanguage className="h-4 w-4 mr-2" />
+              <span>{t.header.switch_language}</span>
+            </div>
+          </a>
 
           <!-- Dark Mode Toggle Button -->
           <button
@@ -269,9 +293,10 @@ const basePath = currentLang === "en" ? "/en" : ""
                   d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                 ></path>
               </svg>
-              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"
-                >Enable Dark Mode</span
-              >
+              <span>
+                <span x-show="!darkMode">{t.header.switch_theme_dark}</span>
+                <span x-show="darkMode">{t.header.switch_theme_light}</span>
+              </span>
             </div>
           </button>
 

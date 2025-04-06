@@ -1,5 +1,6 @@
 ---
 import { IoLanguage } from "react-icons/io5"
+import i18n from "../assets/i18n.json"
 
 // Get the current URL path and hash
 const { pathname, hash } = Astro.url
@@ -27,11 +28,18 @@ const enPath = getLocalizedPath("en")
 // Determine current language
 const currentLang = pathname.startsWith("/en") ? "en" : "de"
 
+// Get translations
+const t = i18n[currentLang]
+
 // Get the other language
 const otherLang = currentLang === "en" ? "de" : "en"
 ---
 
-<a href={currentLang === "en" ? dePath : enPath} class="language-switcher">
+<a
+  href={currentLang === "en" ? dePath : enPath}
+  class="language-switcher focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200"
+  aria-label={t.header.switch_language}
+>
   <IoLanguage className="lang-icon" />
   <div class="lang-stack">
     <span class="current-lang">{currentLang.toUpperCase()}</span>
@@ -50,14 +58,14 @@ const otherLang = currentLang === "en" ? "de" : "en"
 
   /* Base styles for all language switchers */
   .language-switcher {
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
     width: auto;
     justify-content: center;
+    background: transparent;
+    border: none;
   }
 
-  .language-switcher:hover {
-    color: var(--text-secondary-700, #334155);
-  }
+  /* Hover styles are now handled by Tailwind classes */
 
   .lang-icon {
     width: 1.25rem;

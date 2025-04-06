@@ -1,13 +1,14 @@
 ---
-import i18nData from '../assets/i18n.json';
+import i18n from "../assets/i18n.json"
 import config from "../assets/config.ts"
 
 interface Props {
   lang: string;
 }
 
-const { lang = "de" } = Astro.props;
-const t = i18nData[lang as keyof typeof i18nData];
+const { pathname } = Astro.url
+const currentLang = pathname.startsWith("/en") ? "en" : "de"
+const t = i18n[currentLang]
 
 interface FAQItem {
   questionKey: string;
@@ -18,7 +19,7 @@ interface FAQItem {
 }
 
 // Create question keys instead of actual text
-const questionKeys = Object.keys(i18nData.de.faq)
+const questionKeys = Object.keys(t.faq)
   .filter(key => key.startsWith('q_'));
 
 const questions: FAQItem[] = questionKeys.map(key => {
@@ -97,7 +98,7 @@ const questions: FAQItem[] = questionKeys.map(key => {
     
     <div class="text-center mt-12">
       <a
-        href={config.external_links.strategy_call}
+        href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
         class="btn-cta"
         target="_blank"
         rel="noopener noreferrer"
