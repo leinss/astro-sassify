@@ -19,5 +19,10 @@ export default defineConfig({
     "/": "/ki-kommunikation",
     "/en": "/ai-communication"
   },
-
+  // Configure view transitions - this is now a standard feature in Astro 5.x
+  // No need for experimental flag
+  build: {
+    // Improve transition performance
+    inlineStylesheets: 'auto'
+  }
 })

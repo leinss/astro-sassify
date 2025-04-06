@@ -1,5 +1,33 @@
 // Enhanced page transitions
 document.addEventListener("astro:page-load", () => {
+  // Add a class to html to indicate the site is loaded
+  document.documentElement.classList.add('astro-site-loaded');
+
+  // Ensure the page is fully visible
+  const pageWrapper = document.getElementById('page-wrapper');
+  if (pageWrapper) {
+    // Remove transitioning class if it exists
+    pageWrapper.classList.remove('page-transitioning');
+    // Force a repaint to prevent flashing
+    void pageWrapper.offsetWidth;
+    // Add loaded class
+    pageWrapper.classList.add('page-loaded');
+  }
+
+  // Apply content-animate class to main sections
+  const mainSections = document.querySelectorAll('main > section');
+  mainSections.forEach((section, index) => {
+    section.classList.add('content-animate');
+    // Add staggered animation classes
+    if (index > 0) {
+      section.classList.add(`stagger-${Math.min(index, 3)}`);
+    }
+    // Add loaded class with a small delay
+    setTimeout(() => {
+      section.classList.add('loaded');
+    }, 100);
+  });
+
   // Add animation classes to elements with data-animate attribute
   const animatedElements = document.querySelectorAll("[data-animate]");
 
@@ -68,7 +96,20 @@ document.addEventListener("astro:page-load", () => {
 // Handle navigation events
 document.addEventListener(
   "astro:before-preparation",
-  ({ from, to, direction }) => {
+  ({ from, to }) => {
+    // Add transitioning class to start the animation
+    const pageWrapper = document.getElementById('page-wrapper');
+    if (pageWrapper) {
+      pageWrapper.classList.add('page-transitioning');
+      pageWrapper.classList.remove('page-loaded');
+    }
+
+    // Remove loaded class from all content-animate elements
+    const animatedElements = document.querySelectorAll('.content-animate');
+    animatedElements.forEach(el => {
+      el.classList.remove('loaded');
+    });
+
     // Store navigation direction in localStorage to use it after page load
     if (from && to) {
       const fromPath = new URL(from).pathname;
@@ -91,7 +132,7 @@ document.addEventListener(
   },
 );
 
-// Apply direction-specific transitions
+// Handle navigation direction
 document.addEventListener("astro:page-load", () => {
   const navDirection = localStorage.getItem("navigationDirection");
 

@@ -1,19 +1,45 @@
-/* Page Transitions */
+/* Page Transitions - Simplified to prevent flashing */
 .page-transition-wrapper {
   position: relative;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0);
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
+  will-change: opacity, transform; /* Optimize for animations */
 }
 
+/* Only apply transitions when navigating between pages, not on initial load */
+html:not(.astro-site-loaded) .page-transition-wrapper,
+html:not(.astro-site-loaded) .header-transition {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* When transitioning between pages */
+.page-transitioning {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Ensure content is visible after transition */
 .page-loaded {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* View Transitions Animations */
+/* Header transition to prevent flashing */
+.header-transition {
+  position: relative;
+  z-index: 50;
+  will-change: opacity, transform; /* Optimize for animations */
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* View Transitions Animations - Using consistent slide-up for all transitions */
 ::view-transition-old(root) {
   animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
 }
@@ -42,65 +68,50 @@
   }
 }
 
-/* Element-specific transitions */
-main {
-  view-transition-name: main-content;
+/* Element-specific transitions - Using classes instead of direct element selectors */
+.content-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-header {
-  view-transition-name: header;
+.content-animate.loaded {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-footer {
-  view-transition-name: footer;
-}
+/* Staggered animations for sections */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
 
-/* Custom transitions for specific elements */
-.hero-section {
-  view-transition-name: hero;
-}
-
-.features-section {
-  view-transition-name: features;
-}
-
-.testimonials-section {
-  view-transition-name: testimonials;
-}
-
-/* Slide transitions */
-.slide-left-enter {
-  transform: translateX(100%);
-}
-
-.slide-left-enter-active {
-  transform: translateX(0);
-  transition: transform 0.5s ease-out;
-}
-
-.slide-left-exit {
-  transform: translateX(0);
-}
-
-.slide-left-exit-active {
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in;
-}
-
+/* Slide transitions - Modified to use consistent vertical animations */
+.slide-left-enter,
 .slide-right-enter {
-  transform: translateX(-100%);
+  opacity: 0;
+  transform: translateY(20px);
 }
 
+.slide-left-enter-active,
 .slide-right-enter-active {
-  transform: translateX(0);
-  transition: transform 0.5s ease-out;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
 }
 
+.slide-left-exit,
 .slide-right-exit {
-  transform: translateX(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
+.slide-left-exit-active,
 .slide-right-exit-active {
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.3s ease-in,
+    transform 0.3s ease-in;
 }

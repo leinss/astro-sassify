@@ -32,12 +32,12 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <ClientRouter />
   </head>
 
-  <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300">
-    <div id="page-wrapper" class="page-transition-wrapper">
+  <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300" style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
+    <div id="page-wrapper" class="page-transition-wrapper" style="backface-visibility: hidden; -webkit-backface-visibility: hidden;">
       <slot />
     </div>
 
@@ -55,42 +55,94 @@ const {
         }
       }
 
-      // Handle page transitions
-      document.addEventListener('astro:page-load', () => {
-        // This runs on initial page load and after each navigation
+      // Improved page transition handling
+      // Apply loaded class immediately to prevent initial flash
+      document.addEventListener('DOMContentLoaded', () => {
+        // Mark the page as loaded on initial load
+        document.documentElement.classList.add('astro-site-loaded');
+
+        // Make sure the page wrapper is visible immediately
         const pageWrapper = document.getElementById('page-wrapper');
         if (pageWrapper) {
           pageWrapper.classList.add('page-loaded');
         }
       });
 
-      document.addEventListener('astro:before-swap', () => {
-        // This runs before the new page content is swapped in
+      // Handle page transitions
+      document.addEventListener('astro:page-load', () => {
+        // This runs on initial page load and after each navigation
         const pageWrapper = document.getElementById('page-wrapper');
         if (pageWrapper) {
+          // Ensure the page is visible after content swap
+          pageWrapper.classList.add('page-loaded');
+
+          // Add loaded class to all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            setTimeout(() => {
+              el.classList.add('loaded');
+            }, 50); // Small delay to ensure DOM is ready
+          });
+        }
+      });
+
+      // Use before-preparation instead of before-swap to start transition earlier
+      document.addEventListener('astro:before-preparation', () => {
+        // This runs before navigation starts
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          pageWrapper.classList.add('page-transitioning');
           pageWrapper.classList.remove('page-loaded');
+
+          // Remove loaded class from all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            el.classList.remove('loaded');
+          });
+        }
+      });
+
+      // Handle the actual swap
+      document.addEventListener('astro:after-swap', () => {
+        // This runs after the new page content is swapped in but before hydration
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          // Remove transitioning class to allow the loaded class to take effect
+          pageWrapper.classList.remove('page-transitioning');
         }
       });
     </script>
     <script is:inline>
-      // Dynamically load scripts with the correct path based on the current URL
-      // const pathname = window.location.pathname;
-      // For all paths in the new structure, scripts are two levels up
-      const scriptsPath = '../..';
+      // Improved script loading with dynamic path detection
+      document.addEventListener('astro:page-load', () => {
+        // Determine the correct path based on the current URL
+        let scriptsPath;
+        const pathname = window.location.pathname;
 
+        // Count directory levels to determine relative path
+        const segments = pathname.split('/').filter(Boolean);
 
-      // Create and append script elements
-      const scripts = ['transitions.js'];
-      scripts.forEach(script => {
-        // Check if script is already loaded to prevent duplicates
-        const existingScript = document.querySelector(`script[src*="${script}"]`);
-        if (!existingScript) {
-          const scriptEl = document.createElement('script');
-          scriptEl.src = `${scriptsPath}/scripts/${script}`;
-          document.body.appendChild(scriptEl);
-          console.log(`Loaded script: ${scriptsPath}/scripts/${script}`);
+        if (segments.length <= 1) {
+          // Root or first level
+          scriptsPath = 'scripts';
+        } else {
+          // Deeper paths
+          scriptsPath = '../'.repeat(segments.length - 1) + 'scripts';
         }
-      });
+
+        // Create and append script elements
+        const scripts = ['transitions.js'];
+        scripts.forEach(script => {
+          // Check if script is already loaded to prevent duplicates
+          const existingScript = document.querySelector(`script[src*="${script}"]`);
+          if (!existingScript) {
+            const scriptEl = document.createElement('script');
+            scriptEl.src = `${scriptsPath}/${script}`;
+            scriptEl.async = false; // Load synchronously to ensure transitions work
+            document.body.appendChild(scriptEl);
+          }
+        });
+      }, { once: false }); // Run on every page load, not just the first
     </script>
   </body>
 </html>
