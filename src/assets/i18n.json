@@ -1,7 +1,127 @@
 {
   "en": {
-    "header": {},
-    "hero": {}
+    "meta": {
+      "title": "AI Revolution for Your Communication - Use Knowledge Intelligently, Transform Processes.",
+      "description": "Increase efficiency. Reduce errors. Relieve employees.",
+      "privacy_policy": "Privacy Policy",
+      "imprint": "Imprint",
+      "cookie_policy": "Cookie Policy"
+    },
+    "header": {
+      "home": "Home",
+      "problem": "Problems",
+      "solution": "Solutions",
+      "about": "About Me",
+      "services": "Services",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "book_a_call": "Book a Call"
+    },
+    "hero": {
+      "subline": "Unleash the potential of your business communication – with intelligent AI solutions.",
+      "headline_start": "Revolutionize Your Communication:",
+      "headline_end": " AI-Powered Efficiency for Your Success.",
+      "intro_text": "Say goodbye to inefficient information silos. We transform your company knowledge into a dynamic, AI-powered advantage.\n\nFrom intelligent chatbots to automated receptionists – we make your data the heart of your efficient communication.",
+      "point_1_start": "Knowledge Automation",
+      "point_1_end": "Automated provision of information from knowledge databases for accelerated processes and fewer errors.",
+      "point_2_start": "Chatbot Integration",
+      "point_2_end": "Seamless integration of AI chatbots into your communication channels for increased efficiency and accessibility.",
+      "point_3_start": "AI Receptionist",
+      "point_3_end": "Automated greeting and forwarding for a professional first impression and resource conservation.",
+      "cta": "Arrange a free initial consultation now"
+    },
+    "problem_solution": {
+      "problem_headline": "Does this sound familiar?",
+      "problem_subline": "Every day, companies struggle with information chaos and inefficient communication processes. This costs time, money, and nerves – and slows down growth.",
+      "problem_1_headline": "Is your company growing – but your knowledge isn't keeping up?",
+      "problem_1_text": "Do your employees constantly have to search for important information scattered across countless systems? Do they find it difficult to locate relevant data?",
+      "problem_2_headline": "New employees in the information labyrinth?",
+      "problem_2_text": "Do new employees take forever to get up to speed because your company knowledge is not centrally accessible?",
+      "problem_3_headline": "Time-consuming customer service?",
+      "problem_3_text": "Are your customer inquiries made through various channels and answered inconsistently? Does this cost unnecessary time?",
+      "problem_4_headline": "Overworked reception staff – a vicious cycle?",
+      "problem_4_text": "Are your receptionists kept from their core tasks by constant calls and visitor inquiries? Does the high workload lead to stress, errors, and ultimately to lower productivity?",
+      "solution_headline": "How about...",
+      "solution_subline": "...more intelligent solutions? With generative AI, we optimize your processes and reduce your workload – without complicated system changes.",
+      "solution_footer": "Let's find out together how AI can accelerate your processes and make your company fit for the future.",
+      "solution_1_headline": "a central knowledge database?",
+      "solution_1_text": "Implement a central knowledge database that brings together all relevant information from various systems. This allows your employees quick and easy access to the data they need, reduces search times, and increases efficiency.",
+      "solution_2_headline": "AI-powered onboarding?",
+      "solution_2_text": "Use an AI chatbot connected to the central knowledge database to support new employees during onboarding. The chatbot can answer frequently asked questions, provide relevant documents, and speed up the onboarding process.",
+      "solution_3_headline": "personalized customer communication with AI analyses?",
+      "solution_3_text": "Analyze customer interactions using AI to create personalized messages and offers. A chatbot can provide this personalized content and strengthen customer loyalty.",
+      "solution_4_headline": "an intelligent AI receptionist?",
+      "solution_4_text": "Implement an AI receptionist that automatically handles routine calls and visitor inquiries. The AI receptionist can greet callers, provide information, and forward calls. This relieves your reception staff and allows them to focus on more important tasks."
+    },
+    "solution_details": {
+      "intro_1": "You have the vision – we provide the expertise for your AI success.",
+      "intro_2": "I support you with in-depth knowledge and practical assistance in the implementation of AI chatbots, knowledge databases, and AI receptionists.",
+      "solution_1_headline": "Improving customer service through fast and precise answers",
+      "solution_1_text": "A knowledge database enables the chatbot to answer customer inquiries quickly and accurately without human intervention. This reduces waiting times, improves customer satisfaction, and enables self-service options for frequently asked questions.",
+      "solution_2_headline": "Supporting internal processes and increasing employee efficiency",
+      "solution_2_text": "Chatbots with access to a knowledge database can support employees with internal questions, accelerate onboarding, and promote knowledge transfer. This optimizes internal processes and increases productivity by automating routine tasks and improving information retrieval.",
+      "solution_3_headline": "Data acquisition and analysis to improve products and services",
+      "solution_3_text": "Chatbots collect valuable data about customer inquiries and behavior, which companies can use to continuously improve their products and services. Analyzing this data makes it possible to identify common problems and optimize the knowledge database accordingly.",
+      "solution_4_headline": "Automated greeting and forwarding by AI receptionists",
+      "solution_4_text": "An AI receptionist takes over the automated greeting of callers, answers frequently asked questions, and efficiently forwards inquiries to the responsible employees. This ensures a professional first impression and relieves your employees of routine tasks.",
+      "outro_question": "Why this collaboration?",
+      "outro_bullets": [
+        "Through fast and precise answers, we work together to increase the efficiency of your customer service and ensure satisfied customers.",
+        "We optimize your internal processes and increase employee productivity so that your team can focus on the essentials.",
+        "We help you gain valuable data from customer interactions to continuously improve your products and services.",
+        "Invest in a knowledge database and experience how intelligent AI solutions transform your company and make it future-proof."
+      ],
+      "outro_claim": "Together we shape your AI future – efficiently and successfully!"
+    },
+    "about_me": {
+      "title": "About Me",
+      "mission_title": "Mission & Vision",
+      "mission_statement": "Tobias believes in the transformative power of AI and digital innovations to make companies not only more efficient but also future-proof.\n\nHis mission is to support service companies with customized AI solutions so that they can optimize their processes, secure competitive advantages, and grow sustainably.\n\nHe relies on innovative and individual solutions that are precisely tailored to the needs of his customers.\nWith a genuine passion for technological advancements, he accompanies companies on their path to digital excellence.",
+      "career_title": "Career",
+      "career": "Tobias is an experienced software engineer with a focus on artificial intelligence, blockchain, and full-stack development.\n\nHe has worked in various international companies and research institutions.\nHis professional experience includes positions at the Fraunhofer Institute, blockchain projects in the Ethereum and Cosmos ecosystems, and the development of AI-powered software solutions. In addition, he was involved as a co-founder in innovative startups and has demonstrated his expertise through numerous successful participations in hackathons.\n\nHis focus is on the development of scalable software solutions, the automation of digital processes, and the integration of AI into business operations.\nHe is proficient in both backend and frontend technologies and has extensive experience in the areas of DevOps, data engineering, and software architecture.",
+      "background_title": "Background",
+      "background": "Growing up in the economically strong region of Stuttgart, Tobias has a deep understanding of the challenges and opportunities facing German SMEs.\nThese companies face the task of strategically advancing digitalization and increasing efficiency.\n\nTobias's goal is to support medium-sized companies in integrating modern technologies – especially generative AI – into their processes in a targeted manner in order to secure sustainable competitive advantages."
+    },
+    "faq": {
+      "q_1": "Who is your offer aimed at?",
+      "a_1": "Our offer is specifically tailored to medium-sized companies, especially digital service providers and administrations, that want to use generative AI to optimize their internal processes or improve customer communication. We support you in implementing and using modern AI technologies efficiently and in compliance with data protection regulations.",
+      "q_2": "What exactly do you offer?",
+      "a_2": "We offer comprehensive consulting, individual training, and the implementation of generative AI software. Our focus is on imparting practical knowledge for the independent implementation, adaptation, and integration of knowledge databases and AI-powered chatbots into your existing systems.",
+      "q_3": "What specific advantages does generative AI offer for SMEs?",
+      "a_3": "Generative AI enables:\n\n* **Increased efficiency:** Automation of repetitive tasks and reduction of manual processes.\n* **Cost savings:** Optimization of customer communication and internal processes to reduce time expenditure and operating costs.\n* **Scalability:** Supporting your company's growth without a disproportionate increase in personnel costs.\n* **Data protection-compliant solutions:** Implementation of AI solutions that comply with data protection guidelines (GDPR) and protect your company data.",
+      "q_4": "What distinguishes your offer from other providers?",
+      "a_4": "We combine current AI technologies with a strong focus on data protection and individual adaptability. Our goal is not only to provide you with a finished software solution but also to enable you to adapt and further develop it yourself. We offer customized solutions that are precisely tailored to your specific needs.",
+      "q_5": "Is technical prior knowledge required to participate in your training courses?",
+      "a_5": "No, technical prior knowledge is not absolutely necessary. Our training courses are designed so that both technically savvy and non-technical teams can successfully implement the implementation and adaptation of AI solutions. We attach great importance to practical knowledge transfer.",
+      "q_6": "What specific AI applications can companies implement with your support?",
+      "a_6": "We support you in the implementation of:\n\n* Automated customer communication through intelligent chatbots.\n* Efficient document analysis and data processing.\n* Automated text generation for reports, e-mails, and support requests.\n* Process automation through AI-supported workflows.",
+      "q_7": "How is the process of your training courses structured?",
+      "a_7": "Our training courses are modular and include:\n\n* Basics of generative AI and its use cases.\n* Selection and implementation of suitable AI software.\n* Adaptation and training of AI with your specific company data.\n* Ensuring data protection and compliance.\n* Maintenance, optimization, and continuous improvement of the AI solution.",
+      "q_8": "What costs should I expect for a training course?",
+      "a_8": "The costs for our training courses vary depending on the scope of the selected modules and your individual consulting needs. We would be happy to provide you with a non-binding, customized offer tailored to your specific requirements.",
+      "q_9": "Do you also offer support with the integration of AI solutions into existing systems?",
+      "a_9": "Yes, we offer comprehensive support for the integration of AI solutions into your existing systems. Our goal is to ensure seamless integration that optimizes your business processes and increases efficiency.",
+      "q_10": "How do you ensure that the implemented AI solutions are secure and comply with data protection regulations?",
+      "a_10": "Data protection and security are our top priorities. We work closely with you to ensure that all implemented AI solutions comply with applicable data protection regulations (GDPR). We rely on proven technologies and methods to protect your data.",
+      "q_11": "What support do you offer after the implementation of AI solutions?",
+      "a_11": "We offer comprehensive support after implementation, including maintenance, troubleshooting, and continuous optimization. Our goal is to ensure that your AI solutions work effectively and efficiently in the long term.",
+      "q_12": "How can I take the next step if I am interested?",
+      "a_12": "We appreciate your interest! Arrange a non-binding initial consultation with us. In this conversation, we will jointly analyze your individual requirements and explain to you how generative AI can specifically support your company."
+    },
+    "footer": {
+      "contact": {
+        "headline": "Contact",
+        "address": "Musterstraße 123, 12345 Musterstadt",
+        "phone": "+49 123 4567890",
+        "email": ""
+      }
+    },
+    "page_not_found": {
+      "title": "404",
+      "headline": "Page Not Found",
+      "text": "The page you are looking for does not exist or has been moved. Please check the URL and try again.",
+      "back_to_home": "Back to Homepage"
+    }
   },
   "de": {
     "meta": {
