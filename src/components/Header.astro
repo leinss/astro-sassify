@@ -7,24 +7,44 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
 import { IoLanguage } from "react-icons/io5"
 import LanguageSwitcher from "./LanguageSwitcher.astro"
 
-// Get current language from URL
-const { pathname, hash } = Astro.url
-const currentLang = pathname.startsWith("/en") ? "en" : "de"
-const t = i18n[currentLang]
+interface Props {
+  lang: "en" | "de";
+}
+
+// Get language from props
+const { lang } = Astro.props;
+const t = i18n[lang]
 
 // Get the base path for links based on language
-const basePath = currentLang === "en" ? "/en" : ""
+const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+
+// Get current URL for language switching
+const { pathname, hash } = Astro.url
 
 // Function to get the equivalent URL in another language
 function getLocalizedPath(targetLang: string) {
-  // If we're on the default locale (de) with no prefix
-  if (!pathname.startsWith("/en") && targetLang === "en") {
-    return `/en${pathname}${hash}`
+  // If we're on the German version and want to go to English
+  if (pathname.includes("/ki-kommunikation") && targetLang === "en") {
+    return pathname.replace("/ki-kommunikation", "/ai-communication") + hash
   }
 
-  // If we're on the English version and want to go to default (German)
-  if (pathname.startsWith("/en") && targetLang === "de") {
-    return `${pathname.replace(/^\/en/, "")}${hash}`
+  // If we're on the English version and want to go to German
+  if (pathname.includes("/ai-communication") && targetLang === "de") {
+    return pathname.replace("/ai-communication", "/ki-kommunikation") + hash
+  }
+
+  // Handle root redirects
+  if (pathname === "/" && targetLang === "de") {
+    return "/ki-kommunikation" + hash
+  }
+  if (pathname === "/" && targetLang === "en") {
+    return "/ai-communication" + hash
+  }
+  if (pathname === "/en" && targetLang === "en") {
+    return "/ai-communication" + hash
+  }
+  if (pathname === "/en" && targetLang === "de") {
+    return "/ki-kommunikation" + hash
   }
 
   // Return current path if something unexpected
@@ -127,7 +147,7 @@ const enPath = getLocalizedPath("en")
     <div class="flex items-center space-x-2">
       <!-- Language switcher - visible on larger screens -->
       <div class="hidden sm:block">
-        <LanguageSwitcher />
+        <LanguageSwitcher lang={lang} />
       </div>
 
       <!-- Dark mode toggle - visible on larger screens -->
@@ -168,7 +188,7 @@ const enPath = getLocalizedPath("en")
         </svg>
       </button>
 
-      <a href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en} class="btn-primary"
+      <a href={lang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en} class="btn-primary"
         >{t.header.book_a_call}</a
       >
 
@@ -248,7 +268,7 @@ const enPath = getLocalizedPath("en")
 
           <!-- Language Switcher in Mobile Menu -->
           <a
-            href={currentLang === "en" ? dePath : enPath}
+            href={lang === "en" ? dePath : enPath}
             class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
             @click="open = false"
           >

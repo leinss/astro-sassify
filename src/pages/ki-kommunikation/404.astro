@@ -4,16 +4,18 @@ import Header from "../../components/Header.astro"
 import Footer from "../../components/Footer.astro"
 import i18n from "../../assets/i18n.json"
 
-// English version
-const currentLang = "en"
-const t = i18n[currentLang]
+// German version
+const lang = "de"
+const t = i18n[lang]
+
+// For GitHub Pages, we can't set the status code server-side
 
 // Get the base path for links based on language
-const basePath = "/en"
+const basePath = "/ki-kommunikation"
 ---
 
-<Layout title="Page Not Found - Tobias Leinss">
-  <Header lang={currentLang} />
+<Layout title="Seite nicht gefunden - Tobias Leinss">
+  <Header lang={lang} />
   <main>
     <section class="py-20 md:py-32">
       <div class="container-custom text-center">
@@ -38,5 +40,5 @@ const basePath = "/en"
       </div>
     </section>
   </main>
-  <Footer lang={currentLang} />
+  <Footer lang={lang} />
 </Layout>

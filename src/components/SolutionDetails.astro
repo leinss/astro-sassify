@@ -11,9 +11,13 @@ import { FaUserPlus } from "react-icons/fa"
 import { Image } from 'astro:assets';
 import solutionDetails from "../assets/images/content/solution_details.png"
 
-// Get current language from URL
-const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
-const t = i18n[currentLang]
+interface Props {
+  lang: "en" | "de";
+}
+
+// Get language from props
+const { lang } = Astro.props;
+const t = i18n[lang]
 ---
 
 <section
@@ -103,7 +107,7 @@ const t = i18n[currentLang]
 
     <div class="flex flex-wrap gap-4 mt-16 justify-center">
       <a
-        href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
+        href={lang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
         class="btn-cta"
         target="_blank"
         rel="noopener noreferrer"

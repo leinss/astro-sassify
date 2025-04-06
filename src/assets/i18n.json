@@ -112,14 +112,7 @@
       "q_11": "How can I take the next step if I am interested?",
       "a_11": "We appreciate your interest! Arrange a non-binding initial consultation with us. In this conversation, we will jointly analyze your individual requirements and explain to you how generative AI can specifically support your company."
     },
-    "footer": {
-      "contact": {
-        "headline": "Contact",
-        "address": "Musterstraße 123, 12345 Musterstadt",
-        "phone": "+49 123 4567890",
-        "email": ""
-      }
-    },
+    "footer": {},
     "page_not_found": {
       "title": "404",
       "headline": "Page Not Found",
@@ -240,14 +233,7 @@
       "q_11": "Wie kann ich den nächsten Schritt gehen, wenn ich Interesse habe?",
       "a_11": "Wir freuen uns über Ihr Interesse! Vereinbaren Sie ein unverbindliches Erstgespräch mit uns. In diesem Gespräch analysieren wir gemeinsam Ihre individuellen Anforderungen und erläutern Ihnen, wie generative KI Ihr Unternehmen konkret unterstützen kann."
     },
-    "footer": {
-      "contact": {
-        "headline": "Kontakt",
-        "address": "Musterstraße 123, 12345 Musterstadt",
-        "phone": "+49 123 4567890",
-        "email": ""
-      }
-    },
+    "footer": {},
     "page_not_found": {
       "title": "404",
       "headline": "Seite nicht gefunden",

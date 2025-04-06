@@ -7,12 +7,16 @@ const currentYear = new Date().getFullYear()
 const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
   []
 
-// Get current language from URL
-const currentLang = Astro.url.pathname.startsWith("/en") ? "en" : "de"
-const t = i18n[currentLang]
+interface Props {
+  lang: "en" | "de";
+}
+
+// Get language from props
+const { lang } = Astro.props;
+const t = i18n[lang]
 
 // Get the base path for links based on language
-const basePath = currentLang === "en" ? "/en" : ""
+const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
 ---
 
 <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8">
@@ -127,7 +131,7 @@ const basePath = currentLang === "en" ? "/en" : ""
     <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
-          &copy; {currentYear} Tobias Leinss. {currentLang === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."}
+          &copy; {currentYear} Tobias Leinss. {lang === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."}
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a

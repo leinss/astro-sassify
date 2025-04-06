@@ -2,19 +2,37 @@
 import { IoLanguage } from "react-icons/io5"
 import i18n from "../assets/i18n.json"
 
+interface Props {
+  lang: "en" | "de";
+}
+
 // Get the current URL path and hash
 const { pathname, hash } = Astro.url
 
 // Function to get the equivalent URL in another language
 function getLocalizedPath(targetLang: string) {
-  // If we're on the default locale (de) with no prefix
-  if (!pathname.startsWith("/en") && targetLang === "en") {
-    return `/en${pathname}${hash}`
+  // If we're on the German version and want to go to English
+  if (pathname.includes("/ki-kommunikation") && targetLang === "en") {
+    return pathname.replace("/ki-kommunikation", "/ai-communication") + hash
   }
 
-  // If we're on the English version and want to go to default (German)
-  if (pathname.startsWith("/en") && targetLang === "de") {
-    return `${pathname.replace(/^\/en/, "")}${hash}`
+  // If we're on the English version and want to go to German
+  if (pathname.includes("/ai-communication") && targetLang === "de") {
+    return pathname.replace("/ai-communication", "/ki-kommunikation") + hash
+  }
+
+  // Handle root redirects
+  if (pathname === "/" && targetLang === "de") {
+    return "/ki-kommunikation" + hash
+  }
+  if (pathname === "/" && targetLang === "en") {
+    return "/ai-communication" + hash
+  }
+  if (pathname === "/en" && targetLang === "en") {
+    return "/ai-communication" + hash
+  }
+  if (pathname === "/en" && targetLang === "de") {
+    return "/ki-kommunikation" + hash
   }
 
   // Return current path if something unexpected
@@ -25,24 +43,24 @@ function getLocalizedPath(targetLang: string) {
 const dePath = getLocalizedPath("de")
 const enPath = getLocalizedPath("en")
 
-// Determine current language
-const currentLang = pathname.startsWith("/en") ? "en" : "de"
+// Get language from props
+const { lang } = Astro.props;
 
 // Get translations
-const t = i18n[currentLang]
+const t = i18n[lang]
 
 // Get the other language
-const otherLang = currentLang === "en" ? "de" : "en"
+const otherLang = lang === "en" ? "de" : "en"
 ---
 
 <a
-  href={currentLang === "en" ? dePath : enPath}
+  href={lang === "en" ? dePath : enPath}
   class="language-switcher focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200"
   aria-label={t.header.switch_language}
 >
   <IoLanguage className="lang-icon" />
   <div class="lang-stack">
-    <span class="current-lang">{currentLang.toUpperCase()}</span>
+    <span class="current-lang">{lang.toUpperCase()}</span>
     <span class="other-lang">{otherLang.toUpperCase()}</span>
   </div>
 </a>

@@ -19,7 +19,7 @@ const {
 ---
 
 <!doctype html>
-<html lang={Astro.url.pathname.startsWith('/en') ? 'en' : 'de'} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
+<html lang={Astro.url.pathname.includes('/ai-communication') ? 'en' : 'de'} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
   $watch('darkMode', val => localStorage.setItem('darkMode', val));
 " :class="{ 'dark': darkMode }">
   <head>
@@ -32,7 +32,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> -->
+    
     <ClientRouter />
   </head>
 
@@ -74,11 +74,13 @@ const {
     </script>
     <script is:inline>
       // Dynamically load scripts with the correct path based on the current URL
-      const basePath = window.location.pathname.startsWith('/en') ? '/en' : '';
-      const scriptsPath = basePath ? '..' : '.';
+      // const pathname = window.location.pathname;
+      // For all paths in the new structure, scripts are two levels up
+      const scriptsPath = '../..';
+
 
       // Create and append script elements
-      const scripts = ['transitions.js', 'scroll-tracking.js'];
+      const scripts = ['transitions.js'];
       scripts.forEach(script => {
         // Check if script is already loaded to prevent duplicates
         const existingScript = document.querySelector(`script[src*="${script}"]`);

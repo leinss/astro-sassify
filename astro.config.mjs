@@ -9,10 +9,15 @@ export default defineConfig({
   site: "https://leinss-consulting.de",
   integrations: [tailwind(), alpinejs(), react()],
   i18n: {
-    locales: ["en", "de"],
-    defaultLocale: "de",
+    locales: ["ai-communication", "ki-kommunikation"],
+    defaultLocale: "ki-kommunikation",
     routing: {
-      prefixDefaultLocale: false,
+      prefixDefaultLocale: true,
     },
   },
+  redirects: {
+    "/": "/ki-kommunikation",
+    "/en": "/ai-communication"
+  },
+
 })

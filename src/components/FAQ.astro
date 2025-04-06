@@ -3,12 +3,12 @@ import i18n from "../assets/i18n.json"
 import config from "../assets/config.ts"
 
 interface Props {
-  lang: string;
+  lang: "en" | "de";
 }
 
-const { pathname } = Astro.url
-const currentLang = pathname.startsWith("/en") ? "en" : "de"
-const t = i18n[currentLang]
+// Get language from props
+const { lang } = Astro.props;
+const t = i18n[lang]
 
 interface FAQItem {
   questionKey: string;
@@ -46,7 +46,7 @@ const questions: FAQItem[] = questionKeys.map(key => {
         {t.faq.subtitle}
       </p>
     </div>
-    
+
     <!-- FAQ Accordion -->
     <div class="max-w-3xl mx-auto">
       {questions.map((item) => (
@@ -95,10 +95,10 @@ const questions: FAQItem[] = questionKeys.map(key => {
         </div>
       ))}
     </div>
-    
+
     <div class="text-center mt-12">
       <a
-        href={currentLang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
+        href={lang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
         class="btn-cta"
         target="_blank"
         rel="noopener noreferrer"
