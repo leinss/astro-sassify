@@ -25,10 +25,10 @@ import solutions from "../assets/images/content/solutions.png"
     <!-- Problems Section -->
     <div class="space-y-12 mb-20 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <h2 class="font-bold text-red-600 dark:text-red-400">
+        <h2 class="font-bold text-red-600 dark:text-red-400 language-content" data-key-de="problem_solution.problem_headline" data-key-en="problem_solution.problem_headline">
           {i18n.de.problem_solution.problem_headline}
         </h2>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.problem_subline" data-key-en="problem_solution.problem_subline">
           {i18n.de.problem_solution.problem_subline}
         </p>
       </div>
@@ -58,14 +58,14 @@ import solutions from "../assets/images/content/solutions.png"
                   ) : null}
                 </span>
                 <div class="min-w-0 flex-1">
-                  <h3 class="mb-2 text-gray-900 dark:text-white break-words">
+                  <h3 class="mb-2 text-gray-900 dark:text-white break-words language-content" data-key-de={`problem_solution.problem_${num}_headline`} data-key-en={`problem_solution.problem_${num}_headline`}>
                     {
                       i18n.de.problem_solution[
                         `problem_${num}_headline` as keyof typeof i18n.de.problem_solution
                       ]
                     }
                   </h3>
-                  <p class="text-gray-600 dark:text-gray-300">
+                  <p class="text-gray-600 dark:text-gray-300 language-content" data-key-de={`problem_solution.problem_${num}_text`} data-key-en={`problem_solution.problem_${num}_text`}>
                     {
                       i18n.de.problem_solution[
                         `problem_${num}_text` as keyof typeof i18n.de.problem_solution
@@ -83,13 +83,13 @@ import solutions from "../assets/images/content/solutions.png"
     <!-- Solutions Section -->
     <div class="space-y-12 slide-up">
       <div class="text-center space-y-4 max-w-3xl mx-auto">
-        <h2 class="font-bold text-primary-600 dark:text-primary-400">
+        <h2 class="font-bold text-primary-600 dark:text-primary-400 language-content" data-key-de="problem_solution.solution_headline" data-key-en="problem_solution.solution_headline">
           {i18n.de.problem_solution.solution_headline}
         </h2>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.solution_subline" data-key-en="problem_solution.solution_subline">
           {i18n.de.problem_solution.solution_subline}
         </p>
-        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed language-content" data-key-de="problem_solution.solution_footer" data-key-en="problem_solution.solution_footer">
           {i18n.de.problem_solution.solution_footer}
         </p>
       </div>
@@ -120,7 +120,7 @@ import solutions from "../assets/images/content/solutions.png"
                 </span>
                 <div class="min-w-0 flex-1">
                   <p class="text-gray-600 dark:text-gray-300 break-words">
-                    <span class="font-bold">
+                    <span class="font-bold language-content" data-key-de={`problem_solution.solution_${num}_headline`} data-key-en={`problem_solution.solution_${num}_headline`}>
                       {
                         i18n.de.problem_solution[
                           `solution_${num}_headline` as keyof typeof i18n.de.problem_solution
@@ -128,11 +128,13 @@ import solutions from "../assets/images/content/solutions.png"
                       }
                     </span>{" "}
                     -
-                    {
-                      i18n.de.problem_solution[
-                        `solution_${num}_text` as keyof typeof i18n.de.problem_solution
-                      ]
-                    }
+                    <span class="language-content" data-key-de={`problem_solution.solution_${num}_text`} data-key-en={`problem_solution.solution_${num}_text`}>
+                      {
+                        i18n.de.problem_solution[
+                          `solution_${num}_text` as keyof typeof i18n.de.problem_solution
+                        ]
+                      }
+                    </span>
                   </p>
                 </div>
               </div>
@@ -149,7 +151,7 @@ import solutions from "../assets/images/content/solutions.png"
         target="_blank"
         rel="noopener noreferrer"
       >
-        {i18n.de.hero.cta}
+        <span class="language-content" data-key-de="hero.cta" data-key-en="hero.cta">{i18n.de.hero.cta}</span>
       </a>
     </div>
   </div>

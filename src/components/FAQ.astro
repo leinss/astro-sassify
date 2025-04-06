@@ -3,24 +3,28 @@ import i18nData from '../assets/i18n.json';
 import config from "../assets/config.ts"
 
 interface FAQItem {
+  questionKey: string;
+  answerKey: string;
+  id: string;
   question: string;
   answer: string;
-  id: string;
 }
 
-const { faq } = i18nData.de;
+// Create question keys instead of actual text
+const questionKeys = Object.keys(i18nData.de.faq)
+  .filter(key => key.startsWith('q_'));
 
-const questions: FAQItem[] = Object.keys(faq)
-  .filter(key => key.startsWith('q_'))
-  .map(key => {
-    const index = key.substring(2); // Extract number from 'q_1'
-    const answerKey = `a_${index}` as keyof typeof faq;
-    return {
-      question: faq[key as keyof typeof faq],
-      answer: faq[answerKey],
-      id: `faq-${index}`
-    };
-  });
+const questions: FAQItem[] = questionKeys.map(key => {
+  const index = key.substring(2); // Extract number from 'q_1'
+  const answerKey = `a_${index}`;
+  return {
+    questionKey: key,
+    answerKey: answerKey,
+    id: `faq-${index}`,
+    question: i18nData.de.faq[key as keyof typeof i18nData.de.faq],
+    answer: i18nData.de.faq[answerKey as keyof typeof i18nData.de.faq]
+  };
+});
 ---
 
 <section id="faq" class="section py-20 bg-gray-50 dark:bg-gray-800/50" id="faq">
@@ -29,8 +33,8 @@ const questions: FAQItem[] = Object.keys(faq)
       <span class="inline-block px-3 sm:px-4 py-1 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 font-medium text-xs sm:text-sm mb-6">
         FAQ
       </span>
-      <h2 class="mb-6 text-gray-900 dark:text-white">Häufig gestellte Fragen</h2>
-      <p class="mb-6 text-lg md:text-xl text-gray-600 dark:text-gray-300">
+      <h2 class="mb-6 text-gray-900 dark:text-white language-content" data-key-de="title" data-key-en="title">Häufig gestellte Fragen</h2>
+      <p class="mb-6 text-lg md:text-xl text-gray-600 dark:text-gray-300 language-content" data-key-de="subtitle" data-key-en="subtitle">
         Hier finden Sie Antworten auf die wichtigsten Fragen zu unseren Dienstleistungen.
       </p>
     </div>
@@ -45,7 +49,7 @@ const questions: FAQItem[] = Object.keys(faq)
             aria-expanded="false"
             onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); document.getElementById(this.getAttribute('aria-controls')).classList.toggle('hidden')"
           >
-            <span class="text-base sm:text-lg md:text-xl font-medium">{item.question}</span>
+            <span class="text-base sm:text-lg md:text-xl font-medium language-content" data-key-de={item.questionKey} data-key-en={item.questionKey}>{item.question}</span>
             <span class="ml-6 flex h-7 items-center">
               <svg class="h-6 w-6 rotate-0 transform transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -53,7 +57,7 @@ const questions: FAQItem[] = Object.keys(faq)
             </span>
           </button>
           <div id={item.id} class="hidden mt-4">
-            <div class="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 whitespace-pre-line">
+            <div class="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 whitespace-pre-line language-content" data-key-de={item.answerKey} data-key-en={item.answerKey}>
               {item.answer}
             </div>
           </div>
@@ -68,7 +72,7 @@ const questions: FAQItem[] = Object.keys(faq)
         target="_blank"
         rel="noopener noreferrer"
       >
-        {i18nData.de.hero.cta}
+        <span class="language-content" data-key-de="hero.cta" data-key-en="hero.cta">{i18nData.de.hero.cta}</span>
       </a>
     </div>
   </div>

@@ -4,6 +4,7 @@ import i18n from "../assets/i18n.json"
 import { Image } from "astro:assets"
 import logoBlack from "../assets/images/logos/logo-black-right.png"
 import logoWhite from "../assets/images/logos/logo-white-right.png"
+import { IoLanguage } from "react-icons/io5";
 ---
 
 <header
@@ -32,33 +33,33 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
       <a
         href={`/#hero`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        >{i18n.de.header.home}</a
+        x-text="lang === 'de' ? window.i18n.de.header.home : window.i18n.en.header.home"></a
       >
       <a
         href={`/#problem`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        >{i18n.de.header.problem}</a
+        x-text="lang === 'de' ? window.i18n.de.header.problem : window.i18n.en.header.problem"></a
       >
       <a
         href={`/#solution`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        >{i18n.de.header.solution}</a
+        x-text="lang === 'de' ? window.i18n.de.header.solution : window.i18n.en.header.solution"></a
       >
       <a
         href={`/#about`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        >{i18n.de.header.about}</a
+        x-text="lang === 'de' ? window.i18n.de.header.about : window.i18n.en.header.about"></a
       >
       <a
         href={`/#faq`}
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
-        >{i18n.de.header.faq}</a
+        x-text="lang === 'de' ? window.i18n.de.header.faq : window.i18n.en.header.faq"></a
       >
 
       <!-- All Pages Dropdown -->
       <!-- <div x-data="{ open: false }" class="relative">
-        <button 
-          @click="open = !open" 
+        <button
+          @click="open = !open"
           @click.away="open = false"
           class="flex items-center text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
         >
@@ -67,9 +68,9 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        
-        <div 
-          x-show="open" 
+
+        <div
+          x-show="open"
           x-transition:enter="transition ease-out duration-200"
           x-transition:enter-start="opacity-0 scale-95"
           x-transition:enter-end="opacity-100 scale-100"
@@ -91,6 +92,15 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
     </nav>
 
     <div class="flex items-center space-x-4">
+      <!-- Language toggle - visible on larger screens -->
+      <button
+        x-on:click="lang = lang === 'en' ? 'de' : 'en'"
+        class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        aria-label="Toggle language"
+      >
+        <IoLanguage className="h-5 w-5" />
+      </button>
+
       <!-- Dark mode toggle - visible on larger screens -->
       <button
         x-on:click="darkMode = !darkMode"
@@ -129,8 +139,8 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
         </svg>
       </button>
 
-      <a href={config.external_links.strategy_call} class="btn-primary"
-        >{i18n.de.header.book_a_call}</a
+      <a href={config.external_links.strategy_call} class="btn-primary min-w-48"
+        x-text="lang === 'de' ? window.i18n.de.header.book_a_call : window.i18n.en.header.book_a_call"></a
       >
 
       <!-- Mobile Menu Button and Dropdown -->
@@ -185,26 +195,37 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
             href={`/#problem`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            >{i18n.de.header.problem}</a
+            x-text="lang === 'de' ? window.i18n.de.header.problem : window.i18n.en.header.problem"></a
           >
           <a
             href={`/#solution`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            >{i18n.de.header.solution}</a
+            x-text="lang === 'de' ? window.i18n.de.header.solution : window.i18n.en.header.solution"></a
           >
           <a
             href={`/#about`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            >{i18n.de.header.about}</a
+            x-text="lang === 'de' ? window.i18n.de.header.about : window.i18n.en.header.about"></a
           >
           <a
             href={`/#faq`}
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
-            >{i18n.de.header.faq}</a
+            x-text="lang === 'de' ? window.i18n.de.header.faq : window.i18n.en.header.faq"></a
           >
+
+          <!-- Language Toggle Button -->
+          <button
+            x-on:click="lang = lang === 'en' ? 'de' : 'en'; open = false"
+            class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+          >
+            <div class="flex items-center">
+              <IoLanguage className="h-4 w-4 mr-2" />
+              <span x-text="lang === 'en' ? 'Deutsch' : 'English'">English</span>
+            </div>
+          </button>
 
           <!-- Dark Mode Toggle Button -->
           <button
@@ -242,14 +263,13 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
                   d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
                 ></path>
               </svg>
-              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'"
-              ></span>
+              <span x-text="darkMode ? 'Enable Light Mode' : 'Enable Dark Mode'">Enable Dark Mode</span>
             </div>
           </button>
 
           <!-- Mobile All Pages Dropdown -->
-          <!-- <button 
-            @click="showAllPages = !showAllPages" 
+          <!-- <button
+            @click="showAllPages = !showAllPages"
             class="w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 font-semibold border-t border-gray-200 dark:border-gray-700 mt-1 pt-1 flex items-center justify-between"
           >
             All Pages
@@ -257,9 +277,9 @@ import logoWhite from "../assets/images/logos/logo-white-right.png"
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          
-          <div 
-            x-show="showAllPages" 
+
+          <div
+            x-show="showAllPages"
             class="py-1 bg-gray-50 dark:bg-secondary-800"
           >
             {allPages.map(page => (

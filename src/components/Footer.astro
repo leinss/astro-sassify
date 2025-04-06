@@ -21,7 +21,8 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
             />
           </a>
           <p
-            class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal"
+            class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal language-content"
+            data-key-de="meta.title" data-key-en="meta.title"
           >
             {i18n.de.meta.title}
           </p>
@@ -120,18 +121,16 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
     <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
-          &copy; {currentYear} Tobias Leinss. Alle Rechte vorbehalten.
+          &copy; {currentYear} Tobias Leinss. <span class="language-text" data-text-de="Alle Rechte vorbehalten." data-text-en="All rights reserved.">Alle Rechte vorbehalten.</span>
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a
             href={`/privacy-policy`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
-            >{i18n.de.meta.privacy_policy}</a
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors language-content" data-key-de="meta.privacy_policy" data-key-en="meta.privacy_policy">{i18n.de.meta.privacy_policy}</a
           >
           <a
             href={`/imprint`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
-            >{i18n.de.meta.imprint}</a
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors language-content" data-key-de="meta.imprint" data-key-en="meta.imprint">{i18n.de.meta.imprint}</a
           >
         </div>
       </div>
