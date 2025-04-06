@@ -7,6 +7,14 @@
     opacity 0.5s ease,
     transform 0.5s ease;
   will-change: opacity, transform; /* Optimize for animations */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Body styles to prevent flashing */
+body {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Only apply transitions when navigating between pages, not on initial load */
@@ -37,6 +45,8 @@ html:not(.astro-site-loaded) .header-transition {
   z-index: 50;
   will-change: opacity, transform; /* Optimize for animations */
   transition: opacity 0.5s ease, transform 0.5s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* View Transitions Animations - Using consistent slide-up for all transitions */
