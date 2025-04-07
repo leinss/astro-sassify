@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="de" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
   $watch('darkMode', val => localStorage.setItem('darkMode', val));
-" :class="{ 'dark': darkMode }"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.5.5"><meta name="description" content="Effizienz steigern. Fehler reduzieren. Mitarbeiter entlasten."><title>Impressum - Tobias Leinss</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CMTcOisY.js"></script><link rel="stylesheet" href="/_astro/imprint.DmCbc-kY.css">
+" :class="{ 'dark': darkMode }"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.5.5"><meta name="description" content="Effizienz steigern. Fehler reduzieren. Mitarbeiter entlasten."><title>Impressum - Tobias Leinss</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"><!-- Base path adjustment for GitHub Pages --><script src="/scripts/base-path.js"></script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CMTcOisY.js"></script><link rel="stylesheet" href="/_astro/imprint.DmCbc-kY.css">
 <link rel="stylesheet" href="/_astro/imprint.gWYocQNl.css"><script type="module" src="/_astro/page.BvKxy2Uc.js"></script></head> <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300 flex flex-col min-h-screen"> <div id="page-wrapper" class="page-transition-wrapper flex-1 flex flex-col">  <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300 header-transition" id="header" data-astro-cid-3ef6ksr2> <div class="container-custom flex items-center justify-between" data-astro-cid-3ef6ksr2> <a href="/ki-kommunikation/#hero" class="flex items-center" aria-label="Go to homepage" data-astro-cid-3ef6ksr2> <img src="/_astro/logo-black-right.C_o3QmLi_Z222Cmp.webp" x-show="!darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" width="489" height="225" decoding="async" class="h-16 lg:h-20 w-auto"> <img src="/_astro/logo-white-right.Bf8itkGN_Z17aMnQ.webp" x-show="darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" width="491" height="214" decoding="async" class="h-16 lg:h-20 w-auto"> </a> <nav class="hidden lg:flex items-center space-x-8" data-astro-cid-3ef6ksr2> <a href="/ki-kommunikation/#hero" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors" data-astro-cid-3ef6ksr2>Start</a> <a href="/ki-kommunikation/#problem" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors" data-astro-cid-3ef6ksr2>Probleme</a> <a href="/ki-kommunikation/#solution" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors" data-astro-cid-3ef6ksr2>Lösungen</a> <a href="/ki-kommunikation/#about" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors" data-astro-cid-3ef6ksr2>Über mich</a> <a href="/ki-kommunikation/#faq" class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors" data-astro-cid-3ef6ksr2>FAQ</a> <!-- All Pages Dropdown --> <!-- <div x-data="{ open: false }" class="relative">
         <button
           @click="open = !open"
@@ -149,23 +149,8 @@ Telefon: 07161/96014
         }
       });
     </script> <script>
-      // Improved script loading with dynamic path detection
+      // Improved script loading with absolute paths and GitHub Pages compatibility
       document.addEventListener('astro:page-load', () => {
-        // Determine the correct path based on the current URL
-        let scriptsPath;
-        const pathname = window.location.pathname;
-
-        // Count directory levels to determine relative path
-        const segments = pathname.split('/').filter(Boolean);
-
-        if (segments.length <= 1) {
-          // Root or first level
-          scriptsPath = 'scripts';
-        } else {
-          // Deeper paths
-          scriptsPath = '../'.repeat(segments.length - 1) + 'scripts';
-        }
-
         // Create and append script elements
         const scripts = ['transitions.js'];
         scripts.forEach(script => {
@@ -173,7 +158,24 @@ Telefon: 07161/96014
           const existingScript = document.querySelector(`script[src*="${script}"]`);
           if (!existingScript) {
             const scriptEl = document.createElement('script');
-            scriptEl.src = `${scriptsPath}/${script}`;
+
+            // Use the correct path based on the current URL
+            const pathname = window.location.pathname;
+
+            // Determine if we're on a subpage
+            const isSubpage = pathname.split('/').filter(Boolean).length > 0;
+
+            // Create the correct script URL
+            let scriptPath;
+            if (isSubpage) {
+              // Count directory levels to determine relative path
+              const segments = pathname.split('/').filter(Boolean);
+              scriptPath = '../'.repeat(segments.length) + 'scripts/' + script;
+            } else {
+              scriptPath = '/scripts/' + script;
+            }
+
+            scriptEl.src = scriptPath;
             scriptEl.async = false; // Load synchronously to ensure transitions work
             document.body.appendChild(scriptEl);
           }
