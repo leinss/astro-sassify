@@ -3,7 +3,7 @@ import { IoLanguage } from "react-icons/io5"
 import i18n from "../assets/i18n.json"
 
 interface Props {
-  lang: "en" | "de";
+  lang: "en" | "de"
 }
 
 // Get the current URL path and hash
@@ -11,14 +11,51 @@ const { pathname, hash } = Astro.url
 
 // Function to get the equivalent URL in another language
 function getLocalizedPath(targetLang: string) {
+  // Define page name mappings between languages
+  const pageNameMappings = {
+    // English to German
+    "privacy-policy": "datenschutzerklaerung",
+    imprint: "impressum",
+
+    // German to English
+    datenschutzerklaerung: "privacy-policy",
+    impressum: "imprint",
+  }
+
   // If we're on the German version and want to go to English
   if (pathname.includes("/ki-kommunikation") && targetLang === "en") {
-    return pathname.replace("/ki-kommunikation", "/ai-communication") + hash
+    // First replace the base path
+    let newPath = pathname.replace("/ki-kommunikation", "/ai-communication")
+
+    // Check if we need to translate a specific page name
+    for (const [dePage, enPage] of Object.entries(pageNameMappings)) {
+      if (newPath.includes(`/${dePage}`)) {
+        newPath = newPath.replace(`/${dePage}`, `/${enPage}`)
+      }
+    }
+
+    return newPath + hash
   }
 
   // If we're on the English version and want to go to German
   if (pathname.includes("/ai-communication") && targetLang === "de") {
-    return pathname.replace("/ai-communication", "/ki-kommunikation") + hash
+    // First replace the base path
+    let newPath = pathname.replace("/ai-communication", "/ki-kommunikation")
+
+    // Check if we need to translate a specific page name
+    // We need to reverse the mapping for English to German
+    const reversedMappings: Record<string, string> = {}
+    for (const [key, value] of Object.entries(pageNameMappings)) {
+      reversedMappings[value] = key
+    }
+
+    for (const [enPage, dePage] of Object.entries(reversedMappings)) {
+      if (newPath.includes(`/${enPage}`)) {
+        newPath = newPath.replace(`/${enPage}`, `/${dePage}`)
+      }
+    }
+
+    return newPath + hash
   }
 
   // Handle root redirects
@@ -28,11 +65,11 @@ function getLocalizedPath(targetLang: string) {
   if (pathname === "/" && targetLang === "en") {
     return "/ai-communication" + hash
   }
-  if (pathname === "/en" && targetLang === "en") {
-    return "/ai-communication" + hash
-  }
   if (pathname === "/en" && targetLang === "de") {
     return "/ki-kommunikation" + hash
+  }
+  if (pathname === "/de" && targetLang === "en") {
+    return "/ai-communication" + hash
   }
 
   // Return current path if something unexpected
@@ -44,7 +81,7 @@ const dePath = getLocalizedPath("de")
 const enPath = getLocalizedPath("en")
 
 // Get language from props
-const { lang } = Astro.props;
+const { lang } = Astro.props
 
 // Get translations
 const t = i18n[lang]
