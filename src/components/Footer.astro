@@ -141,12 +141,12 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a
-            href={`${basePath}/${t.meta.privacy_policy.toLowerCase()}`}
+            href={`${basePath}/${basePath === "/ai-communication" ? "privacy-policy" : "datenschutzerklaerung"}`}
             class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
             >{t.meta.privacy_policy}</a
           >
           <a
-            href={`${basePath}/${t.meta.imprint.toLowerCase()}`}
+            href={`${basePath}/${basePath === "/ai-communication" ? "imprint" : "impressum"}`}
             class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
             >{t.meta.imprint}</a
           >

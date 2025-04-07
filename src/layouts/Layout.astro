@@ -113,23 +113,8 @@ const {
       });
     </script>
     <script is:inline>
-      // Improved script loading with dynamic path detection
+      // Improved script loading with absolute paths and GitHub Pages compatibility
       document.addEventListener('astro:page-load', () => {
-        // Determine the correct path based on the current URL
-        let scriptsPath;
-        const pathname = window.location.pathname;
-
-        // Count directory levels to determine relative path
-        const segments = pathname.split('/').filter(Boolean);
-
-        if (segments.length <= 1) {
-          // Root or first level
-          scriptsPath = 'scripts';
-        } else {
-          // Deeper paths
-          scriptsPath = '../'.repeat(segments.length - 1) + 'scripts';
-        }
-
         // Create and append script elements
         const scripts = ['transitions.js'];
         scripts.forEach(script => {
@@ -137,7 +122,24 @@ const {
           const existingScript = document.querySelector(`script[src*="${script}"]`);
           if (!existingScript) {
             const scriptEl = document.createElement('script');
-            scriptEl.src = `${scriptsPath}/${script}`;
+
+            // Use the correct path based on the current URL
+            const pathname = window.location.pathname;
+
+            // Determine if we're on a subpage
+            const isSubpage = pathname.split('/').filter(Boolean).length > 0;
+
+            // Create the correct script URL
+            let scriptPath;
+            if (isSubpage) {
+              // Count directory levels to determine relative path
+              const segments = pathname.split('/').filter(Boolean);
+              scriptPath = '../'.repeat(segments.length) + 'scripts/' + script;
+            } else {
+              scriptPath = '/scripts/' + script;
+            }
+
+            scriptEl.src = scriptPath;
             scriptEl.async = false; // Load synchronously to ensure transitions work
             document.body.appendChild(scriptEl);
           }
