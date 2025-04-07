@@ -8,11 +8,11 @@ const footerLinks: { title: string; links: { text: string; url: string }[] }[] =
   []
 
 interface Props {
-  lang: "en" | "de";
+  lang: "en" | "de"
 }
 
 // Get language from props
-const { lang } = Astro.props;
+const { lang } = Astro.props
 const t = i18n[lang]
 
 // Get the base path for links based on language
@@ -24,7 +24,11 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
     <div class="grid md:grid-cols-2 gap-8 mb-6 md:mb-12">
       <div class="md:col-span-2 lg:col-span-2">
         <div class="flex items-center mb-6">
-          <a href={`${basePath}/#hero`} class="flex items-center" aria-label="Go to homepage">
+          <a
+            href={`${basePath}/#hero`}
+            class="flex items-center"
+            aria-label="Go to homepage"
+          >
             <Image
               src={logoWhite}
               alt="Logo"
@@ -131,16 +135,20 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
     <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
-          &copy; {currentYear} Tobias Leinss. {lang === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."}
+          &copy; {currentYear} Tobias Leinss. {
+            lang === "de" ? "Alle Rechte vorbehalten." : "All rights reserved."
+          }
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a
-            href={`${basePath}/privacy-policy`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">{t.meta.privacy_policy}</a
+            href={`${basePath}/${t.meta.privacy_policy.toLowerCase()}`}
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
+            >{t.meta.privacy_policy}</a
           >
           <a
-            href={`${basePath}/imprint`}
-            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">{t.meta.imprint}</a
+            href={`${basePath}/${t.meta.imprint.toLowerCase()}`}
+            class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
+            >{t.meta.imprint}</a
           >
         </div>
       </div>

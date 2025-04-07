@@ -3,18 +3,16 @@ import Layout from "../../layouts/Layout.astro"
 import Header from "../../components/Header.astro"
 import Footer from "../../components/Footer.astro"
 import HeroSection from "../../components/HeroSection.astro"
-import i18n from "../../assets/i18n.json"
 
-// German version
 const lang = "de"
 ---
 
 <Layout title="Impressum - Tobias Leinss">
   <Header lang={lang} />
-  <main>
+  <main class="flex-1 flex flex-col">
     <HeroSection title="Impressum" description="" />
 
-    <section class="py-12 md:py-16 bg-white dark:bg-gray-800">
+    <section class="py-12 md:py-16 bg-white dark:bg-gray-800 flex-1">
       <div class="container-custom">
         <div class="prose prose-lg dark:prose-invert max-w-4xl mx-auto">
           <div id="generator_results" class="space-y-8 md:space-y-12">

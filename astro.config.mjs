@@ -17,7 +17,9 @@ export default defineConfig({
   },
   redirects: {
     "/": "/ki-kommunikation",
-    "/en": "/ai-communication"
+    "/en": "/ai-communication",
+    "/ki-kommunikation/datenschutz": "/ki-kommunikation/datenschutzerklaerung",
+    "/ki-kommunikation/datenschutzerklärung": "/ki-kommunikation/datenschutzerklaerung"
   },
   // Configure view transitions - this is now a standard feature in Astro 5.x
   // No need for experimental flag
