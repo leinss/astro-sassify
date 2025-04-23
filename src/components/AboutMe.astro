@@ -1,14 +1,15 @@
 ---
 import i18n from "../assets/i18n.json"
 import { Image } from "astro:assets"
-import profile from "../assets/images/content/profile.jpg"
+import profile from "../assets/images/content/profile.png"
+import profile2 from "../assets/images/content/profile_2.png"
 
 interface Props {
-  lang: "en" | "de";
+  lang: "en" | "de"
 }
 
 // Get language from props
-const { lang } = Astro.props;
+const { lang } = Astro.props
 const t = i18n[lang]
 ---
 
@@ -25,9 +26,9 @@ const t = i18n[lang]
         <Image
           src={profile}
           alt="Portrait of Tobias"
-          width={256}
-          height={256}
-          class="rounded-full mx-auto w-40 h-48 object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl sm:w-48 sm:h-56 lg:w-52 lg:h-64"
+          width={377}
+          height={582}
+          class="rounded-xl mx-auto object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
           loading="lazy"
         />
       </div>
@@ -122,6 +123,17 @@ const t = i18n[lang]
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="text-center space-y-4 max-w-3xl mx-auto">
+        <Image
+          src={profile2}
+          alt="Tobias in work setting"
+          width={512}
+          height={345}
+          class="rounded-xl mx-auto object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>
