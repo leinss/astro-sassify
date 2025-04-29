@@ -1,8 +1,28 @@
 ---
 // This file is just a redirect to the German version
+import i18n from "../assets/i18n.json"
+
+const lang = "de"
+
+const {
+  title,
+  description = i18n[lang as keyof typeof i18n].meta.description,
+} = Astro.props
 ---
 
-<meta http-equiv="refresh" content="0;url=/ki-kommunikation" />
+<head>
+  <meta http-equiv="refresh" content="0;url=/ki-kommunikation" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="description" content={description} />
+  <meta name="image" content={"/assets/images/hero.png"} />
+
+  <title>{title}</title>
+</head>
+
 <script>
-  window.location.href = "/ki-kommunikation";
+  window.location.href = "/ki-kommunikation"
 </script>
