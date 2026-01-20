@@ -9,6 +9,10 @@ const { lang } = Astro.props
 const t = i18n[lang]
 
 const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+
+// Listmonk public subscription config
+const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz"
+const LIST_UUID = "3c2ca359-31c7-41b4-9ec3-e73e65f4e108"
 ---
 
 <section id="newsletter" class="section bg-gradient-to-b from-primary-50/50 to-white dark:from-primary-900/20 dark:to-secondary-950">
@@ -28,8 +32,7 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
           loading: false,
           submitted: false,
           success: false,
-          message: '',
-          lang: '${lang}'
+          message: ''
         }`}
         @submit.prevent={`
           if (loading) return;
@@ -46,17 +49,32 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
           loading = true;
           message = '';
 
-          fetch('/api/subscribe', {
+          fetch('${LISTMONK_URL}/api/public/subscription', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, lang })
+            body: JSON.stringify({
+              email: email,
+              list_uuids: ['${LIST_UUID}']
+            })
           })
-          .then(res => res.json())
+          .then(res => {
+            if (res.ok) {
+              return { success: true };
+            }
+            return res.json().then(data => ({ success: false, error: data.message || 'Unknown error' }));
+          })
           .then(data => {
             loading = false;
             submitted = true;
             success = data.success;
-            message = data.message;
+            if (data.success) {
+              message = '${lang === "de" ? "Vielen Dank! Bitte bestätigen Sie Ihre Anmeldung in der E-Mail, die wir Ihnen gesendet haben." : "Thank you! Please confirm your subscription in the email we sent you."}';
+            } else if (data.error && data.error.includes('already')) {
+              success = true;
+              message = '${lang === "de" ? "Diese E-Mail-Adresse ist bereits angemeldet." : "This email is already subscribed."}';
+            } else {
+              message = '${lang === "de" ? "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut." : "An error occurred. Please try again later."}';
+            }
           })
           .catch(() => {
             loading = false;
