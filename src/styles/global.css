@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* 80px - accounts for sticky header on mobile */
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 6rem; /* 96px - accounts for sticky header on desktop */
+    }
+  }
+
   h1,
   h2,
   h3,

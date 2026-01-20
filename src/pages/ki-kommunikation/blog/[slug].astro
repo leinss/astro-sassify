@@ -62,7 +62,7 @@ const alternateUrl = post.data.alternateSlug
 >
   <Header lang={lang} alternateHref={alternateUrl || undefined} />
 
-  <main class="min-h-screen bg-gradient-to-b from-white to-secondary-50 dark:from-secondary-950 dark:to-secondary-900">
+  <main class="min-h-screen bg-gradient-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900">
     <article class="py-12 md:py-20">
       <div class="container-custom max-w-4xl">
         <!-- Back Link -->
@@ -133,23 +133,45 @@ const alternateUrl = post.data.alternateSlug
           </div>
         )}
 
-        <!-- CTA -->
-        <div class="mt-12 p-8 bg-primary-50 dark:bg-primary-900/20 rounded-2xl text-center">
-          <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-4">
-            Bereit, Ihre Prozesse zu automatisieren?
-          </h3>
-          <p class="text-secondary-600 dark:text-secondary-400 mb-6">
-            Lassen Sie uns in einem kostenlosen Strategiegespräch besprechen, wie Automatisierung Ihrem Unternehmen helfen kann.
-          </p>
-          <a
-            href="/ki-kommunikation/#contact"
-            class="btn-primary inline-flex items-center"
-          >
-            Gespräch vereinbaren
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+        <!-- CTAs -->
+        <div class="mt-12 grid md:grid-cols-2 gap-6">
+          <!-- Newsletter CTA -->
+          <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl">
+            <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+              Bleiben Sie informiert
+            </h3>
+            <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+              Erhalten Sie praktische Automatisierungstipps und Brancheneinblicke direkt in Ihr Postfach.
+            </p>
+            <a
+              href="/ki-kommunikation/#newsletter"
+              class="btn-outline inline-flex items-center"
+            >
+              Newsletter abonnieren
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Book a Call CTA -->
+          <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl">
+            <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+              Bereit zu automatisieren?
+            </h3>
+            <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+              Lassen Sie uns in einem kostenlosen Strategiegespräch besprechen, wie Automatisierung Ihrem Unternehmen helfen kann.
+            </p>
+            <a
+              href="/ki-kommunikation/#contact"
+              class="btn-primary inline-flex items-center"
+            >
+              Gespräch vereinbaren
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </article>
