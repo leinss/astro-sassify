@@ -4,6 +4,7 @@ import i18n from "../assets/i18n.json"
 
 interface Props {
   lang: "en" | "de"
+  alternateHref?: string // Used for blog posts with different slugs per language
 }
 
 // Get the current URL path and hash
@@ -81,7 +82,7 @@ const dePath = getLocalizedPath("de")
 const enPath = getLocalizedPath("en")
 
 // Get language from props
-const { lang } = Astro.props
+const { lang, alternateHref } = Astro.props
 
 // Get translations
 const t = i18n[lang]
@@ -91,7 +92,7 @@ const otherLang = lang === "en" ? "de" : "en"
 ---
 
 <a
-  href={lang === "en" ? dePath : enPath}
+  href={alternateHref || (lang === "en" ? dePath : enPath)}
   class="language-switcher focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200"
   aria-label={t.header.switch_language}
 >

@@ -89,7 +89,7 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              <span x-text="loading ? '' : '{t.newsletter.button}'">{t.newsletter.button}</span>
+              <span x-text={`loading ? '' : '${t.newsletter.button}'`}>{t.newsletter.button}</span>
             </button>
           </div>
           <p class="text-red-500 dark:text-red-400 text-sm mt-2" x-show="message && !submitted" x-text="message"></p>
@@ -116,7 +116,7 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
           <h3
             class="text-xl font-semibold mb-2"
             :class="success ? 'text-secondary-900 dark:text-white' : 'text-red-700 dark:text-red-400'"
-            x-text="success ? '{t.newsletter.success_title}' : '{lang === "de" ? "Fehler" : "Error"}'"
+            x-text={`success ? '${t.newsletter.success_title}' : '${lang === "de" ? "Fehler" : "Error"}'`}
           ></h3>
           <p
             class="mb-4"

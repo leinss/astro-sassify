@@ -60,7 +60,7 @@ const alternateUrl = post.data.alternateSlug
   title={`${post.data.title} - ${i18n[lang].meta.title}`}
   description={post.data.description}
 >
-  <Header lang={lang} />
+  <Header lang={lang} alternateHref={alternateUrl || undefined} />
 
   <main class="min-h-screen bg-gradient-to-b from-white to-secondary-50 dark:from-secondary-950 dark:to-secondary-900">
     <article class="py-12 md:py-20">
