@@ -1,0 +1,89 @@
+---
+import type { CollectionEntry } from "astro:content"
+import i18n from "../assets/i18n.json"
+
+interface Props {
+  post: CollectionEntry<"blog">
+  lang: "en" | "de"
+}
+
+const { post, lang } = Astro.props
+const t = i18n[lang]
+
+const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+
+// Strip the language folder prefix from the slug (e.g., "en/my-post" -> "my-post")
+const cleanSlug = post.slug.replace(/^(en|de)\//, "")
+
+// Format date based on language
+const formattedDate = post.data.pubDate.toLocaleDateString(
+  lang === "de" ? "de-DE" : "en-US",
+  {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }
+)
+
+// Category labels
+const categoryLabels: Record<string, Record<string, string>> = {
+  automation: { en: "Automation", de: "Automatisierung" },
+  integration: { en: "Integration", de: "Integration" },
+  crm: { en: "CRM & Sales", de: "CRM & Vertrieb" },
+  documents: { en: "Documents", de: "Dokumente" },
+  communication: { en: "Communication", de: "Kommunikation" },
+  "case-study": { en: "Case Study", de: "Fallstudie" },
+}
+---
+
+<article class="group bg-white dark:bg-secondary-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-secondary-200/50 dark:border-secondary-700/50">
+  <a href={`${basePath}/blog/${cleanSlug}`} class="block">
+    <!-- Category Badge -->
+    <div class="p-6 pb-0">
+      <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+        {categoryLabels[post.data.category]?.[lang] || post.data.category}
+      </span>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+      <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
+        {post.data.title}
+      </h3>
+
+      <p class="text-secondary-600 dark:text-secondary-400 mb-4 line-clamp-3">
+        {post.data.description}
+      </p>
+
+      <!-- Meta -->
+      <div class="flex items-center justify-between text-sm text-secondary-500 dark:text-secondary-500">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+
+        <span class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium group-hover:translate-x-1 transition-transform">
+          {lang === "de" ? "Lesen" : "Read"}
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

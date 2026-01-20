@@ -1,0 +1,15 @@
+# Robots.txt for leinss-consulting.de
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://leinss-consulting.de/sitemap-index.xml
+
+# Block admin and API paths
+Disallow: /api/
+
+# Block 404 pages
+Disallow: /404
+Disallow: /ki-kommunikation/404
+Disallow: /ai-communication/404

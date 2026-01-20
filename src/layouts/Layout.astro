@@ -2,24 +2,35 @@
 import '../styles/global.css';
 import '../styles/transitions.css';
 import { ClientRouter } from 'astro:transitions';
+import SEO from '../components/SEO.astro';
 import i18n from '../assets/i18n.json';
 
 export interface Props {
   title: string;
   description?: string;
+  lang?: "de" | "en";
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
-// Default language is German ('de')
-const lang = 'de';
+// Detect language from URL
+const urlLang = Astro.url.pathname.includes('/ai-communication') ? 'en' : 'de';
 
 const {
   title,
-  description=i18n[lang as keyof typeof i18n].meta.description,
+  description = i18n[urlLang as keyof typeof i18n].meta.description,
+  lang = urlLang,
+  image,
+  type = "website",
+  publishedTime,
+  modifiedTime,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={Astro.url.pathname.includes('/ai-communication') ? 'en' : 'de'} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
+<html lang={lang} x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
   $watch('darkMode', val => localStorage.setItem('darkMode', val));
 " :class="{ 'dark': darkMode }">
   <head>
@@ -27,8 +38,20 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
     <title>{title}</title>
+
+    <!-- SEO Meta Tags -->
+    <SEO
+      title={title}
+      description={description}
+      lang={lang}
+      image={image}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+    />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">

@@ -1,0 +1,67 @@
+---
+export const prerender = true;
+
+import { getCollection } from "astro:content"
+import Layout from "../../../layouts/Layout.astro"
+import Header from "../../../components/Header.astro"
+import Footer from "../../../components/Footer.astro"
+import BackToTop from "../../../components/BackToTop.astro"
+import BlogCard from "../../../components/BlogCard.astro"
+import i18n from "../../../assets/i18n.json"
+
+const lang = "de"
+const t = i18n[lang]
+
+// Get all German blog posts, filter out drafts in production
+const allPosts = await getCollection("blog", ({ data }) => {
+  return data.lang === "de" && (import.meta.env.DEV || !data.draft)
+})
+
+// Sort by date, newest first
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+---
+
+<Layout
+  title={`Blog - ${i18n[lang].meta.title}`}
+  description="Artikel und Insights zu Geschäftsprozess-Automatisierung, Workflow-Optimierung und digitaler Transformation."
+>
+  <Header lang={lang} />
+
+  <main class="min-h-screen bg-gradient-to-b from-white to-secondary-50 dark:from-secondary-950 dark:to-secondary-900">
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 dark:text-white mb-6">
+            {t.header.blog}
+          </h1>
+          <p class="text-xl text-secondary-600 dark:text-secondary-400">
+            Insights und Best Practices zu Automatisierung, Integration und Workflow-Optimierung.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="pb-20">
+      <div class="container-custom">
+        {posts.length > 0 ? (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard post={post} lang={lang} />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-12">
+            <p class="text-secondary-600 dark:text-secondary-400 text-lg">
+              Neue Artikel kommen bald. Bleiben Sie dran!
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+  <BackToTop />
+</Layout>

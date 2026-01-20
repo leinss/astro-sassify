@@ -1,0 +1,147 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  lang?: "de" | "en";
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description,
+  lang = "de",
+  image = "/images/og-image.png",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author = "Tobias Leinss",
+  canonicalUrl,
+} = Astro.props;
+
+const siteUrl = "https://leinss-consulting.de";
+const currentUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
+const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
+
+// Alternate URLs for language switching
+const altDe = Astro.url.pathname.includes("/ai-communication")
+  ? Astro.url.pathname.replace("/ai-communication", "/ki-kommunikation")
+  : Astro.url.pathname;
+const altEn = Astro.url.pathname.includes("/ki-kommunikation")
+  ? Astro.url.pathname.replace("/ki-kommunikation", "/ai-communication")
+  : Astro.url.pathname;
+
+// JSON-LD Organization Schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Leinss Consulting",
+  url: siteUrl,
+  logo: `${siteUrl}/images/logo.png`,
+  founder: {
+    "@type": "Person",
+    name: "Tobias Leinss",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "DE",
+    addressRegion: "Baden-Württemberg",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    availableLanguage: ["German", "English"],
+  },
+  sameAs: [
+    "https://linkedin.com/in/tobiasleinss",
+  ],
+};
+
+// JSON-LD Service Schema
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: lang === "de" ? "Geschäftsautomatisierung" : "Business Automation",
+  description: description,
+  provider: {
+    "@type": "Organization",
+    name: "Leinss Consulting",
+  },
+  serviceType: "Business Automation Consulting",
+  areaServed: {
+    "@type": "Country",
+    name: lang === "de" ? "Deutschland" : "Germany",
+  },
+};
+
+// JSON-LD WebPage Schema
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "Article" : "WebPage",
+  name: title,
+  description: description,
+  url: currentUrl,
+  inLanguage: lang === "de" ? "de-DE" : "en-US",
+  ...(type === "article" && publishedTime && {
+    datePublished: publishedTime,
+    dateModified: modifiedTime || publishedTime,
+    author: {
+      "@type": "Person",
+      name: author,
+    },
+  }),
+  publisher: {
+    "@type": "Organization",
+    name: "Leinss Consulting",
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/images/logo.png`,
+    },
+  },
+};
+---
+
+<!-- Primary Meta Tags -->
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<link rel="canonical" href={currentUrl} />
+
+<!-- Language Alternates -->
+<link rel="alternate" hreflang="de" href={`${siteUrl}${altDe}`} />
+<link rel="alternate" hreflang="en" href={`${siteUrl}${altEn}`} />
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/ki-kommunikation`} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
+<meta property="og:locale:alternate" content={lang === "de" ? "en_US" : "de_DE"} />
+<meta property="og:site_name" content="Leinss Consulting" />
+
+{type === "article" && publishedTime && (
+  <>
+    <meta property="article:published_time" content={publishedTime} />
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    <meta property="article:author" content={author} />
+  </>
+)}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={currentUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageUrl} />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />

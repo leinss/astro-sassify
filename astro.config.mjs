@@ -3,11 +3,32 @@ import { defineConfig } from "astro/config"
 import tailwind from "@astrojs/tailwind"
 import alpinejs from "@astrojs/alpinejs"
 import react from "@astrojs/react"
+import sitemap from "@astrojs/sitemap"
+import node from "@astrojs/node"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://leinss-consulting.de",
-  integrations: [tailwind(), alpinejs(), react()],
+  // Server output for API routes (newsletter subscription)
+  output: "server",
+  adapter: node({
+    mode: "standalone",
+  }),
+  integrations: [
+    tailwind(),
+    alpinejs(),
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: "de",
+        locales: {
+          de: "de-DE",
+          en: "en-US",
+        },
+      },
+      filter: (page) => !page.includes("/404"),
+    }),
+  ],
   i18n: {
     locales: ["ai-communication", "ki-kommunikation"],
     defaultLocale: "ki-kommunikation",

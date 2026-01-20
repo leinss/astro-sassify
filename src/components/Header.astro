@@ -108,6 +108,11 @@ const enPath = getLocalizedPath("en")
         class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
         >{t.header.faq}</a
       >
+      <a
+        href={`${basePath}/blog`}
+        class="text-secondary-600 hover:text-primary-600 dark:text-secondary-300 dark:hover:text-primary-400 font-medium transition-colors"
+        >{t.header.blog}</a
+      >
 
       <!-- All Pages Dropdown -->
       <!-- <div x-data="{ open: false }" class="relative">
@@ -264,6 +269,12 @@ const enPath = getLocalizedPath("en")
             @click="open = false"
             class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
             >{t.header.faq}</a
+          >
+          <a
+            href={`${basePath}/blog`}
+            @click="open = false"
+            class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800"
+            >{t.header.blog}</a
           >
 
           <!-- Language Switcher in Mobile Menu -->

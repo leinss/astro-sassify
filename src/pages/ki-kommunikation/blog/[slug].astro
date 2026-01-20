@@ -1,0 +1,160 @@
+---
+export const prerender = true;
+
+import { getCollection, type CollectionEntry } from "astro:content"
+import Layout from "../../../layouts/Layout.astro"
+import Header from "../../../components/Header.astro"
+import Footer from "../../../components/Footer.astro"
+import BackToTop from "../../../components/BackToTop.astro"
+import i18n from "../../../assets/i18n.json"
+
+const lang = "de"
+const t = i18n[lang]
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => {
+    return data.lang === "de"
+  })
+
+  return posts.map((post) => {
+    // Strip the language folder prefix from the slug (e.g., "de/mein-post" -> "mein-post")
+    const slug = post.slug.replace(/^de\//, "")
+    return {
+      params: { slug },
+      props: { post },
+    }
+  })
+}
+
+interface Props {
+  post: CollectionEntry<"blog">
+}
+
+const { post } = Astro.props
+const { Content } = await post.render()
+
+// Format date
+const formattedDate = post.data.pubDate.toLocaleDateString("de-DE", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+})
+
+// Category labels
+const categoryLabels: Record<string, string> = {
+  automation: "Automatisierung",
+  integration: "Integration",
+  crm: "CRM & Vertrieb",
+  documents: "Dokumente",
+  communication: "Kommunikation",
+  "case-study": "Fallstudie",
+}
+
+// Get alternate language URL if available
+const alternateUrl = post.data.alternateSlug
+  ? `/ai-communication/blog/${post.data.alternateSlug}`
+  : null
+---
+
+<Layout
+  title={`${post.data.title} - ${i18n[lang].meta.title}`}
+  description={post.data.description}
+>
+  <Header lang={lang} />
+
+  <main class="min-h-screen bg-gradient-to-b from-white to-secondary-50 dark:from-secondary-950 dark:to-secondary-900">
+    <article class="py-12 md:py-20">
+      <div class="container-custom max-w-4xl">
+        <!-- Back Link -->
+        <a
+          href="/ki-kommunikation/blog"
+          class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Zurück zum Blog
+        </a>
+
+        <!-- Header -->
+        <header class="mb-12">
+          <div class="flex flex-wrap items-center gap-4 mb-6">
+            <span class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+              {categoryLabels[post.data.category] || post.data.category}
+            </span>
+            <time datetime={post.data.pubDate.toISOString()} class="text-secondary-500 dark:text-secondary-400">
+              {formattedDate}
+            </time>
+            {alternateUrl && (
+              <a
+                href={alternateUrl}
+                class="text-sm text-secondary-500 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400 transition-colors"
+              >
+                Read in English
+              </a>
+            )}
+          </div>
+
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-900 dark:text-white mb-6 leading-tight">
+            {post.data.title}
+          </h1>
+
+          <p class="text-xl text-secondary-600 dark:text-secondary-400">
+            {post.data.description}
+          </p>
+        </header>
+
+        <!-- Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none
+          prose-headings:text-secondary-900 dark:prose-headings:text-white
+          prose-p:text-secondary-700 dark:prose-p:text-secondary-300
+          prose-a:text-primary-600 dark:prose-a:text-primary-400
+          prose-strong:text-secondary-900 dark:prose-strong:text-white
+          prose-ul:text-secondary-700 dark:prose-ul:text-secondary-300
+          prose-ol:text-secondary-700 dark:prose-ol:text-secondary-300
+          prose-li:text-secondary-700 dark:prose-li:text-secondary-300
+          prose-blockquote:border-primary-500 prose-blockquote:text-secondary-600 dark:prose-blockquote:text-secondary-400
+          prose-code:text-primary-600 dark:prose-code:text-primary-400
+          prose-pre:bg-secondary-900 dark:prose-pre:bg-secondary-800
+        ">
+          <Content />
+        </div>
+
+        <!-- Tags -->
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="mt-12 pt-8 border-t border-secondary-200 dark:border-secondary-700">
+            <div class="flex flex-wrap gap-2">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- CTA -->
+        <div class="mt-12 p-8 bg-primary-50 dark:bg-primary-900/20 rounded-2xl text-center">
+          <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-4">
+            Bereit, Ihre Prozesse zu automatisieren?
+          </h3>
+          <p class="text-secondary-600 dark:text-secondary-400 mb-6">
+            Lassen Sie uns in einem kostenlosen Strategiegespräch besprechen, wie Automatisierung Ihrem Unternehmen helfen kann.
+          </p>
+          <a
+            href="/ki-kommunikation/#contact"
+            class="btn-primary inline-flex items-center"
+          >
+            Gespräch vereinbaren
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <Footer lang={lang} />
+  <BackToTop />
+</Layout>
