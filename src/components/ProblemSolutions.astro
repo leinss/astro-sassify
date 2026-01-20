@@ -31,8 +31,8 @@ const t = i18n[lang]
 <section class="relative py-20 bg-white dark:bg-gray-900" id="problem">
   <div class="container-custom">
     <!-- Problems Section -->
-    <div class="space-y-12 mb-20 slide-up">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
+    <div class="space-y-12 mb-20 reveal">
+      <div class="text-center space-y-4 max-w-3xl mx-auto reveal">
         <h2 class="font-bold text-red-600 dark:text-red-400">
           {t.problem_solution.problem_headline}
         </h2>
@@ -50,10 +50,10 @@ const t = i18n[lang]
             loading="lazy"
           />
         </div>
-        <div class="grid sm:grid-cols-2 gap-6">
+        <div class="grid sm:grid-cols-2 gap-6 reveal-stagger">
           {
             [1, 2, 3, 4].map((num) => (
-              <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md">
+              <div class="flex items-start gap-4 p-6 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 transition-all hover:shadow-md hover-lift">
                 <span class="text-red-600 dark:text-red-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
                     <BsGraphUp className="w-5 h-5 md:w-6 md:h-6" /> // Data jungle/scattered info
@@ -89,8 +89,8 @@ const t = i18n[lang]
     </div>
 
     <!-- Solutions Section -->
-    <div class="space-y-12 slide-up">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
+    <div class="space-y-12 reveal">
+      <div class="text-center space-y-4 max-w-3xl mx-auto reveal">
         <h2 class="font-bold text-primary-600 dark:text-primary-400">
           {t.problem_solution.solution_headline}
         </h2>
@@ -111,10 +111,10 @@ const t = i18n[lang]
             loading="lazy"
           />
         </div>
-        <div class="grid sm:grid-cols-2 gap-6">
+        <div class="grid sm:grid-cols-2 gap-6 reveal-stagger">
           {
             [1, 2, 3, 4].map((num) => (
-              <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md">
+              <div class="flex items-start gap-4 p-6 rounded-lg bg-primary-50 dark:bg-primary-900/20 border border-primary-100 dark:border-primary-800 transition-all hover:shadow-md hover-lift">
                 <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0 sm:mt-1">
                   {num === 1 ? (
                     <BsDatabase className="w-5 h-5 md:w-6 md:h-6" /> // Knowledge database

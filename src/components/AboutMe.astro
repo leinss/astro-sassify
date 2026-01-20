@@ -15,14 +15,14 @@ const t = i18n[lang]
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="about">
   <div class="container-custom">
-    <div class="space-y-12 slide-up">
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
+    <div class="space-y-12">
+      <div class="text-center space-y-4 max-w-3xl mx-auto reveal">
         <h2 class="text-primary-600 dark:text-primary-400">
           {t.about_me.title}
         </h2>
       </div>
 
-      <div class="text-center space-y-4 max-w-3xl mx-auto">
+      <div class="text-center space-y-4 max-w-3xl mx-auto reveal-scale">
         <Image
           src={profile}
           alt="Portrait of Tobias"
@@ -33,7 +33,7 @@ const t = i18n[lang]
         />
       </div>
 
-      <div x-data="{ activeTab: 'mission' }" class="space-y-6">
+      <div x-data="{ activeTab: 'mission' }" class="space-y-6 reveal">
         <!-- Tab Navigation -->
         <div
           class="flex justify-center space-x-4 border-b border-gray-200 dark:border-gray-700"

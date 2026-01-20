@@ -37,7 +37,7 @@ const questions: FAQItem[] = questionKeys.map(key => {
 
 <section id="faq" class="py-12 md:py-20 bg-white dark:bg-secondary-950">
   <div class="container-custom">
-    <div class="text-center max-w-3xl mx-auto">
+    <div class="text-center max-w-3xl mx-auto reveal">
       <span class="inline-block px-3 sm:px-4 py-1 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 font-medium text-xs sm:text-sm mb-6">
         {t.faq.tag}
       </span>
@@ -48,7 +48,7 @@ const questions: FAQItem[] = questionKeys.map(key => {
     </div>
 
     <!-- FAQ Accordion -->
-    <div class="max-w-3xl mx-auto">
+    <div class="max-w-3xl mx-auto reveal-stagger">
       {questions.map((item) => (
         <div class="mb-6 border-b border-gray-200 dark:border-gray-800 pb-6">
           <div x-data="{ open: false }" class="relative">

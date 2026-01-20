@@ -134,6 +134,93 @@ const {
           pageWrapper.classList.remove('page-transitioning');
         }
       });
+
+      // Scroll-triggered reveal animations using Intersection Observer
+      function initRevealAnimations() {
+        const revealElements = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger');
+
+        if (revealElements.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              // Optional: unobserve after revealing to improve performance
+              // observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+          observer.observe(el);
+        });
+
+        return observer;
+      }
+
+      // Counter animation for statistics
+      function initCounterAnimations() {
+        const counters = document.querySelectorAll('.counter[data-target]');
+
+        if (counters.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              const target = parseInt(counter.dataset.target, 10);
+              const duration = parseInt(counter.dataset.duration || '2000', 10);
+              const suffix = counter.dataset.suffix || '';
+
+              let start = 0;
+              const startTime = performance.now();
+
+              function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuad = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeOutQuad * target);
+
+                counter.textContent = current.toLocaleString() + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                }
+              }
+
+              requestAnimationFrame(updateCounter);
+              observer.unobserve(counter);
+            }
+          });
+        }, {
+          threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+          counter.textContent = '0';
+          observer.observe(counter);
+        });
+      }
+
+      // Initialize animations on page load
+      let revealObserver = null;
+      document.addEventListener('astro:page-load', () => {
+        // Clean up previous observer if exists
+        if (revealObserver) {
+          revealObserver.disconnect();
+        }
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
+
+      // Also init on DOMContentLoaded for initial page load
+      document.addEventListener('DOMContentLoaded', () => {
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
     </script>
     <script is:inline>
       // Improved script loading with absolute paths and GitHub Pages compatibility
