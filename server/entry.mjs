@@ -1,6 +1,6 @@
 import { renderers } from './renderers.mjs';
 import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_Bnlt-_3Q.mjs';
-import { manifest } from './manifest_B_Nr0M0L.mjs';
+import { manifest } from './manifest_D2qr_mSn.mjs';
 
 const serverIslandMap = new Map();;
 
@@ -12,14 +12,13 @@ const _page4 = () => import('./pages/ai-communication/blog.astro.mjs');
 const _page5 = () => import('./pages/ai-communication/imprint.astro.mjs');
 const _page6 = () => import('./pages/ai-communication/privacy-policy.astro.mjs');
 const _page7 = () => import('./pages/ai-communication.astro.mjs');
-const _page8 = () => import('./pages/api/subscribe.astro.mjs');
-const _page9 = () => import('./pages/ki-kommunikation/404.astro.mjs');
-const _page10 = () => import('./pages/ki-kommunikation/blog/_slug_.astro.mjs');
-const _page11 = () => import('./pages/ki-kommunikation/blog.astro.mjs');
-const _page12 = () => import('./pages/ki-kommunikation/datenschutzerklaerung.astro.mjs');
-const _page13 = () => import('./pages/ki-kommunikation/impressum.astro.mjs');
+const _page8 = () => import('./pages/ki-kommunikation/404.astro.mjs');
+const _page9 = () => import('./pages/ki-kommunikation/blog/_slug_.astro.mjs');
+const _page10 = () => import('./pages/ki-kommunikation/blog.astro.mjs');
+const _page11 = () => import('./pages/ki-kommunikation/datenschutzerklaerung.astro.mjs');
+const _page12 = () => import('./pages/ki-kommunikation/impressum.astro.mjs');
+const _page13 = () => import('./pages/ki-kommunikation.astro.mjs');
 const _page14 = () => import('./pages/ki-kommunikation.astro.mjs');
-const _page15 = () => import('./pages/ki-kommunikation.astro.mjs');
 const pageMap = new Map([
     ["node_modules/.pnpm/astro@5.16.11_@types+node@22.15.29_jiti@1.21.7_rollup@4.55.2_typescript@5.8.2_yaml@2.7.1/node_modules/astro/dist/assets/endpoint/node.js", _page0],
     ["src/pages/404.astro", _page1],
@@ -29,14 +28,13 @@ const pageMap = new Map([
     ["src/pages/ai-communication/imprint.astro", _page5],
     ["src/pages/ai-communication/privacy-policy.astro", _page6],
     ["src/pages/ai-communication/index.astro", _page7],
-    ["src/pages/api/subscribe.ts", _page8],
-    ["src/pages/ki-kommunikation/404.astro", _page9],
-    ["src/pages/ki-kommunikation/blog/[slug].astro", _page10],
-    ["src/pages/ki-kommunikation/blog/index.astro", _page11],
-    ["src/pages/ki-kommunikation/datenschutzerklaerung.astro", _page12],
-    ["src/pages/ki-kommunikation/impressum.astro", _page13],
-    ["src/pages/ki-kommunikation/index.astro", _page14],
-    ["src/pages/ki-kommunikation/index.astro", _page15]
+    ["src/pages/ki-kommunikation/404.astro", _page8],
+    ["src/pages/ki-kommunikation/blog/[slug].astro", _page9],
+    ["src/pages/ki-kommunikation/blog/index.astro", _page10],
+    ["src/pages/ki-kommunikation/datenschutzerklaerung.astro", _page11],
+    ["src/pages/ki-kommunikation/impressum.astro", _page12],
+    ["src/pages/ki-kommunikation/index.astro", _page13],
+    ["src/pages/ki-kommunikation/index.astro", _page14]
 ]);
 
 const _manifest = Object.assign(manifest, {
