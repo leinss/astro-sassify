@@ -16,7 +16,7 @@ const { lang } = Astro.props
 const t = i18n[lang]
 
 // Get the base path for links based on language
-const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+const basePath = lang === "en" ? "/en" : "/de"
 ---
 
 <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8">
@@ -141,12 +141,12 @@ const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
         </p>
         <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
           <a
-            href={`${basePath}/${basePath === "/ai-communication" ? "privacy-policy" : "datenschutzerklaerung"}`}
+            href={`${basePath}/${lang === "en" ? "privacy-policy" : "datenschutzerklaerung"}`}
             class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
             >{t.meta.privacy_policy}</a
           >
           <a
-            href={`${basePath}/${basePath === "/ai-communication" ? "imprint" : "impressum"}`}
+            href={`${basePath}/${lang === "en" ? "imprint" : "impressum"}`}
             class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors"
             >{t.meta.imprint}</a
           >

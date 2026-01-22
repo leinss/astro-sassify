@@ -1,7 +1,7 @@
 ---
 // Root redirect with browser locale detection
-// German browsers → /ki-kommunikation/
-// All others → /ai-communication/
+// German browsers → /de/
+// All others → /en/
 ---
 
 <!doctype html>
@@ -13,7 +13,7 @@
     <meta name="robots" content="noindex" />
     <!-- Fallback for no-JS: default to German -->
     <noscript>
-      <meta http-equiv="refresh" content="0;url=/ki-kommunikation/" />
+      <meta http-equiv="refresh" content="0;url=/de/" />
     </noscript>
     <script is:inline>
       (function () {
@@ -21,7 +21,7 @@
         const lang = navigator.language || navigator.userLanguage || "de"
         const isGerman = lang.toLowerCase().startsWith("de")
         // Redirect based on browser locale
-        window.location.replace(isGerman ? "/ki-kommunikation/" : "/ai-communication/")
+        window.location.replace(isGerman ? "/de/" : "/en/")
       })()
     </script>
   </head>
