@@ -1,0 +1,28 @@
+---
+export const prerender = true;
+
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import ServicePage from '../../../components/ServicePage.astro';
+import Footer from '../../../components/Footer.astro';
+import BackToTop from '../../../components/BackToTop.astro';
+import i18n from '../../../assets/i18n.json';
+
+const lang = 'de';
+const pillar = 'integrations';
+const t = i18n[lang].services[pillar];
+const alternateHref = `/en/services/${i18n.en.services[pillar].slug}/`;
+---
+
+<Layout
+  title={`${t.meta_title} - Tobias Leinss`}
+  description={t.meta_description}
+  lang={lang}
+>
+  <Header lang={lang} alternateHref={alternateHref} />
+  <main>
+    <ServicePage lang={lang} pillar={pillar} />
+  </main>
+  <Footer lang={lang} />
+  <BackToTop />
+</Layout>

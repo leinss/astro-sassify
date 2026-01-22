@@ -132,6 +132,127 @@
       "headline": "Page Not Found",
       "text": "The page you're looking for doesn't exist or has been moved.",
       "back_to_home": "Back to Homepage"
+    },
+    "services": {
+      "index": {
+        "meta_title": "Automation Services - Streamline Your Business",
+        "meta_description": "Explore our automation services: CRM & Sales, Document Workflows, Communication Automation, and System Integrations. Find the right solution for your business.",
+        "title": "Our Automation Services",
+        "subtitle": "Four pillars of business automation to transform how you work.",
+        "cta": "Book a free consultation"
+      },
+      "crm": {
+        "slug": "crm-sales-automation",
+        "meta_title": "CRM & Sales Automation - Automate Your Pipeline",
+        "meta_description": "Automate lead scoring, assignment, and nurturing. Build sales sequences that work 24/7. Track deals without manual data entry.",
+        "title": "CRM & Sales Automation",
+        "subtitle": "Turn your CRM from a data graveyard into a sales engine.",
+        "problem_title": "The Challenge",
+        "problem_text": "Your sales team spends more time updating spreadsheets than selling. Leads get lost, follow-ups are inconsistent, and you have no idea which deals will close this month. Manual data entry means your CRM is always outdated.",
+        "solution_title": "The Solution",
+        "solution_text": "We build automated pipelines that keep your CRM alive. Leads are scored and assigned automatically. Follow-up sequences run without manual effort. Your team focuses on closing deals while the system handles the administration.",
+        "use_cases_title": "Use Cases",
+        "use_cases": [
+          "Automatic lead scoring based on behavior and profile data",
+          "Smart assignment rules that route leads to the right rep",
+          "Multi-channel follow-up sequences (email, SMS, calls)",
+          "Pipeline stage automation with task creation",
+          "Real-time sync between CRM and other business tools"
+        ],
+        "benefits_title": "Benefits",
+        "benefits": [
+          "Reduce manual data entry by 80%",
+          "Respond to leads within minutes, not hours",
+          "Never lose a deal due to missed follow-ups",
+          "Get accurate forecasting with real-time data"
+        ],
+        "cta": "Automate your sales pipeline",
+        "back_to_services": "Back to Services"
+      },
+      "documents": {
+        "slug": "document-workflows",
+        "meta_title": "Document & Data Workflows - Process Documents Automatically",
+        "meta_description": "Automate invoice processing, report generation, and data extraction. Build document workflows that save hours every week.",
+        "title": "Document & Data Workflows",
+        "subtitle": "Stop drowning in paperwork. Let automation handle it.",
+        "problem_title": "The Challenge",
+        "problem_text": "Invoices pile up waiting for processing. Reports take days to compile from multiple sources. Contract data lives in PDFs that nobody can search. Every document creates manual work.",
+        "solution_title": "The Solution",
+        "solution_text": "We build automated document pipelines. Invoices are extracted, validated, and routed for approval automatically. Reports compile themselves from your data sources. Document data becomes searchable and actionable.",
+        "use_cases_title": "Use Cases",
+        "use_cases": [
+          "Invoice data extraction and automatic booking",
+          "Automated report generation from multiple sources",
+          "Contract data extraction and searchable archives",
+          "Form processing with validation and routing",
+          "Document approval workflows with notifications"
+        ],
+        "benefits_title": "Benefits",
+        "benefits": [
+          "Process invoices in minutes instead of days",
+          "Generate reports automatically overnight",
+          "Find any document data in seconds",
+          "Eliminate data entry errors"
+        ],
+        "cta": "Automate your document workflows",
+        "back_to_services": "Back to Services"
+      },
+      "communication": {
+        "slug": "communication-automation",
+        "meta_title": "Communication Automation - Customer Journeys That Run Themselves",
+        "meta_description": "Build automated customer journeys, onboarding sequences, and support workflows. The right message at the right time, every time.",
+        "title": "Communication Automation",
+        "subtitle": "Consistent, timely communication without the manual effort.",
+        "problem_title": "The Challenge",
+        "problem_text": "New customers don't get the onboarding they need. Support tickets bounce between teams. Appointment reminders are sent manually - or forgotten. Your communication is reactive, not proactive.",
+        "solution_title": "The Solution",
+        "solution_text": "We build communication workflows that run automatically. Every customer gets the same great experience. Support tickets route to the right team instantly. Reminders and updates send themselves.",
+        "use_cases_title": "Use Cases",
+        "use_cases": [
+          "Customer onboarding sequences across channels",
+          "Intelligent support ticket routing and escalation",
+          "Automated appointment reminders and confirmations",
+          "Status updates and delivery notifications",
+          "Feedback collection and NPS automation"
+        ],
+        "benefits_title": "Benefits",
+        "benefits": [
+          "Reduce support volume with proactive communication",
+          "Cut no-shows with automated reminders",
+          "Improve customer satisfaction with timely updates",
+          "Free your team from repetitive messaging"
+        ],
+        "cta": "Automate your communication",
+        "back_to_services": "Back to Services"
+      },
+      "integrations": {
+        "slug": "integrations-apis",
+        "meta_title": "Integrations & APIs - Connect Your Business Tools",
+        "meta_description": "Build seamless integrations between your CRM, ERP, shop system, and other tools. One source of truth, no manual exports.",
+        "title": "Integrations & APIs",
+        "subtitle": "Your tools should talk to each other. We make it happen.",
+        "problem_title": "The Challenge",
+        "problem_text": "Your team switches between five apps to complete one task. Data lives in silos that don't sync. Export-import routines run weekly, creating lag and errors. No single source of truth exists.",
+        "solution_title": "The Solution",
+        "solution_text": "We build integrations that connect your tools in real-time. Data flows automatically where it needs to go. Custom APIs fill gaps when off-the-shelf solutions don't fit. Your systems become one ecosystem.",
+        "use_cases_title": "Use Cases",
+        "use_cases": [
+          "Real-time sync between CRM and ERP systems",
+          "E-commerce integration with inventory and accounting",
+          "Custom API development for legacy systems",
+          "Webhook-based event triggers across platforms",
+          "Data warehouse and reporting integrations"
+        ],
+        "benefits_title": "Benefits",
+        "benefits": [
+          "Eliminate manual data transfers",
+          "Get real-time visibility across systems",
+          "Reduce sync errors to zero",
+          "Scale without adding admin overhead"
+        ],
+        "cta": "Connect your systems",
+        "back_to_services": "Back to Services"
+      }
     }
   },
   "de": {
@@ -267,6 +388,127 @@
       "headline": "Seite nicht gefunden",
       "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
       "back_to_home": "Zurück zur Startseite"
+    },
+    "services": {
+      "index": {
+        "meta_title": "Automatisierungslösungen - Optimieren Sie Ihr Unternehmen",
+        "meta_description": "Entdecken Sie unsere Automatisierungslösungen: CRM & Vertrieb, Dokumenten-Workflows, Kommunikationsautomatisierung und Systemintegrationen.",
+        "title": "Unsere Automatisierungslösungen",
+        "subtitle": "Vier Säulen der Geschäftsautomatisierung für Ihre Transformation.",
+        "cta": "Kostenloses Erstgespräch buchen"
+      },
+      "crm": {
+        "slug": "crm-vertriebsautomatisierung",
+        "meta_title": "CRM & Vertriebsautomatisierung - Pipeline automatisieren",
+        "meta_description": "Automatisieren Sie Lead-Scoring, Zuweisung und Nurturing. Bauen Sie Vertriebssequenzen, die rund um die Uhr arbeiten.",
+        "title": "CRM & Vertriebsautomatisierung",
+        "subtitle": "Verwandeln Sie Ihr CRM vom Datenfriedhof in eine Verkaufsmaschine.",
+        "problem_title": "Die Herausforderung",
+        "problem_text": "Ihr Vertriebsteam verbringt mehr Zeit mit Tabellen als mit Verkaufen. Leads gehen verloren, Follow-ups sind uneinheitlich, und Sie wissen nicht, welche Deals diesen Monat abschließen. Manuelle Dateneingabe bedeutet: Ihr CRM ist immer veraltet.",
+        "solution_title": "Die Lösung",
+        "solution_text": "Wir bauen automatisierte Pipelines, die Ihr CRM am Leben halten. Leads werden automatisch bewertet und zugewiesen. Follow-up-Sequenzen laufen ohne manuellen Aufwand. Ihr Team konzentriert sich aufs Abschließen, während das System die Verwaltung übernimmt.",
+        "use_cases_title": "Anwendungsfälle",
+        "use_cases": [
+          "Automatisches Lead-Scoring basierend auf Verhalten und Profildaten",
+          "Intelligente Zuweisungsregeln für die richtigen Vertriebsmitarbeiter",
+          "Multi-Channel Follow-up-Sequenzen (E-Mail, SMS, Anrufe)",
+          "Pipeline-Stufen-Automatisierung mit Aufgabenerstellung",
+          "Echtzeit-Sync zwischen CRM und anderen Business-Tools"
+        ],
+        "benefits_title": "Vorteile",
+        "benefits": [
+          "Reduzieren Sie manuelle Dateneingabe um 80%",
+          "Reagieren Sie auf Leads in Minuten, nicht Stunden",
+          "Verlieren Sie nie wieder einen Deal durch verpasste Follow-ups",
+          "Erhalten Sie genaue Forecasts mit Echtzeit-Daten"
+        ],
+        "cta": "Vertriebspipeline automatisieren",
+        "back_to_services": "Zurück zu Leistungen"
+      },
+      "documents": {
+        "slug": "dokumenten-workflows",
+        "meta_title": "Dokumenten- & Daten-Workflows - Dokumente automatisch verarbeiten",
+        "meta_description": "Automatisieren Sie Rechnungsverarbeitung, Berichtserstellung und Datenextraktion. Dokumenten-Workflows, die Stunden pro Woche sparen.",
+        "title": "Dokumenten- & Daten-Workflows",
+        "subtitle": "Schluss mit dem Papierkram. Lassen Sie die Automatisierung arbeiten.",
+        "problem_title": "Die Herausforderung",
+        "problem_text": "Rechnungen stapeln sich und warten auf Bearbeitung. Berichte dauern Tage, um sie aus mehreren Quellen zusammenzustellen. Vertragsdaten stecken in PDFs, die niemand durchsuchen kann. Jedes Dokument erzeugt manuelle Arbeit.",
+        "solution_title": "Die Lösung",
+        "solution_text": "Wir bauen automatisierte Dokumenten-Pipelines. Rechnungen werden automatisch extrahiert, validiert und zur Freigabe weitergeleitet. Berichte erstellen sich selbst aus Ihren Datenquellen. Dokumentendaten werden durchsuchbar und nutzbar.",
+        "use_cases_title": "Anwendungsfälle",
+        "use_cases": [
+          "Rechnungsdaten-Extraktion und automatische Verbuchung",
+          "Automatische Berichterstellung aus mehreren Quellen",
+          "Vertragsdaten-Extraktion und durchsuchbare Archive",
+          "Formularverarbeitung mit Validierung und Routing",
+          "Dokumenten-Freigabe-Workflows mit Benachrichtigungen"
+        ],
+        "benefits_title": "Vorteile",
+        "benefits": [
+          "Rechnungen in Minuten statt Tagen verarbeiten",
+          "Berichte automatisch über Nacht generieren",
+          "Dokumentendaten in Sekunden finden",
+          "Dateneingabefehler eliminieren"
+        ],
+        "cta": "Dokumenten-Workflows automatisieren",
+        "back_to_services": "Zurück zu Leistungen"
+      },
+      "communication": {
+        "slug": "kommunikationsautomatisierung",
+        "meta_title": "Kommunikationsautomatisierung - Customer Journeys, die sich selbst steuern",
+        "meta_description": "Bauen Sie automatisierte Customer Journeys, Onboarding-Sequenzen und Support-Workflows. Die richtige Nachricht zur richtigen Zeit.",
+        "title": "Kommunikationsautomatisierung",
+        "subtitle": "Konsistente, zeitnahe Kommunikation ohne manuellen Aufwand.",
+        "problem_title": "Die Herausforderung",
+        "problem_text": "Neue Kunden erhalten nicht das Onboarding, das sie brauchen. Support-Tickets wandern zwischen Teams hin und her. Terminerinnerungen werden manuell verschickt – oder vergessen. Ihre Kommunikation ist reaktiv statt proaktiv.",
+        "solution_title": "Die Lösung",
+        "solution_text": "Wir bauen Kommunikations-Workflows, die automatisch laufen. Jeder Kunde erhält dieselbe großartige Erfahrung. Support-Tickets landen sofort beim richtigen Team. Erinnerungen und Updates versenden sich selbst.",
+        "use_cases_title": "Anwendungsfälle",
+        "use_cases": [
+          "Kunden-Onboarding-Sequenzen über alle Kanäle",
+          "Intelligentes Support-Ticket-Routing und Eskalation",
+          "Automatische Terminerinnerungen und Bestätigungen",
+          "Status-Updates und Lieferbenachrichtigungen",
+          "Feedback-Erfassung und NPS-Automatisierung"
+        ],
+        "benefits_title": "Vorteile",
+        "benefits": [
+          "Support-Volumen durch proaktive Kommunikation reduzieren",
+          "No-Shows durch automatische Erinnerungen minimieren",
+          "Kundenzufriedenheit durch zeitnahe Updates verbessern",
+          "Ihr Team von repetitivem Messaging befreien"
+        ],
+        "cta": "Kommunikation automatisieren",
+        "back_to_services": "Zurück zu Leistungen"
+      },
+      "integrations": {
+        "slug": "integrationen-apis",
+        "meta_title": "Integrationen & APIs - Verbinden Sie Ihre Business-Tools",
+        "meta_description": "Bauen Sie nahtlose Integrationen zwischen CRM, ERP, Shop-System und anderen Tools. Eine Quelle der Wahrheit, keine manuellen Exporte.",
+        "title": "Integrationen & APIs",
+        "subtitle": "Ihre Tools sollten miteinander sprechen. Wir machen es möglich.",
+        "problem_title": "Die Herausforderung",
+        "problem_text": "Ihr Team wechselt zwischen fünf Apps, um eine Aufgabe zu erledigen. Daten leben in Silos, die sich nicht synchronisieren. Export-Import-Routinen laufen wöchentlich und erzeugen Verzögerungen und Fehler. Es gibt keine einzige Quelle der Wahrheit.",
+        "solution_title": "Die Lösung",
+        "solution_text": "Wir bauen Integrationen, die Ihre Tools in Echtzeit verbinden. Daten fließen automatisch dorthin, wo sie gebraucht werden. Custom APIs schließen Lücken, wenn Standardlösungen nicht passen. Ihre Systeme werden zu einem Ökosystem.",
+        "use_cases_title": "Anwendungsfälle",
+        "use_cases": [
+          "Echtzeit-Sync zwischen CRM und ERP-Systemen",
+          "E-Commerce-Integration mit Lager und Buchhaltung",
+          "Custom API-Entwicklung für Legacy-Systeme",
+          "Webhook-basierte Event-Trigger über Plattformen hinweg",
+          "Data Warehouse und Reporting-Integrationen"
+        ],
+        "benefits_title": "Vorteile",
+        "benefits": [
+          "Manuelle Datentransfers eliminieren",
+          "Echtzeit-Sichtbarkeit über alle Systeme",
+          "Sync-Fehler auf null reduzieren",
+          "Skalieren ohne zusätzlichen Admin-Aufwand"
+        ],
+        "cta": "Systeme verbinden",
+        "back_to_services": "Zurück zu Leistungen"
+      }
     }
   }
 }
