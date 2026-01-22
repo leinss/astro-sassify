@@ -17,7 +17,7 @@ const { lang, alternateHref } = Astro.props;
 const t = i18n[lang]
 
 // Get the base path for links based on language
-const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+const basePath = lang === "en" ? "/en" : "/de"
 
 // Get current URL for language switching
 const { pathname, hash } = Astro.url
@@ -25,27 +25,21 @@ const { pathname, hash } = Astro.url
 // Function to get the equivalent URL in another language
 function getLocalizedPath(targetLang: string) {
   // If we're on the German version and want to go to English
-  if (pathname.includes("/ki-kommunikation") && targetLang === "en") {
-    return pathname.replace("/ki-kommunikation", "/ai-communication") + hash
+  if (pathname.startsWith("/de") && targetLang === "en") {
+    return pathname.replace("/de", "/en") + hash
   }
 
   // If we're on the English version and want to go to German
-  if (pathname.includes("/ai-communication") && targetLang === "de") {
-    return pathname.replace("/ai-communication", "/ki-kommunikation") + hash
+  if (pathname.startsWith("/en") && targetLang === "de") {
+    return pathname.replace("/en", "/de") + hash
   }
 
   // Handle root redirects
   if (pathname === "/" && targetLang === "de") {
-    return "/ki-kommunikation" + hash
+    return "/de" + hash
   }
   if (pathname === "/" && targetLang === "en") {
-    return "/ai-communication" + hash
-  }
-  if (pathname === "/en" && targetLang === "en") {
-    return "/ai-communication" + hash
-  }
-  if (pathname === "/en" && targetLang === "de") {
-    return "/ki-kommunikation" + hash
+    return "/en" + hash
   }
 
   // Return current path if something unexpected

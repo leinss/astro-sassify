@@ -26,8 +26,8 @@ export default defineConfig({
     }),
   ],
   i18n: {
-    locales: ["ai-communication", "ki-kommunikation"],
-    defaultLocale: "ki-kommunikation",
+    locales: ["en", "de"],
+    defaultLocale: "de",
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false, // We handle root redirect with locale detection
@@ -35,17 +35,22 @@ export default defineConfig({
   },
   redirects: {
     // Root "/" handled by src/pages/index.astro with locale detection
-    "/en": "/ai-communication",
-    "/de": "/ki-kommunikation",
-    "/ki-kommunikation/datenschutz": "/ki-kommunikation/datenschutzerklaerung",
-    "/ki-kommunikation/datenschutzerklärung":
-      "/ki-kommunikation/datenschutzerklaerung",
-    "/imprint": "/ai-communication/imprint",
-    "/impressum": "/ki-kommunikation/impressum",
-    "/privacy-policy": "/ai-communication/privacy-policy",
-    "/datenschutz": "/ki-kommunikation/datenschutzerklaerung",
-    "/datenschutzerklärung": "/ki-kommunikation/datenschutzerklaerung",
-    "/datenschutzerklaerung": "/ki-kommunikation/datenschutzerklaerung",
+    // Legacy URL compatibility (SEO) - base paths only (dynamic redirects not supported in static mode)
+    "/ki-kommunikation": "/de",
+    "/ai-communication": "/en",
+    // Legacy legal page redirects
+    "/ki-kommunikation/datenschutzerklaerung": "/de/datenschutzerklaerung",
+    "/ki-kommunikation/impressum": "/de/impressum",
+    "/ai-communication/privacy-policy": "/en/privacy-policy",
+    "/ai-communication/imprint": "/en/imprint",
+    // Privacy page aliases
+    "/de/datenschutz": "/de/datenschutzerklaerung",
+    "/datenschutz": "/de/datenschutzerklaerung",
+    "/datenschutzerklaerung": "/de/datenschutzerklaerung",
+    // Legal page shortcuts
+    "/imprint": "/en/imprint",
+    "/impressum": "/de/impressum",
+    "/privacy-policy": "/en/privacy-policy",
   },
   // Configure view transitions - this is now a standard feature in Astro 5.x
   // No need for experimental flag
