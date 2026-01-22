@@ -4,16 +4,12 @@ import tailwind from "@astrojs/tailwind"
 import alpinejs from "@astrojs/alpinejs"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
-import node from "@astrojs/node"
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://leinss-consulting.de",
-  // Server output for API routes (newsletter subscription)
-  output: "server",
-  adapter: node({
-    mode: "standalone",
-  }),
+  // Static output for GitHub Pages (newsletter uses Listmonk public API directly)
+  output: "static",
   integrations: [
     tailwind(),
     alpinejs(),
@@ -34,10 +30,11 @@ export default defineConfig({
     defaultLocale: "ki-kommunikation",
     routing: {
       prefixDefaultLocale: true,
+      redirectToDefaultLocale: false, // We handle root redirect with locale detection
     },
   },
   redirects: {
-    "/": "/ki-kommunikation",
+    // Root "/" handled by src/pages/index.astro with locale detection
     "/en": "/ai-communication",
     "/de": "/ki-kommunikation",
     "/ki-kommunikation/datenschutz": "/ki-kommunikation/datenschutzerklaerung",
