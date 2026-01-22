@@ -1,0 +1,130 @@
+---
+export const prerender = true;
+
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BackToTop from '../../../components/BackToTop.astro';
+import { Image } from 'astro:assets';
+import { BsArrowRight } from 'react-icons/bs';
+import config from '../../../assets/config.ts';
+import i18n from '../../../assets/i18n.json';
+
+// Import pillar images
+import pillarCRM from '../../../assets/images/pillars/pillar-1-crm-a.png';
+import pillarDocs from '../../../assets/images/pillars/pillar-2-docs-a.png';
+import pillarComm from '../../../assets/images/pillars/pillar-3-comm-c.png';
+import pillarIntegration from '../../../assets/images/pillars/pillar-4-integration-a.png';
+
+const lang = 'de';
+const t = i18n[lang].services;
+const basePath = '/de';
+const alternateHref = '/en/services/';
+
+const pillars = [
+  { key: 'crm', image: pillarCRM },
+  { key: 'documents', image: pillarDocs },
+  { key: 'communication', image: pillarComm },
+  { key: 'integrations', image: pillarIntegration },
+] as const;
+---
+
+<Layout
+  title={`${t.index.meta_title} - Tobias Leinss`}
+  description={t.index.meta_description}
+  lang={lang}
+>
+  <Header lang={lang} alternateHref={alternateHref} />
+  <main>
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 overflow-hidden bg-gradient-to-br from-primary-50 to-white dark:from-primary-950 dark:to-secondary-950">
+      <div class="absolute inset-0 z-0 opacity-30">
+        <div class="absolute inset-0 bg-grid-pattern"></div>
+      </div>
+      <div class="container-custom relative z-10 text-center">
+        <div class="max-w-3xl mx-auto reveal">
+          <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 dark:text-white mb-6">
+            {t.index.title}
+          </h1>
+          <p class="text-xl text-secondary-600 dark:text-secondary-300">
+            {t.index.subtitle}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-20 bg-white dark:bg-secondary-950">
+      <div class="container-custom">
+        <div class="grid md:grid-cols-2 gap-8 reveal-stagger">
+          {pillars.map((pillar) => {
+            const pillarData = t[pillar.key];
+            return (
+              <a
+                href={`${basePath}/services/${pillarData.slug}/`}
+                class="group block bg-secondary-50 dark:bg-secondary-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover-lift"
+              >
+                <div class="aspect-video relative overflow-hidden">
+                  <Image
+                    src={pillar.image}
+                    alt={pillarData.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    width={600}
+                    height={400}
+                  />
+                </div>
+                <div class="p-6">
+                  <h2 class="text-xl font-bold text-secondary-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                    {pillarData.title}
+                  </h2>
+                  <p class="text-secondary-600 dark:text-secondary-300 mb-4">
+                    {pillarData.subtitle}
+                  </p>
+                  <span class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-medium group-hover:gap-3 transition-all">
+                    Mehr erfahren
+                    <BsArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary-50 dark:bg-primary-950 relative">
+      <div class="absolute inset-0 z-0 opacity-30">
+        <div class="absolute inset-0 bg-grid-pattern"></div>
+      </div>
+      <div class="container-custom text-center reveal relative z-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-secondary-900 dark:text-white mb-6">
+          {t.index.cta}
+        </h2>
+        <a
+          href={config.external_links.strategy_call_de}
+          class="btn-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {i18n[lang].hero.cta}
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+  <BackToTop />
+</Layout>
+
+<style>
+  .bg-grid-pattern {
+    background-size: 20px 20px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  }
+</style>

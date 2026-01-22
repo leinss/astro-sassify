@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import config from '../assets/config.ts';
+import i18n from '../assets/i18n.json';
+import { BsCheckCircleFill, BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+
+// Import pillar images
+import pillarCRM from '../assets/images/pillars/pillar-1-crm-a.png';
+import pillarDocs from '../assets/images/pillars/pillar-2-docs-a.png';
+import pillarComm from '../assets/images/pillars/pillar-3-comm-c.png';
+import pillarIntegration from '../assets/images/pillars/pillar-4-integration-a.png';
+
+interface Props {
+  lang: 'en' | 'de';
+  pillar: 'crm' | 'documents' | 'communication' | 'integrations';
+}
+
+const { lang, pillar } = Astro.props;
+const t = i18n[lang].services[pillar];
+const basePath = lang === 'en' ? '/en' : '/de';
+
+// Select the appropriate image
+const pillarImages = {
+  crm: pillarCRM,
+  documents: pillarDocs,
+  communication: pillarComm,
+  integrations: pillarIntegration,
+};
+const heroImage = pillarImages[pillar];
+
+// Get alternate language slug for language switcher
+const alternateSlug = i18n[lang === 'en' ? 'de' : 'en'].services[pillar].slug;
+const alternateBasePath = lang === 'en' ? '/de' : '/en';
+---
+
+<section class="relative pt-24 pb-16 overflow-hidden bg-primary-50 dark:bg-primary-950">
+  <!-- Hero Section -->
+  <div class="container-custom">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <a
+          href={`${basePath}/services/`}
+          class="inline-flex items-center gap-2 text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-4 transition-colors"
+        >
+          <BsArrowLeft className="w-4 h-4" />
+          {t.back_to_services}
+        </a>
+        <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 dark:text-white mb-4">
+          {t.title}
+        </h1>
+        <p class="text-xl text-secondary-600 dark:text-secondary-300 mb-8">
+          {t.subtitle}
+        </p>
+        <a
+          href={lang === 'de' ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
+          class="btn-cta inline-flex items-center gap-2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t.cta}
+          <BsArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+      <div class="reveal-right">
+        <Image
+          src={heroImage}
+          alt={t.title}
+          class="w-full h-auto rounded-lg shadow-xl"
+          loading="eager"
+          width={600}
+          height={400}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem Section -->
+<section class="py-16 bg-white dark:bg-secondary-950">
+  <div class="container-custom">
+    <div class="max-w-3xl mx-auto reveal">
+      <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-6">
+        {t.problem_title}
+      </h2>
+      <p class="text-lg text-secondary-600 dark:text-secondary-300 leading-relaxed">
+        {t.problem_text}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Solution Section -->
+<section class="py-16 bg-primary-50 dark:bg-primary-950/50">
+  <div class="container-custom">
+    <div class="max-w-3xl mx-auto reveal">
+      <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-6">
+        {t.solution_title}
+      </h2>
+      <p class="text-lg text-secondary-600 dark:text-secondary-300 leading-relaxed">
+        {t.solution_text}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Use Cases Section -->
+<section class="py-16 bg-primary-50 dark:bg-primary-950/50">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-8 reveal">
+        {t.use_cases_title}
+      </h2>
+      <ul class="space-y-4 reveal-stagger">
+        {t.use_cases.map((useCase: string) => (
+          <li class="flex items-start gap-4 p-4 bg-white dark:bg-secondary-900 rounded-lg shadow-sm">
+            <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+              <BsCheckCircleFill className="w-5 h-5" />
+            </span>
+            <span class="text-secondary-700 dark:text-secondary-300">{useCase}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-16 bg-white dark:bg-secondary-900">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-8 reveal">
+        {t.benefits_title}
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6 reveal-stagger">
+        {t.benefits.map((benefit: string) => (
+          <div class="flex items-start gap-4 p-6 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-100 dark:border-primary-800">
+            <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
+              <BsCheckCircleFill className="w-5 h-5" />
+            </span>
+            <span class="text-secondary-700 dark:text-secondary-300 font-medium">{benefit}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-primary-50 dark:bg-primary-950">
+  <div class="absolute inset-0 z-0 opacity-30">
+    <div class="absolute inset-0 bg-grid-pattern"></div>
+  </div>
+  <div class="container-custom text-center reveal relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-secondary-900 dark:text-white mb-6">
+      {t.cta}
+    </h2>
+    <a
+      href={lang === 'de' ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
+      class="btn-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {i18n[lang].hero.cta}
+    </a>
+  </div>
+</section>
+
+<style>
+  .bg-grid-pattern {
+    background-size: 20px 20px;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  }
+</style>
