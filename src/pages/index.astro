@@ -1,0 +1,31 @@
+---
+// Root redirect with browser locale detection
+// German browsers → /ki-kommunikation/
+// All others → /ai-communication/
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leinss Consulting - Redirecting...</title>
+    <meta name="robots" content="noindex" />
+    <!-- Fallback for no-JS: default to German -->
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/ki-kommunikation/" />
+    </noscript>
+    <script is:inline>
+      (function () {
+        // Get browser language (e.g., "de", "de-DE", "en-US")
+        const lang = navigator.language || navigator.userLanguage || "de"
+        const isGerman = lang.toLowerCase().startsWith("de")
+        // Redirect based on browser locale
+        window.location.replace(isGerman ? "/ki-kommunikation/" : "/ai-communication/")
+      })()
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>
