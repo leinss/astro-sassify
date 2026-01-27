@@ -2,46 +2,42 @@
   "name": "Invoice Processing - Local Ollama",
   "nodes": [
     {
-      "parameters": {
-        "path": "/data/invoices/inbox",
-        "events": ["add"],
-        "options": {
-          "ignoreInitialScan": true
-        }
-      },
-      "id": "folder-watcher",
-      "name": "Watch Invoice Folder",
-      "type": "n8n-nodes-base.localFileTrigger",
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [250, 300]
     },
     {
       "parameters": {
-        "filePath": "={{ $json.path }}"
+        "filePath": "/data/invoices/inbox/invoice.pdf",
+        "options": {}
       },
       "id": "read-file",
       "name": "Read Invoice File",
-      "type": "n8n-nodes-base.readBinaryFiles",
+      "type": "n8n-nodes-base.readBinaryFile",
       "typeVersion": 1,
       "position": [470, 300]
     },
     {
       "parameters": {
+        "method": "POST",
         "url": "http://host.docker.internal:11434/api/generate",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"qwen3-vl\",\n  \"prompt\": \"Analyze this invoice image and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\",\n  \"images\": [\"{{ $binary.data.toBase64() }}\"]\n}",
+        "jsonBody": "={\n  \"model\": \"llava\",\n  \"prompt\": \"Analyze this invoice image and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\",\n  \"images\": [\"{{ $binary.data.data }}\"]\n}",
         "options": {}
       },
       "id": "ollama-vision",
-      "name": "Ollama Vision (qwen3-vl)",
+      "name": "Ollama Vision (LLaVA)",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4,
+      "typeVersion": 4.2,
       "position": [690, 300]
     },
     {
       "parameters": {
-        "jsCode": "// Parse Ollama response\nconst response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    content = JSON.parse(jsonMatch[0]);\n  } else {\n    throw new Error('No JSON found in response');\n  }\n  \n  return {\n    json: {\n      success: true,\n      invoice_data: content,\n      processed_at: new Date().toISOString(),\n      source_file: $('Watch Invoice Folder').first().json.path\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response\n    }\n  };\n}"
+        "jsCode": "// Parse Ollama response\nconst response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString()\n      }\n    };\n  } else {\n    throw new Error('No JSON found in response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response\n    }\n  };\n}"
       },
       "id": "parse-response",
       "name": "Parse Invoice JSON",
@@ -51,29 +47,27 @@
     },
     {
       "parameters": {
-        "operation": "write",
-        "fileName": "=/data/invoices/processed/{{ $json.invoice_data.invoice.number || 'unknown' }}_{{ $now.format('yyyy-MM-dd_HHmmss') }}.json",
-        "dataPropertyName": "={{ JSON.stringify($json, null, 2) }}"
+        "assignments": {
+          "assignments": [
+            {
+              "id": "result",
+              "name": "result",
+              "value": "={{ JSON.stringify($json, null, 2) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
       },
-      "id": "save-json",
-      "name": "Save Result",
-      "type": "n8n-nodes-base.writeToFile",
-      "typeVersion": 1,
+      "id": "format-output",
+      "name": "Format Output",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [1130, 300]
-    },
-    {
-      "parameters": {
-        "command": "=mv \"{{ $('Watch Invoice Folder').first().json.path }}\" \"/data/invoices/done/\""
-      },
-      "id": "move-processed",
-      "name": "Move to Done",
-      "type": "n8n-nodes-base.executeCommand",
-      "typeVersion": 1,
-      "position": [1350, 300]
     }
   ],
   "connections": {
-    "Watch Invoice Folder": {
+    "Manual Trigger": {
       "main": [
         [
           {
@@ -88,14 +82,14 @@
       "main": [
         [
           {
-            "node": "Ollama Vision (qwen3-vl)",
+            "node": "Ollama Vision (LLaVA)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Ollama Vision (qwen3-vl)": {
+    "Ollama Vision (LLaVA)": {
       "main": [
         [
           {
@@ -110,18 +104,7 @@
       "main": [
         [
           {
-            "node": "Save Result",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Save Result": {
-      "main": [
-        [
-          {
-            "node": "Move to Done",
+            "node": "Format Output",
             "type": "main",
             "index": 0
           }
@@ -131,5 +114,8 @@
   },
   "settings": {
     "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "starter-workflow"
   }
 }
