@@ -4,14 +4,14 @@
     {
       "parameters": {
         "formTitle": "Invoice Upload (Ollama)",
-        "formDescription": "Upload an invoice IMAGE (PNG, JPG, WebP) to extract data using local Ollama Qwen2.5-VL. For PDFs, use the Claude version.",
+        "formDescription": "Upload an invoice (PDF or image) to extract data using local Ollama Qwen3-VL.",
         "formFields": {
           "values": [
             {
-              "fieldLabel": "Invoice Image",
+              "fieldLabel": "Invoice File",
               "fieldType": "file",
               "requiredField": true,
-              "acceptFileTypes": ".png,.jpg,.jpeg,.webp"
+              "acceptFileTypes": ".png,.jpg,.jpeg,.webp,.pdf"
             }
           ]
         },
@@ -36,7 +36,7 @@
         "url": "http://host.docker.internal:11434/api/generate",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"qwen3-vl\",\n  \"prompt\": \"Analyze this invoice image and extract all data as JSON. Return ONLY valid JSON with this exact structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, no markdown, just the JSON object.\",\n  \"images\": [\"{{ $binary['Invoice Image'].data }}\"],\n  \"stream\": false\n}",
+        "jsonBody": "={\n  \"model\": \"qwen3-vl\",\n  \"prompt\": \"Analyze this invoice image and extract all data as JSON. Return ONLY valid JSON with this exact structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, no markdown, just the JSON object.\",\n  \"images\": [\"{{ $binary['Invoice File'].data }}\"],\n  \"stream\": false\n}",
         "options": {
           "timeout": 180000
         }
