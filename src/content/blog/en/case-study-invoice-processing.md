@@ -204,6 +204,10 @@ vs. €3,200/month equivalent labor cost.
 3. **Start with high-volume clients**: Biggest ROI, most sample data for tuning
 4. **Keep humans for exceptions**: Staff now handle only the 0.8% that needs judgment
 
+## Learn More
+
+For a conceptual overview of AI-powered invoice automation and ROI calculations, see: **[Automating Invoice Processing with AI](/en/blog/automating-invoice-processing/)**
+
 ## Your Turn
 
 Processing stacks of documents manually?

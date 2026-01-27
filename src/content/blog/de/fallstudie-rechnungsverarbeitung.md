@@ -204,6 +204,10 @@ vs. €3.200/Monat äquivalente Personalkosten.
 3. **Mit Großmandanten starten**: Größter ROI, meiste Beispieldaten zum Tuning
 4. **Menschen für Ausnahmen**: Mitarbeiter bearbeiten nur die 0,8%, die Urteilsvermögen brauchen
 
+## Mehr erfahren
+
+Für eine konzeptionelle Übersicht über KI-gestützte Rechnungsautomatisierung und ROI-Berechnungen, siehe: **[Rechnungsverarbeitung automatisieren mit KI](/de/blog/rechnungsverarbeitung-automatisieren/)**
+
 ## Ihr nächster Schritt
 
 Verarbeiten Sie manuell Stapel von Dokumenten?
