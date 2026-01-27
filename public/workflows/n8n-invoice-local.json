@@ -3,12 +3,12 @@
   "nodes": [
     {
       "parameters": {
-        "formTitle": "Invoice Upload",
-        "formDescription": "Upload an invoice image (PNG, JPG) to extract data using local Ollama",
+        "formTitle": "Invoice Upload (Ollama)",
+        "formDescription": "Upload an invoice IMAGE (PNG, JPG, WebP) to extract data using local Ollama LLaVA. For PDFs, use the Claude version.",
         "formFields": {
           "values": [
             {
-              "fieldLabel": "Invoice File",
+              "fieldLabel": "Invoice Image",
               "fieldType": "file",
               "requiredField": true,
               "acceptFileTypes": ".png,.jpg,.jpeg,.webp"
@@ -18,7 +18,7 @@
         "options": {
           "respondWithOptions": {
             "values": {
-              "formSubmittedText": "Processing your invoice..."
+              "formSubmittedText": "Processing your invoice... Check Executions tab for results."
             }
           }
         }
@@ -28,7 +28,7 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [250, 300],
-      "webhookId": "invoice-form"
+      "webhookId": "invoice-form-ollama"
     },
     {
       "parameters": {
@@ -36,23 +36,23 @@
         "url": "http://host.docker.internal:11434/api/generate",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"llava\",\n  \"prompt\": \"Analyze this invoice image and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\",\n  \"images\": [\"{{ $binary['Invoice File'].data }}\"]\n}",
+        "jsonBody": "={\n  \"model\": \"llava\",\n  \"prompt\": \"Analyze this invoice image and extract all data as JSON. Return ONLY valid JSON with this exact structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, no markdown, just the JSON object.\",\n  \"images\": [\"{{ $binary['Invoice Image'].data }}\"],\n  \"stream\": false\n}",
         "options": {
-          "timeout": 120000
+          "timeout": 180000
         }
       },
       "id": "ollama-vision",
-      "name": "Ollama Vision (LLaVA)",
+      "name": "Ollama LLaVA",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [470, 300]
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString()\n      }\n    };\n  } else {\n    throw new Error('No JSON found in response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response\n    }\n  };\n}"
+        "jsCode": "const response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON object in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString(),\n        model: 'llava (local)'\n      }\n    };\n  } else {\n    throw new Error('No JSON found in LLaVA response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response?.substring(0, 500)\n    }\n  };\n}"
       },
       "id": "parse-response",
-      "name": "Parse Invoice JSON",
+      "name": "Parse Result",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [690, 300]
@@ -63,18 +63,18 @@
       "main": [
         [
           {
-            "node": "Ollama Vision (LLaVA)",
+            "node": "Ollama LLaVA",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Ollama Vision (LLaVA)": {
+    "Ollama LLaVA": {
       "main": [
         [
           {
-            "node": "Parse Invoice JSON",
+            "node": "Parse Result",
             "type": "main",
             "index": 0
           }
