@@ -12,13 +12,17 @@ import i18n from "../../../assets/i18n.json"
 const lang = "de"
 const t = i18n[lang]
 
-// Get all German blog posts, filter out drafts in production
+// Get all German blog posts, filter out drafts
 const allPosts = await getCollection("blog", ({ data }) => {
-  return data.lang === "de" && (import.meta.env.DEV || !data.draft)
+  return data.lang === "de" && !data.draft
 })
 
 // Sort by date, newest first
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+// Count posts by type
+const caseStudyCount = posts.filter(p => p.data.category === 'case-study').length
+const articleCount = posts.length - caseStudyCount
 ---
 
 <Layout
@@ -42,13 +46,47 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
       </div>
     </section>
 
+    <!-- Filter Tabs -->
+    <section class="pb-8">
+      <div class="container-custom">
+        <div class="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Beiträge filtern">
+          <button
+            data-filter="all"
+            class="filter-tab active px-4 py-2 rounded-full text-sm font-medium transition-all"
+            role="tab"
+            aria-selected="true"
+          >
+            Alle ({posts.length})
+          </button>
+          <button
+            data-filter="article"
+            class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Artikel ({articleCount})
+          </button>
+          <button
+            data-filter="case-study"
+            class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Fallstudien ({caseStudyCount})
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- Blog Grid -->
     <section class="pb-20">
       <div class="container-custom">
         {posts.length > 0 ? (
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div id="blog-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <BlogCard post={post} lang={lang} />
+              <div data-category={post.data.category === 'case-study' ? 'case-study' : 'article'}>
+                <BlogCard post={post} lang={lang} />
+              </div>
             ))}
           </div>
         ) : (
@@ -65,3 +103,69 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
   <Footer lang={lang} />
   <BackToTop />
 </Layout>
+
+<style>
+  .filter-tab {
+    background: transparent;
+    color: theme('colors.secondary.600');
+    border: 1px solid theme('colors.secondary.200');
+  }
+
+  :global(.dark) .filter-tab {
+    color: theme('colors.secondary.400');
+    border-color: theme('colors.secondary.700');
+  }
+
+  .filter-tab:hover {
+    background: theme('colors.secondary.100');
+  }
+
+  :global(.dark) .filter-tab:hover {
+    background: theme('colors.secondary.800');
+  }
+
+  .filter-tab.active {
+    background: theme('colors.primary.500');
+    color: white;
+    border-color: theme('colors.primary.500');
+  }
+
+  #blog-grid > div {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  #blog-grid > div.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tabs = document.querySelectorAll('.filter-tab');
+    const items = document.querySelectorAll('#blog-grid > div');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-filter');
+
+        // Update active tab
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Filter items
+        items.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  });
+</script>
