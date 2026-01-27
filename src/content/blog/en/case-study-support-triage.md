@@ -241,6 +241,10 @@ vs. hiring an additional support agent at €3,500/month.
 3. **Human override is easy**: One-click to stop auto-response for specific customer
 4. **Measure what matters**: CSAT improved more than volume handled
 
+## Technical Deep Dive
+
+For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** — covers intent classification, context retrieval, and response generation.
+
 ## Your Turn
 
 Support team drowning in repetitive queries?
