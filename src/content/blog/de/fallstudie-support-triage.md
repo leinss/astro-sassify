@@ -241,6 +241,10 @@ vs. Einstellung eines zusätzlichen Support-Agents bei €3.500/Monat.
 3. **Menschliches Override ist einfach**: Ein Klick um Auto-Antwort für bestimmten Kunden zu stoppen
 4. **Messen was zählt**: CSAT verbesserte sich mehr als bearbeitetes Volumen
 
+## Technischer Deep Dive
+
+Für eine detaillierte technische Anleitung zum Aufbau von Kundenservice-Bots mit n8n, siehe meinen persönlichen Blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** (EN) — behandelt Intent-Klassifizierung, Kontext-Retrieval und Antwortgenerierung.
+
 ## Ihr nächster Schritt
 
 Ertrinkt Ihr Support-Team in repetitiven Anfragen?
