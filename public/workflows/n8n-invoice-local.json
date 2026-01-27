@@ -15,8 +15,13 @@
             }
           ]
         },
-        "responseMode": "responseNode",
-        "options": {}
+        "options": {
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Processing your invoice..."
+            }
+          }
+        }
       },
       "id": "form-trigger",
       "name": "Upload Invoice Form",
@@ -51,18 +56,6 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [690, 300]
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "=Invoice processed successfully!\n\n{{ JSON.stringify($json, null, 2) }}",
-        "options": {}
-      },
-      "id": "respond",
-      "name": "Show Result",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [910, 300]
     }
   ],
   "connections": {
@@ -82,17 +75,6 @@
         [
           {
             "node": "Parse Invoice JSON",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Parse Invoice JSON": {
-      "main": [
-        [
-          {
-            "node": "Show Result",
             "type": "main",
             "index": 0
           }
