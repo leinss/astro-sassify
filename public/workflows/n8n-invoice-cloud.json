@@ -1,0 +1,164 @@
+{
+  "name": "Invoice Processing with Claude Vision",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute",
+              "minute": 5
+            }
+          ]
+        },
+        "mailbox": "INBOX",
+        "options": {
+          "customEmailConfig": "imap.gmail.com",
+          "allowUnauthorizedCerts": false
+        }
+      },
+      "id": "imap-trigger",
+      "name": "Email Trigger (IMAP)",
+      "type": "n8n-nodes-base.imapEmail",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "imap": {
+          "id": "CONFIGURE_ME",
+          "name": "Your Email IMAP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.attachments && $json.attachments.length > 0 }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "has-attachment",
+      "name": "Has PDF Attachment?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "create",
+        "model": "claude-sonnet-4-20250514",
+        "messages": {
+          "values": [
+            {
+              "role": "user",
+              "content": "=Analyze this invoice image and extract the following data as JSON:\n\n{\n  \"vendor\": {\n    \"name\": \"\",\n    \"address\": \"\",\n    \"tax_id\": \"\"\n  },\n  \"invoice\": {\n    \"number\": \"\",\n    \"date\": \"\",\n    \"due_date\": \"\"\n  },\n  \"line_items\": [\n    {\n      \"description\": \"\",\n      \"quantity\": 0,\n      \"unit_price\": 0,\n      \"total\": 0\n    }\n  ],\n  \"totals\": {\n    \"net\": 0,\n    \"tax_rate\": 0,\n    \"tax_amount\": 0,\n    \"gross\": 0\n  }\n}\n\nReturn ONLY valid JSON, no explanation."
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 2000
+        }
+      },
+      "id": "claude-vision",
+      "name": "Claude Vision API",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "credentials": {
+        "anthropicApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude's JSON response\nconst response = $input.first().json;\n\ntry {\n  // Extract JSON from response\n  let content = response.message?.content || response.content || response;\n  \n  // If it's a string, try to parse it\n  if (typeof content === 'string') {\n    // Remove markdown code blocks if present\n    content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    content = JSON.parse(content);\n  }\n  \n  return {\n    json: {\n      success: true,\n      invoice_data: content,\n      processed_at: new Date().toISOString(),\n      source_email: $('Email Trigger (IMAP)').first().json.from\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response\n    }\n  };\n}"
+      },
+      "id": "parse-response",
+      "name": "Parse Invoice JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "fileName": "=/tmp/invoices/{{ $json.invoice_data.invoice.number || 'unknown' }}_{{ $now.format('yyyy-MM-dd_HHmmss') }}.json",
+        "options": {}
+      },
+      "id": "save-json",
+      "name": "Save to File",
+      "type": "n8n-nodes-base.writeToFile",
+      "typeVersion": 1,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {},
+      "id": "no-attachment",
+      "name": "No Attachment - Skip",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [690, 480]
+    }
+  ],
+  "connections": {
+    "Email Trigger (IMAP)": {
+      "main": [
+        [
+          {
+            "node": "Has PDF Attachment?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has PDF Attachment?": {
+      "main": [
+        [
+          {
+            "node": "Claude Vision API",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Attachment - Skip",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Vision API": {
+      "main": [
+        [
+          {
+            "node": "Parse Invoice JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Invoice JSON": {
+      "main": [
+        [
+          {
+            "node": "Save to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

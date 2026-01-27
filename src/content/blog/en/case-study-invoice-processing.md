@@ -1,6 +1,6 @@
 ---
 title: "Case Study: AI-Powered Invoice Processing for an Accounting Firm"
-description: "How we cut invoice processing from 15 minutes to 90 seconds per document with 99.2% accuracy using n8n, Claude Vision, and intelligent validation."
+description: "A fictional scenario showing how to cut invoice processing from 15 minutes to 90 seconds per document with 99.2% accuracy using n8n, Claude Vision, and intelligent validation."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "fallstudie-rechnungsverarbeitung"
 
 # AI-Powered Invoice Processing for an Accounting Firm
 
-A mid-sized accounting firm was drowning in paper. Their clients sent hundreds of invoices monthly in every format imaginable—PDFs, scans, photos of receipts. We built an AI-powered extraction pipeline that transformed their document processing.
+> **Note:** This is a fictional scenario demonstrating what AI-powered invoice processing can achieve. The company profile and metrics are representative examples based on common industry patterns.
+
+A mid-sized accounting firm was drowning in paper. Their clients sent hundreds of invoices monthly in every format imaginable—PDFs, scans, photos of receipts. This workflow demonstrates how an AI-powered extraction pipeline can transform document processing.
 
 ## The Challenge
 
-**Client**: Accounting firm, 8 staff, 120+ business clients
+**Example Company**: Accounting firm, 8 staff, 120+ business clients
 
 **Pain Points**:
 - Invoices arrived via email, cloud folders, and client portals
@@ -203,6 +205,68 @@ vs. €3,200/month equivalent labor cost.
 2. **Validation catches AI mistakes**: 90% of flagged items are correct flags
 3. **Start with high-volume clients**: Biggest ROI, most sample data for tuning
 4. **Keep humans for exceptions**: Staff now handle only the 0.8% that needs judgment
+
+## Build This Yourself
+
+Want to implement this workflow? Here's how each piece connects.
+
+### Node-by-Node Breakdown
+
+**1. Document Trigger (Email or Folder Watch)**
+
+The workflow starts when a new document arrives. You have two options:
+- **Email Trigger**: Monitors a dedicated inbox via IMAP. When an invoice lands, the workflow fires within 30 seconds.
+- **Folder Watch**: For local/self-hosted setups, watches a directory for new PDFs.
+
+```
+Trigger → Extract attachment → Pass to AI
+```
+
+**2. Claude Vision Analysis**
+
+The core extraction happens here. Claude receives the document image and a structured prompt asking for specific fields. The prompt is critical—it defines the exact JSON structure you need for your accounting software.
+
+Key prompt elements:
+- Explicit JSON schema with all required fields
+- Instructions to return "only valid JSON, no explanation"
+- Field-level guidance for ambiguous cases (e.g., "tax_id" vs "VAT number")
+
+**3. Response Parsing**
+
+Claude returns JSON, but sometimes wrapped in markdown code blocks or with extra text. The Code node:
+- Strips markdown formatting
+- Validates JSON structure
+- Merges with source metadata (email sender, timestamp)
+- Flags parse failures for manual review
+
+**4. Validation Layer**
+
+Before exporting, every invoice passes sanity checks:
+- Math verification: Do line items sum to the total?
+- VAT rate validation: Is 19% or 7% (German rates) applied correctly?
+- Duplicate detection: Hash the invoice number to catch re-submissions
+
+**5. Export & Archive**
+
+Finally, validated data exports to your accounting system format (DATEV XML, CSV) and archives the original with processing metadata.
+
+### Get the Starter Workflow
+
+Download the workflow JSON and import it into n8n:
+
+**Cloud Version (Claude API):**
+[Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
+
+**Local Version (Ollama):**
+[Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
+
+**Quick Setup:**
+1. Import JSON via n8n Settings → Import Workflow
+2. Configure credentials (IMAP, Anthropic/Ollama, file storage)
+3. Adjust the prompt for your invoice format
+4. Test with 5-10 sample invoices
+
+This starter handles the core extraction flow. A tailored implementation would add your specific validation rules, accounting software export format, error alerting, and multi-source intake—the pieces that make it production-ready for your setup.
 
 ## Learn More
 

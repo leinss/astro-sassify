@@ -1,6 +1,6 @@
 ---
 title: "Case Study: AI Support Triage for E-commerce"
-description: "How we reduced first-response time from 8 hours to 15 minutes and auto-resolved 60% of support tickets using AI-powered classification and routing."
+description: "A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "fallstudie-support-triage"
 
 # AI Support Triage for E-commerce
 
-An online retailer's support team was overwhelmed. Customer messages piled up, urgent issues got buried, and response times stretched to days. We built an AI triage system that classifies, routes, and even resolves common queries automatically.
+> **Note:** This is a fictional scenario demonstrating what AI-powered support triage can achieve. The company profile and metrics are representative examples based on common industry patterns.
+
+An online retailer's support team was overwhelmed. Customer messages piled up, urgent issues got buried, and response times stretched to days. This workflow demonstrates how an AI triage system can classify, route, and resolve common queries automatically.
 
 ## The Challenge
 
-**Client**: E-commerce retailer, 50k monthly orders, 5-person support team
+**Example Company**: E-commerce retailer, 50k monthly orders, 5-person support team
 
 **Pain Points**:
 - Support requests via email, contact form, and social media
@@ -240,6 +242,79 @@ vs. hiring an additional support agent at €3,500/month.
 2. **Start with low-risk auto-responses**: Order status is safe; complaints are not
 3. **Human override is easy**: One-click to stop auto-response for specific customer
 4. **Measure what matters**: CSAT improved more than volume handled
+
+## Build This Yourself
+
+Here's the architecture for building a smart support triage system.
+
+### Node-by-Node Breakdown
+
+**1. Email Trigger (IMAP)**
+
+Monitor your support inbox for incoming messages. The trigger polls every 2 minutes (configurable) and captures:
+- Sender email
+- Subject line
+- Message body (text and HTML)
+- Timestamp
+
+Alternative: Use a webhook if your support platform (Zendesk, Intercom) can push events.
+
+**2. Pre-Filter with Ollama**
+
+Before calling Claude's API, run a quick local classification using Ollama (Mistral 7B works well). This handles 80% of clear-cut cases cheaply:
+
+```
+order-status | returns | product | payment | account | complaint | spam | other
+```
+
+Why two-stage? Cost optimization. Ollama is free/local; Claude API costs per token. Route only ambiguous or high-stakes messages to Claude.
+
+**3. Escalation Check**
+
+Before detailed analysis, scan for escalation keywords: "lawyer", "lawsuit", "fraud", "police", "legal action". These bypass normal routing and go straight to `#support-urgent` with maximum priority.
+
+**4. Claude Deep Analysis**
+
+For complex or ambiguous tickets, Claude provides:
+- **Urgency score (1-5)**: Payment failed = 5, general question = 2
+- **Category**: More nuanced than pre-filter
+- **Auto-resolvable**: Can this be answered with order lookup + FAQ?
+- **Sentiment**: Detect angry customers for human handling
+- **Suggested response**: Draft reply if auto-resolvable
+- **Confidence score**: Only auto-respond if >90%
+
+**5. Category-Based Slack Routing**
+
+Route tickets to specialized channels:
+- `#support-billing` → Payment issues (urgency 4-5)
+- `#support-orders` → Shipping, delivery questions
+- `#support-returns` → Return/refund requests
+- `#support-general` → Everything else
+
+Each Slack message includes: customer email, urgency, AI summary, and whether auto-response was sent.
+
+**6. Auto-Response Logic (Optional)**
+
+For tickets marked `auto_resolvable: true` with high confidence and non-angry sentiment:
+- Fetch order status from your shop API
+- Generate personalized response using template + live data
+- Send immediately (or queue for human review)
+- Log for spot-checking
+
+### Get the Starter Workflow
+
+Download and import into n8n:
+
+[Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
+
+**Quick Setup:**
+1. Import JSON via n8n Settings → Import Workflow
+2. Configure credentials (IMAP for support inbox, Slack, Anthropic API)
+3. Set up Ollama locally or skip pre-filter (Claude-only mode)
+4. Create Slack channels (#support-urgent, #support-billing, etc.)
+5. Customize urgency levels and categories for your business
+
+This starter implements classification and routing. A full implementation would add auto-response templates, order status API integration, confidence thresholds, CSAT tracking, and agent assignment logic—the operational details that make the difference between a demo and a system your team relies on.
 
 ## Technical Deep Dive
 

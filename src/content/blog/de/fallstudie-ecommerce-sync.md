@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: Multi-Plattform Inventar-Sync für Retail"
-description: "Wie wir 95% der Bestandsabweichungen eliminierten und die Listing-Zeit von 30 Minuten auf 3 Minuten reduzierten – über Shopify, WooCommerce und Amazon hinweg."
+description: "Ein fiktives Szenario: 95% der Bestandsabweichungen eliminieren und Listing-Zeit von 30 Minuten auf 3 Minuten reduzieren – über Shopify, WooCommerce und Amazon."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "case-study-ecommerce-sync"
 
 # Multi-Plattform Inventar-Sync für Retail
 
-Ein wachsender Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lebte isoliert—Überverkäufe waren häufig, Listings waren inkonsistent, und das Team verbrachte Stunden mit manuellen Updates. Wir haben ein einheitliches Inventarsystem mit KI-gestützter Automatisierung gebaut.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was ein einheitliches Inventarsystem erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+
+Ein wachsender Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lebte isoliert—Überverkäufe waren häufig, Listings waren inkonsistent, und das Team verbrachte Stunden mit manuellen Updates. Dieser Workflow demonstriert, wie ein einheitliches Inventarsystem mit KI-gestützter Automatisierung diese Herausforderungen löst.
 
 ## Die Herausforderung
 
-**Kunde**: Multi-Channel-Händler, 2.000 SKUs, 4 Verkaufsplattformen
+**Beispielunternehmen**: Multi-Channel-Händler, 2.000 SKUs, 4 Verkaufsplattformen
 
 **Schmerzpunkte**:
 - Inventar in Spreadsheets verwaltet, manuell zu jeder Plattform synchronisiert
@@ -280,6 +282,91 @@ vs. 15 Stunden/Woche manuelle Arbeit = €1.500/Monat Äquivalent.
 2. **Single Source of Truth**: Airtable ist autoritativ, Plattformen sind Spiegel
 3. **Puffer für langsame Plattformen**: Amazons 15-Min-Verzögerung muss berücksichtigt werden
 4. **KI für Mühsames, nicht Kritisches**: KI für Beschreibungen nutzen, nicht für Bestandszählungen
+
+## Selbst bauen
+
+So bauen Sie einen Multi-Plattform-Inventar-Sync von Grund auf.
+
+### Node-für-Node Aufschlüsselung
+
+**1. Universeller Webhook-Eingang**
+
+Ein einzelner Webhook-Endpoint empfängt Events von allen Plattformen. Der erste Schritt normalisiert verschiedene Payload-Formate:
+
+```javascript
+// Plattform aus Payload-Struktur erkennen
+if (body.topic?.includes('shopify')) platform = 'shopify';
+else if (body.source === 'woocommerce') platform = 'woocommerce';
+else if (body.NotificationType) platform = 'amazon';
+```
+
+Ausgabe: Konsistentes `{ sku, quantity_change, new_quantity, source }` unabhängig vom Ursprung.
+
+**2. Zentraler Hub-Lookup (Airtable)**
+
+Ihre zentrale Inventardatenbank nach SKU abfragen. Airtable (oder Notion) dient als Single Source of Truth:
+- Aktueller Bestandslevel
+- Plattform-spezifische IDs (Shopify Variant ID, WooCommerce Produkt-ID, Amazon ASIN)
+- Letzter Sync-Zeitstempel
+- Puffermengen pro Plattform
+
+**3. Bestandsberechnung**
+
+Zwei Update-Typen behandeln:
+- **Absolut**: "Setze Bestand auf 50" → new_quantity = 50
+- **Relativ**: "Bestellung aufgegeben, -1" → new_quantity = aktuell - 1
+
+Immer nicht-negative Werte erzwingen. Delta für Audit Trails loggen.
+
+**4. Zentralen Hub aktualisieren**
+
+Neuen Bestandslevel zurück nach Airtable schreiben mit:
+- Aktualisierter Menge
+- Zeitstempel
+- Quell-Plattform (um Echo-Loops zu verhindern)
+
+**5. Plattform-Distribution (Split → Switch)**
+
+Für jede Plattform, die aktualisiert werden muss (alle außer Quelle):
+- **Shopify**: GraphQL API oder REST `/variants/{id}/inventory_levels`
+- **WooCommerce**: REST API `PUT /products/{id}`
+- **Amazon**: SP-API Inventar-Feed (Batch, 15-Min Verarbeitung)
+
+Plattform-spezifische Eigenheiten behandeln:
+- Shopify braucht location_id für Multi-Location-Inventar
+- Amazon erfordert XML-Feed-Format und Polling zur Bestätigung
+- WooCommerce Bestandsverwaltung muss pro Produkt aktiviert sein
+
+**6. Bestätigung & Alerting**
+
+Nach erfolgreichem Sync:
+- Slack-Benachrichtigung mit SKU, neuem Level, aktualisierten Plattformen
+- Webhook-Antwort bestätigt Abschluss
+- Logging für Sync-Issue-Debugging
+
+### KI-gestützte Kategorisierung (Optionaler Node)
+
+Beim Anlegen neuer Produkte kann Claude auto-kategorisieren:
+- Amazon Kategoriepfad und Keywords
+- Shopify Produkttyp und Tags
+- Attribut-Extraktion aus Produktnamen
+
+Dieser Node ist im Starter standardmäßig deaktiviert – für Neuprodukt-Workflows aktivieren.
+
+### Starter-Workflow herunterladen
+
+Herunterladen und in n8n importieren:
+
+[Download n8n-ecommerce-sync.json](/workflows/n8n-ecommerce-sync.json)
+
+**Schnellstart:**
+1. JSON importieren via n8n Einstellungen → Workflow importieren
+2. Zugangsdaten konfigurieren (Airtable, Shopify, WooCommerce, Slack)
+3. Airtable-Base einrichten mit: SKU, stock, shopify_id, wc_id, amazon_asin
+4. Webhooks in jeder Plattform auf Ihren n8n-Endpoint konfigurieren
+5. Mit manuellen Bestandsanpassungen testen
+
+Dieser Starter behandelt die Kern-Sync-Schleife. Ein Produktionssystem würde Bestandspuffer für langsame Plattformen, Konfliktlösung für simultane Bestellungen, Anomalie-Erkennung (Ollama), Multi-Location-Support und Retry-Logik für API-Fehler hinzufügen – die Resilienz-Schicht, die Black-Friday-Traffic aushält ohne ins Schwitzen zu kommen.
 
 ## Ihr nächster Schritt
 

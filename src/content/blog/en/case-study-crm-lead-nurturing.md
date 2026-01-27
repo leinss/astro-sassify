@@ -1,6 +1,6 @@
 ---
 title: "Case Study: Automated Lead Nurturing for a SaaS Startup"
-description: "How we reduced lead response time from 2 days to 4 hours and increased qualified leads by 35% using n8n, Notion, and AI-powered lead scoring."
+description: "A fictional scenario showing how to reduce lead response time from 2 days to 4 hours and increase qualified leads by 35% using n8n, Notion, and AI-powered lead scoring."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "fallstudie-crm-leadpflege"
 
 # Automated Lead Nurturing for a SaaS Startup
 
-A growing B2B SaaS company was losing deals because leads went cold. Manual follow-ups were inconsistent, and the sales team spent more time on admin than selling. We built an automated lead nurturing system that transformed their pipeline.
+> **Note:** This is a fictional scenario demonstrating what an automated lead nurturing system can achieve. The company profile and metrics are representative examples based on common industry patterns.
+
+A growing B2B SaaS company was losing deals because leads went cold. Manual follow-ups were inconsistent, and the sales team spent more time on admin than selling. This workflow demonstrates how an automated lead nurturing system can transform a sales pipeline.
 
 ## The Challenge
 
-**Client**: B2B SaaS startup, 15 employees, €2M ARR
+**Example Company**: B2B SaaS startup, 15 employees, €2M ARR
 
 **Pain Points**:
 - Leads from website, LinkedIn, and events sat in email inboxes
@@ -144,6 +146,74 @@ Compare to: 1 SDR at €4,000/month doing the same manual work.
 2. **Human-in-the-loop**: Hot leads get AI drafts, not auto-sends
 3. **Measure response time**: The #1 factor in lead conversion
 4. **Iterate prompts**: We refined scoring prompts 8 times based on sales feedback
+
+## Build This Yourself
+
+Here's how to wire up the lead nurturing pipeline from scratch.
+
+### Node-by-Node Breakdown
+
+**1. Lead Intake Webhook**
+
+A webhook receives form submissions from your website, landing pages, or integrations like Zapier. The trigger normalizes incoming data into a consistent format regardless of source.
+
+```
+POST /lead-intake → { name, email, company, message, source }
+```
+
+**2. Data Enrichment (Set Node)**
+
+Before AI scoring, structure the lead data explicitly. This makes the Claude prompt more reliable and easier to debug. Include:
+- Contact info (name, email, company)
+- Context fields (source, company size, industry)
+- Message content for sentiment analysis
+
+**3. Claude Lead Scoring**
+
+The AI evaluates each lead against your Ideal Customer Profile. The prompt includes:
+- Weighted scoring criteria (company size, industry, pain indicators, budget signals)
+- Clear tier definitions (hot/warm/cold/disqualified)
+- Output format with score, tier, reasoning, and personalization hook
+
+Key insight: Include a `personalization_hook` field—it gives your sales team a specific detail to reference in outreach, making responses feel personal at scale.
+
+**4. Score Parsing**
+
+Parse Claude's JSON response and merge with original lead data. Handle edge cases:
+- Markdown code blocks in response
+- Missing fields (default to "warm" tier)
+- Parse errors (log and route to manual review)
+
+**5. Tier-Based Routing (Switch Node)**
+
+Route leads to different paths based on their tier:
+- **Hot (80-100)**: Immediate Slack alert + Notion record + calendar link
+- **Warm (50-79)**: Email nurture sequence (3 emails over 7 days)
+- **Cold (20-49)**: Add to newsletter for long-term nurture
+- **Disqualified (0-19)**: Log and skip (no outreach)
+
+**6. Channel Integrations**
+
+Each tier triggers appropriate actions:
+- Slack for hot lead alerts (with one-click actions)
+- Email via SMTP or SendGrid for nurture sequences
+- Mailchimp/ConvertKit for newsletter adds
+- Notion for centralized lead tracking
+
+### Get the Starter Workflow
+
+Download and import into n8n:
+
+[Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
+
+**Quick Setup:**
+1. Import JSON via n8n Settings → Import Workflow
+2. Configure credentials (Anthropic API, Slack, Notion, Email/SMTP)
+3. Update the ICP criteria in the Claude prompt to match your target customer
+4. Create matching Slack channels (#sales-hot-leads)
+5. Test with sample form submissions
+
+This starter implements the core scoring and routing logic. A production implementation would include lead enrichment via Clearbit/Apollo, CRM sync (HubSpot, Pipedrive), multi-step email sequences with delay nodes, and escalation logic for uncontacted hot leads—refinements that come from understanding your specific sales process.
 
 ## Your Turn
 

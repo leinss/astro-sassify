@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: KI-Support-Triage für E-Commerce"
-description: "Wie wir die Erstantwortzeit von 8 Stunden auf 15 Minuten reduzierten und 60% der Support-Tickets automatisch lösten – mit KI-gestützter Klassifizierung und Routing."
+description: "Ein fiktives Szenario: Erstantwortzeit von 8 Stunden auf 15 Minuten reduzieren und 60% der Support-Tickets automatisch lösen – mit KI-gestützter Klassifizierung und Routing."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "case-study-support-triage"
 
 # KI-Support-Triage für E-Commerce
 
-Das Support-Team eines Online-Händlers war überlastet. Kundenanfragen häuften sich, dringende Probleme gingen unter, und die Antwortzeiten dehnten sich auf Tage aus. Wir haben ein KI-Triage-System gebaut, das klassifiziert, routet und häufige Anfragen sogar automatisch beantwortet.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was KI-gestützte Support-Triage erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+
+Das Support-Team eines Online-Händlers war überlastet. Kundenanfragen häuften sich, dringende Probleme gingen unter, und die Antwortzeiten dehnten sich auf Tage aus. Dieser Workflow demonstriert, wie ein KI-Triage-System klassifizieren, routen und häufige Anfragen automatisch beantworten kann.
 
 ## Die Herausforderung
 
-**Kunde**: E-Commerce-Händler, 50.000 monatliche Bestellungen, 5-köpfiges Support-Team
+**Beispielunternehmen**: E-Commerce-Händler, 50.000 monatliche Bestellungen, 5-köpfiges Support-Team
 
 **Schmerzpunkte**:
 - Support-Anfragen per E-Mail, Kontaktformular und Social Media
@@ -240,6 +242,79 @@ vs. Einstellung eines zusätzlichen Support-Agents bei €3.500/Monat.
 2. **Mit risikoarmen Auto-Antworten starten**: Bestellstatus ist sicher; Beschwerden nicht
 3. **Menschliches Override ist einfach**: Ein Klick um Auto-Antwort für bestimmten Kunden zu stoppen
 4. **Messen was zählt**: CSAT verbesserte sich mehr als bearbeitetes Volumen
+
+## Selbst bauen
+
+Hier ist die Architektur für den Aufbau eines smarten Support-Triage-Systems.
+
+### Node-für-Node Aufschlüsselung
+
+**1. E-Mail-Trigger (IMAP)**
+
+Support-Postfach auf eingehende Nachrichten überwachen. Der Trigger pollt alle 2 Minuten (konfigurierbar) und erfasst:
+- Absender-E-Mail
+- Betreffzeile
+- Nachrichteninhalt (Text und HTML)
+- Zeitstempel
+
+Alternative: Webhook verwenden, wenn Ihre Support-Plattform (Zendesk, Intercom) Events pushen kann.
+
+**2. Vorfilter mit Ollama**
+
+Vor dem Claude-API-Aufruf eine schnelle lokale Klassifizierung mit Ollama durchführen (Mistral 7B funktioniert gut). Dies behandelt 80% der eindeutigen Fälle günstig:
+
+```
+order-status | returns | product | payment | account | complaint | spam | other
+```
+
+Warum zweistufig? Kostenoptimierung. Ollama ist kostenlos/lokal; Claude API kostet pro Token. Nur mehrdeutige oder kritische Nachrichten an Claude routen.
+
+**3. Eskalations-Check**
+
+Vor der Detailanalyse auf Eskalations-Keywords scannen: "Anwalt", "Klage", "Betrug", "Polizei", "rechtliche Schritte". Diese umgehen das normale Routing und gehen direkt an `#support-urgent` mit maximaler Priorität.
+
+**4. Claude Tiefenanalyse**
+
+Für komplexe oder mehrdeutige Tickets liefert Claude:
+- **Dringlichkeitsscore (1-5)**: Zahlung fehlgeschlagen = 5, allgemeine Frage = 2
+- **Kategorie**: Nuancierter als Vorfilter
+- **Auto-lösbar**: Kann dies mit Bestellabfrage + FAQ beantwortet werden?
+- **Sentiment**: Verärgerte Kunden zur menschlichen Bearbeitung erkennen
+- **Antwortvorschlag**: Entwurf wenn auto-lösbar
+- **Konfidenz-Score**: Nur auto-antworten wenn >90%
+
+**5. Kategorie-basiertes Slack-Routing**
+
+Tickets zu spezialisierten Channels routen:
+- `#support-billing` → Zahlungsprobleme (Dringlichkeit 4-5)
+- `#support-orders` → Versand-, Lieferfragen
+- `#support-returns` → Retoure-/Erstattungsanfragen
+- `#support-general` → Alles andere
+
+Jede Slack-Nachricht enthält: Kunden-E-Mail, Dringlichkeit, KI-Zusammenfassung und ob Auto-Antwort gesendet wurde.
+
+**6. Auto-Antwort-Logik (Optional)**
+
+Für Tickets mit `auto_resolvable: true`, hoher Konfidenz und nicht-verärgtem Sentiment:
+- Bestellstatus aus Shop-API abrufen
+- Personalisierte Antwort mit Template + Live-Daten generieren
+- Sofort senden (oder zur manuellen Prüfung queuen)
+- Für Stichproben-Kontrolle loggen
+
+### Starter-Workflow herunterladen
+
+Herunterladen und in n8n importieren:
+
+[Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
+
+**Schnellstart:**
+1. JSON importieren via n8n Einstellungen → Workflow importieren
+2. Zugangsdaten konfigurieren (IMAP für Support-Postfach, Slack, Anthropic API)
+3. Ollama lokal einrichten oder Vorfilter überspringen (Claude-only Modus)
+4. Slack-Channels erstellen (#support-urgent, #support-billing, etc.)
+5. Dringlichkeitsstufen und Kategorien für Ihr Business anpassen
+
+Dieser Starter implementiert Klassifizierung und Routing. Eine vollständige Implementierung würde Auto-Antwort-Templates, Bestellstatus-API-Integration, Konfidenz-Schwellen, CSAT-Tracking und Agent-Zuweisungslogik hinzufügen – die operativen Details, die den Unterschied zwischen einer Demo und einem System ausmachen, auf das Ihr Team sich verlässt.
 
 ## Technischer Deep Dive
 
