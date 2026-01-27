@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei"
-description: "Wie wir die Rechnungsverarbeitung von 15 Minuten auf 90 Sekunden pro Dokument mit 99,2% Genauigkeit reduzierten – mit n8n, Claude Vision und intelligenter Validierung."
+description: "Ein fiktives Szenario: Rechnungsverarbeitung von 15 Minuten auf 90 Sekunden pro Dokument mit 99,2% Genauigkeit reduzieren – mit n8n, Claude Vision und intelligenter Validierung."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "case-study-invoice-processing"
 
 # KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei
 
-Eine mittelgroße Steuerkanzlei erstickte in Papier. Ihre Mandanten schickten monatlich Hunderte von Rechnungen in jedem erdenklichen Format—PDFs, Scans, Fotos von Belegen. Wir haben eine KI-gestützte Extraktionspipeline gebaut, die ihre Dokumentenverarbeitung transformierte.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was KI-gestützte Rechnungsverarbeitung erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+
+Eine mittelgroße Steuerkanzlei erstickte in Papier. Ihre Mandanten schickten monatlich Hunderte von Rechnungen in jedem erdenklichen Format—PDFs, Scans, Fotos von Belegen. Dieser Workflow demonstriert, wie eine KI-gestützte Extraktionspipeline die Dokumentenverarbeitung transformieren kann.
 
 ## Die Herausforderung
 
-**Kunde**: Steuerkanzlei, 8 Mitarbeiter, 120+ Geschäftsmandanten
+**Beispielunternehmen**: Steuerkanzlei, 8 Mitarbeiter, 120+ Geschäftsmandanten
 
 **Schmerzpunkte**:
 - Rechnungen kamen per E-Mail, Cloud-Ordner und Mandantenportale
@@ -203,6 +205,68 @@ vs. €3.200/Monat äquivalente Personalkosten.
 2. **Validierung fängt KI-Fehler**: 90% der markierten Einträge sind korrekte Markierungen
 3. **Mit Großmandanten starten**: Größter ROI, meiste Beispieldaten zum Tuning
 4. **Menschen für Ausnahmen**: Mitarbeiter bearbeiten nur die 0,8%, die Urteilsvermögen brauchen
+
+## Selbst bauen
+
+Sie möchten diesen Workflow implementieren? Hier sehen Sie, wie die einzelnen Teile zusammenwirken.
+
+### Node-für-Node Aufschlüsselung
+
+**1. Dokument-Trigger (E-Mail oder Ordner-Überwachung)**
+
+Der Workflow startet, wenn ein neues Dokument eintrifft. Sie haben zwei Optionen:
+- **E-Mail-Trigger**: Überwacht ein dediziertes Postfach via IMAP. Wenn eine Rechnung eingeht, startet der Workflow innerhalb von 30 Sekunden.
+- **Ordner-Überwachung**: Für lokale/self-hosted Setups – überwacht ein Verzeichnis auf neue PDFs.
+
+```
+Trigger → Anhang extrahieren → An KI übergeben
+```
+
+**2. Claude Vision Analyse**
+
+Hier findet die Kernextraktion statt. Claude erhält das Dokumentenbild und einen strukturierten Prompt, der nach spezifischen Feldern fragt. Der Prompt ist entscheidend – er definiert die exakte JSON-Struktur, die Ihre Buchhaltungssoftware benötigt.
+
+Wichtige Prompt-Elemente:
+- Explizites JSON-Schema mit allen erforderlichen Feldern
+- Anweisung "nur gültiges JSON, keine Erklärung" zurückzugeben
+- Feldspezifische Hinweise für mehrdeutige Fälle (z.B. "Steuernummer" vs. "USt-IdNr.")
+
+**3. Antwort-Parsing**
+
+Claude gibt JSON zurück, aber manchmal in Markdown-Codeblöcken eingewickelt oder mit Zusatztext. Der Code-Node:
+- Entfernt Markdown-Formatierung
+- Validiert JSON-Struktur
+- Führt mit Quell-Metadaten zusammen (E-Mail-Absender, Zeitstempel)
+- Markiert Parse-Fehler zur manuellen Prüfung
+
+**4. Validierungsschicht**
+
+Vor dem Export durchläuft jede Rechnung Plausibilitätsprüfungen:
+- Mathematik-Prüfung: Ergeben die Positionen die Summe?
+- MwSt-Satz-Validierung: Werden 19% oder 7% (deutsche Sätze) korrekt angewendet?
+- Duplikat-Erkennung: Hash der Rechnungsnummer um erneute Einreichungen zu erkennen
+
+**5. Export & Archivierung**
+
+Schließlich exportieren validierte Daten in Ihr Buchhaltungssystem-Format (DATEV XML, CSV) und archivieren das Original mit Verarbeitungs-Metadaten.
+
+### Starter-Workflow herunterladen
+
+Laden Sie die Workflow-JSON herunter und importieren Sie sie in n8n:
+
+**Cloud-Version (Claude API):**
+[Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
+
+**Lokale Version (Ollama):**
+[Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
+
+**Schnellstart:**
+1. JSON importieren via n8n Einstellungen → Workflow importieren
+2. Zugangsdaten konfigurieren (IMAP, Anthropic/Ollama, Dateispeicher)
+3. Prompt an Ihr Rechnungsformat anpassen
+4. Mit 5-10 Beispielrechnungen testen
+
+Dieser Starter behandelt den Kern-Extraktionsfluss. Eine maßgeschneiderte Implementierung würde Ihre spezifischen Validierungsregeln, Buchhaltungssoftware-Exportformat, Fehler-Alerting und Multi-Source-Eingang hinzufügen – die Komponenten, die es produktionsreif für Ihr Setup machen.
 
 ## Mehr erfahren
 

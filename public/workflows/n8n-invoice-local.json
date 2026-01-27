@@ -1,0 +1,135 @@
+{
+  "name": "Invoice Processing - Local Ollama",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "/data/invoices/inbox",
+        "events": ["add"],
+        "options": {
+          "ignoreInitialScan": true
+        }
+      },
+      "id": "folder-watcher",
+      "name": "Watch Invoice Folder",
+      "type": "n8n-nodes-base.localFileTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $json.path }}"
+      },
+      "id": "read-file",
+      "name": "Read Invoice File",
+      "type": "n8n-nodes-base.readBinaryFiles",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:11434/api/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"qwen3-vl\",\n  \"prompt\": \"Analyze this invoice image and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\",\n  \"images\": [\"{{ $binary.data.toBase64() }}\"]\n}",
+        "options": {}
+      },
+      "id": "ollama-vision",
+      "name": "Ollama Vision (qwen3-vl)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Ollama response\nconst response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    content = JSON.parse(jsonMatch[0]);\n  } else {\n    throw new Error('No JSON found in response');\n  }\n  \n  return {\n    json: {\n      success: true,\n      invoice_data: content,\n      processed_at: new Date().toISOString(),\n      source_file: $('Watch Invoice Folder').first().json.path\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response\n    }\n  };\n}"
+      },
+      "id": "parse-response",
+      "name": "Parse Invoice JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/data/invoices/processed/{{ $json.invoice_data.invoice.number || 'unknown' }}_{{ $now.format('yyyy-MM-dd_HHmmss') }}.json",
+        "dataPropertyName": "={{ JSON.stringify($json, null, 2) }}"
+      },
+      "id": "save-json",
+      "name": "Save Result",
+      "type": "n8n-nodes-base.writeToFile",
+      "typeVersion": 1,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "command": "=mv \"{{ $('Watch Invoice Folder').first().json.path }}\" \"/data/invoices/done/\""
+      },
+      "id": "move-processed",
+      "name": "Move to Done",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [1350, 300]
+    }
+  ],
+  "connections": {
+    "Watch Invoice Folder": {
+      "main": [
+        [
+          {
+            "node": "Read Invoice File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Invoice File": {
+      "main": [
+        [
+          {
+            "node": "Ollama Vision (qwen3-vl)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Vision (qwen3-vl)": {
+      "main": [
+        [
+          {
+            "node": "Parse Invoice JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Invoice JSON": {
+      "main": [
+        [
+          {
+            "node": "Save Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Result": {
+      "main": [
+        [
+          {
+            "node": "Move to Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

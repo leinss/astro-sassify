@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: Automatisierte Lead-Pflege für ein SaaS-Startup"
-description: "Wie wir die Lead-Reaktionszeit von 2 Tagen auf 4 Stunden reduzierten und qualifizierte Leads um 35% steigerten – mit n8n, Notion und KI-gestütztem Lead-Scoring."
+description: "Ein fiktives Szenario: Lead-Reaktionszeit von 2 Tagen auf 4 Stunden reduzieren und qualifizierte Leads um 35% steigern – mit n8n, Notion und KI-gestütztem Lead-Scoring."
 pubDate: 2025-01-27
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
@@ -12,11 +12,13 @@ alternateSlug: "case-study-crm-lead-nurturing"
 
 # Automatisierte Lead-Pflege für ein SaaS-Startup
 
-Ein wachsendes B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Manuelle Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit mit Administration als mit Verkaufen. Wir haben ein automatisiertes Lead-Nurturing-System entwickelt, das die Pipeline transformierte.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was ein automatisiertes Lead-Nurturing-System erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+
+Ein wachsendes B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Manuelle Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit mit Administration als mit Verkaufen. Dieser Workflow demonstriert, wie ein automatisiertes Lead-Nurturing-System eine Sales-Pipeline transformieren kann.
 
 ## Die Herausforderung
 
-**Kunde**: B2B-SaaS-Startup, 15 Mitarbeiter, €2M ARR
+**Beispielunternehmen**: B2B-SaaS-Startup, 15 Mitarbeiter, €2M ARR
 
 **Schmerzpunkte**:
 - Leads von Website, LinkedIn und Events versanken in E-Mail-Postfächern
@@ -144,6 +146,74 @@ Vergleich: 1 SDR bei €4.000/Monat für die gleiche manuelle Arbeit.
 2. **Human-in-the-Loop**: Hot Leads bekommen KI-Entwürfe, keine Auto-Sends
 3. **Reaktionszeit messen**: Der #1-Faktor bei der Lead-Conversion
 4. **Prompts iterieren**: Wir haben die Scoring-Prompts 8 Mal basierend auf Sales-Feedback verfeinert
+
+## Selbst bauen
+
+So verkabeln Sie die Lead-Nurturing-Pipeline von Grund auf.
+
+### Node-für-Node Aufschlüsselung
+
+**1. Lead-Intake-Webhook**
+
+Ein Webhook empfängt Formular-Submissions von Ihrer Website, Landing Pages oder Integrationen wie Zapier. Der Trigger normalisiert eingehende Daten in ein konsistentes Format, unabhängig von der Quelle.
+
+```
+POST /lead-intake → { name, email, company, message, source }
+```
+
+**2. Datenanreicherung (Set Node)**
+
+Vor dem KI-Scoring strukturieren Sie die Lead-Daten explizit. Das macht den Claude-Prompt zuverlässiger und einfacher zu debuggen. Enthalten:
+- Kontaktinfo (Name, E-Mail, Unternehmen)
+- Kontextfelder (Quelle, Unternehmensgröße, Branche)
+- Nachrichteninhalt für Sentiment-Analyse
+
+**3. Claude Lead-Scoring**
+
+Die KI bewertet jeden Lead gegen Ihr Ideal Customer Profile. Der Prompt enthält:
+- Gewichtete Scoring-Kriterien (Unternehmensgröße, Branche, Pain-Indikatoren, Budget-Signale)
+- Klare Tier-Definitionen (hot/warm/cold/disqualified)
+- Ausgabeformat mit Score, Tier, Begründung und Personalisierungs-Hook
+
+Wichtige Erkenntnis: Ein `personalization_hook`-Feld einbauen – es gibt Ihrem Sales-Team ein spezifisches Detail zum Referenzieren in der Ansprache, sodass Antworten persönlich wirken, auch bei Skalierung.
+
+**4. Score-Parsing**
+
+Claude's JSON-Antwort parsen und mit Original-Lead-Daten zusammenführen. Edge Cases behandeln:
+- Markdown-Codeblöcke in der Antwort
+- Fehlende Felder (Standard auf "warm"-Tier)
+- Parse-Fehler (loggen und zur manuellen Prüfung routen)
+
+**5. Tier-basiertes Routing (Switch Node)**
+
+Leads auf verschiedene Pfade basierend auf ihrem Tier routen:
+- **Hot (80-100)**: Sofortiger Slack-Alert + Notion-Eintrag + Kalenderlink
+- **Warm (50-79)**: E-Mail-Nurture-Sequenz (3 E-Mails über 7 Tage)
+- **Cold (20-49)**: Zum Newsletter für langfristige Pflege hinzufügen
+- **Disqualifiziert (0-19)**: Loggen und überspringen (keine Ansprache)
+
+**6. Kanal-Integrationen**
+
+Jedes Tier triggert entsprechende Aktionen:
+- Slack für Hot-Lead-Alerts (mit Ein-Klick-Aktionen)
+- E-Mail via SMTP oder SendGrid für Nurture-Sequenzen
+- Mailchimp/ConvertKit für Newsletter-Adds
+- Notion für zentrales Lead-Tracking
+
+### Starter-Workflow herunterladen
+
+Herunterladen und in n8n importieren:
+
+[Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
+
+**Schnellstart:**
+1. JSON importieren via n8n Einstellungen → Workflow importieren
+2. Zugangsdaten konfigurieren (Anthropic API, Slack, Notion, E-Mail/SMTP)
+3. ICP-Kriterien im Claude-Prompt auf Ihren Zielkunden anpassen
+4. Passende Slack-Channels erstellen (#sales-hot-leads)
+5. Mit Beispiel-Formular-Submissions testen
+
+Dieser Starter implementiert die Kern-Scoring- und Routing-Logik. Eine Produktionsimplementierung würde Lead-Anreicherung via Clearbit/Apollo, CRM-Sync (HubSpot, Pipedrive), mehrstufige E-Mail-Sequenzen mit Delay-Nodes und Eskalationslogik für nicht kontaktierte Hot-Leads hinzufügen – Verfeinerungen, die aus dem Verständnis Ihres spezifischen Sales-Prozesses entstehen.
 
 ## Ihr nächster Schritt
 

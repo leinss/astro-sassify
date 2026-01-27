@@ -1,0 +1,369 @@
+{
+  "name": "CRM Lead Nurturing - Starter",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-intake",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Lead Form Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "lead_name",
+              "value": "={{ $json.body.name || $json.name }}"
+            },
+            {
+              "name": "lead_email",
+              "value": "={{ $json.body.email || $json.email }}"
+            },
+            {
+              "name": "company",
+              "value": "={{ $json.body.company || $json.company || 'Unknown' }}"
+            },
+            {
+              "name": "company_size",
+              "value": "={{ $json.body.company_size || $json.company_size || 'Unknown' }}"
+            },
+            {
+              "name": "industry",
+              "value": "={{ $json.body.industry || $json.industry || 'Unknown' }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ $json.body.message || $json.message || '' }}"
+            },
+            {
+              "name": "source",
+              "value": "={{ $json.body.source || $json.source || 'website' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-lead-data",
+      "name": "Set Lead Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "create",
+        "model": "claude-sonnet-4-20250514",
+        "messages": {
+          "values": [
+            {
+              "role": "user",
+              "content": "=Analyze this lead against our Ideal Customer Profile (ICP):\n\n**ICP Criteria:**\n- Company size: 10-200 employees (30 points)\n- Industry: Professional services, Manufacturing, E-commerce (25 points)\n- Pain indicators: Manual processes, scaling challenges, automation interest (25 points)\n- Budget signals: Growth mentions, funding, expansion (20 points)\n\n**Lead Data:**\nName: {{ $json.lead_name }}\nEmail: {{ $json.lead_email }}\nCompany: {{ $json.company }}\nCompany Size: {{ $json.company_size }}\nIndustry: {{ $json.industry }}\nMessage: {{ $json.message }}\nSource: {{ $json.source }}\n\n**Instructions:**\nScore this lead and return ONLY valid JSON with this structure:\n{\n  \"score\": <0-100>,\n  \"tier\": \"hot\" | \"warm\" | \"cold\" | \"disqualified\",\n  \"reasoning\": \"<2 sentence explanation>\",\n  \"suggested_action\": \"call\" | \"email_sequence\" | \"newsletter\" | \"skip\",\n  \"personalization_hook\": \"<specific detail to reference in outreach>\"\n}\n\nScoring guide:\n- 80-100: Hot (call immediately)\n- 50-79: Warm (email nurture sequence)\n- 20-49: Cold (add to newsletter)\n- 0-19: Disqualified (skip)"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 500
+        }
+      },
+      "id": "claude-scoring",
+      "name": "Claude Lead Scoring",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1,
+      "position": [690, 300],
+      "credentials": {
+        "anthropicApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude's JSON response\nconst response = $input.first().json;\n\ntry {\n  let content = response.message?.content || response.content || response;\n  \n  if (typeof content === 'string') {\n    content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    content = JSON.parse(content);\n  }\n  \n  // Merge with original lead data\n  const leadData = $('Set Lead Data').first().json;\n  \n  return {\n    json: {\n      ...leadData,\n      scoring: content,\n      processed_at: new Date().toISOString()\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      error: error.message,\n      raw_response: response,\n      tier: 'warm' // Default to warm on parse error\n    }\n  };\n}"
+      },
+      "id": "parse-score",
+      "name": "Parse Score JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value": "hot",
+              "output": 0
+            },
+            {
+              "value": "warm",
+              "output": 1
+            },
+            {
+              "value": "cold",
+              "output": 2
+            },
+            {
+              "value": "disqualified",
+              "output": 3
+            }
+          ]
+        },
+        "dataType": "string",
+        "value1": "={{ $json.scoring.tier }}"
+      },
+      "id": "tier-switch",
+      "name": "Route by Tier",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#sales-hot-leads",
+        "text": "=🔥 *HOT LEAD ALERT*\n\n*{{ $json.lead_name }}* from *{{ $json.company }}*\n\nScore: {{ $json.scoring.score }}/100\nReason: {{ $json.scoring.reasoning }}\n\n💡 Hook: _{{ $json.scoring.personalization_hook }}_\n\n📧 {{ $json.lead_email }}\n\n<{{ $json.lead_email }}|Send Email> | <#|Mark Contacted>",
+        "otherOptions": {}
+      },
+      "id": "slack-hot",
+      "name": "Slack Alert (Hot)",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1350, 140],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "databaseId": "CONFIGURE_ME_NOTION_DB_ID",
+        "properties": {
+          "title": {
+            "title": [
+              {
+                "text": {
+                  "content": "={{ $json.lead_name }}"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "id": "notion-create",
+      "name": "Create Notion Record",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2,
+      "position": [1570, 140],
+      "credentials": {
+        "notionApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Notion API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "sales@yourcompany.com",
+        "toEmail": "={{ $json.lead_email }}",
+        "subject": "Quick question about {{ $json.company }}",
+        "text": "=Hi {{ $json.lead_name }},\n\nThanks for reaching out! I noticed {{ $json.scoring.personalization_hook }}.\n\nI'd love to learn more about what you're working on. Do you have 15 minutes this week for a quick call?\n\n[CALENDAR_LINK_HERE]\n\nBest,\n[YOUR_NAME]"
+      },
+      "id": "email-warm",
+      "name": "Email Sequence (Warm)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1350, 300],
+      "credentials": {
+        "smtp": {
+          "id": "CONFIGURE_ME",
+          "name": "SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "subscriber",
+        "email": "={{ $json.lead_email }}",
+        "additionalFields": {
+          "name": "={{ $json.lead_name }}"
+        }
+      },
+      "id": "newsletter-cold",
+      "name": "Add to Newsletter (Cold)",
+      "type": "n8n-nodes-base.mailchimp",
+      "typeVersion": 1,
+      "position": [1350, 460],
+      "credentials": {
+        "mailchimpApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Mailchimp API"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "skip-disqualified",
+      "name": "Skip (Disqualified)",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1350, 620]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\": \"received\", \"tier\": \"{{ $json.scoring.tier }}\"}"
+      },
+      "id": "webhook-response",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1790, 300]
+    }
+  ],
+  "connections": {
+    "Lead Form Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Lead Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Lead Data": {
+      "main": [
+        [
+          {
+            "node": "Claude Lead Scoring",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Lead Scoring": {
+      "main": [
+        [
+          {
+            "node": "Parse Score JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Score JSON": {
+      "main": [
+        [
+          {
+            "node": "Route by Tier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Tier": {
+      "main": [
+        [
+          {
+            "node": "Slack Alert (Hot)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email Sequence (Warm)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add to Newsletter (Cold)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skip (Disqualified)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Alert (Hot)": {
+      "main": [
+        [
+          {
+            "node": "Create Notion Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Notion Record": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email Sequence (Warm)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Newsletter (Cold)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skip (Disqualified)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

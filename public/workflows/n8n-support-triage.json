@@ -1,0 +1,379 @@
+{
+  "name": "Support Triage - Starter",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute",
+              "minute": 2
+            }
+          ]
+        },
+        "mailbox": "INBOX",
+        "options": {}
+      },
+      "id": "email-trigger",
+      "name": "Support Email Trigger",
+      "type": "n8n-nodes-base.imapEmail",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "imap": {
+          "id": "CONFIGURE_ME",
+          "name": "Support Email IMAP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "customer_email",
+              "value": "={{ $json.from }}"
+            },
+            {
+              "name": "subject",
+              "value": "={{ $json.subject }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ $json.text || $json.html }}"
+            },
+            {
+              "name": "received_at",
+              "value": "={{ $json.date }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "set-ticket-data",
+      "name": "Set Ticket Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:11434/api/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"mistral\",\n  \"prompt\": \"Quickly classify this support message. Return ONLY one of: order-status, returns, product, payment, account, complaint, spam, other.\\n\\nSubject: {{ $json.subject }}\\nMessage: {{ $json.message.substring(0, 500) }}\\n\\nCategory:\",\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "id": "ollama-prefilter",
+      "name": "Ollama Pre-filter",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Quick classification from Ollama\nconst response = $input.first().json;\nconst ticketData = $('Set Ticket Data').first().json;\n\nlet category = 'other';\nconst responseText = (response.response || '').toLowerCase().trim();\n\nconst categories = ['order-status', 'returns', 'product', 'payment', 'account', 'complaint', 'spam', 'other'];\nfor (const cat of categories) {\n  if (responseText.includes(cat.replace('-', ''))) {\n    category = cat;\n    break;\n  }\n}\n\n// Check for escalation keywords\nconst escalationKeywords = ['lawyer', 'lawsuit', 'fraud', 'scam', 'police', 'attorney', 'legal action'];\nconst needsEscalation = escalationKeywords.some(kw => \n  ticketData.message.toLowerCase().includes(kw) || \n  ticketData.subject.toLowerCase().includes(kw)\n);\n\nreturn {\n  json: {\n    ...ticketData,\n    quick_category: category,\n    needs_escalation: needsEscalation,\n    needs_detailed_analysis: category === 'other' || category === 'complaint'\n  }\n};"
+      },
+      "id": "parse-prefilter",
+      "name": "Parse Pre-filter",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [910, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.needs_escalation }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "check-escalation",
+      "name": "Needs Escalation?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1130, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#support-urgent",
+        "text": "=🚨 *URGENT ESCALATION*\n\n*Customer:* {{ $json.customer_email }}\n*Subject:* {{ $json.subject }}\n\n_Escalation keywords detected - requires immediate attention_\n\n```{{ $json.message.substring(0, 500) }}```",
+        "otherOptions": {}
+      },
+      "id": "slack-urgent",
+      "name": "Slack Urgent",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1350, 140],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "create",
+        "model": "claude-sonnet-4-20250514",
+        "messages": {
+          "values": [
+            {
+              "role": "user",
+              "content": "=Analyze this customer support message and classify it.\n\n**Subject:** {{ $json.subject }}\n**Message:** {{ $json.message }}\n**Customer:** {{ $json.customer_email }}\n\n**Return JSON:**\n{\n  \"urgency\": <1-5, where 5 is critical>,\n  \"category\": \"order-status|returns|product|payment|account|complaint|other\",\n  \"auto_resolvable\": <true if can be answered with standard info>,\n  \"key_issue\": \"<one sentence summary>\",\n  \"sentiment\": \"positive|neutral|negative|angry\",\n  \"suggested_response\": \"<draft response if auto_resolvable>\",\n  \"confidence\": <0.0-1.0>\n}\n\n**Urgency Guide:**\n5: Payment failed, account locked, security issue\n4: Order not delivered past expected date\n3: Product question, shipping inquiry\n2: General feedback, feature request\n1: Spam, irrelevant"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 800
+        }
+      },
+      "id": "claude-analysis",
+      "name": "Claude Analysis",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1,
+      "position": [1350, 380],
+      "credentials": {
+        "anthropicApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Anthropic API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Claude's detailed analysis\nconst response = $input.first().json;\nconst ticketData = $('Parse Pre-filter').first().json;\n\ntry {\n  let content = response.message?.content || response.content || response;\n  \n  if (typeof content === 'string') {\n    content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n    const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n    if (jsonMatch) {\n      content = JSON.parse(jsonMatch[0]);\n    }\n  }\n  \n  return {\n    json: {\n      ...ticketData,\n      analysis: content,\n      can_auto_respond: content.auto_resolvable && content.confidence > 0.9 && content.sentiment !== 'angry'\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      ...ticketData,\n      analysis: { urgency: 3, category: ticketData.quick_category },\n      can_auto_respond: false,\n      parse_error: error.message\n    }\n  };\n}"
+      },
+      "id": "parse-analysis",
+      "name": "Parse Analysis",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1570, 380]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value": "payment",
+              "output": 0
+            },
+            {
+              "value": "order-status",
+              "output": 1
+            },
+            {
+              "value": "returns",
+              "output": 2
+            }
+          ],
+          "fallbackOutput": 3
+        },
+        "dataType": "string",
+        "value1": "={{ $json.analysis.category }}"
+      },
+      "id": "category-switch",
+      "name": "Route by Category",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1790, 380]
+    },
+    {
+      "parameters": {
+        "channel": "#support-billing",
+        "text": "=💳 *Payment Issue*\n\n*Customer:* {{ $json.customer_email }}\n*Urgency:* {{ $json.analysis.urgency }}/5\n*Issue:* {{ $json.analysis.key_issue }}\n\n_{{ $json.analysis.sentiment }} sentiment_",
+        "otherOptions": {}
+      },
+      "id": "slack-billing",
+      "name": "Slack Billing",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2010, 200],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#support-orders",
+        "text": "=📦 *Order Inquiry*\n\n*Customer:* {{ $json.customer_email }}\n*Urgency:* {{ $json.analysis.urgency }}/5\n*Issue:* {{ $json.analysis.key_issue }}\n\n{{ $json.can_auto_respond ? '✅ Auto-response sent' : '⏳ Needs manual response' }}",
+        "otherOptions": {}
+      },
+      "id": "slack-orders",
+      "name": "Slack Orders",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2010, 360],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#support-returns",
+        "text": "=↩️ *Return Request*\n\n*Customer:* {{ $json.customer_email }}\n*Urgency:* {{ $json.analysis.urgency }}/5\n*Issue:* {{ $json.analysis.key_issue }}",
+        "otherOptions": {}
+      },
+      "id": "slack-returns",
+      "name": "Slack Returns",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2010, 520],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#support-general",
+        "text": "=📬 *Support Ticket*\n\n*Customer:* {{ $json.customer_email }}\n*Category:* {{ $json.analysis.category }}\n*Urgency:* {{ $json.analysis.urgency }}/5\n*Issue:* {{ $json.analysis.key_issue }}",
+        "otherOptions": {}
+      },
+      "id": "slack-general",
+      "name": "Slack General",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2010, 680],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Support Email Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Ticket Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Ticket Data": {
+      "main": [
+        [
+          {
+            "node": "Ollama Pre-filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Pre-filter": {
+      "main": [
+        [
+          {
+            "node": "Parse Pre-filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Pre-filter": {
+      "main": [
+        [
+          {
+            "node": "Needs Escalation?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs Escalation?": {
+      "main": [
+        [
+          {
+            "node": "Slack Urgent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Claude Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude Analysis": {
+      "main": [
+        [
+          {
+            "node": "Parse Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Analysis": {
+      "main": [
+        [
+          {
+            "node": "Route by Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Category": {
+      "main": [
+        [
+          {
+            "node": "Slack Billing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack Orders",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack Returns",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Slack General",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
