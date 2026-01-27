@@ -2,23 +2,28 @@
   "name": "Invoice Processing with Claude Vision",
   "nodes": [
     {
-      "parameters": {},
-      "id": "manual-trigger",
-      "name": "Manual Trigger",
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [250, 300]
-    },
-    {
       "parameters": {
-        "filePath": "/tmp/invoice.pdf",
+        "formTitle": "Invoice Upload (Claude)",
+        "formDescription": "Upload an invoice image to extract data using Claude Vision API",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Invoice File",
+              "fieldType": "file",
+              "requiredField": true,
+              "acceptFileTypes": ".png,.jpg,.jpeg,.webp,.pdf"
+            }
+          ]
+        },
+        "responseMode": "responseNode",
         "options": {}
       },
-      "id": "read-file",
-      "name": "Read Invoice File",
-      "type": "n8n-nodes-base.readBinaryFile",
-      "typeVersion": 1,
-      "position": [470, 300]
+      "id": "form-trigger",
+      "name": "Upload Invoice Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [250, 300],
+      "webhookId": "invoice-form-claude"
     },
     {
       "parameters": {
@@ -32,23 +37,19 @@
             {
               "name": "anthropic-version",
               "value": "2023-06-01"
-            },
-            {
-              "name": "content-type",
-              "value": "application/json"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"image\",\n          \"source\": {\n            \"type\": \"base64\",\n            \"media_type\": \"application/pdf\",\n            \"data\": \"{{ $binary.data.data }}\"\n          }\n        },\n        {\n          \"type\": \"text\",\n          \"text\": \"Analyze this invoice and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\"\n        }\n      ]\n    }\n  ]\n}",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 4096,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"image\",\n          \"source\": {\n            \"type\": \"base64\",\n            \"media_type\": \"{{ $binary['Invoice File'].mimeType }}\",\n            \"data\": \"{{ $binary['Invoice File'].data }}\"\n          }\n        },\n        {\n          \"type\": \"text\",\n          \"text\": \"Analyze this invoice and extract data as JSON. Return ONLY valid JSON with this structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, just JSON.\"\n        }\n      ]\n    }\n  ]\n}",
         "options": {}
       },
       "id": "claude-vision",
       "name": "Claude Vision API",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [690, 300],
+      "position": [470, 300],
       "credentials": {
         "httpHeaderAuth": {
           "id": "CONFIGURE_ME",
@@ -58,48 +59,29 @@
     },
     {
       "parameters": {
-        "jsCode": "// Parse Claude response\nconst response = $input.first().json;\n\ntry {\n  let content = response.content?.[0]?.text || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString()\n      }\n    };\n  } else {\n    throw new Error('No JSON found in response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response\n    }\n  };\n}"
+        "jsCode": "const response = $input.first().json;\n\ntry {\n  let content = response.content?.[0]?.text || '';\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  \n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString()\n      }\n    };\n  } else {\n    throw new Error('No JSON found in response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response\n    }\n  };\n}"
       },
       "id": "parse-response",
       "name": "Parse Invoice JSON",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [910, 300]
+      "position": [690, 300]
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "result",
-              "name": "result",
-              "value": "={{ JSON.stringify($json, null, 2) }}",
-              "type": "string"
-            }
-          ]
-        },
+        "respondWith": "text",
+        "responseBody": "=Invoice processed successfully!\n\n{{ JSON.stringify($json, null, 2) }}",
         "options": {}
       },
-      "id": "format-output",
-      "name": "Format Output",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [1130, 300]
+      "id": "respond",
+      "name": "Show Result",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [910, 300]
     }
   ],
   "connections": {
-    "Manual Trigger": {
-      "main": [
-        [
-          {
-            "node": "Read Invoice File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read Invoice File": {
+    "Upload Invoice Form": {
       "main": [
         [
           {
@@ -125,7 +107,7 @@
       "main": [
         [
           {
-            "node": "Format Output",
+            "node": "Show Result",
             "type": "main",
             "index": 0
           }
