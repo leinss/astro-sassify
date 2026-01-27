@@ -4,7 +4,7 @@
     {
       "parameters": {
         "formTitle": "Invoice Upload (Ollama)",
-        "formDescription": "Upload an invoice IMAGE (PNG, JPG, WebP) to extract data using local Ollama LLaVA. For PDFs, use the Claude version.",
+        "formDescription": "Upload an invoice IMAGE (PNG, JPG, WebP) to extract data using local Ollama Qwen2.5-VL. For PDFs, use the Claude version.",
         "formFields": {
           "values": [
             {
@@ -36,20 +36,20 @@
         "url": "http://host.docker.internal:11434/api/generate",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"model\": \"llava\",\n  \"prompt\": \"Analyze this invoice image and extract all data as JSON. Return ONLY valid JSON with this exact structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, no markdown, just the JSON object.\",\n  \"images\": [\"{{ $binary['Invoice Image'].data }}\"],\n  \"stream\": false\n}",
+        "jsonBody": "={\n  \"model\": \"qwen3-vl\",\n  \"prompt\": \"Analyze this invoice image and extract all data as JSON. Return ONLY valid JSON with this exact structure:\\n{\\n  \\\"vendor\\\": { \\\"name\\\": \\\"\\\", \\\"address\\\": \\\"\\\", \\\"tax_id\\\": \\\"\\\" },\\n  \\\"invoice\\\": { \\\"number\\\": \\\"\\\", \\\"date\\\": \\\"\\\", \\\"due_date\\\": \\\"\\\" },\\n  \\\"line_items\\\": [{ \\\"description\\\": \\\"\\\", \\\"quantity\\\": 0, \\\"unit_price\\\": 0, \\\"total\\\": 0 }],\\n  \\\"totals\\\": { \\\"net\\\": 0, \\\"tax_rate\\\": 0, \\\"tax_amount\\\": 0, \\\"gross\\\": 0 }\\n}\\nNo explanation, no markdown, just the JSON object.\",\n  \"images\": [\"{{ $binary['Invoice Image'].data }}\"],\n  \"stream\": false\n}",
         "options": {
           "timeout": 180000
         }
       },
       "id": "ollama-vision",
-      "name": "Ollama LLaVA",
+      "name": "Ollama Qwen2.5-VL",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [470, 300]
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON object in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString(),\n        model: 'llava (local)'\n      }\n    };\n  } else {\n    throw new Error('No JSON found in LLaVA response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response?.substring(0, 500)\n    }\n  };\n}"
+        "jsCode": "const response = $input.first().json;\n\ntry {\n  let content = response.response || '';\n  \n  // Remove markdown code blocks if present\n  content = content.replace(/```json\\n?/gi, '').replace(/```\\n?/g, '').trim();\n  \n  // Find JSON object in response\n  const jsonMatch = content.match(/\\{[\\s\\S]*\\}/);\n  if (jsonMatch) {\n    const parsed = JSON.parse(jsonMatch[0]);\n    return {\n      json: {\n        success: true,\n        invoice_data: parsed,\n        processed_at: new Date().toISOString(),\n        model: 'qwen3-vl (local)'\n      }\n    };\n  } else {\n    throw new Error('No JSON found in LLaVA response');\n  }\n} catch (error) {\n  return {\n    json: {\n      success: false,\n      error: error.message,\n      raw_response: response.response?.substring(0, 500)\n    }\n  };\n}"
       },
       "id": "parse-response",
       "name": "Parse Result",
