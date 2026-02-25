@@ -1,7 +1,7 @@
 {
   "en": {
     "meta": {
-      "title": "Business Automation Solutions - Streamline Your Workflows",
+      "title": "Business Automation Solutions - Turn Manual Work Into Digital Efficiency",
       "description": "Automate your business processes, connect your tools, and free up time for what matters. CRM automation, document workflows, and seamless integrations.",
       "privacy_policy": "Privacy Policy",
       "imprint": "Imprint"
@@ -78,11 +78,13 @@
     },
     "about_me": {
       "title": "About Me",
-      "mission_title": "Mission & Vision",
+      "tools_label": "Tools & Platforms",
+      "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
+      "mission_title": "Mission",
       "mission_statement": "Tobias believes businesses shouldn't spend their time on work a computer could do better.\n\nHis mission is to help mid-sized companies identify automation opportunities and implement solutions that actually work – saving time, reducing errors, and freeing teams to focus on what matters.\n\nHe combines technical expertise with a practical approach: every automation should have clear ROI and be maintainable by your team.",
-      "career_title": "Background",
+      "career_title": "Experience",
       "career": "Tobias is a software engineer with deep experience in AI, blockchain, and full-stack development.\n\nHe has worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and developed AI-powered software solutions. As a co-founder of multiple startups and winner of numerous hackathons, he understands both the technical and business sides of automation.\n\nHis focus is on building scalable systems, automating digital processes, and integrating modern tools into business operations.",
-      "background_title": "Focus",
+      "background_title": "Approach",
       "background": "Growing up in the Stuttgart region – the heart of German manufacturing and SMEs – Tobias understands the challenges mid-sized businesses face.\n\nThese companies need to digitize and automate, but can't afford enterprise consultants or year-long implementation projects.\n\nHis goal is to bring modern automation capabilities to businesses that are ready to grow but don't have dedicated IT teams for every initiative."
     },
     "faq": {
@@ -124,7 +126,7 @@
       "success_title": "Welcome aboard!",
       "success_message": "You're subscribed. Check your inbox for confirmation.",
       "error_message": "Something went wrong. Please try again.",
-      "privacy_note": "By subscribing, you agree to our"
+      "privacy_note": "No spam. Unsubscribe anytime. Your email is stored by Listmonk (self-hosted) and used solely for this newsletter. See our"
     },
     "footer": {},
     "page_not_found": {
@@ -257,7 +259,7 @@
   },
   "de": {
     "meta": {
-      "title": "Geschäftsautomatisierung - Optimieren Sie Ihre Workflows",
+      "title": "Geschäftsautomatisierung - Manuelle Arbeit in digitale Effizienz verwandeln",
       "description": "Automatisieren Sie Ihre Geschäftsprozesse, verbinden Sie Ihre Tools und gewinnen Sie Zeit für das Wesentliche. CRM-Automatisierung, Dokumenten-Workflows und nahtlose Integrationen.",
       "privacy_policy": "Datenschutzerklärung",
       "imprint": "Impressum"
@@ -334,11 +336,13 @@
     },
     "about_me": {
       "title": "Über Mich",
-      "mission_title": "Mission & Vision",
+      "tools_label": "Tools & Plattformen",
+      "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
+      "mission_title": "Mission",
       "mission_statement": "Tobias ist überzeugt: Unternehmen sollten ihre Zeit nicht mit Arbeit verbringen, die ein Computer besser erledigen kann.\n\nSeine Mission ist es, mittelständischen Unternehmen zu helfen, Automatisierungspotenziale zu identifizieren und Lösungen zu implementieren, die tatsächlich funktionieren – Zeit sparen, Fehler reduzieren und Teams für das Wesentliche freistellen.\n\nEr kombiniert technische Expertise mit einem praktischen Ansatz: Jede Automatisierung sollte einen klaren ROI haben und von Ihrem Team wartbar sein.",
-      "career_title": "Hintergrund",
+      "career_title": "Erfahrung",
       "career": "Tobias ist Software Engineer mit tiefgreifender Erfahrung in KI, Blockchain und Fullstack-Entwicklung.\n\nEr hat an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ethereum- und Cosmos-Ökosystemen gebaut und KI-gestützte Softwarelösungen entwickelt. Als Mitgründer mehrerer Startups und Gewinner zahlreicher Hackathons versteht er sowohl die technische als auch die geschäftliche Seite der Automatisierung.\n\nSein Fokus liegt auf dem Aufbau skalierbarer Systeme, der Automatisierung digitaler Prozesse und der Integration moderner Tools in Geschäftsabläufe.",
-      "background_title": "Fokus",
+      "background_title": "Ansatz",
       "background": "Aufgewachsen in der Region Stuttgart – dem Herzen der deutschen Industrie und des Mittelstands – versteht Tobias die Herausforderungen mittelständischer Unternehmen.\n\nDiese Unternehmen müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelange Implementierungsprojekte leisten.\n\nSein Ziel ist es, moderne Automatisierungsfähigkeiten zu Unternehmen zu bringen, die bereit sind zu wachsen, aber keine dedizierten IT-Teams für jede Initiative haben."
     },
     "faq": {
@@ -380,7 +384,7 @@
       "success_title": "Willkommen an Bord!",
       "success_message": "Sie sind angemeldet. Prüfen Sie Ihr Postfach für die Bestätigung.",
       "error_message": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
-      "privacy_note": "Mit der Anmeldung stimmen Sie unserer"
+      "privacy_note": "Kein Spam. Jederzeit abbestellbar. Ihre E-Mail wird von Listmonk (selbst gehostet) gespeichert und ausschließlich für diesen Newsletter verwendet. Siehe unsere"
     },
     "footer": {},
     "page_not_found": {
