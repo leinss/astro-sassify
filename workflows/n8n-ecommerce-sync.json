@@ -1,0 +1,435 @@
+{
+  "name": "E-commerce Inventory Sync - Starter",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inventory-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Inventory Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize incoming inventory event from any platform\nconst input = $input.first().json;\nconst body = input.body || input;\n\n// Detect source platform\nlet platform = 'unknown';\nlet event_type = 'unknown';\nlet sku = '';\nlet quantity_change = 0;\nlet new_quantity = null;\n\nif (body.topic && body.topic.includes('shopify')) {\n  platform = 'shopify';\n  event_type = body.topic;\n  sku = body.sku || body.variant?.sku || '';\n  quantity_change = body.quantity_adjustment || 0;\n  new_quantity = body.available;\n} else if (body.action && body.source === 'woocommerce') {\n  platform = 'woocommerce';\n  event_type = body.action;\n  sku = body.sku || '';\n  new_quantity = body.stock_quantity;\n} else if (body.NotificationType) {\n  platform = 'amazon';\n  event_type = body.NotificationType;\n  sku = body.ASIN || body.SellerSKU || '';\n} else {\n  // Manual update or generic webhook\n  platform = body.platform || 'manual';\n  sku = body.sku || '';\n  quantity_change = body.quantity_change || 0;\n  new_quantity = body.new_quantity;\n}\n\nreturn {\n  json: {\n    source_platform: platform,\n    event_type: event_type,\n    sku: sku,\n    quantity_change: quantity_change,\n    new_quantity: new_quantity,\n    raw_event: body,\n    received_at: new Date().toISOString()\n  }\n};"
+      },
+      "id": "normalize-event",
+      "name": "Normalize Event",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.sku }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "has-sku",
+      "name": "Has Valid SKU?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "getAll",
+        "databaseId": "CONFIGURE_ME_AIRTABLE_BASE",
+        "filterByFormula": "={sku} = '{{ $json.sku }}'"
+      },
+      "id": "lookup-airtable",
+      "name": "Lookup in Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [910, 240],
+      "credentials": {
+        "airtableApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Airtable API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Calculate new stock level\nconst event = $('Normalize Event').first().json;\nconst airtableRecord = $input.first().json;\n\nlet currentStock = airtableRecord.fields?.stock || 0;\nlet newStock;\n\nif (event.new_quantity !== null) {\n  // Absolute update\n  newStock = event.new_quantity;\n} else {\n  // Relative update\n  newStock = currentStock + (event.quantity_change || 0);\n}\n\n// Ensure non-negative\nnewStock = Math.max(0, newStock);\n\nreturn {\n  json: {\n    sku: event.sku,\n    previous_stock: currentStock,\n    new_stock: newStock,\n    source: event.source_platform,\n    airtable_record_id: airtableRecord.id,\n    needs_sync_to: ['shopify', 'woocommerce', 'amazon'].filter(p => p !== event.source_platform)\n  }\n};"
+      },
+      "id": "calculate-stock",
+      "name": "Calculate New Stock",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1130, 240]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "databaseId": "CONFIGURE_ME_AIRTABLE_BASE",
+        "id": "={{ $json.airtable_record_id }}",
+        "fields": {
+          "stock": "={{ $json.new_stock }}",
+          "last_updated": "={{ $now.toISO() }}",
+          "last_source": "={{ $json.source }}"
+        }
+      },
+      "id": "update-airtable",
+      "name": "Update Airtable",
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 1,
+      "position": [1350, 240],
+      "credentials": {
+        "airtableApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Airtable API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "split-platforms",
+      "name": "Split for Platforms",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 1,
+      "position": [1570, 240]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            {
+              "value": "shopify",
+              "output": 0
+            },
+            {
+              "value": "woocommerce",
+              "output": 1
+            },
+            {
+              "value": "amazon",
+              "output": 2
+            }
+          ]
+        },
+        "dataType": "string",
+        "value1": "={{ $json.needs_sync_to[0] }}"
+      },
+      "id": "platform-switch",
+      "name": "Route to Platform",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1790, 240]
+    },
+    {
+      "parameters": {
+        "resource": "productVariant",
+        "operation": "update",
+        "productId": "={{ $json.shopify_product_id }}",
+        "variantId": "={{ $json.shopify_variant_id }}",
+        "updateFields": {
+          "inventoryQuantity": "={{ $json.new_stock }}"
+        }
+      },
+      "id": "update-shopify",
+      "name": "Update Shopify",
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [2010, 100],
+      "credentials": {
+        "shopifyApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Shopify API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "product",
+        "operation": "update",
+        "productId": "={{ $json.woocommerce_product_id }}",
+        "updateFields": {
+          "stock_quantity": "={{ $json.new_stock }}"
+        }
+      },
+      "id": "update-woocommerce",
+      "name": "Update WooCommerce",
+      "type": "n8n-nodes-base.wooCommerce",
+      "typeVersion": 1,
+      "position": [2010, 260],
+      "credentials": {
+        "wooCommerceApi": {
+          "id": "CONFIGURE_ME",
+          "name": "WooCommerce API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://sellingpartnerapi.amazon.com/feeds/2021-06-30/feeds",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-amz-access-token",
+              "value": "={{ $credentials.amazonSpApi.accessToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"feedType\": \"POST_INVENTORY_AVAILABILITY_DATA\",\n  \"marketplaceIds\": [\"ATVPDKIKX0DER\"],\n  \"inputFeedDocumentId\": \"doc-123\"\n}"
+      },
+      "id": "update-amazon",
+      "name": "Update Amazon (Feed)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2010, 420],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "CONFIGURE_ME",
+          "name": "Amazon SP-API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "channel": "#inventory-alerts",
+        "text": "=✅ *Inventory Synced*\n\nSKU: `{{ $json.sku }}`\nNew Stock: {{ $json.new_stock }}\nSource: {{ $json.source }}\nSynced to: {{ $json.needs_sync_to.join(', ') }}",
+        "otherOptions": {}
+      },
+      "id": "slack-success",
+      "name": "Slack Confirmation",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2230, 240],
+      "credentials": {
+        "slackApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Slack API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\": \"synced\", \"sku\": \"{{ $json.sku }}\", \"new_stock\": {{ $json.new_stock }}}"
+      },
+      "id": "webhook-response",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [2450, 240]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"status\": \"error\", \"message\": \"Invalid SKU\"}"
+      },
+      "id": "webhook-error",
+      "name": "Respond Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [910, 420]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "create",
+        "model": "claude-sonnet-4-20250514",
+        "messages": {
+          "values": [
+            {
+              "role": "user",
+              "content": "=Categorize this product for e-commerce platforms.\n\n**Product Info:**\nSKU: {{ $json.sku }}\nName: {{ $json.product_name }}\nDescription: {{ $json.description }}\n\n**Return JSON:**\n{\n  \"amazon_category\": \"<Amazon browse node path>\",\n  \"amazon_keywords\": [\"<5 keywords>\"],\n  \"shopify_type\": \"<product type>\",\n  \"shopify_tags\": [\"<relevant tags>\"],\n  \"attributes\": {\n    \"<key>\": \"<value>\"\n  }\n}"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 500
+        }
+      },
+      "id": "ai-categorize",
+      "name": "AI Categorization",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1,
+      "position": [1350, 500],
+      "disabled": true,
+      "credentials": {
+        "anthropicApi": {
+          "id": "CONFIGURE_ME",
+          "name": "Anthropic API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Inventory Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Event": {
+      "main": [
+        [
+          {
+            "node": "Has Valid SKU?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Valid SKU?": {
+      "main": [
+        [
+          {
+            "node": "Lookup in Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup in Airtable": {
+      "main": [
+        [
+          {
+            "node": "Calculate New Stock",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate New Stock": {
+      "main": [
+        [
+          {
+            "node": "Update Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Airtable": {
+      "main": [
+        [
+          {
+            "node": "Split for Platforms",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split for Platforms": {
+      "main": [
+        [
+          {
+            "node": "Route to Platform",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route to Platform": {
+      "main": [
+        [
+          {
+            "node": "Update Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update WooCommerce",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Amazon (Feed)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Shopify": {
+      "main": [
+        [
+          {
+            "node": "Slack Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update WooCommerce": {
+      "main": [
+        [
+          {
+            "node": "Slack Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Amazon (Feed)": {
+      "main": [
+        [
+          {
+            "node": "Slack Confirmation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Confirmation": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

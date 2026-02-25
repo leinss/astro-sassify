@@ -1,0 +1,677 @@
+<!DOCTYPE html><html lang="de" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
+  $watch('darkMode', val => localStorage.setItem('darkMode', val));
+" :class="{ 'dark': darkMode }"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.16.11"><title>Case Study: AI Support Triage for E-commerce - Business Automation Solutions - Streamline Your Workflows</title><!-- SEO Meta Tags --><!-- Primary Meta Tags --><meta name="title" content="Case Study: AI Support Triage for E-commerce - Business Automation Solutions - Streamline Your Workflows"><meta name="description" content="A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."><meta name="author" content="Tobias Leinss"><link rel="canonical" href="https://leinss-consulting.de/en/blog/case-study-support-triage/"><!-- Language Alternates --><link rel="alternate" hreflang="de" href="https://leinss-consulting.de/en/blog/case-study-support-triage/"><link rel="alternate" hreflang="en" href="https://leinss-consulting.de/en/blog/case-study-support-triage/"><link rel="alternate" hreflang="x-default" href="https://leinss-consulting.de/ki-kommunikation"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://leinss-consulting.de/en/blog/case-study-support-triage/"><meta property="og:title" content="Case Study: AI Support Triage for E-commerce - Business Automation Solutions - Streamline Your Workflows"><meta property="og:description" content="A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."><meta property="og:image" content="https://leinss-consulting.de/images/og-image.png"><meta property="og:locale" content="de_DE"><meta property="og:locale:alternate" content="en_US"><meta property="og:site_name" content="Leinss Consulting"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://leinss-consulting.de/en/blog/case-study-support-triage/"><meta property="twitter:title" content="Case Study: AI Support Triage for E-commerce - Business Automation Solutions - Streamline Your Workflows"><meta property="twitter:description" content="A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."><meta property="twitter:image" content="https://leinss-consulting.de/images/og-image.png"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Leinss Consulting","url":"https://leinss-consulting.de","logo":"https://leinss-consulting.de/images/logo.png","founder":{"@type":"Person","name":"Tobias Leinss"},"address":{"@type":"PostalAddress","addressCountry":"DE","addressRegion":"Baden-Württemberg"},"contactPoint":{"@type":"ContactPoint","contactType":"customer service","availableLanguage":["German","English"]},"sameAs":["https://linkedin.com/in/tobiasleinss"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Geschäftsautomatisierung","description":"A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing.","provider":{"@type":"Organization","name":"Leinss Consulting"},"serviceType":"Business Automation Consulting","areaServed":{"@type":"Country","name":"Deutschland"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Case Study: AI Support Triage for E-commerce - Business Automation Solutions - Streamline Your Workflows","description":"A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing.","url":"https://leinss-consulting.de/en/blog/case-study-support-triage/","inLanguage":"de-DE","publisher":{"@type":"Organization","name":"Leinss Consulting","logo":{"@type":"ImageObject","url":"https://leinss-consulting.de/images/logo.png"}}}</script><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><link rel="stylesheet" href="/_astro/_slug_.66cAr6Vm.css">
+<link rel="stylesheet" href="/_astro/_slug_.BWC-U55T.css"><script type="module" src="/_astro/page.C5bFeOsj.js"></script></head> <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300 flex flex-col min-h-screen"> <div id="page-wrapper" class="page-transition-wrapper flex-1 flex flex-col">  <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300 header-transition" id="header" data-astro-cid-3ef6ksr2> <div class="container-custom flex items-center justify-between" data-astro-cid-3ef6ksr2> <a href="/en/#hero" class="flex items-center" aria-label="Go to homepage" data-astro-cid-3ef6ksr2> <img src="/_astro/logo-black-right.C_o3QmLi_Z222Cmp.webp" x-show="!darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" decoding="async" fetchpriority="auto" width="489" height="225" class="h-16 lg:h-20 w-auto"> <img src="/_astro/logo-white-right.Bf8itkGN_Z17aMnQ.webp" x-show="darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" decoding="async" fetchpriority="auto" width="491" height="214" class="h-16 lg:h-20 w-auto"> </a> <nav class="hidden lg:flex items-center space-x-6" data-astro-cid-3ef6ksr2> <!-- Home with dropdown for sections --> <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false" data-astro-cid-3ef6ksr2> <a href="/en/" class="flex items-center text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors" data-astro-cid-3ef6ksr2> Home <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" data-astro-cid-3ef6ksr2></path> </svg> </a> <div x-show="open" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1" class="absolute left-0 mt-2 w-44 bg-white dark:bg-secondary-900 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/10 py-2 z-50" x-cloak data-astro-cid-3ef6ksr2> <a href="/en/#problem" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>Challenges</a> <a href="/en/#solution" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>Solutions</a> <a href="/en/#about" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>About</a> <a href="/en/#faq" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>FAQ</a> </div> </div> <!-- Services - prominent standalone link --> <a href="/en/services/" class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors" data-astro-cid-3ef6ksr2>Services</a> <!-- Blog hidden until content is ready
+      <a
+        href={`${basePath}/blog`}
+        class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+        >{t.header.blog}</a
+      >
+      --> </nav> <div class="flex items-center space-x-2" data-astro-cid-3ef6ksr2> <!-- Language switcher - visible on larger screens --> <div class="hidden sm:block" data-astro-cid-3ef6ksr2> <a href="/ki-kommunikation/blog/fallstudie-support-triage" class="language-switcher focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200" aria-label="Auf Deutsch" data-astro-cid-a2mxz4y6> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="lang-icon" data-astro-cid-a2mxz4y6="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"></path></svg> <div class="lang-stack" data-astro-cid-a2mxz4y6> <span class="current-lang" data-astro-cid-a2mxz4y6>EN</span> <span class="other-lang" data-astro-cid-a2mxz4y6>DE</span> </div> </a>  </div> <!-- Dark mode toggle - visible on larger screens --> <button x-on:click="darkMode = !darkMode" class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500" aria-label="Toggle dark mode" data-astro-cid-3ef6ksr2> <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" data-astro-cid-3ef6ksr2></path> </svg> </button> <a href="https://cal.com/tobias-leinss/strategymeeting" class="btn-primary" data-astro-cid-3ef6ksr2>Book a Call</a> <!-- Mobile Menu Button and Dropdown --> <div x-data="{ open: false, showAllPages: false }" @keydown.escape.window="open = false" data-astro-cid-3ef6ksr2> <button @click="open = !open" class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-3ef6ksr2></path> </svg> </button> <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute top-16 right-4 w-52 py-2 bg-white dark:bg-secondary-900 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/10" x-cloak data-astro-cid-3ef6ksr2> <!-- Primary: Home --> <a href="/en/" @click="open = false" class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30" data-astro-cid-3ef6ksr2>Home</a> <!-- Section links (indented, smaller) --> <div class="pl-3 border-l-2 border-secondary-200 dark:border-secondary-700 ml-4 my-1" data-astro-cid-3ef6ksr2> <a href="/en/#problem" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>Challenges</a> <a href="/en/#solution" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>Solutions</a> <a href="/en/#about" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>About</a> <a href="/en/#faq" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>FAQ</a> </div> <!-- Primary: Services --> <a href="/en/services/" @click="open = false" class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30 mt-1" data-astro-cid-3ef6ksr2>Services</a> <!-- Blog hidden until content is ready
+          <a
+            href={`${basePath}/blog`}
+            @click="open = false"
+            class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30"
+            >{t.header.blog}</a
+          >
+          --> <div class="border-t border-secondary-200 dark:border-secondary-700 my-2" data-astro-cid-3ef6ksr2></div> <!-- Language Switcher in Mobile Menu --> <a href="/ki-kommunikation/blog/fallstudie-support-triage" class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800" @click="open = false" data-astro-cid-3ef6ksr2> <div class="flex items-center" data-astro-cid-3ef6ksr2> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="h-4 w-4 mr-2" data-astro-cid-3ef6ksr2="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"></path></svg> <span data-astro-cid-3ef6ksr2>Auf Deutsch</span> </div> </a> <!-- Dark Mode Toggle Button --> <button x-on:click="darkMode = !darkMode; open = false" class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800" data-astro-cid-3ef6ksr2> <div class="flex items-center" data-astro-cid-3ef6ksr2> <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" data-astro-cid-3ef6ksr2></path> </svg> <span data-astro-cid-3ef6ksr2> <span x-show="!darkMode" data-astro-cid-3ef6ksr2>Dark Mode</span> <span x-show="darkMode" data-astro-cid-3ef6ksr2>Light Mode</span> </span> </div> </button> <!-- Mobile All Pages Dropdown --> <!-- <button
+            @click="showAllPages = !showAllPages"
+            class="w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 font-semibold border-t border-gray-200 dark:border-gray-700 mt-1 pt-1 flex items-center justify-between"
+          >
+            All Pages
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" :class="{ 'transform rotate-180': showAllPages }">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div
+            x-show="showAllPages"
+            class="py-1 bg-gray-50 dark:bg-secondary-800"
+          >
+            {allPages.map(page => (
+              <a href={page.url} class="block px-6 py-1 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700">
+                {page.text}
+              </a>
+            ))} --> </div> </div> </div> </div> </header>  <main class="min-h-screen bg-gradient-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900"> <article class="py-12 md:py-20"> <div class="container-custom max-w-4xl"> <!-- Back Link --> <a href="/ai-communication/blog" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
+Back to Blog
+</a> <!-- Header --> <header class="mb-12"> <div class="flex flex-wrap items-center gap-4 mb-6"> <span class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"> Case Study </span> <time datetime="2025-01-27T00:00:00.000Z" class="text-secondary-500 dark:text-secondary-400"> January 27, 2025 </time> <a href="/ki-kommunikation/blog/fallstudie-support-triage" class="text-sm text-secondary-500 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400 transition-colors">
+Auf Deutsch lesen
+</a> </div> <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-900 dark:text-white mb-6 leading-tight"> Case Study: AI Support Triage for E-commerce </h1> <p class="text-xl text-secondary-600 dark:text-secondary-400"> A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing. </p> </header> <!-- Content --> <div class="prose prose-lg dark:prose-invert max-w-none
+          prose-headings:text-secondary-900 dark:prose-headings:text-white
+          prose-p:text-secondary-700 dark:prose-p:text-secondary-300
+          prose-a:text-primary-600 dark:prose-a:text-primary-400
+          prose-strong:text-secondary-900 dark:prose-strong:text-white
+          prose-ul:text-secondary-700 dark:prose-ul:text-secondary-300
+          prose-ol:text-secondary-700 dark:prose-ol:text-secondary-300
+          prose-li:text-secondary-700 dark:prose-li:text-secondary-300
+          prose-blockquote:border-primary-500 prose-blockquote:text-secondary-600 dark:prose-blockquote:text-secondary-400
+          prose-code:text-primary-600 dark:prose-code:text-primary-400
+          prose-pre:bg-secondary-900 dark:prose-pre:bg-secondary-800
+        "> <h1 id="ai-support-triage-for-e-commerce">AI Support Triage for E-commerce</h1>
+<blockquote>
+<p><strong>Note:</strong> This is a fictional scenario demonstrating what AI-powered support triage can achieve. The company profile and metrics are representative examples based on common industry patterns.</p>
+</blockquote>
+<p>An online retailer’s support team was overwhelmed. Customer messages piled up, urgent issues got buried, and response times stretched to days. This workflow demonstrates how an AI triage system can classify, route, and resolve common queries automatically.</p>
+<h2 id="the-challenge">The Challenge</h2>
+<p><strong>Example Company</strong>: E-commerce retailer, 50k monthly orders, 5-person support team</p>
+<p><strong>Pain Points</strong>:</p>
+<ul>
+<li>Support requests via email, contact form, and social media</li>
+<li>No prioritization—first come, first served (even if it’s “where’s my order?” vs. “payment failed”)</li>
+<li>Repetitive questions consumed 70% of agent time</li>
+<li>Weekend/holiday backlog took days to clear</li>
+</ul>
+<p><strong>Before Automation</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>First response time</td><td>8 hours (average)</td></tr><tr><td>Resolution time</td><td>24-48 hours</td></tr><tr><td>Tickets per agent/day</td><td>40-50</td></tr><tr><td>Repetitive queries</td><td>70%</td></tr><tr><td>Customer satisfaction</td><td>3.2/5</td></tr></tbody></table>
+<h2 id="the-solution">The Solution</h2>
+<p>We deployed an AI-powered triage layer that sits between customers and the support team.</p>
+<h3 id="tool-stack">Tool Stack</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Component</th><th>Tool</th><th>Why</th></tr></thead><tbody><tr><td>Message Intake</td><td>Email + Contact Form Webhooks</td><td>Unified entry point</td></tr><tr><td>Workflow Engine</td><td>n8n</td><td>Flexible routing logic</td></tr><tr><td>AI Classification</td><td>Claude API</td><td>Nuanced understanding of intent</td></tr><tr><td>AI Classification (Local)</td><td>Ollama + Mistral</td><td>Cost-effective for high volume</td></tr><tr><td>Team Communication</td><td>Slack</td><td>Real-time alerts, channel routing</td></tr><tr><td>Response Drafting</td><td>Claude API</td><td>Consistent, on-brand replies</td></tr></tbody></table>
+<h3 id="system-architecture">System Architecture</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Customer Message → n8n → AI Classification → Route/Respond → Slack/Email</span></span></code></pre>
+<p><strong>Step 1: Message Intake</strong></p>
+<p>All support channels funnel into n8n:</p>
+<ul>
+<li>Email forwarding to dedicated inbox</li>
+<li>Contact form webhook</li>
+<li>Social media via Zapier/Make integration</li>
+</ul>
+<p>Each message gets a unique ticket ID and timestamp.</p>
+<p><strong>Step 2: AI Classification</strong></p>
+<p>Claude analyzes each message for three dimensions:</p>
+<p><strong>Urgency</strong> (1-5):</p>
+<ul>
+<li>5: Payment failed, account locked, security issue</li>
+<li>4: Order not delivered (past expected date)</li>
+<li>3: Product question, shipping inquiry</li>
+<li>2: General feedback, feature request</li>
+<li>1: Spam, irrelevant</li>
+</ul>
+<p><strong>Category</strong>:</p>
+<ul>
+<li><code>order-status</code>: Where is my order?</li>
+<li><code>returns</code>: Return/refund requests</li>
+<li><code>product</code>: Product questions</li>
+<li><code>payment</code>: Payment issues</li>
+<li><code>account</code>: Login, password, account changes</li>
+<li><code>complaint</code>: Negative feedback</li>
+<li><code>other</code>: Everything else</li>
+</ul>
+<p><strong>Auto-Resolvable</strong> (yes/no):
+Can this be answered with standard information + order lookup?</p>
+<p><strong>Classification Prompt</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Analyze this customer support message:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>"{message}"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Customer email: {email}</span></span>
+<span class="line"><span>Order history: {recent_orders_summary}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Return JSON:</span></span>
+<span class="line"><span>{</span></span>
+<span class="line"><span>  "urgency": 1-5,</span></span>
+<span class="line"><span>  "category": "order-status|returns|product|payment|account|complaint|other",</span></span>
+<span class="line"><span>  "auto_resolvable": true/false,</span></span>
+<span class="line"><span>  "key_issue": "one sentence summary",</span></span>
+<span class="line"><span>  "suggested_response": "draft if auto_resolvable"</span></span>
+<span class="line"><span>}</span></span></code></pre>
+<p><strong>Step 3: Intelligent Routing</strong></p>
+<p>Based on classification, messages take different paths:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Urgency</th><th>Auto-Resolvable</th><th>Action</th></tr></thead><tbody><tr><td>5</td><td>Any</td><td>Immediate Slack alert to #support-urgent</td></tr><tr><td>3-4</td><td>No</td><td>Route to appropriate Slack channel</td></tr><tr><td>1-4</td><td>Yes</td><td>Auto-respond + log</td></tr><tr><td>1</td><td>N/A</td><td>Archive (spam filter)</td></tr></tbody></table>
+<p><strong>Slack Channels</strong>:</p>
+<ul>
+<li><code>#support-urgent</code>: Payment issues, security concerns</li>
+<li><code>#support-orders</code>: Shipping, delivery, order changes</li>
+<li><code>#support-returns</code>: Returns and refunds</li>
+<li><code>#support-general</code>: Everything else</li>
+</ul>
+<p>Each Slack message includes:</p>
+<ul>
+<li>Customer name and email</li>
+<li>Order history summary</li>
+<li>AI’s classification and reasoning</li>
+<li>One-click actions (respond, escalate, close)</li>
+</ul>
+<p><strong>Step 4: Auto-Response System</strong></p>
+<p>For auto-resolvable queries, AI drafts responses using:</p>
+<ul>
+<li>Order status from shop system (Shopify/WooCommerce API)</li>
+<li>Shipping carrier tracking</li>
+<li>Return policy details</li>
+<li>FAQ knowledge base</li>
+</ul>
+<p><strong>Example Auto-Response (Order Status)</strong>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Hi Sarah,</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Thanks for reaching out! I checked your order #12345.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>📦 Current Status: In transit</span></span>
+<span class="line"><span>🚚 Carrier: DHL</span></span>
+<span class="line"><span>📍 Last Update: Package departed sorting facility in Hamburg</span></span>
+<span class="line"><span>📅 Expected Delivery: January 29, 2025</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>You can track your package here: [tracking link]</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Let me know if you need anything else!</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Best,</span></span>
+<span class="line"><span>[Brand] Support</span></span></code></pre>
+<p>Auto-responses are sent immediately but logged for agent review.</p>
+<h3 id="ollama-for-high-volume">Ollama for High Volume</h3>
+<p>For cost optimization, we run Mistral 7B locally for initial classification:</p>
+<ul>
+<li>Handles 80% of messages (clear-cut cases)</li>
+<li>Claude API only called for ambiguous or high-urgency</li>
+<li>Reduces API costs by 70%</li>
+</ul>
+<h2 id="results">Results</h2>
+<p>After 6 weeks in production:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr></thead><tbody><tr><td>First response time</td><td>8 hours</td><td>15 minutes</td><td>-97%</td></tr><tr><td>Resolution time</td><td>24-48 hours</td><td>4 hours</td><td>-83%</td></tr><tr><td>Tickets per agent/day</td><td>40-50</td><td>25-30 (complex only)</td><td>-40%</td></tr><tr><td>Auto-resolved</td><td>0%</td><td>60%</td><td>+60%</td></tr><tr><td>Customer satisfaction</td><td>3.2/5</td><td>4.6/5</td><td>+44%</td></tr></tbody></table>
+<p><strong>Breakdown of Auto-Resolution</strong>:</p>
+<ul>
+<li>Order status inquiries: 95% auto-resolved</li>
+<li>Shipping questions: 85% auto-resolved</li>
+<li>Return policy questions: 80% auto-resolved</li>
+<li>Account issues: 40% auto-resolved (often need manual verification)</li>
+</ul>
+<p><strong>Agent Feedback</strong>: “I now handle interesting problems instead of copy-pasting tracking numbers.”</p>
+<h2 id="implementation-details">Implementation Details</h2>
+<h3 id="fail-safes">Fail-Safes</h3>
+<p>AI systems need guardrails:</p>
+<ol>
+<li><strong>Confidence threshold</strong>: Auto-respond only if AI confidence >90%</li>
+<li><strong>Sentiment check</strong>: Angry customers always go to humans</li>
+<li><strong>Escalation keywords</strong>: “lawyer”, “complaint”, “fraud” → immediate escalation</li>
+<li><strong>Daily review</strong>: Agent spot-checks 5% of auto-responses</li>
+</ol>
+<h3 id="response-quality">Response Quality</h3>
+<p>All auto-responses follow brand guidelines:</p>
+<ul>
+<li>Tone: Friendly, concise, helpful</li>
+<li>Format: Emoji use, paragraph structure</li>
+<li>Sign-off: Consistent signature</li>
+</ul>
+<p>Templates are AI-generated but human-approved before deployment.</p>
+<h3 id="privacy-considerations">Privacy Considerations</h3>
+<ul>
+<li>Customer data stays in existing systems (Shopify, email)</li>
+<li>AI receives only necessary context (order summary, not full history)</li>
+<li>Self-hosted n8n for workflow logic</li>
+<li>Option to run classification locally via Ollama</li>
+</ul>
+<h2 id="timeline">Timeline</h2>
+<p><strong>Week 1</strong>: Intake integration, classification prompt development</p>
+<p><strong>Week 2</strong>: Slack routing, auto-response templates</p>
+<p><strong>Week 3</strong>: Testing with 2 weeks of historical tickets</p>
+<p><strong>Week 4</strong>: Shadow mode (AI classifies, humans verify)</p>
+<p><strong>Week 5-6</strong>: Gradual auto-response rollout (10% → 50% → 100%)</p>
+<p><strong>Ongoing Costs</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Item</th><th>Monthly</th></tr></thead><tbody><tr><td>Claude API (classification + drafting)</td><td>€120</td></tr><tr><td>Ollama (self-hosted, pre-filter)</td><td>€0</td></tr><tr><td>n8n (self-hosted)</td><td>€0</td></tr><tr><td>Slack (existing)</td><td>€0</td></tr><tr><td><strong>Total</strong></td><td><strong>€120/month</strong></td></tr></tbody></table>
+<p>vs. hiring an additional support agent at €3,500/month.</p>
+<h2 id="key-learnings">Key Learnings</h2>
+<ol>
+<li><strong>Classification accuracy is everything</strong>: Spend 80% of time on prompt engineering</li>
+<li><strong>Start with low-risk auto-responses</strong>: Order status is safe; complaints are not</li>
+<li><strong>Human override is easy</strong>: One-click to stop auto-response for specific customer</li>
+<li><strong>Measure what matters</strong>: CSAT improved more than volume handled</li>
+</ol>
+<h2 id="build-this-yourself">Build This Yourself</h2>
+<p>Here’s the architecture for building a smart support triage system.</p>
+<h3 id="node-by-node-breakdown">Node-by-Node Breakdown</h3>
+<p><strong>1. Email Trigger (IMAP)</strong></p>
+<p>Monitor your support inbox for incoming messages. The trigger polls every 2 minutes (configurable) and captures:</p>
+<ul>
+<li>Sender email</li>
+<li>Subject line</li>
+<li>Message body (text and HTML)</li>
+<li>Timestamp</li>
+</ul>
+<p>Alternative: Use a webhook if your support platform (Zendesk, Intercom) can push events.</p>
+<p><strong>2. Pre-Filter with Ollama</strong></p>
+<p>Before calling Claude’s API, run a quick local classification using Ollama (Mistral 7B works well). This handles 80% of clear-cut cases cheaply:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>order-status | returns | product | payment | account | complaint | spam | other</span></span></code></pre>
+<p>Why two-stage? Cost optimization. Ollama is free/local; Claude API costs per token. Route only ambiguous or high-stakes messages to Claude.</p>
+<p><strong>3. Escalation Check</strong></p>
+<p>Before detailed analysis, scan for escalation keywords: “lawyer”, “lawsuit”, “fraud”, “police”, “legal action”. These bypass normal routing and go straight to <code>#support-urgent</code> with maximum priority.</p>
+<p><strong>4. Claude Deep Analysis</strong></p>
+<p>For complex or ambiguous tickets, Claude provides:</p>
+<ul>
+<li><strong>Urgency score (1-5)</strong>: Payment failed = 5, general question = 2</li>
+<li><strong>Category</strong>: More nuanced than pre-filter</li>
+<li><strong>Auto-resolvable</strong>: Can this be answered with order lookup + FAQ?</li>
+<li><strong>Sentiment</strong>: Detect angry customers for human handling</li>
+<li><strong>Suggested response</strong>: Draft reply if auto-resolvable</li>
+<li><strong>Confidence score</strong>: Only auto-respond if >90%</li>
+</ul>
+<p><strong>5. Category-Based Slack Routing</strong></p>
+<p>Route tickets to specialized channels:</p>
+<ul>
+<li><code>#support-billing</code> → Payment issues (urgency 4-5)</li>
+<li><code>#support-orders</code> → Shipping, delivery questions</li>
+<li><code>#support-returns</code> → Return/refund requests</li>
+<li><code>#support-general</code> → Everything else</li>
+</ul>
+<p>Each Slack message includes: customer email, urgency, AI summary, and whether auto-response was sent.</p>
+<p><strong>6. Auto-Response Logic (Optional)</strong></p>
+<p>For tickets marked <code>auto_resolvable: true</code> with high confidence and non-angry sentiment:</p>
+<ul>
+<li>Fetch order status from your shop API</li>
+<li>Generate personalized response using template + live data</li>
+<li>Send immediately (or queue for human review)</li>
+<li>Log for spot-checking</li>
+</ul>
+<h3 id="get-the-starter-workflow">Get the Starter Workflow</h3>
+<p>Download and import into n8n:</p>
+<p><a href="/workflows/n8n-support-triage.json">Download n8n-support-triage.json</a></p>
+<p><strong>Quick Setup:</strong></p>
+<ol>
+<li>Import JSON via n8n Settings → Import Workflow</li>
+<li>Configure credentials (IMAP for support inbox, Slack, Anthropic API)</li>
+<li>Set up Ollama locally or skip pre-filter (Claude-only mode)</li>
+<li>Create Slack channels (#support-urgent, #support-billing, etc.)</li>
+<li>Customize urgency levels and categories for your business</li>
+</ol>
+<p>This starter implements classification and routing. A full implementation would add auto-response templates, order status API integration, confidence thresholds, CSAT tracking, and agent assignment logic—the operational details that make the difference between a demo and a system your team relies on.</p>
+<h2 id="technical-deep-dive">Technical Deep Dive</h2>
+<p>For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: <strong><a href="https://leinss.xyz/blog/en/n8n-customer-service/">Building Customer Service Bots with n8n</a></strong> — covers intent classification, context retrieval, and response generation.</p>
+<h2 id="your-turn">Your Turn</h2>
+<p>Support team drowning in repetitive queries?</p>
+<ol>
+<li><strong>Categorize</strong>: What % of tickets are truly repetitive?</li>
+<li><strong>Audit</strong>: Which queries could be auto-answered with data you have?</li>
+<li><strong>Pilot</strong>: Start with one category (e.g., order status)</li>
+</ol>
+<p><a href="https://cal.com/tobias-leinss/strategymeeting">Book a free strategy call</a> — I’ll analyze your support patterns and show what’s automatable.</p> </div> <!-- Tags --> <div class="mt-12 pt-8 border-t border-secondary-200 dark:border-secondary-700"> <div class="flex flex-wrap gap-2"> <span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#support </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#triage </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#n8n </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#slack </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#ai </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#claude </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#ollama </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#e-commerce </span> </div> </div> <!-- CTAs --> <div class="mt-12 grid md:grid-cols-2 gap-6"> <!-- Newsletter CTA --> <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl"> <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+Stay Updated
+</h3> <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+Get practical automation tips and industry insights delivered to your inbox.
+</p> <a href="/ai-communication/#newsletter" class="btn-outline inline-flex items-center">
+Subscribe to Newsletter
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path> </svg> </a> </div> <!-- Book a Call CTA --> <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl"> <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+Ready to automate?
+</h3> <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+Let's discuss how automation can help your business in a free strategy call.
+</p> <a href="/ai-communication/#contact" class="btn-primary inline-flex items-center">
+Book a Call
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path> </svg> </a> </div> </div> </div> </article> </main> <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8"> <div class="container-custom"> <div class="grid md:grid-cols-2 gap-8 mb-6 md:mb-12"> <div class="md:col-span-2 lg:col-span-2"> <div class="flex items-center mb-6"> <a href="/en/#hero" class="flex items-center" aria-label="Go to homepage"> <img src="/_astro/logo-white.Bf-Ft_qe_9Qrpm.webp" alt="Logo" loading="lazy" decoding="async" fetchpriority="auto" width="500" height="396" class="h-24 w-auto min-w-16 object-contain"> </a> <p class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal"> Business Automation Solutions - Streamline Your Workflows </p> </div> <div class="flex space-x-4"> <a href="https://twitter.com/t_leinss" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="Twitter"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path> </svg> </a> <a href="https://www.linkedin.com/in/tobias-leinss/" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="LinkedIn"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path> </svg> </a> <a href="https://www.youtube.com/@t_leinss" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="YouTube"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path> </svg> </a> <!-- <a
+            href="https://github.com/leinss"
+            class="text-gray-400 hover:text-primary-400 transition-colors"
+            aria-label="GitHub"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              ></path>
+            </svg>
+          </a> --> </div> </div>  </div> <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8"> <div class="flex flex-col md:flex-row justify-between items-center"> <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
+&copy; 2026 Tobias Leinss. All rights reserved. </p> <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0"> <a href="/en/privacy-policy" class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">Privacy Policy</a> <a href="/en/imprint" class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">Imprint</a> </div> </div> </div> </div> </footer> <!-- Back to top button --><button id="backToTop" class="fixed bottom-8 md:bottom-16 right-8 p-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg transition-opacity duration-300 opacity-0 z-50" aria-label="Back to top"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path> </svg> </button> <script type="module">document.addEventListener("astro:page-load",()=>{const o=document.getElementById("backToTop"),e=()=>{window.scrollY>300?o?.classList.remove("opacity-0"):o?.classList.add("opacity-0")},t=()=>{window.scrollTo({top:0,behavior:"smooth"})};window.addEventListener("scroll",e),o?.addEventListener("click",t),e(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",e),o?.removeEventListener("click",t)})});</script>  </div> <script defer src="https://umami.funnel.leinss.xyz/script.js" data-website-id="07e97b70-8ac7-40ab-8e58-da90ba0d8ceb"></script> <script>
+      // Check for user preference
+      if (localStorage.getItem('darkMode') === null) {
+        // Check system preference
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          localStorage.setItem('darkMode', 'true');
+          document.documentElement.classList.add('dark');
+        } else {
+          localStorage.setItem('darkMode', 'false');
+        }
+      }
+
+      // Improved page transition handling
+      // Apply loaded class immediately to prevent initial flash
+      document.addEventListener('DOMContentLoaded', () => {
+        // Mark the page as loaded on initial load
+        document.documentElement.classList.add('astro-site-loaded');
+
+        // Make sure the page wrapper is visible immediately
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          pageWrapper.classList.add('page-loaded');
+        }
+      });
+
+      // Handle page transitions
+      document.addEventListener('astro:page-load', () => {
+        // This runs on initial page load and after each navigation
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          // Ensure the page is visible after content swap
+          pageWrapper.classList.add('page-loaded');
+
+          // Add loaded class to all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            setTimeout(() => {
+              el.classList.add('loaded');
+            }, 50); // Small delay to ensure DOM is ready
+          });
+        }
+      });
+
+      // Use before-preparation instead of before-swap to start transition earlier
+      document.addEventListener('astro:before-preparation', () => {
+        // This runs before navigation starts
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          pageWrapper.classList.add('page-transitioning');
+          pageWrapper.classList.remove('page-loaded');
+
+          // Remove loaded class from all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            el.classList.remove('loaded');
+          });
+        }
+      });
+
+      // Handle the actual swap
+      document.addEventListener('astro:after-swap', () => {
+        // This runs after the new page content is swapped in but before hydration
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          // Remove transitioning class to allow the loaded class to take effect
+          pageWrapper.classList.remove('page-transitioning');
+        }
+      });
+
+      // Scroll-triggered reveal animations using Intersection Observer
+      function initRevealAnimations() {
+        const revealElements = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger');
+
+        if (revealElements.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              // Optional: unobserve after revealing to improve performance
+              // observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+          observer.observe(el);
+        });
+
+        return observer;
+      }
+
+      // Counter animation for statistics
+      function initCounterAnimations() {
+        const counters = document.querySelectorAll('.counter[data-target]');
+
+        if (counters.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              const target = parseInt(counter.dataset.target, 10);
+              const duration = parseInt(counter.dataset.duration || '2000', 10);
+              const suffix = counter.dataset.suffix || '';
+
+              let start = 0;
+              const startTime = performance.now();
+
+              function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuad = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeOutQuad * target);
+
+                counter.textContent = current.toLocaleString() + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                }
+              }
+
+              requestAnimationFrame(updateCounter);
+              observer.unobserve(counter);
+            }
+          });
+        }, {
+          threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+          counter.textContent = '0';
+          observer.observe(counter);
+        });
+      }
+
+      // Initialize animations on page load
+      let revealObserver = null;
+      document.addEventListener('astro:page-load', () => {
+        // Clean up previous observer if exists
+        if (revealObserver) {
+          revealObserver.disconnect();
+        }
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
+
+      // Also init on DOMContentLoaded for initial page load
+      document.addEventListener('DOMContentLoaded', () => {
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
+    </script> <script>
+      // Improved script loading with absolute paths and GitHub Pages compatibility
+      document.addEventListener('astro:page-load', () => {
+        // Create and append script elements
+        const scripts = ['transitions.js'];
+        scripts.forEach(script => {
+          // Check if script is already loaded to prevent duplicates
+          const existingScript = document.querySelector(`script[src*="${script}"]`);
+          if (!existingScript) {
+            const scriptEl = document.createElement('script');
+
+            // Use the correct path based on the current URL
+            const pathname = window.location.pathname;
+
+            // Determine if we're on a subpage
+            const isSubpage = pathname.split('/').filter(Boolean).length > 0;
+
+            // Create the correct script URL
+            let scriptPath;
+            if (isSubpage) {
+              // Count directory levels to determine relative path
+              const segments = pathname.split('/').filter(Boolean);
+              scriptPath = '../'.repeat(segments.length) + 'scripts/' + script;
+            } else {
+              scriptPath = '/scripts/' + script;
+            }
+
+            scriptEl.src = scriptPath;
+            scriptEl.async = false; // Load synchronously to ensure transitions work
+            document.body.appendChild(scriptEl);
+          }
+        });
+      }, { once: false }); // Run on every page load, not just the first
+    </script> </body> </html>
