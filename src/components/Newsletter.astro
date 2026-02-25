@@ -8,11 +8,11 @@ interface Props {
 const { lang } = Astro.props
 const t = i18n[lang]
 
-const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+const basePath = lang === "en" ? "/en" : "/de"
 
 // Listmonk public subscription config
 const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz"
-const LIST_UUID = "3c2ca359-31c7-41b4-9ec3-e73e65f4e108"
+const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
 ---
 
 <section id="newsletter" class="section relative overflow-hidden bg-gradient-to-b from-primary-100 to-white dark:from-primary-950 dark:to-secondary-950">
