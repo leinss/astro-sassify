@@ -1,6 +1,26 @@
 ---
 import type { CollectionEntry } from "astro:content"
+import { Image } from "astro:assets"
 import i18n from "../assets/i18n.json"
+import { BsArrowRight } from "react-icons/bs"
+
+// Import optimized blog images
+import caseStudyCrm from "../assets/images/blog/case-study-crm.png"
+import caseStudyInvoice from "../assets/images/blog/case-study-invoice.png"
+import caseStudySupport from "../assets/images/blog/case-study-support.png"
+import caseStudyEcommerce from "../assets/images/blog/case-study-ecommerce.png"
+import invoiceAutomation from "../assets/images/blog/invoice-automation.png"
+import roiAutomation from "../assets/images/blog/roi-automation.png"
+
+// Map heroImage paths to optimized imports
+const optimizedImages: Record<string, ImageMetadata> = {
+  "/images/blog/case-study-crm.png": caseStudyCrm,
+  "/images/blog/case-study-invoice.png": caseStudyInvoice,
+  "/images/blog/case-study-support.png": caseStudySupport,
+  "/images/blog/case-study-ecommerce.png": caseStudyEcommerce,
+  "/images/blog/invoice-automation.png": invoiceAutomation,
+  "/images/blog/roi-automation.png": roiAutomation,
+}
 
 interface Props {
   post: CollectionEntry<"blog">
@@ -10,7 +30,7 @@ interface Props {
 const { post, lang } = Astro.props
 const t = i18n[lang]
 
-const basePath = lang === "en" ? "/ai-communication" : "/ki-kommunikation"
+const basePath = lang === "en" ? "/en" : "/de"
 
 // Strip the language folder prefix from the slug (e.g., "en/my-post" -> "my-post")
 const cleanSlug = post.slug.replace(/^(en|de)\//, "")
@@ -34,43 +54,66 @@ const categoryLabels: Record<string, Record<string, string>> = {
   communication: { en: "Communication", de: "Kommunikation" },
   "case-study": { en: "Case Study", de: "Fallstudie" },
 }
+
+// Default placeholder image if no heroImage
+const heroImagePath = post.data.heroImage || "/images/blog/placeholder.png"
+const optimizedImage = optimizedImages[heroImagePath]
 ---
 
-<article class="group bg-white dark:bg-secondary-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-secondary-200/50 dark:border-secondary-700/50">
-  <a href={`${basePath}/blog/${cleanSlug}`} class="block">
-    <!-- Category Badge -->
-    <div class="p-6 pb-0">
-      <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+<a
+  href={`${basePath}/blog/${cleanSlug}/`}
+  class="group block bg-secondary-50 dark:bg-secondary-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover-lift"
+>
+  <!-- Hero Image -->
+  <div class="aspect-video relative overflow-hidden">
+    {optimizedImage ? (
+      <Image
+        src={optimizedImage}
+        alt={post.data.title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+        widths={[400, 600, 800]}
+        sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
+      />
+    ) : (
+      <img
+        src={heroImagePath}
+        alt={post.data.title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        loading="lazy"
+      />
+    )}
+    <!-- Category Badge overlay -->
+    <div class="absolute top-4 left-4">
+      <span class="px-3 py-1 text-xs font-medium rounded-full bg-primary-500/90 text-white backdrop-blur-sm">
         {categoryLabels[post.data.category]?.[lang] || post.data.category}
       </span>
     </div>
+  </div>
 
-    <!-- Content -->
-    <div class="p-6">
-      <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
-        {post.data.title}
-      </h3>
+  <!-- Content -->
+  <div class="p-6">
+    <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors line-clamp-2">
+      {post.data.title}
+    </h3>
 
-      <p class="text-secondary-600 dark:text-secondary-400 mb-4 line-clamp-3">
-        {post.data.description}
-      </p>
+    <p class="text-secondary-700 dark:text-secondary-300 mb-4 line-clamp-3">
+      {post.data.description}
+    </p>
 
-      <!-- Meta -->
-      <div class="flex items-center justify-between text-sm text-secondary-500 dark:text-secondary-500">
-        <time datetime={post.data.pubDate.toISOString()}>
-          {formattedDate}
-        </time>
+    <!-- Meta -->
+    <div class="flex items-center justify-between">
+      <time datetime={post.data.pubDate.toISOString()} class="text-sm text-secondary-500 dark:text-secondary-400">
+        {formattedDate}
+      </time>
 
-        <span class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium group-hover:translate-x-1 transition-transform">
-          {lang === "de" ? "Lesen" : "Read"}
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </span>
-      </div>
+      <span class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-medium group-hover:gap-3 transition-all">
+        {lang === "de" ? "Lesen" : "Read"}
+        <BsArrowRight className="w-4 h-4" />
+      </span>
     </div>
-  </a>
-</article>
+  </div>
+</a>
 
 <style>
   .line-clamp-2 {
@@ -85,5 +128,13 @@ const categoryLabels: Record<string, Record<string, string>> = {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
   }
 </style>

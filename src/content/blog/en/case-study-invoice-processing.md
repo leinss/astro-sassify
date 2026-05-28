@@ -46,7 +46,7 @@ We designed a vision AI pipeline that reads, understands, and validates invoices
 | Document Intake | Google Drive / Email | Clients already used these |
 | Workflow Engine | n8n | Self-hosted for data privacy |
 | Document AI (Cloud) | Claude Vision API | Best-in-class document understanding |
-| Document AI (Local) | Ollama + LLaVA | For clients requiring on-premise |
+| Document AI (Local) | Ollama + DeepSeek-OCR | For clients requiring on-premise |
 | Validation | Custom n8n logic | Business rule enforcement |
 | Export | DATEV XML / CSV | Native accounting software format |
 
@@ -105,7 +105,7 @@ Claude Vision receives the document image and extracts structured data:
 - Multi-language support (German, English, French invoices)
 - Extracts implicit data (infers payment terms from text)
 
-**Ollama + LLaVA Alternative**: For clients in regulated industries (healthcare, legal), we deploy LLaVA 13B locally. Processing stays on-premise, meeting strict compliance requirements.
+**Ollama + DeepSeek-OCR Alternative**: For clients in regulated industries (healthcare, legal), we deploy DeepSeek-OCR locally. Processing stays on-premise, meeting strict compliance requirements. The workflow automatically detects PDFs and converts them to images for processing.
 
 **Step 3: Intelligent Validation**
 

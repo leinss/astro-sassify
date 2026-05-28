@@ -16,7 +16,7 @@ export interface Props {
 }
 
 // Detect language from URL
-const urlLang = Astro.url.pathname.includes('/ai-communication') ? 'en' : 'de';
+const urlLang = Astro.url.pathname.startsWith('/en') ? 'en' : 'de';
 
 const {
   title,

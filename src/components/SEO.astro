@@ -28,11 +28,11 @@ const currentUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
 const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
 // Alternate URLs for language switching
-const altDe = Astro.url.pathname.includes("/ai-communication")
-  ? Astro.url.pathname.replace("/ai-communication", "/ki-kommunikation")
+const altDe = Astro.url.pathname.startsWith("/en")
+  ? Astro.url.pathname.replace(/^\/en/, "/de")
   : Astro.url.pathname;
-const altEn = Astro.url.pathname.includes("/ki-kommunikation")
-  ? Astro.url.pathname.replace("/ki-kommunikation", "/ai-communication")
+const altEn = Astro.url.pathname.startsWith("/de")
+  ? Astro.url.pathname.replace(/^\/de/, "/en")
   : Astro.url.pathname;
 
 // JSON-LD Organization Schema
@@ -114,7 +114,7 @@ const webPageSchema = {
 <!-- Language Alternates -->
 <link rel="alternate" hreflang="de" href={`${siteUrl}${altDe}`} />
 <link rel="alternate" hreflang="en" href={`${siteUrl}${altEn}`} />
-<link rel="alternate" hreflang="x-default" href={`${siteUrl}/ki-kommunikation`} />
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/de`} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
