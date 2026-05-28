@@ -41,15 +41,15 @@ export const prerender = true;
       const pathname = window.location.pathname;
 
       // Check if the path contains language information
-      if (pathname.includes('/ai-communication/')) {
+      if (pathname.startsWith('/en/') || pathname === '/en') {
         // If we're in the English section, redirect to the English 404 page
-        window.location.href = '/ai-communication/404';
-      } else if (pathname.includes('/ki-kommunikation/')) {
+        window.location.href = '/en/404';
+      } else if (pathname.startsWith('/de/') || pathname === '/de') {
         // If we're in the German section, redirect to the German 404 page
-        window.location.href = '/ki-kommunikation/404';
+        window.location.href = '/de/404';
       } else {
         // Default to German 404 page for any other path
-        window.location.href = '/ki-kommunikation/404';
+        window.location.href = '/de/404';
       }
     })();
   </script>

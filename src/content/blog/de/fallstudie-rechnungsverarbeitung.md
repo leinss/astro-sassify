@@ -46,7 +46,7 @@ Wir haben eine Vision-KI-Pipeline entwickelt, die Rechnungen automatisch liest, 
 | Dokumenteneingang | Google Drive / E-Mail | Mandanten nutzten diese bereits |
 | Workflow-Engine | n8n | Self-hosted für Datenschutz |
 | Dokument-KI (Cloud) | Claude Vision API | Beste Dokumentenverständnis-Qualität |
-| Dokument-KI (Lokal) | Ollama + LLaVA | Für Mandanten mit On-Premise-Anforderung |
+| Dokument-KI (Lokal) | Ollama + DeepSeek-OCR | Für Mandanten mit On-Premise-Anforderung |
 | Validierung | Custom n8n Logic | Durchsetzung von Geschäftsregeln |
 | Export | DATEV XML / CSV | Natives Buchhaltungssoftware-Format |
 
@@ -105,7 +105,7 @@ Claude Vision erhält das Dokumentenbild und extrahiert strukturierte Daten:
 - Mehrsprachige Unterstützung (deutsche, englische, französische Rechnungen)
 - Extrahiert implizite Daten (leitet Zahlungsbedingungen aus Text ab)
 
-**Ollama + LLaVA Alternative**: Für Mandanten in regulierten Branchen (Gesundheit, Recht) deployen wir LLaVA 13B lokal. Die Verarbeitung bleibt on-premise und erfüllt strenge Compliance-Anforderungen.
+**Ollama + DeepSeek-OCR Alternative**: Für Mandanten in regulierten Branchen (Gesundheit, Recht) deployen wir DeepSeek-OCR lokal. Die Verarbeitung bleibt on-premise und erfüllt strenge Compliance-Anforderungen. Der Workflow erkennt automatisch PDFs und konvertiert sie für die Verarbeitung in Bilder.
 
 **Schritt 3: Intelligente Validierung**
 

@@ -75,44 +75,37 @@ const alternateBasePath = lang === 'en' ? '/de' : '/en';
   </div>
 </section>
 
-<!-- Problem Section -->
+<!-- Content Sections -->
 <section class="py-16 bg-white dark:bg-secondary-950">
   <div class="container-custom">
+    <!-- Problem -->
     <div class="max-w-3xl mx-auto reveal">
       <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-6">
         {t.problem_title}
       </h2>
-      <p class="text-lg text-secondary-600 dark:text-secondary-300 leading-relaxed">
+      <p class="text-lg text-secondary-700 dark:text-secondary-300 leading-relaxed">
         {t.problem_text}
       </p>
     </div>
-  </div>
-</section>
 
-<!-- Solution Section -->
-<section class="py-16 bg-primary-50 dark:bg-primary-950/50">
-  <div class="container-custom">
-    <div class="max-w-3xl mx-auto reveal">
+    <!-- Solution -->
+    <div class="max-w-3xl mx-auto mt-16 pt-16 border-t border-secondary-200 dark:border-secondary-800 reveal">
       <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-6">
         {t.solution_title}
       </h2>
-      <p class="text-lg text-secondary-600 dark:text-secondary-300 leading-relaxed">
+      <p class="text-lg text-secondary-700 dark:text-secondary-300 leading-relaxed">
         {t.solution_text}
       </p>
     </div>
-  </div>
-</section>
 
-<!-- Use Cases Section -->
-<section class="py-16 bg-primary-50 dark:bg-primary-950/50">
-  <div class="container-custom">
-    <div class="max-w-4xl mx-auto">
+    <!-- Use Cases -->
+    <div class="max-w-4xl mx-auto mt-16 pt-16 border-t border-secondary-200 dark:border-secondary-800">
       <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-8 reveal">
         {t.use_cases_title}
       </h2>
       <ul class="space-y-4 reveal-stagger">
         {t.use_cases.map((useCase: string) => (
-          <li class="flex items-start gap-4 p-4 bg-white dark:bg-secondary-900 rounded-lg shadow-sm">
+          <li class="flex items-start gap-4 p-4 bg-secondary-50 dark:bg-secondary-900 rounded-lg shadow-sm">
             <span class="text-primary-600 dark:text-primary-400 mt-1 shrink-0">
               <BsCheckCircleFill className="w-5 h-5" />
             </span>
@@ -121,13 +114,9 @@ const alternateBasePath = lang === 'en' ? '/de' : '/en';
         ))}
       </ul>
     </div>
-  </div>
-</section>
 
-<!-- Benefits Section -->
-<section class="py-16 bg-white dark:bg-secondary-900">
-  <div class="container-custom">
-    <div class="max-w-4xl mx-auto">
+    <!-- Benefits -->
+    <div class="max-w-4xl mx-auto mt-16 pt-16 border-t border-secondary-200 dark:border-secondary-800">
       <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-8 reveal">
         {t.benefits_title}
       </h2>

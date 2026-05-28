@@ -24,4 +24,7 @@ pnpm-debug.log*
 .idea/
 .qodo
 
+# browser automation test artifacts
+.playwright-mcp/
+
 docs/
