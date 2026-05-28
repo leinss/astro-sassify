@@ -114,13 +114,11 @@ const enPath = getLocalizedPath("en")
         >{t.header.services}</a
       >
 
-      <!-- Blog hidden until content is ready
       <a
-        href={`${basePath}/blog`}
+        href={`${basePath}/blog/`}
         class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >{t.header.blog}</a
       >
-      -->
     </nav>
 
     <div class="flex items-center space-x-2">
@@ -264,14 +262,12 @@ const enPath = getLocalizedPath("en")
             >{t.header.services}</a
           >
 
-          <!-- Blog hidden until content is ready
           <a
-            href={`${basePath}/blog`}
+            href={`${basePath}/blog/`}
             @click="open = false"
             class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30"
             >{t.header.blog}</a
           >
-          -->
 
           <div class="border-t border-secondary-200 dark:border-secondary-700 my-2"></div>
 

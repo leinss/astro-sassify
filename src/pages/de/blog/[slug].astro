@@ -13,7 +13,8 @@ const t = i18n[lang]
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => {
-    return data.lang === "de"
+    // Filter by language and draft status
+    return data.lang === "de" && !data.draft
   })
 
   return posts.map((post) => {
@@ -52,7 +53,7 @@ const categoryLabels: Record<string, string> = {
 
 // Get alternate language URL if available
 const alternateUrl = post.data.alternateSlug
-  ? `/ai-communication/blog/${post.data.alternateSlug}`
+  ? `/en/blog/${post.data.alternateSlug}/`
   : null
 ---
 
@@ -67,7 +68,7 @@ const alternateUrl = post.data.alternateSlug
       <div class="container-custom max-w-4xl">
         <!-- Back Link -->
         <a
-          href="/ki-kommunikation/blog"
+          href="/de/blog/"
           class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +145,7 @@ const alternateUrl = post.data.alternateSlug
               Erhalten Sie praktische Automatisierungstipps und Brancheneinblicke direkt in Ihr Postfach.
             </p>
             <a
-              href="/ki-kommunikation/#newsletter"
+              href="/de/#newsletter"
               class="btn-outline inline-flex items-center"
             >
               Newsletter abonnieren
@@ -163,7 +164,7 @@ const alternateUrl = post.data.alternateSlug
               Lassen Sie uns in einem kostenlosen Strategiegespräch besprechen, wie Automatisierung Ihrem Unternehmen helfen kann.
             </p>
             <a
-              href="/ki-kommunikation/#contact"
+              href="/de/#contact"
               class="btn-primary inline-flex items-center"
             >
               Gespräch vereinbaren
