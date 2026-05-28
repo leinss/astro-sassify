@@ -1,0 +1,185 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "Blitz-Antwort — Personalisierte Lead-Response",
+  "active": false,
+  "versionId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "nodes": [
+    {
+      "id": "webhook-trigger",
+      "name": "Kontaktformular Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "blitz-antwort-lead",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "blitz-antwort-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "validate-input",
+      "name": "Eingabe validieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\n\nconst name = (body.name || '').trim();\nconst email = (body.email || '').trim();\nconst message = (body.message || '').trim();\nconst company = (body.company || '').trim();\n\nif (!name || !email || !message) {\n  return [{\n    json: {\n      valid: false,\n      error: 'Name, E-Mail und Nachricht sind erforderlich'\n    }\n  }];\n}\n\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\nif (!emailRegex.test(email)) {\n  return [{\n    json: {\n      valid: false,\n      error: 'Ungültige E-Mail-Adresse'\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    valid: true,\n    name,\n    email,\n    message,\n    company,\n    received_at: new Date().toISOString()\n  }\n}];"
+      }
+    },
+    {
+      "id": "check-valid",
+      "name": "Validierung OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [640, 300],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "error-response",
+      "name": "Fehler zurückgeben",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 460],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, error: $json.error }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    },
+    {
+      "id": "classify-lead",
+      "name": "Lead klassifizieren (KI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [860, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kimi-api-header-auth",
+          "name": "Kimi API (Moonshot)"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.moonshot.cn/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"kimi-k2\",\n  \"max_tokens\": 512,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Du bist ein Lead-Qualifizierungsassistent für eine Unternehmensberatung spezialisiert auf KI-Automatisierung. Analysiere eingehende Anfragen und klassifiziere den Lead. Antworte NUR mit validem JSON, ohne Erklärungen.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analysiere diesen Lead:\\n\\nName: {{ $json.name }}\\nUnternehmen: {{ $json.company || 'nicht angegeben' }}\\nNachricht: {{ $json.message }}\\n\\nGib zurück:\\n{\\n  \\\"score\\\": <1-10>,\\n  \\\"kategorie\\\": \\\"<smb|enterprise|agency|private>\\\",\\n  \\\"hauptinteresse\\\": \\\"<ein kurzer Satz>\\\",\\n  \\\"dringlichkeit\\\": \\\"<hoch|mittel|niedrig>\\\",\\n  \\\"sprache\\\": \\\"<de|en>\\\"\\n}\"\n    }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "parse-classification",
+      "name": "Klassifikation parsen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 200],
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst lead = $('Eingabe validieren').first().json;\n\ntry {\n  let content = response.choices?.[0]?.message?.content || '{}';\n  content = content.replace(/```json\\n?/g, '').replace(/```\\n?/g, '').trim();\n  const jsonMatch = content.match(/{[\\s\\S]*}/);\n  const classification = jsonMatch ? JSON.parse(jsonMatch[0]) : {};\n\n  return [{\n    json: {\n      ...lead,\n      classification: {\n        score: classification.score || 5,\n        kategorie: classification.kategorie || 'smb',\n        hauptinteresse: classification.hauptinteresse || lead.message.substring(0, 100),\n        dringlichkeit: classification.dringlichkeit || 'mittel',\n        sprache: classification.sprache || 'de'\n      }\n    }\n  }];\n} catch (e) {\n  return [{\n    json: {\n      ...lead,\n      classification: {\n        score: 5,\n        kategorie: 'smb',\n        hauptinteresse: lead.message.substring(0, 100),\n        dringlichkeit: 'mittel',\n        sprache: 'de'\n      }\n    }\n  }];\n}"
+      }
+    },
+    {
+      "id": "generate-response",
+      "name": "Personalisierte Antwort generieren",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1300, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kimi-api-header-auth",
+          "name": "Kimi API (Moonshot)"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.moonshot.cn/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"kimi-k2\",\n  \"max_tokens\": 800,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Du bist Tobias Leinss, Berater für KI-Automatisierung. Schreibe eine professionelle, persönliche Erstantwort auf eine Kundenanfrage. Der Ton ist freundlich aber professionell. Erwähne konkret das Anliegen des Kunden. Schlage immer einen nächsten Schritt vor (Beratungsgespräch via Cal.com: https://cal.com/tobias-leinss/beratung). Schreibe auf {{ $json.classification.sprache === 'en' ? 'Englisch' : 'Deutsch' }}. Gib NUR den E-Mail-Text zurück, kein Betreff, keine Anleitung.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Schreibe eine Erstantwort für:\\n\\nKontaktperson: {{ $json.name }}{{ $json.company ? ' von ' + $json.company : '' }}\\nKategorie: {{ $json.classification.kategorie }}\\nHauptinteresse: {{ $json.classification.hauptinteresse }}\\nDringlichkeit: {{ $json.classification.dringlichkeit }}\\nOriginalnachricht: {{ $json.message }}\"\n    }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "build-email",
+      "name": "E-Mail zusammenbauen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1520, 200],
+      "parameters": {
+        "jsCode": "const lead = $('Klassifikation parsen').first().json;\nconst response = $input.first().json;\n\nconst emailBody = response.choices?.[0]?.message?.content || '';\n\nconst isDE = lead.classification.sprache !== 'en';\nconst subject = isDE\n  ? `Re: Ihre Anfrage — ${lead.classification.hauptinteresse.substring(0, 50)}`\n  : `Re: Your inquiry — ${lead.classification.hauptinteresse.substring(0, 50)}`;\n\nreturn [{\n  json: {\n    to: lead.email,\n    subject,\n    body: emailBody,\n    lead_score: lead.classification.score,\n    kategorie: lead.classification.kategorie,\n    dringlichkeit: lead.classification.dringlichkeit,\n    name: lead.name,\n    company: lead.company,\n    original_message: lead.message,\n    received_at: lead.received_at\n  }\n}];"
+      }
+    },
+    {
+      "id": "success-response",
+      "name": "Erfolg bestätigen",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1740, 200],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Ihre Nachricht wurde empfangen. Sie erhalten in Kürze eine persönliche Antwort.\" }",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Kontaktformular Webhook": {
+      "main": [[{"node": "Eingabe validieren", "type": "main", "index": 0}]]
+    },
+    "Eingabe validieren": {
+      "main": [[{"node": "Validierung OK?", "type": "main", "index": 0}]]
+    },
+    "Validierung OK?": {
+      "main": [
+        [{"node": "Lead klassifizieren (KI)", "type": "main", "index": 0}],
+        [{"node": "Fehler zurückgeben", "type": "main", "index": 0}]
+      ]
+    },
+    "Lead klassifizieren (KI)": {
+      "main": [[{"node": "Klassifikation parsen", "type": "main", "index": 0}]]
+    },
+    "Klassifikation parsen": {
+      "main": [[{"node": "Personalisierte Antwort generieren", "type": "main", "index": 0}]]
+    },
+    "Personalisierte Antwort generieren": {
+      "main": [[{"node": "E-Mail zusammenbauen", "type": "main", "index": 0}]]
+    },
+    "E-Mail zusammenbauen": {
+      "main": [[{"node": "Erfolg bestätigen", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "blitz-antwort-demo"
+  }
+}
