@@ -2,9 +2,10 @@
 title: "The ROI of Business Process Automation"
 description: "How to calculate the return on investment for automation projects and make the business case for automation."
 pubDate: 2025-02-26
+heroImage: "/images/blog/roi-automation.png"
 category: automation
 tags: ["roi", "business-case", "cost-savings"]
-draft: true
+draft: false
 lang: en
 alternateSlug: "roi-von-automatisierung"
 ---

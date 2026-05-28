@@ -1,5 +1,6 @@
 ---
 import i18n from "../assets/i18n.json"
+import config from "../assets/config"
 import { Image } from "astro:assets"
 import profile from "../assets/images/content/profile.png"
 import profile2 from "../assets/images/content/profile_2.png"
@@ -11,6 +12,7 @@ interface Props {
 // Get language from props
 const { lang } = Astro.props
 const t = i18n[lang]
+const bookingUrl = lang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en
 ---
 
 <section class="relative py-20 bg-white dark:bg-gray-900" id="about">
@@ -31,6 +33,18 @@ const t = i18n[lang]
           class="rounded-xl mx-auto object-contain bg-gray-100 dark:bg-gray-800 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
           loading="lazy"
         />
+
+        <!-- Tool Badges -->
+        <div class="pt-4">
+          <p class="text-sm text-gray-500 dark:text-gray-400 mb-3">{t.about_me.tools_label}</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            {t.about_me.tools.map((tool: string) => (
+              <span class="px-3 py-1 text-sm font-medium bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 rounded-full">
+                {tool}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div x-data="{ activeTab: 'mission' }" class="space-y-6 reveal">
@@ -122,6 +136,18 @@ const t = i18n[lang]
               </p>
             </div>
           </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="text-center mt-8">
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-cta"
+          >
+            {t.hero.cta}
+          </a>
         </div>
       </div>
 
