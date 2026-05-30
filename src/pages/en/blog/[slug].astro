@@ -7,6 +7,10 @@ import Header from "../../../components/Header.astro"
 import Footer from "../../../components/Footer.astro"
 import BackToTop from "../../../components/BackToTop.astro"
 import i18n from "../../../assets/i18n.json"
+import InvoiceDemoWidget from "../../../components/InvoiceDemoWidget.astro"
+import BlitzAntwortDemo from "../../../components/BlitzAntwortDemo.astro"
+import MeetingBotDemo from "../../../components/MeetingBotDemo.astro"
+import ExcelRetterDemo from "../../../components/ExcelRetterDemo.astro"
 
 const lang = "en"
 const t = i18n[lang]
@@ -55,6 +59,12 @@ const categoryLabels: Record<string, string> = {
 const alternateUrl = post.data.alternateSlug
   ? `/de/blog/${post.data.alternateSlug}/`
   : null
+
+const slug = post.slug.replace(/^en\//, "")
+const showInvoiceDemo = slug === "automating-invoice-processing"
+const showBlitzDemo = slug === "automating-communication"
+const showMeetingDemo = slug === "meeting-minutes-automation"
+const showExcelDemo = slug === "from-spreadsheets-to-systems"
 ---
 
 <Layout
@@ -120,6 +130,12 @@ const alternateUrl = post.data.alternateSlug
         ">
           <Content />
         </div>
+
+        <!-- Live Demo Widgets -->
+        {showInvoiceDemo && <InvoiceDemoWidget lang="en" />}
+        {showBlitzDemo && <BlitzAntwortDemo lang="en" />}
+        {showMeetingDemo && <MeetingBotDemo lang="en" />}
+        {showExcelDemo && <ExcelRetterDemo lang="en" />}
 
         <!-- Tags -->
         {post.data.tags && post.data.tags.length > 0 && (
