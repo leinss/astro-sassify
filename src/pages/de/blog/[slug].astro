@@ -11,6 +11,7 @@ import InvoiceDemoWidget from "../../../components/InvoiceDemoWidget.astro"
 import BlitzAntwortDemo from "../../../components/BlitzAntwortDemo.astro"
 import MeetingBotDemo from "../../../components/MeetingBotDemo.astro"
 import ExcelRetterDemo from "../../../components/ExcelRetterDemo.astro"
+import FAQAssistentDemo from "../../../components/FAQAssistentDemo.astro"
 
 const lang = "de"
 const t = i18n[lang]
@@ -65,6 +66,7 @@ const showInvoiceDemo = slug === "rechnungsverarbeitung-automatisieren"
 const showBlitzDemo = slug === "kommunikation-automatisieren-menschlich-bleiben"
 const showMeetingDemo = slug === "meeting-protokoll-automatisieren"
 const showExcelDemo = slug === "von-tabellen-zu-systemen"
+const showFAQDemo = slug === "faq-assistent-ki-support"
 ---
 
 <Layout
@@ -136,6 +138,7 @@ const showExcelDemo = slug === "von-tabellen-zu-systemen"
         {showBlitzDemo && <BlitzAntwortDemo lang="de" />}
         {showMeetingDemo && <MeetingBotDemo lang="de" />}
         {showExcelDemo && <ExcelRetterDemo lang="de" />}
+        {showFAQDemo && <FAQAssistentDemo lang="de" />}
 
         <!-- Tags -->
         {post.data.tags && post.data.tags.length > 0 && (
