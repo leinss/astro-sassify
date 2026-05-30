@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="
+  $watch('darkMode', val => localStorage.setItem('darkMode', val));
+" :class="{ 'dark': darkMode }"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/x-icon" href="/favicon.ico"><meta name="generator" content="Astro v5.16.11"><title>Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI - Business Automation Solutions - Turn Manual Work Into Digital Efficiency</title><!-- SEO Meta Tags --><!-- Primary Meta Tags --><meta name="title" content="Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI - Business Automation Solutions - Turn Manual Work Into Digital Efficiency"><meta name="description" content="How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work."><meta name="author" content="Tobias Leinss"><link rel="canonical" href="https://leinss-consulting.de/en/blog/from-spreadsheets-to-systems/"><!-- Language Alternates --><link rel="alternate" hreflang="de" href="https://leinss-consulting.de/de/blog/from-spreadsheets-to-systems/"><link rel="alternate" hreflang="en" href="https://leinss-consulting.de/en/blog/from-spreadsheets-to-systems/"><link rel="alternate" hreflang="x-default" href="https://leinss-consulting.de/de"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://leinss-consulting.de/en/blog/from-spreadsheets-to-systems/"><meta property="og:title" content="Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI - Business Automation Solutions - Turn Manual Work Into Digital Efficiency"><meta property="og:description" content="How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work."><meta property="og:image" content="https://leinss-consulting.de/images/og-image.png"><meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="de_DE"><meta property="og:site_name" content="Leinss Consulting"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://leinss-consulting.de/en/blog/from-spreadsheets-to-systems/"><meta property="twitter:title" content="Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI - Business Automation Solutions - Turn Manual Work Into Digital Efficiency"><meta property="twitter:description" content="How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work."><meta property="twitter:image" content="https://leinss-consulting.de/images/og-image.png"><!-- JSON-LD Structured Data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Leinss Consulting","url":"https://leinss-consulting.de","logo":"https://leinss-consulting.de/images/logo.png","founder":{"@type":"Person","name":"Tobias Leinss"},"address":{"@type":"PostalAddress","addressCountry":"DE","addressRegion":"Baden-Württemberg"},"contactPoint":{"@type":"ContactPoint","contactType":"customer service","availableLanguage":["German","English"]},"sameAs":["https://linkedin.com/in/tobiasleinss"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Business Automation","description":"How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work.","provider":{"@type":"Organization","name":"Leinss Consulting"},"serviceType":"Business Automation Consulting","areaServed":{"@type":"Country","name":"Germany"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI - Business Automation Solutions - Turn Manual Work Into Digital Efficiency","description":"How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work.","url":"https://leinss-consulting.de/en/blog/from-spreadsheets-to-systems/","inLanguage":"en-US","publisher":{"@type":"Organization","name":"Leinss Consulting","logo":{"@type":"ImageObject","url":"https://leinss-consulting.de/images/logo.png"}}}</script><!-- Fonts --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CDGfc0hd.js"></script><link rel="stylesheet" href="/_astro/_slug_.CQ7VyJiI.css">
+<link rel="stylesheet" href="/_astro/_slug_.BJ-bJxx2.css"><script type="module" src="/_astro/page.C5bFeOsj.js"></script></head> <body class="antialiased bg-white dark:bg-secondary-950 text-secondary-900 dark:text-secondary-100 transition-colors duration-300 flex flex-col min-h-screen"> <div id="page-wrapper" class="page-transition-wrapper flex-1 flex flex-col">  <header class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300 header-transition" id="header" data-astro-cid-3ef6ksr2> <div class="container-custom flex items-center justify-between" data-astro-cid-3ef6ksr2> <a href="/en/#hero" class="flex items-center" aria-label="Go to homepage" data-astro-cid-3ef6ksr2> <img src="/_astro/logo-black-right.C_o3QmLi_Z222Cmp.webp" x-show="!darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" decoding="async" fetchpriority="auto" width="489" height="225" class="h-16 lg:h-20 w-auto"> <img src="/_astro/logo-white-right.Bf8itkGN_Z17aMnQ.webp" x-show="darkMode" alt="Logo" loading="eager" data-astro-cid-3ef6ksr2="true" decoding="async" fetchpriority="auto" width="491" height="214" class="h-16 lg:h-20 w-auto"> </a> <nav class="hidden lg:flex items-center space-x-6" data-astro-cid-3ef6ksr2> <!-- Home with dropdown for sections --> <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false" data-astro-cid-3ef6ksr2> <a href="/en/" class="flex items-center text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors" data-astro-cid-3ef6ksr2> Home <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" data-astro-cid-3ef6ksr2></path> </svg> </a> <div x-show="open" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-1" class="absolute left-0 mt-2 w-44 bg-white dark:bg-secondary-900 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/10 py-2 z-50" x-cloak data-astro-cid-3ef6ksr2> <a href="/en/#problem" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>Challenges</a> <a href="/en/#solution" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>Solutions</a> <a href="/en/#about" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>About</a> <a href="/en/#faq" class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-astro-cid-3ef6ksr2>FAQ</a> </div> </div> <!-- Services - prominent standalone link --> <a href="/en/services/" class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors" data-astro-cid-3ef6ksr2>Services</a> <a href="/en/blog/" class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors" data-astro-cid-3ef6ksr2>Blog</a> </nav> <div class="flex items-center space-x-2" data-astro-cid-3ef6ksr2> <!-- Language switcher - visible on larger screens --> <div class="hidden sm:block" data-astro-cid-3ef6ksr2> <a href="/de/blog/von-tabellen-zu-systemen/" class="language-switcher focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200" aria-label="Auf Deutsch" data-astro-cid-a2mxz4y6> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="lang-icon" data-astro-cid-a2mxz4y6="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"></path></svg> <div class="lang-stack" data-astro-cid-a2mxz4y6> <span class="current-lang" data-astro-cid-a2mxz4y6>EN</span> <span class="other-lang" data-astro-cid-a2mxz4y6>DE</span> </div> </a>  </div> <!-- Dark mode toggle - visible on larger screens --> <button x-on:click="darkMode = !darkMode" class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500" aria-label="Toggle dark mode" data-astro-cid-3ef6ksr2> <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" data-astro-cid-3ef6ksr2></path> </svg> </button> <a href="https://cal.com/tobias-leinss/strategymeeting" class="btn-primary" data-astro-cid-3ef6ksr2>Book a Call</a> <!-- Mobile Menu Button and Dropdown --> <div x-data="{ open: false, showAllPages: false }" @keydown.escape.window="open = false" data-astro-cid-3ef6ksr2> <button @click="open = !open" class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500" aria-label="Toggle menu" data-astro-cid-3ef6ksr2> <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" data-astro-cid-3ef6ksr2></path> </svg> </button> <div x-show="open" @click.away="open = false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="absolute top-16 right-4 w-52 py-2 bg-white dark:bg-secondary-900 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/10" x-cloak data-astro-cid-3ef6ksr2> <!-- Primary: Home --> <a href="/en/" @click="open = false" class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30" data-astro-cid-3ef6ksr2>Home</a> <!-- Section links (indented, smaller) --> <div class="pl-3 border-l-2 border-secondary-200 dark:border-secondary-700 ml-4 my-1" data-astro-cid-3ef6ksr2> <a href="/en/#problem" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>Challenges</a> <a href="/en/#solution" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>Solutions</a> <a href="/en/#about" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>About</a> <a href="/en/#faq" @click="open = false" class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400" data-astro-cid-3ef6ksr2>FAQ</a> </div> <!-- Primary: Services --> <a href="/en/services/" @click="open = false" class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30 mt-1" data-astro-cid-3ef6ksr2>Services</a> <a href="/en/blog/" @click="open = false" class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30" data-astro-cid-3ef6ksr2>Blog</a> <div class="border-t border-secondary-200 dark:border-secondary-700 my-2" data-astro-cid-3ef6ksr2></div> <!-- Language Switcher in Mobile Menu --> <a href="/de/blog/von-tabellen-zu-systemen/" class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800" @click="open = false" data-astro-cid-3ef6ksr2> <div class="flex items-center" data-astro-cid-3ef6ksr2> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="h-4 w-4 mr-2" data-astro-cid-3ef6ksr2="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="m478.33 433.6-90-218a22 22 0 0 0-40.67 0l-90 218a22 22 0 1 0 40.67 16.79L316.66 406h102.67l18.33 44.39A22 22 0 0 0 458 464a22 22 0 0 0 20.32-30.4zM334.83 362 368 281.65 401.17 362zm-66.99-19.08a22 22 0 0 0-4.89-30.7c-.2-.15-15-11.13-36.49-34.73 39.65-53.68 62.11-114.75 71.27-143.49H330a22 22 0 0 0 0-44H214V70a22 22 0 0 0-44 0v20H54a22 22 0 0 0 0 44h197.25c-9.52 26.95-27.05 69.5-53.79 108.36-31.41-41.68-43.08-68.65-43.17-68.87a22 22 0 0 0-40.58 17c.58 1.38 14.55 34.23 52.86 83.93.92 1.19 1.83 2.35 2.74 3.51-39.24 44.35-77.74 71.86-93.85 80.74a22 22 0 1 0 21.07 38.63c2.16-1.18 48.6-26.89 101.63-85.59 22.52 24.08 38 35.44 38.93 36.1a22 22 0 0 0 30.75-4.9z"></path></svg> <span data-astro-cid-3ef6ksr2>Auf Deutsch</span> </div> </a> <!-- Dark Mode Toggle Button --> <button x-on:click="darkMode = !darkMode; open = false" class="block w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800" data-astro-cid-3ef6ksr2> <div class="flex items-center" data-astro-cid-3ef6ksr2> <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" data-astro-cid-3ef6ksr2></path> </svg> <svg x-show="darkMode" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" data-astro-cid-3ef6ksr2> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" data-astro-cid-3ef6ksr2></path> </svg> <span data-astro-cid-3ef6ksr2> <span x-show="!darkMode" data-astro-cid-3ef6ksr2>Dark Mode</span> <span x-show="darkMode" data-astro-cid-3ef6ksr2>Light Mode</span> </span> </div> </button> <!-- Mobile All Pages Dropdown --> <!-- <button
+            @click="showAllPages = !showAllPages"
+            class="w-full text-left px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-800 font-semibold border-t border-gray-200 dark:border-gray-700 mt-1 pt-1 flex items-center justify-between"
+          >
+            All Pages
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" :class="{ 'transform rotate-180': showAllPages }">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div
+            x-show="showAllPages"
+            class="py-1 bg-gray-50 dark:bg-secondary-800"
+          >
+            {allPages.map(page => (
+              <a href={page.url} class="block px-6 py-1 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-secondary-100 dark:hover:bg-secondary-700">
+                {page.text}
+              </a>
+            ))} --> </div> </div> </div> </div> </header>  <main class="min-h-screen bg-gradient-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900"> <article class="py-12 md:py-20"> <div class="container-custom max-w-4xl"> <!-- Back Link --> <a href="/en/blog/" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"> <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path> </svg>
+Back to Blog
+</a> <!-- Header --> <header class="mb-12"> <div class="flex flex-wrap items-center gap-4 mb-6"> <span class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"> Automation </span> <time datetime="2025-03-12T00:00:00.000Z" class="text-secondary-500 dark:text-secondary-400"> March 12, 2025 </time> <a href="/de/blog/von-tabellen-zu-systemen/" class="text-sm text-secondary-500 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400 transition-colors">
+Auf Deutsch lesen
+</a> </div> <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-900 dark:text-white mb-6 leading-tight"> Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI </h1> <p class="text-xl text-secondary-600 dark:text-secondary-400"> How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work. </p> </header> <!-- Content --> <div class="prose prose-lg dark:prose-invert max-w-none
+          prose-headings:text-secondary-900 dark:prose-headings:text-white
+          prose-p:text-secondary-700 dark:prose-p:text-secondary-300
+          prose-a:text-primary-600 dark:prose-a:text-primary-400
+          prose-strong:text-secondary-900 dark:prose-strong:text-white
+          prose-ul:text-secondary-700 dark:prose-ul:text-secondary-300
+          prose-ol:text-secondary-700 dark:prose-ol:text-secondary-300
+          prose-li:text-secondary-700 dark:prose-li:text-secondary-300
+          prose-blockquote:border-primary-500 prose-blockquote:text-secondary-600 dark:prose-blockquote:text-secondary-400
+          prose-code:text-primary-600 dark:prose-code:text-primary-400
+          prose-pre:bg-secondary-900 dark:prose-pre:bg-secondary-800
+        "> <p>Every business has one: the contact list that grew over years. Names with inconsistent capitalization, email addresses in ALL CAPS, phone numbers in four different formats, company names sometimes “LLC” and sometimes “llc” – and somewhere in there, duplicate entries hiding.</p>
+<p>Cleaning it manually costs hours, sometimes days. And just when you’re done, new entries come in and break everything again.</p>
+<h2 id="what-really-happens-with-dirty-data">What Really Happens With Dirty Data?</h2>
+<p>The visible problems are obvious. But the invisible ones are more expensive:</p>
+<ul>
+<li><strong>Duplicate emails sent</strong> damage your reputation with recipients and email providers</li>
+<li><strong>Failed validations</strong> because “John Smith” and “john smith” are treated as two different people</li>
+<li><strong>Missed contacts</strong> because searching for “Acme Corp” finds nothing, even though “acme corp” and “Acme corp” are in the system</li>
+<li><strong>Compliance risk</strong> from incorrect or outdated records</li>
+</ul>
+<p>The result: the CRM that was supposed to solve the problem becomes the problem itself.</p>
+<h2 id="the-spreadsheet-rescuer-automated-data-cleaning-with-ai">The Spreadsheet Rescuer: Automated Data Cleaning with AI</h2>
+<p>This workflow solves exactly that. You upload your CSV data (or paste it directly), and n8n sends it to Claude – which:</p>
+<ol>
+<li>Removes <strong>leading and trailing whitespace</strong></li>
+<li>Normalizes <strong>email addresses</strong> (lowercase) and checks syntactic validity</li>
+<li>Standardizes <strong>phone numbers</strong> into a consistent format (e.g. <code>+1 555 123 4567</code>)</li>
+<li>Correctly capitalizes <strong>names</strong></li>
+<li>Makes <strong>company names</strong> consistent (detects “acme corp” and “Acme Corp” as identical)</li>
+<li>Finds and removes <strong>duplicates</strong> – including fuzzy matches (same person, slightly different spelling)</li>
+<li>Flags <strong>invalid fields</strong></li>
+</ol>
+<p>The result: a clean CSV file ready to download, plus a summary of every change made.</p>
+<h2 id="live-demo">Live Demo</h2>
+<p>Test it with sample data or your own:</p>
+<h2 id="how-the-workflow-works">How the Workflow Works</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[CSV Upload / Text Input]</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>[Validate Input]</span></span>
+<span class="line"><span>  - Empty? Too large? → Error</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>[Claude API (Clean Data)]</span></span>
+<span class="line"><span>  - Tool-use: structured JSON output</span></span>
+<span class="line"><span>  - Prompt defines cleaning rules</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>[Format Result]</span></span>
+<span class="line"><span>  - Cleaned rows → CSV</span></span>
+<span class="line"><span>  - Build change log</span></span>
+<span class="line"><span>        ↓</span></span>
+<span class="line"><span>[Return JSON Response]</span></span>
+<span class="line"><span>  - headers, cleaned_rows, changes, stats</span></span></code></pre>
+<p>The key: Claude returns the result as structured JSON via tool-use – not as text. This makes the output reliably parseable no matter how many special characters are in the data.</p>
+<h2 id="time-savings-in-numbers">Time Savings in Numbers</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Task</th><th>Manual</th><th>With Workflow</th></tr></thead><tbody><tr><td>Clean 100 contacts</td><td>2–4 hours</td><td>~20 seconds</td></tr><tr><td>Clean 1,000 contacts</td><td>1–2 days</td><td>~3 minutes</td></tr><tr><td>Find duplicates</td><td>30 min per 100</td><td>Automatic</td></tr><tr><td>Normalize phone numbers</td><td>1 min per number</td><td>In batch</td></tr></tbody></table>
+<p>For monthly-maintained lists: <strong>annual savings of 10–30 hours</strong> per person.</p>
+<h2 id="customization-options">Customization Options</h2>
+<p>The workflow is a starting point. Common extensions:</p>
+<ul>
+<li><strong>Describe your target system</strong> directly (e.g. “Export only contacts with valid US phone numbers for HubSpot import”)</li>
+<li><strong>Add more fields</strong>: addresses, zip codes, IBAN validation</li>
+<li><strong>Email delivery</strong> after cleaning (result sent directly to your inbox)</li>
+<li><strong>Scheduling</strong> for regular cleanup of a Google Sheet</li>
+</ul>
+<h2 id="privacy-note">Privacy Note</h2>
+<p>Data is used exclusively for AI processing and not stored afterward. The workflow runs on a self-hosted n8n server. For production use, add your own API key and run the workflow on your own instance.</p>
+<h2 id="download-the-workflow">Download the Workflow</h2>
+<p>Download the complete n8n workflow for free and import it into your own instance:</p>
+<p><a href="/workflows/excel-retter.json">Download n8n Workflow (JSON)</a></p>
+<p>Import: n8n → Workflows → Import from File → Upload JSON → Set credentials (Anthropic API Key)</p>
+<hr>
+<p><em>Interested in a tailored solution for your specific data challenges? <a href="/en/#contact">Get in touch.</a></em></p> </div> <!-- Live Demo Widgets -->    <div id="excel-demo" class="mt-12 p-6 md:p-8 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl not-prose"> <div class="flex items-center gap-3 mb-2"> <span class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"> <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"></path> </svg> </span> <h3 class="text-lg font-bold text-secondary-900 dark:text-white">Live Demo: Spreadsheet Cleaner</h3> </div> <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">Paste CSV data. The AI cleans, normalizes, and removes duplicates.</p> <form id="excel-form" class="space-y-4"> <div> <div class="flex items-center justify-between mb-2"> <label class="block text-sm font-medium text-secondary-700 dark:text-secondary-300"> Paste CSV data </label> <button type="button" id="excel-sample-btn" class="text-xs text-primary-600 dark:text-primary-400 hover:underline"> Load sample data </button> </div> <textarea id="excel-csv" rows="7" spellcheck="false" class="w-full px-3 py-2 text-xs font-mono rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-y" placeholder="Name,E-Mail,Telefon
+Anna Müller,anna@example.com,+49 176 12345678
+..."></textarea> </div> <div> <label for="excel-instructions" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1"> Additional instructions (optional) </label> <input type="text" id="excel-instructions" placeholder="e.g. Keep only US phone numbers" class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"> </div> <p id="excel-error" class="hidden text-sm text-red-600 dark:text-red-400"></p> <button type="submit" id="excel-submit" disabled class="w-full py-3 font-semibold rounded-xl bg-green-600 hover:bg-green-700 text-white opacity-50 cursor-not-allowed transition-all"> Clean Data → </button> <p class="text-xs text-secondary-400 dark:text-secondary-500">🔒 Your data is processed for cleaning and not stored afterward.</p> </form> <div id="excel-loading" class="hidden mt-6 text-center py-8 space-y-3"> <div class="inline-flex items-center gap-3 text-secondary-600 dark:text-secondary-400"> <svg class="animate-spin w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"> <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle> <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path> </svg> <span class="font-medium">Analyzing and cleaning data...</span> </div> <p class="text-xs text-secondary-400">(~15–30 seconds)</p> </div> <div id="excel-results" class="hidden mt-6 space-y-5"> <div id="excel-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div> <div> <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2"> Cleaned Data </p> <div class="overflow-x-auto rounded-lg border border-secondary-200 dark:border-secondary-700"> <table id="excel-table" class="w-full text-xs"> <thead id="excel-thead" class="bg-secondary-50 dark:bg-secondary-800"></thead> <tbody id="excel-tbody" class="divide-y divide-secondary-100 dark:divide-secondary-700"></tbody> </table> </div> </div> <div> <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2"> Changes Made </p> <ul id="excel-changes" class="space-y-1"></ul> </div> <div class="flex items-center gap-4 pt-2"> <button id="excel-download" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors"> <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path> </svg> Download CSV </button> <button id="excel-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+← Try another </button> </div> </div> </div> <script>(function(){const WEBHOOK_URL = "https://n8n.esprimo.leinss.xyz/webhook/excel-retter";
+const SAMPLE_CSV = "Name,Email,Phone,Company\n  Anna Miller ,anna.miller@gmail.com,+1 555 123 4567,Acme Corp\nJohn DOE,JOHN@GMAIL.COM,555-987-6543,acme corp\nanna miller,anna.miller@gmail.com,,\nTom Smith,tom@,+1 (555) 234-567,Globex Inc.\n  Lisa Brown  ,lisa.brown@company.com,15552345678,   Globex Inc   ";
+const t = {"title":"Live Demo: Spreadsheet Cleaner","subtitle":"Paste CSV data. The AI cleans, normalizes, and removes duplicates.","dataLabel":"Paste CSV data","sampleBtn":"Load sample data","instructionsLabel":"Additional instructions (optional)","instructionsPlaceholder":"e.g. Keep only US phone numbers","submit":"Clean Data →","loading":"Analyzing and cleaning data...","loadingHint":"~15–30 seconds","resultTitle":"Cleaned Data","changesTitle":"Changes Made","downloadBtn":"Download CSV","tryAnother":"Try another","noChanges":"No changes needed.","privacy":"🔒 Your data is processed for cleaning and not stored afterward.","errorGeneric":"Processing failed. Please try again.","statTotal":"Total rows","statModified":"Modified","statDuplicates":"Duplicates removed","statIssues":"Issues found"};
+
+  const form = document.getElementById('excel-form');
+  const csvInput = document.getElementById('excel-csv');
+  const submitBtn = document.getElementById('excel-submit');
+  const sampleBtn = document.getElementById('excel-sample-btn');
+  const instructionsInput = document.getElementById('excel-instructions');
+  const errorEl = document.getElementById('excel-error');
+  const loadingEl = document.getElementById('excel-loading');
+  const resultsEl = document.getElementById('excel-results');
+  const statsEl = document.getElementById('excel-stats');
+  const theadEl = document.getElementById('excel-thead');
+  const tbodyEl = document.getElementById('excel-tbody');
+  const changesEl = document.getElementById('excel-changes');
+  const downloadBtn = document.getElementById('excel-download');
+  const retryBtn = document.getElementById('excel-retry');
+
+  let cleanedCsv = '';
+
+  function updateSubmitState() {
+    const hasContent = csvInput.value.trim().length > 0;
+    submitBtn.disabled = !hasContent;
+    submitBtn.classList.toggle('opacity-50', !hasContent);
+    submitBtn.classList.toggle('cursor-not-allowed', !hasContent);
+  }
+
+  csvInput.addEventListener('input', updateSubmitState);
+
+  sampleBtn.addEventListener('click', () => {
+    csvInput.value = SAMPLE_CSV;
+    updateSubmitState();
+    hideError();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!csvInput.value.trim()) return;
+
+    form.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden');
+    hideError();
+
+    try {
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          csv_data: csvInput.value.trim(),
+          instructions: instructionsInput.value.trim(),
+          language: 'de',
+        }),
+      });
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.error || 'Unknown error');
+      cleanedCsv = data.cleaned_csv || '';
+      renderResults(data);
+    } catch {
+      loadingEl.classList.add('hidden');
+      form.classList.remove('hidden');
+      showError(t.errorGeneric);
+    }
+  });
+
+  retryBtn.addEventListener('click', () => {
+    resultsEl.classList.add('hidden');
+    form.classList.remove('hidden');
+    cleanedCsv = '';
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if (!cleanedCsv) return;
+    const blob = new Blob([cleanedCsv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'bereinigte-daten.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function makeStatCard(label, value, colorClass) {
+    const div = document.createElement('div');
+    div.className = `p-3 rounded-lg ${colorClass} text-center`;
+    const num = document.createElement('div');
+    num.className = 'text-2xl font-bold';
+    num.textContent = String(value);
+    const lbl = document.createElement('div');
+    lbl.className = 'text-xs mt-0.5 opacity-80';
+    lbl.textContent = label;
+    div.appendChild(num);
+    div.appendChild(lbl);
+    return div;
+  }
+
+  function renderStats(stats) {
+    const items = [
+      { label: t.statTotal, value: stats.total_rows ?? 0, cls: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
+      { label: t.statModified, value: stats.rows_modified ?? 0, cls: 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' },
+      { label: t.statDuplicates, value: stats.duplicates_removed ?? 0, cls: 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300' },
+      { label: t.statIssues, value: stats.issues_found ?? 0, cls: 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300' },
+    ];
+    statsEl.replaceChildren(...items.map(({ label, value, cls }) => makeStatCard(label, value, cls)));
+  }
+
+  function renderTable(headers, rows) {
+    const trHead = document.createElement('tr');
+    for (const h of headers) {
+      const th = document.createElement('th');
+      th.className = 'px-3 py-2 text-left font-semibold text-secondary-700 dark:text-secondary-300 whitespace-nowrap';
+      th.textContent = h;
+      trHead.appendChild(th);
+    }
+    theadEl.replaceChildren(trHead);
+
+    const trRows = rows.map((row, i) => {
+      const tr = document.createElement('tr');
+      tr.className = i % 2 === 0
+        ? 'bg-white dark:bg-transparent'
+        : 'bg-secondary-50 dark:bg-secondary-800/30';
+      for (const h of headers) {
+        const td = document.createElement('td');
+        td.className = 'px-3 py-2 text-secondary-700 dark:text-secondary-300 whitespace-nowrap';
+        td.textContent = row[h] ?? '';
+        tr.appendChild(td);
+      }
+      return tr;
+    });
+    tbodyEl.replaceChildren(...trRows);
+  }
+
+  function renderChanges(changes) {
+    if (!changes || changes.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'text-sm text-secondary-500 dark:text-secondary-400';
+      li.textContent = t.noChanges;
+      changesEl.replaceChildren(li);
+      return;
+    }
+    const items = changes.map((c) => {
+      const li = document.createElement('li');
+      li.className = 'flex items-start gap-2 text-sm text-secondary-700 dark:text-secondary-300';
+      const dot = document.createElement('span');
+      dot.className = 'flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500';
+      const span = document.createElement('span');
+      span.textContent = c;
+      li.appendChild(dot);
+      li.appendChild(span);
+      return li;
+    });
+    changesEl.replaceChildren(...items);
+  }
+
+  function renderResults(data) {
+    loadingEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+    renderStats(data.stats || {});
+    renderTable(data.headers || [], data.cleaned_rows || []);
+    renderChanges(data.changes || []);
+  }
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+  function hideError() { errorEl.classList.add('hidden'); }
+})();</script>  <!-- Tags --> <div class="mt-12 pt-8 border-t border-secondary-200 dark:border-secondary-700"> <div class="flex flex-wrap gap-2"> <span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#spreadsheets </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#excel </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#contacts </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#data-cleaning </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#n8n </span><span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+#ai </span> </div> </div> <!-- CTAs --> <div class="mt-12 grid md:grid-cols-2 gap-6"> <!-- Newsletter CTA --> <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl"> <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+Stay Updated
+</h3> <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+Get practical automation tips and industry insights delivered to your inbox.
+</p> <a href="/en/#newsletter" class="btn-outline inline-flex items-center">
+Subscribe to Newsletter
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path> </svg> </a> </div> <!-- Book a Call CTA --> <div class="p-6 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl"> <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+Ready to automate?
+</h3> <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+Let's discuss how automation can help your business in a free strategy call.
+</p> <a href="/en/#contact" class="btn-primary inline-flex items-center">
+Book a Call
+<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path> </svg> </a> </div> </div> </div> </article> </main> <footer class="bg-gray-900 text-white pt-4 md:pt-16 pb-4 md:pb-8"> <div class="container-custom"> <div class="grid md:grid-cols-2 gap-8 mb-6 md:mb-12"> <div class="md:col-span-2 lg:col-span-2"> <div class="flex items-center mb-6"> <a href="/en/#hero" class="flex items-center" aria-label="Go to homepage"> <img src="/_astro/logo-white.Bf-Ft_qe_9Qrpm.webp" alt="Logo" loading="lazy" decoding="async" fetchpriority="auto" width="500" height="396" class="h-24 w-auto min-w-16 object-contain"> </a> <p class="text-gray-400 ml-6 md:ml-10 self-center text-sm md:text-base lg:text-lg font-medium leading-normal"> Business Automation Solutions - Turn Manual Work Into Digital Efficiency </p> </div> <div class="flex space-x-4"> <a href="https://twitter.com/t_leinss" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="Twitter"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path> </svg> </a> <a href="https://www.linkedin.com/in/tobias-leinss/" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="LinkedIn"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path> </svg> </a> <a href="https://www.youtube.com/@t_leinss" class="text-gray-400 hover:text-primary-400 transition-colors" aria-label="YouTube"> <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path> </svg> </a> <!-- <a
+            href="https://github.com/leinss"
+            class="text-gray-400 hover:text-primary-400 transition-colors"
+            aria-label="GitHub"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+              ></path>
+            </svg>
+          </a> --> </div> </div>  </div> <div class="border-t border-gray-800 pt-4 md:pt-8 mt-4 md:mt-8"> <div class="flex flex-col md:flex-row justify-between items-center"> <p class="text-gray-400 text-sm lg:text-base mb-4 md:mb-0">
+&copy; 2026 Tobias Leinss. All rights reserved. </p> <div class="flex flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0"> <a href="/en/privacy-policy" class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">Privacy Policy</a> <a href="/en/imprint" class="text-gray-400 hover:text-primary-400 text-sm lg:text-base transition-colors">Imprint</a> </div> </div> </div> </div> </footer> <!-- Back to top button --><button id="backToTop" class="fixed bottom-8 md:bottom-16 right-8 p-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full shadow-lg transition-opacity duration-300 opacity-0 z-50" aria-label="Back to top"> <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path> </svg> </button> <script type="module">document.addEventListener("astro:page-load",()=>{const o=document.getElementById("backToTop"),e=()=>{window.scrollY>300?o?.classList.remove("opacity-0"):o?.classList.add("opacity-0")},t=()=>{window.scrollTo({top:0,behavior:"smooth"})};window.addEventListener("scroll",e),o?.addEventListener("click",t),e(),document.addEventListener("astro:before-swap",()=>{window.removeEventListener("scroll",e),o?.removeEventListener("click",t)})});</script>  </div> <script defer src="https://umami.funnel.leinss.xyz/script.js" data-website-id="07e97b70-8ac7-40ab-8e58-da90ba0d8ceb"></script> <script>
+      // Check for user preference
+      if (localStorage.getItem('darkMode') === null) {
+        // Check system preference
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          localStorage.setItem('darkMode', 'true');
+          document.documentElement.classList.add('dark');
+        } else {
+          localStorage.setItem('darkMode', 'false');
+        }
+      }
+
+      // Improved page transition handling
+      // Apply loaded class immediately to prevent initial flash
+      document.addEventListener('DOMContentLoaded', () => {
+        // Mark the page as loaded on initial load
+        document.documentElement.classList.add('astro-site-loaded');
+
+        // Make sure the page wrapper is visible immediately
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          pageWrapper.classList.add('page-loaded');
+        }
+      });
+
+      // Handle page transitions
+      document.addEventListener('astro:page-load', () => {
+        // This runs on initial page load and after each navigation
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          // Ensure the page is visible after content swap
+          pageWrapper.classList.add('page-loaded');
+
+          // Add loaded class to all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            setTimeout(() => {
+              el.classList.add('loaded');
+            }, 50); // Small delay to ensure DOM is ready
+          });
+        }
+      });
+
+      // Use before-preparation instead of before-swap to start transition earlier
+      document.addEventListener('astro:before-preparation', () => {
+        // This runs before navigation starts
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          pageWrapper.classList.add('page-transitioning');
+          pageWrapper.classList.remove('page-loaded');
+
+          // Remove loaded class from all content-animate elements
+          const animatedElements = document.querySelectorAll('.content-animate');
+          animatedElements.forEach(el => {
+            el.classList.remove('loaded');
+          });
+        }
+      });
+
+      // Handle the actual swap
+      document.addEventListener('astro:after-swap', () => {
+        // This runs after the new page content is swapped in but before hydration
+        const pageWrapper = document.getElementById('page-wrapper');
+        if (pageWrapper) {
+          // Remove transitioning class to allow the loaded class to take effect
+          pageWrapper.classList.remove('page-transitioning');
+        }
+      });
+
+      // Scroll-triggered reveal animations using Intersection Observer
+      function initRevealAnimations() {
+        const revealElements = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger');
+
+        if (revealElements.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              // Optional: unobserve after revealing to improve performance
+              // observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+          observer.observe(el);
+        });
+
+        return observer;
+      }
+
+      // Counter animation for statistics
+      function initCounterAnimations() {
+        const counters = document.querySelectorAll('.counter[data-target]');
+
+        if (counters.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              const target = parseInt(counter.dataset.target, 10);
+              const duration = parseInt(counter.dataset.duration || '2000', 10);
+              const suffix = counter.dataset.suffix || '';
+
+              let start = 0;
+              const startTime = performance.now();
+
+              function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOutQuad = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeOutQuad * target);
+
+                counter.textContent = current.toLocaleString() + suffix;
+
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                }
+              }
+
+              requestAnimationFrame(updateCounter);
+              observer.unobserve(counter);
+            }
+          });
+        }, {
+          threshold: 0.5
+        });
+
+        counters.forEach(counter => {
+          counter.textContent = '0';
+          observer.observe(counter);
+        });
+      }
+
+      // Initialize animations on page load
+      let revealObserver = null;
+      document.addEventListener('astro:page-load', () => {
+        // Clean up previous observer if exists
+        if (revealObserver) {
+          revealObserver.disconnect();
+        }
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
+
+      // Also init on DOMContentLoaded for initial page load
+      document.addEventListener('DOMContentLoaded', () => {
+        revealObserver = initRevealAnimations();
+        initCounterAnimations();
+      });
+    </script> <script>
+      // Improved script loading with absolute paths and GitHub Pages compatibility
+      document.addEventListener('astro:page-load', () => {
+        // Create and append script elements
+        const scripts = ['transitions.js'];
+        scripts.forEach(script => {
+          // Check if script is already loaded to prevent duplicates
+          const existingScript = document.querySelector(`script[src*="${script}"]`);
+          if (!existingScript) {
+            const scriptEl = document.createElement('script');
+
+            // Use the correct path based on the current URL
+            const pathname = window.location.pathname;
+
+            // Determine if we're on a subpage
+            const isSubpage = pathname.split('/').filter(Boolean).length > 0;
+
+            // Create the correct script URL
+            let scriptPath;
+            if (isSubpage) {
+              // Count directory levels to determine relative path
+              const segments = pathname.split('/').filter(Boolean);
+              scriptPath = '../'.repeat(segments.length) + 'scripts/' + script;
+            } else {
+              scriptPath = '/scripts/' + script;
+            }
+
+            scriptEl.src = scriptPath;
+            scriptEl.async = false; // Load synchronously to ensure transitions work
+            document.body.appendChild(scriptEl);
+          }
+        });
+      }, { once: false }); // Run on every page load, not just the first
+    </script> </body> </html>
