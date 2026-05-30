@@ -5,7 +5,7 @@ interface Props {
 const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
-const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/faq-assistent';
+const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/faq-assistent';
 
 const t = {
   title: isDE ? 'Live-Demo: FAQ-Assistent' : 'Live Demo: FAQ Assistant',
@@ -19,7 +19,7 @@ const t = {
   placeholder: isDE ? 'Ihre Frage eingeben…' : 'Enter your question…',
   submit: isDE ? 'Fragen →' : 'Ask →',
   loading: isDE ? 'Suche in Wissensbasis…' : 'Searching knowledge base…',
-  loadingHint: isDE ? '~5–10 Sekunden' : '~5–10 seconds',
+  loadingHint: isDE ? '~30–60 Sekunden' : '~30–60 seconds',
   answerTitle: isDE ? 'Antwort' : 'Answer',
   sourcesLabel: isDE ? 'Quellen' : 'Sources',
   confidenceLabel: isDE ? 'Konfidenz' : 'Confidence',
