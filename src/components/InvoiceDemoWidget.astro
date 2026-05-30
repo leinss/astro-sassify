@@ -1,0 +1,225 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+const { lang = 'de' } = Astro.props;
+const isDE = lang === 'de';
+
+const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/invoice-upload';
+
+const t = {
+  title: isDE ? 'Live-Demo: KI-Rechnungsanalyse' : 'Live Demo: AI Invoice Analysis',
+  subtitle: isDE
+    ? 'Laden Sie eine Rechnung hoch und sehen Sie, wie die KI die Daten in Sekunden extrahiert.'
+    : 'Upload an invoice and watch the AI extract data in seconds.',
+  fileLabel: isDE ? 'Rechnungsbild auswählen' : 'Select invoice image',
+  fileHint: isDE ? 'PNG, JPG, JPEG, WEBP · max. 10 MB' : 'PNG, JPG, JPEG, WEBP · max. 10 MB',
+  submit: isDE ? 'Analysieren →' : 'Analyze →',
+  loading: isDE ? 'KI analysiert Rechnung...' : 'AI analyzing invoice...',
+  loadingHint: isDE ? '~15–30 Sekunden' : '~15–30 seconds',
+  resultTitle: isDE ? 'Extrahierte Daten' : 'Extracted Data',
+  vendor: isDE ? 'Lieferant' : 'Vendor',
+  invoiceNr: isDE ? 'Rechnungs-Nr.' : 'Invoice No.',
+  date: isDE ? 'Datum' : 'Date',
+  dueDate: isDE ? 'Fällig am' : 'Due Date',
+  net: isDE ? 'Nettobetrag' : 'Net',
+  tax: isDE ? 'MwSt.' : 'VAT',
+  gross: isDE ? 'Bruttobetrag' : 'Total',
+  lineItems: isDE ? 'Positionen' : 'Line Items',
+  privacy: isDE
+    ? '🔒 Ihre Datei wird nur für diese Analyse verarbeitet und danach nicht gespeichert.'
+    : '🔒 Your file is only processed for this analysis and not stored afterward.',
+  fileTooLarge: isDE ? 'Datei zu groß. Maximal 10 MB.' : 'File too large. Maximum 10 MB.',
+  errorGeneric: isDE ? 'Analyse fehlgeschlagen. Bitte erneut versuchen.' : 'Analysis failed. Please try again.',
+  description: isDE ? 'Menge × Einzelpreis' : 'Qty × Unit Price',
+};
+---
+
+<div id="invoice-demo" class="mt-12 p-6 md:p-8 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl not-prose">
+  <div class="flex items-center gap-3 mb-2">
+    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    </span>
+    <h3 class="text-lg font-bold text-secondary-900 dark:text-white">{t.title}</h3>
+  </div>
+  <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
+
+  <form id="invoice-form" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-2">
+        {t.fileLabel}
+      </label>
+      <div class="relative border-2 border-dashed border-secondary-300 dark:border-secondary-600 rounded-xl p-6 text-center hover:border-primary-400 dark:hover:border-primary-500 transition-colors">
+        <input type="file" id="invoice-file" accept=".png,.jpg,.jpeg,.webp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto mb-2 text-secondary-400 dark:text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+        </svg>
+        <p id="invoice-filename" class="text-sm text-secondary-500 dark:text-secondary-400">{t.fileHint}</p>
+      </div>
+    </div>
+
+    <p id="invoice-error" class="hidden text-sm text-red-600 dark:text-red-400"></p>
+
+    <button type="submit" id="invoice-submit" disabled
+      class="w-full btn-secondary py-3 font-semibold opacity-50 cursor-not-allowed transition-all">
+      {t.submit}
+    </button>
+
+    <p class="text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
+  </form>
+
+  <div id="invoice-loading" class="hidden mt-6 text-center py-8">
+    <div class="inline-flex items-center gap-3 text-secondary-600 dark:text-secondary-400">
+      <svg class="animate-spin w-5 h-5 text-primary-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span class="font-medium">{t.loading}</span>
+      <span class="text-xs opacity-70">({t.loadingHint})</span>
+    </div>
+  </div>
+
+  <div id="invoice-results" class="hidden mt-6 space-y-4">
+    <h4 class="font-semibold text-secondary-900 dark:text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+      {t.resultTitle}
+    </h4>
+    <div class="grid sm:grid-cols-2 gap-3" id="invoice-fields"></div>
+    <div id="invoice-lineitems-section" class="hidden">
+      <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2">{t.lineItems}</p>
+      <div class="overflow-x-auto rounded-lg border border-secondary-200 dark:border-secondary-700">
+        <table class="w-full text-sm"><tbody id="invoice-lineitems"></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ WEBHOOK_URL, t }}>
+  const form = document.getElementById('invoice-form');
+  const fileInput = document.getElementById('invoice-file');
+  const filenameEl = document.getElementById('invoice-filename');
+  const submitBtn = document.getElementById('invoice-submit');
+  const errorEl = document.getElementById('invoice-error');
+  const loadingEl = document.getElementById('invoice-loading');
+  const resultsEl = document.getElementById('invoice-results');
+  const fieldsEl = document.getElementById('invoice-fields');
+  const lineItemsSection = document.getElementById('invoice-lineitems-section');
+  const lineItemsEl = document.getElementById('invoice-lineitems');
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      showError(t.fileTooLarge);
+      fileInput.value = '';
+      return;
+    }
+    filenameEl.textContent = file.name;
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    hideError();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const file = fileInput.files?.[0];
+    if (!file) return;
+
+    form.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden');
+
+    try {
+      const base64 = await fileToBase64(file);
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imageBase64: base64, mimeType: file.type, fileName: file.name }),
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      renderResults(data);
+    } catch {
+      loadingEl.classList.add('hidden');
+      form.classList.remove('hidden');
+      showError(t.errorGeneric);
+    }
+  });
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function makeField(label, value) {
+    const div = document.createElement('div');
+    div.className = 'p-3 bg-secondary-50 dark:bg-secondary-800 rounded-lg';
+    const labelEl = document.createElement('p');
+    labelEl.className = 'text-xs text-secondary-500 dark:text-secondary-400 mb-0.5';
+    labelEl.textContent = label;
+    const valueEl = document.createElement('p');
+    valueEl.className = 'text-sm font-semibold text-secondary-900 dark:text-white';
+    valueEl.textContent = value;
+    div.appendChild(labelEl);
+    div.appendChild(valueEl);
+    return div;
+  }
+
+  function makeLineItemRow(item) {
+    const tr = document.createElement('tr');
+    tr.className = 'bg-white dark:bg-secondary-800/50';
+    const desc = document.createElement('td');
+    desc.className = 'px-3 py-2 text-secondary-700 dark:text-secondary-300';
+    desc.textContent = item.description || '—';
+    const qty = document.createElement('td');
+    qty.className = 'px-3 py-2 text-right text-secondary-500 dark:text-secondary-400 whitespace-nowrap';
+    qty.textContent = item.quantity != null ? `${item.quantity} × ${formatCurrency(item.unit_price)}` : formatCurrency(item.unit_price);
+    const total = document.createElement('td');
+    total.className = 'px-3 py-2 text-right font-medium text-secondary-900 dark:text-white whitespace-nowrap';
+    total.textContent = formatCurrency(item.total);
+    tr.appendChild(desc);
+    tr.appendChild(qty);
+    tr.appendChild(total);
+    return tr;
+  }
+
+  function renderResults(data) {
+    loadingEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+
+    const inv = data.invoice_data || data;
+    const vendor = inv.vendor || {};
+    const invoice = inv.invoice || {};
+    const totals = inv.totals || {};
+    const lineItems = inv.line_items || [];
+
+    fieldsEl.replaceChildren(
+      makeField(t.vendor, vendor.name || '—'),
+      makeField(t.invoiceNr, invoice.number || '—'),
+      makeField(t.date, invoice.date || '—'),
+      makeField(t.dueDate, invoice.due_date || '—'),
+      makeField(t.net, formatCurrency(totals.net)),
+      makeField(t.tax, totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '—'),
+      makeField(t.gross, formatCurrency(totals.gross)),
+    );
+
+    if (lineItems.length > 0) {
+      lineItemsSection.classList.remove('hidden');
+      lineItemsEl.replaceChildren(...lineItems.map(makeLineItemRow));
+    }
+  }
+
+  function formatCurrency(val) {
+    if (val == null || val === '') return '—';
+    const num = parseFloat(val);
+    if (isNaN(num)) return String(val);
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(num);
+  }
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+  function hideError() { errorEl.classList.add('hidden'); }
+</script>

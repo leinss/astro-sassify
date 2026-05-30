@@ -1,0 +1,208 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+const { lang = 'de' } = Astro.props;
+const isDE = lang === 'de';
+
+const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/blitz-antwort-lead';
+
+const t = {
+  title: isDE ? 'Live-Demo: Blitz-Antwort Generator' : 'Live Demo: Instant Response Generator',
+  subtitle: isDE
+    ? 'Füllen Sie das Formular aus und sehen Sie, wie die KI eine personalisierte Erstantwort generiert.'
+    : 'Fill in the form and watch the AI generate a personalized first response.',
+  namePlaceholder: isDE ? 'z. B. Maria Schneider' : 'e.g. Jane Smith',
+  companyPlaceholder: isDE ? 'z. B. Apex GmbH' : 'e.g. Apex Ltd.',
+  messagePlaceholder: isDE
+    ? 'Beschreiben Sie kurz Ihr Anliegen oder Ihr Projekt...'
+    : 'Briefly describe your request or project...',
+  emailPlaceholder: 'max@example.com',
+  nameLabel: isDE ? 'Ihr Name' : 'Your Name',
+  companyLabel: isDE ? 'Unternehmen' : 'Company',
+  messageLabel: isDE ? 'Ihre Nachricht' : 'Your Message',
+  emailLabel: isDE ? 'E-Mail-Adresse' : 'Email Address',
+  submit: isDE ? 'Antwort generieren →' : 'Generate Response →',
+  loading: isDE ? 'KI generiert personalisierte Antwort...' : 'AI generating personalized response...',
+  loadingHint: isDE ? '~30–60 Sekunden' : '~30–60 seconds',
+  resultTitle: isDE ? 'Generierte Erstantwort' : 'Generated First Response',
+  subject: isDE ? 'Betreff' : 'Subject',
+  scoreLabel: isDE ? 'Lead Score' : 'Lead Score',
+  tryAnother: isDE ? 'Nochmal testen' : 'Try another',
+  noteTitle: isDE ? 'Hinweis' : 'Note',
+  noteText: isDE
+    ? 'Dies ist eine echte KI-generierte Antwort — nicht vorgefertigt. In Ihrer Implementierung würde diese E-Mail direkt an die angegebene Adresse gesendet.'
+    : 'This is a real AI-generated response — not pre-written. In your implementation, this email would be sent directly to the given address.',
+  errorRequired: isDE ? 'Bitte Name, Unternehmen und Nachricht ausfüllen.' : 'Please fill in name, company, and message.',
+  errorGeneric: isDE ? 'Anfrage fehlgeschlagen. Bitte erneut versuchen.' : 'Request failed. Please try again.',
+  kategorie: {
+    smb: isDE ? 'KMU' : 'SMB',
+    agency: isDE ? 'Agentur' : 'Agency',
+    enterprise: 'Enterprise',
+    individual: isDE ? 'Privatperson' : 'Individual',
+  },
+};
+---
+
+<div id="blitz-demo" class="mt-12 p-6 md:p-8 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl not-prose">
+  <div class="flex items-center gap-3 mb-2">
+    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-600 dark:text-accent-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+    </span>
+    <h3 class="text-lg font-bold text-secondary-900 dark:text-white">{t.title}</h3>
+  </div>
+  <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
+
+  <form id="blitz-form" class="space-y-4">
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label for="blitz-name" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.nameLabel}</label>
+        <input type="text" id="blitz-name" placeholder={t.namePlaceholder}
+          class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+      </div>
+      <div>
+        <label for="blitz-company" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.companyLabel}</label>
+        <input type="text" id="blitz-company" placeholder={t.companyPlaceholder}
+          class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+      </div>
+    </div>
+
+    <div>
+      <label for="blitz-message" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.messageLabel}</label>
+      <textarea id="blitz-message" rows="4" placeholder={t.messagePlaceholder}
+        class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
+    </div>
+
+    <div>
+      <label for="blitz-email" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.emailLabel}</label>
+      <input type="email" id="blitz-email" placeholder={t.emailPlaceholder}
+        class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+    </div>
+
+    <p id="blitz-error" class="hidden text-sm text-red-600 dark:text-red-400"></p>
+
+    <button type="submit" id="blitz-submit" class="w-full btn-secondary py-3 font-semibold">
+      {t.submit}
+    </button>
+  </form>
+
+  <div id="blitz-loading" class="hidden mt-6 text-center py-8">
+    <div class="inline-flex items-center gap-3 text-secondary-600 dark:text-secondary-400">
+      <svg class="animate-spin w-5 h-5 text-primary-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span class="font-medium">{t.loading}</span>
+      <span class="text-xs opacity-70">({t.loadingHint})</span>
+    </div>
+  </div>
+
+  <div id="blitz-results" class="hidden mt-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h4 class="font-semibold text-secondary-900 dark:text-white flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        {t.resultTitle}
+      </h4>
+      <div class="flex items-center gap-2">
+        <span id="blitz-score-badge" class="hidden px-2 py-0.5 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300"></span>
+        <span id="blitz-category-badge" class="hidden px-2 py-0.5 text-xs font-medium rounded-full bg-secondary-100 dark:bg-secondary-700 text-secondary-600 dark:text-secondary-300"></span>
+      </div>
+    </div>
+
+    <div class="rounded-lg border border-secondary-200 dark:border-secondary-700 overflow-hidden">
+      <div class="px-4 py-2 bg-secondary-50 dark:bg-secondary-800 border-b border-secondary-200 dark:border-secondary-700">
+        <p class="text-xs text-secondary-500 dark:text-secondary-400 font-medium">{t.subject}</p>
+        <p id="blitz-subject" class="text-sm font-semibold text-secondary-900 dark:text-white mt-0.5"></p>
+      </div>
+      <div class="p-4 bg-white dark:bg-secondary-800/50">
+        <pre id="blitz-body" class="text-sm text-secondary-700 dark:text-secondary-300 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+      </div>
+    </div>
+
+    <div class="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
+      <p class="text-xs font-medium text-amber-800 dark:text-amber-300">{t.noteTitle}</p>
+      <p class="text-xs text-amber-700 dark:text-amber-400 mt-1">{t.noteText}</p>
+    </div>
+
+    <button id="blitz-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+      ← {t.tryAnother}
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ WEBHOOK_URL, t }}>
+  const form = document.getElementById('blitz-form');
+  const nameInput = document.getElementById('blitz-name');
+  const companyInput = document.getElementById('blitz-company');
+  const messageInput = document.getElementById('blitz-message');
+  const emailInput = document.getElementById('blitz-email');
+  const errorEl = document.getElementById('blitz-error');
+  const loadingEl = document.getElementById('blitz-loading');
+  const resultsEl = document.getElementById('blitz-results');
+  const subjectEl = document.getElementById('blitz-subject');
+  const bodyEl = document.getElementById('blitz-body');
+  const scoreBadge = document.getElementById('blitz-score-badge');
+  const categoryBadge = document.getElementById('blitz-category-badge');
+  const retryBtn = document.getElementById('blitz-retry');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    const company = companyInput.value.trim();
+    const message = messageInput.value.trim();
+    const email = emailInput.value.trim();
+
+    if (!name || !company || !message) {
+      showError(t.errorRequired);
+      return;
+    }
+    hideError();
+
+    form.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+
+    try {
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, company, message, email }),
+      });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      renderResults(data);
+    } catch {
+      loadingEl.classList.add('hidden');
+      form.classList.remove('hidden');
+      showError(t.errorGeneric);
+    }
+  });
+
+  retryBtn.addEventListener('click', () => {
+    resultsEl.classList.add('hidden');
+    form.classList.remove('hidden');
+    nameInput.value = '';
+    companyInput.value = '';
+    messageInput.value = '';
+    emailInput.value = '';
+  });
+
+  function renderResults(data) {
+    loadingEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+
+    subjectEl.textContent = data.subject || '(kein Betreff)';
+    bodyEl.textContent = data.body || '(keine Antwort generiert)';
+
+    if (data.lead_score) {
+      scoreBadge.textContent = `Score: ${data.lead_score}/10`;
+      scoreBadge.classList.remove('hidden');
+    }
+    if (data.kategorie) {
+      categoryBadge.textContent = t.kategorie[data.kategorie] || data.kategorie;
+      categoryBadge.classList.remove('hidden');
+    }
+  }
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+  function hideError() { errorEl.classList.add('hidden'); }
+</script>
