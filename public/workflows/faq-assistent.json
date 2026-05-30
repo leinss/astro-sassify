@@ -1,0 +1,201 @@
+{
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "FAQ-Assistent — Wissensbank-Abfrage",
+  "active": false,
+  "versionId": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+  "nodes": [
+    {
+      "id": "frage-webhook",
+      "name": "Frage-Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "faq-assistent",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "faq-assistent",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "id": "validate-input",
+      "name": "Eingabe validieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst question = (body.question || '').trim();\nconst language = (body.language || 'de').trim();\nif (!question) return [{ json: { valid: false, error: 'Bitte stellen Sie eine Frage.' } }];\nif (question.length > 500) return [{ json: { valid: false, error: 'Frage zu lang (max. 500 Zeichen).' } }];\nreturn [{ json: { valid: true, question, language } }];"
+      }
+    },
+    {
+      "id": "check-valid",
+      "name": "Validierung OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [640, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "error-response",
+      "name": "Fehler zurückgeben",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 460],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, error: $json.error }) }}",
+        "options": { "responseCode": 400 }
+      }
+    },
+    {
+      "id": "generate-embedding",
+      "name": "Frage einbetten (OpenAI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [860, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "openai-api-header-auth",
+          "name": "OpenAI API (Bearer)"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/embeddings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { input: $json.question, model: 'text-embedding-3-small' } }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "search-kb",
+      "name": "Wissensdatenbank durchsuchen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "https://YOUR_PROJECT_REF.supabase.co/rest/v1/rpc/match_documents",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "YOUR_SUPABASE_ANON_KEY" },
+            { "name": "Authorization", "value": "Bearer YOUR_SUPABASE_ANON_KEY" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { query_embedding: $json.data[0].embedding, match_count: 5, match_threshold: 0.5 } }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "build-request",
+      "name": "Anfrage aufbauen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 200],
+      "parameters": {
+        "jsCode": "const searchResults = $input.first().json;\nconst validated = $('Eingabe validieren').first().json;\nconst question = validated.question;\nconst language = validated.language;\n\nconst matches = Array.isArray(searchResults) ? searchResults : [];\nconst context = matches.length > 0\n  ? matches.map((m, i) => '[' + (i+1) + '] (Quelle: ' + (m.source || 'FAQ') + ')\\n' + m.content).join('\\n\\n')\n  : null;\nconst sources = [...new Set(matches.map(m => m.source).filter(Boolean))];\nconst maxSimilarity = matches.length > 0 ? Math.max(...matches.map(m => m.similarity || 0)) : 0;\nconst isDE = language === 'de';\n\nconst systemPrompt = isDE\n  ? 'Du bist ein hilfreicher FAQ-Assistent f\\u00fcr Leinss Consulting. Beantworte Fragen NUR basierend auf dem bereitgestellten Kontext. Antworte immer auf Deutsch. Gib EXAKT dieses JSON zur\\u00fcck: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}'\n  : 'You are a helpful FAQ assistant for Leinss Consulting. Answer questions ONLY based on the provided context. Respond in English. Return EXACTLY this JSON: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}';\n\nconst contextBlock = context\n  ? (isDE ? 'Wissensbank-Kontext:\\n\\n' : 'Knowledge base context:\\n\\n') + context\n  : (isDE ? 'KEIN KONTEXT GEFUNDEN. Teile mit, dass du keine Informationen zu dieser Frage hast, und empfehle direkte Kontaktaufnahme.' : 'NO CONTEXT FOUND. Politely say you have no information about this question and suggest direct contact.');\n\nconst claudeRequest = {\n  model: 'claude-sonnet-4-6',\n  max_tokens: 1024,\n  messages: [\n    { role: 'system', content: systemPrompt },\n    { role: 'user', content: contextBlock + '\\n\\n' + (isDE ? 'Frage: ' : 'Question: ') + question }\n  ]\n};\n\nreturn [{ json: { claudeRequest, question, language, sources, maxSimilarity, hasContext: matches.length > 0 } }];"
+      }
+    },
+    {
+      "id": "call-claude",
+      "name": "Antwort generieren (Claude)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1520, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "anthropic-api-header-auth",
+          "name": "Anthropic API (Claude)"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "anthropic-version", "value": "2023-06-01" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.claudeRequest }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "format-result",
+      "name": "Antwort formatieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1740, 200],
+      "parameters": {
+        "jsCode": "const meta = $('Anfrage aufbauen').first().json;\nconst response = $input.first().json;\nconst content = response.content?.[0]?.text;\nif (!content) throw new Error('Claude returned empty response');\n\nlet data;\ntry {\n  data = JSON.parse(content);\n} catch {\n  const match = content.match(/```(?:json)?\\s*([\\s\\S]+?)```/);\n  if (!match) {\n    const jsonMatch = content.match(/\\{[\\s\\S]+\\}/);\n    if (!jsonMatch) throw new Error('Could not parse JSON from Claude response: ' + content.substring(0, 200));\n    data = JSON.parse(jsonMatch[0]);\n  } else {\n    data = JSON.parse(match[1]);\n  }\n}\n\nconst simConf = meta.hasContext ? Math.min(meta.maxSimilarity, 1.0) : 0.1;\nconst finalConf = parseFloat(Math.max(\n  Math.min(data.confidence || 0.5, simConf + 0.1),\n  meta.hasContext ? 0.3 : 0.1\n).toFixed(2));\n\nreturn [{\n  json: {\n    answer: data.answer,\n    sources: data.sources || meta.sources || [],\n    confidence: finalConf,\n    escalate: data.escalate === true || finalConf < 0.5 || !meta.hasContext,\n    escalation_reason: data.escalation_reason || null\n  }\n}];"
+      }
+    },
+    {
+      "id": "success-response",
+      "name": "Ergebnis zurückgeben",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1960, 200],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, answer: $json.answer, sources: $json.sources, confidence: $json.confidence, escalate: $json.escalate, escalation_reason: $json.escalation_reason }) }}",
+        "options": { "responseCode": 200 }
+      }
+    }
+  ],
+  "connections": {
+    "Frage-Webhook": {
+      "main": [[{ "node": "Eingabe validieren", "type": "main", "index": 0 }]]
+    },
+    "Eingabe validieren": {
+      "main": [[{ "node": "Validierung OK?", "type": "main", "index": 0 }]]
+    },
+    "Validierung OK?": {
+      "main": [
+        [{ "node": "Frage einbetten (OpenAI)", "type": "main", "index": 0 }],
+        [{ "node": "Fehler zurückgeben", "type": "main", "index": 0 }]
+      ]
+    },
+    "Frage einbetten (OpenAI)": {
+      "main": [[{ "node": "Wissensdatenbank durchsuchen", "type": "main", "index": 0 }]]
+    },
+    "Wissensdatenbank durchsuchen": {
+      "main": [[{ "node": "Anfrage aufbauen", "type": "main", "index": 0 }]]
+    },
+    "Anfrage aufbauen": {
+      "main": [[{ "node": "Antwort generieren (Claude)", "type": "main", "index": 0 }]]
+    },
+    "Antwort generieren (Claude)": {
+      "main": [[{ "node": "Antwort formatieren", "type": "main", "index": 0 }]]
+    },
+    "Antwort formatieren": {
+      "main": [[{ "node": "Ergebnis zurückgeben", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": { "templateCredsSetupCompleted": true }
+}
