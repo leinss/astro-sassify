@@ -4,7 +4,8 @@ description: "Learn how connecting your business tools creates compound efficien
 pubDate: 2025-02-05
 category: integration
 tags: ["api", "data-sync", "tools"]
-draft: true
+heroImage: "/images/blog/power-of-integration.png"
+draft: false
 lang: en
 alternateSlug: "die-macht-der-integration"
 ---

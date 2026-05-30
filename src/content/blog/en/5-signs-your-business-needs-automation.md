@@ -4,7 +4,8 @@ description: "Is your team drowning in repetitive tasks? Here are five clear ind
 pubDate: 2025-01-15
 category: automation
 tags: ["workflow", "efficiency", "business-growth"]
-draft: true
+heroImage: "/images/blog/5-signs-automation.png"
+draft: false
 lang: en
 alternateSlug: "5-zeichen-dass-ihr-unternehmen-automatisierung-braucht"
 ---

@@ -4,7 +4,8 @@ description: "A practical roadmap for small businesses looking to start their au
 pubDate: 2025-01-22
 category: automation
 tags: ["small-business", "getting-started", "digital-transformation"]
-draft: true
+heroImage: "/images/blog/from-manual-to-automated.png"
+draft: false
 lang: en
 alternateSlug: "von-manuell-zu-automatisiert"
 ---

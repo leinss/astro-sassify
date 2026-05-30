@@ -116,3 +116,9 @@ Want to automate your invoice processing?
 3. **Pilot project**: Start with one supplier type
 
 [Book a free consultation](https://cal.com/tobias-leinss/strategymeeting) – I'll show you what the workflow would look like for your situation.
+
+## Technical Deep Dive
+
+Interested in the technical details — PDF-to-image conversion, Claude tool_use for structured extraction, validation logic, and DATEV export?
+
+→ **[Claude Vision API for Invoice Extraction: Technical Implementation with n8n](https://leinss.xyz/en/blog/invoice-extractor-technical/)** *(leinss.xyz)*

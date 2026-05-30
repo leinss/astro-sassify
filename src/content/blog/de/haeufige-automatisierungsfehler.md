@@ -4,7 +4,8 @@ description: "Aus den Fehlern anderer lernen: die häufigsten Automatisierungsfa
 pubDate: 2025-03-05
 category: automation
 tags: ["best-practices", "fallstricke", "planung"]
-draft: true
+heroImage: "/images/blog/common-automation-mistakes.png"
+draft: false
 lang: de
 alternateSlug: "common-automation-mistakes"
 ---

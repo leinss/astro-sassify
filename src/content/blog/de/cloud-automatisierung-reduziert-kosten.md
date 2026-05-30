@@ -4,7 +4,8 @@ description: "Erfahren Sie, wie cloudbasierte Automatisierungstools Ihre Betrieb
 pubDate: 2025-01-29
 category: automation
 tags: ["cloud", "kostenreduktion", "effizienz"]
-draft: true
+heroImage: "/images/blog/cloud-automation-costs.png"
+draft: false
 lang: de
 alternateSlug: "cloud-automation-reduces-costs"
 ---

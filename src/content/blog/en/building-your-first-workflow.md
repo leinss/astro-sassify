@@ -4,7 +4,8 @@ description: "A practical guide to creating your first business automation workf
 pubDate: 2025-03-19
 category: automation
 tags: ["getting-started", "workflow", "tutorial"]
-draft: true
+heroImage: "/images/blog/building-your-first-workflow.png"
+draft: false
 lang: en
 alternateSlug: "ihren-ersten-workflow-bauen"
 ---

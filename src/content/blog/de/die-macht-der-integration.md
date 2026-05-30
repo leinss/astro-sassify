@@ -4,7 +4,8 @@ description: "Erfahren Sie, wie die Verbindung Ihrer Business-Tools kumulative E
 pubDate: 2025-02-05
 category: integration
 tags: ["api", "datensync", "tools"]
-draft: true
+heroImage: "/images/blog/power-of-integration.png"
+draft: false
 lang: de
 alternateSlug: "power-of-integration"
 ---
