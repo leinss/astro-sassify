@@ -1,0 +1,223 @@
+{
+  "id": "c3d4e5f6-a7b8-9012-cdef-123456789abc",
+  "name": "Meeting-Protokoll Bot — Transkription & Zusammenfassung",
+  "active": false,
+  "versionId": "d4e5f6a7-b8c9-0123-defa-234567890bcd",
+  "nodes": [
+    {
+      "id": "webhook-trigger",
+      "name": "Meeting Audio Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "meeting-protokoll-upload",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "meeting-protokoll",
+        "responseMode": "responseNode",
+        "options": {
+          "binaryData": true,
+          "rawBody": false
+        }
+      }
+    },
+    {
+      "id": "validate-input",
+      "name": "Eingabe validieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 300],
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body || $input.first().json;\nconst binaryData = $input.first().binary || {};\n\n// Extract form fields\nconst title = (body.title || body.meeting_title || 'Meeting').trim();\nconst attendees = (body.attendees || '').split(',').map(a => a.trim()).filter(Boolean);\nconst language = (body.language || 'de').trim().toLowerCase();\n\n// Find the audio file in binary data\nconst audioKey = Object.keys(binaryData).find(k => {\n  const mt = binaryData[k]?.mimeType || '';\n  return mt.startsWith('audio/') || mt === 'application/octet-stream';\n});\n\nif (!audioKey) {\n  return [{ json: { valid: false, error: 'Keine Audiodatei gefunden. Unterstützte Formate: MP3, M4A, WAV, WEBM, OGG.' } }];\n}\n\n// n8n binary size check (fileSize in bytes if available)\nconst fileSize = binaryData[audioKey]?.fileSize || 0;\nconst maxSize = 25 * 1024 * 1024; // 25 MB Whisper limit\nif (fileSize > 0 && fileSize > maxSize) {\n  return [{ json: { valid: false, error: `Datei zu groß (${Math.round(fileSize / 1024 / 1024)}MB). Maximum: 25MB.` } }];\n}\n\nreturn [{\n  json: {\n    valid: true,\n    title,\n    attendees,\n    language,\n    audioKey,\n    fileName: binaryData[audioKey]?.fileName || 'meeting.mp3',\n    mimeType: binaryData[audioKey]?.mimeType || 'audio/mpeg',\n    received_at: new Date().toISOString()\n  }\n}];"
+      }
+    },
+    {
+      "id": "check-valid",
+      "name": "Validierung OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [640, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.valid }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "true" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "error-response",
+      "name": "Fehler zurückgeben",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [860, 460],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, error: $json.error }) }}",
+        "options": { "responseCode": 400 }
+      }
+    },
+    {
+      "id": "transcribe-whisper",
+      "name": "Transkription (Whisper API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [860, 180],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "openai-api-header-auth",
+          "name": "OpenAI API"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/audio/transcriptions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "={{ $('Eingabe validieren').first().json.audioKey }}"
+            },
+            { "name": "model", "value": "whisper-1" },
+            { "name": "response_format", "value": "text" },
+            { "name": "language", "value": "={{ $('Eingabe validieren').first().json.language }}" }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "extract-transcript",
+      "name": "Transkript extrahieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1080, 180],
+      "parameters": {
+        "jsCode": "const meta = $('Eingabe validieren').first().json;\n\n// Whisper with response_format=text returns plain text body\nconst transcript = ($input.first().json.body || $input.first().json.data || '').toString().trim();\n\nif (!transcript) {\n  throw new Error('Transkription leer – Datei möglicherweise nicht lesbar oder stumm.');\n}\n\nreturn [{\n  json: {\n    ...meta,\n    transcript,\n    transcript_length: transcript.length,\n    word_count: transcript.split(/\\s+/).length\n  }\n}];"
+      }
+    },
+    {
+      "id": "summarize-claude",
+      "name": "Zusammenfassung (Claude API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1300, 180],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "anthropic-api-header-auth",
+          "name": "Anthropic Claude API"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-6\",\n  \"max_tokens\": 1024,\n  \"tools\": [\n    {\n      \"name\": \"extract_meeting_data\",\n      \"description\": \"Extrahiere strukturierte Daten aus einem Meeting-Transkript\",\n      \"input_schema\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"summary\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" },\n            \"description\": \"3-5 prägnante Zusammenfassungspunkte des Meetings\"\n          },\n          \"decisions\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"decision\": { \"type\": \"string\" },\n                \"owner\": { \"type\": \"string\" }\n              },\n              \"required\": [\"decision\"]\n            },\n            \"description\": \"Getroffene Entscheidungen mit verantwortlicher Person\"\n          },\n          \"action_items\": {\n            \"type\": \"array\",\n            \"items\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"task\": { \"type\": \"string\" },\n                \"owner\": { \"type\": \"string\" },\n                \"due_date\": { \"type\": \"string\" }\n              },\n              \"required\": [\"task\"]\n            },\n            \"description\": \"Aufgaben mit Verantwortlichem und optionalem Fälligkeitsdatum\"\n          },\n          \"open_questions\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" },\n            \"description\": \"Offene Fragen, die noch beantwortet werden müssen\"\n          },\n          \"follow_up_date\": {\n            \"type\": \"string\",\n            \"description\": \"Vorgeschlagenes Datum für das nächste Meeting, falls erwähnt\"\n          }\n        },\n        \"required\": [\"summary\", \"decisions\", \"action_items\", \"open_questions\"]\n      }\n    }\n  ],\n  \"tool_choice\": { \"type\": \"tool\", \"name\": \"extract_meeting_data\" },\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Analysiere das folgende Meeting-Transkript und extrahiere die strukturierten Daten.\\n\\nMeeting: {{ $json.title }}\\nDatum: {{ $json.received_at.substring(0, 10) }}\\nSprache: {{ $json.language }}\\n\\nTRANSKRIPT:\\n{{ $json.transcript }}\"\n    }\n  ]\n}",
+        "options": {}
+      }
+    },
+    {
+      "id": "parse-and-format",
+      "name": "Markdown formatieren",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1520, 180],
+      "parameters": {
+        "jsCode": "const meta = $('Transkript extrahieren').first().json;\nconst response = $input.first().json;\n\n// Extract tool_use result from Claude's structured output\nconst toolUse = response.content?.find(c => c.type === 'tool_use');\nif (!toolUse) throw new Error('Claude returned no tool_use block');\n\nconst data = toolUse.input;\nconst date = new Date(meta.received_at).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });\nconst attendeeList = meta.attendees.length > 0 ? meta.attendees.join(', ') : 'Nicht angegeben';\n\n// Build Markdown document\nconst lines = [\n  `# Meeting: ${meta.title} — ${date}`,\n  '',\n  `**Teilnehmer:** ${attendeeList}`,\n  `**Wortanzahl Transkript:** ${meta.word_count}`,\n  '',\n  '## Zusammenfassung',\n  ...data.summary.map(s => `- ${s}`),\n  '',\n  '## Entscheidungen',\n];\n\nif (data.decisions.length > 0) {\n  data.decisions.forEach((d, i) => {\n    lines.push(`${i + 1}. ${d.decision}${d.owner ? ` *(${d.owner})*` : ''}`);\n  });\n} else {\n  lines.push('*Keine Entscheidungen protokolliert.*');\n}\n\nlines.push('', '## Aufgaben');\nif (data.action_items.length > 0) {\n  data.action_items.forEach(a => {\n    const due = a.due_date ? ` — bis ${a.due_date}` : '';\n    const owner = a.owner ? ` *(${a.owner})* ` : ' ';\n    lines.push(`- [ ]${owner}${a.task}${due}`);\n  });\n} else {\n  lines.push('*Keine Aufgaben erfasst.*');\n}\n\nlines.push('', '## Offene Fragen');\nif (data.open_questions.length > 0) {\n  data.open_questions.forEach(q => lines.push(`- ${q}`));\n} else {\n  lines.push('*Keine offenen Fragen.*');\n}\n\nif (data.follow_up_date) {\n  lines.push('', '## Nächstes Meeting', data.follow_up_date);\n}\n\nlines.push('', '---', `*Automatisch erstellt am ${new Date(meta.received_at).toLocaleString('de-DE')} — Meeting-Protokoll Bot*`);\n\nconst markdown = lines.join('\\n');\n\nreturn [{\n  json: {\n    ...meta,\n    summary: data.summary,\n    decisions: data.decisions,\n    action_items: data.action_items,\n    open_questions: data.open_questions,\n    follow_up_date: data.follow_up_date || null,\n    markdown,\n    email_subject: `Meeting-Protokoll: ${meta.title} — ${date}`\n  }\n}];"
+      }
+    },
+    {
+      "id": "send-email",
+      "name": "Protokoll per E-Mail versenden",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1740, 100],
+      "credentials": {
+        "smtp": {
+          "id": "smtp-credentials",
+          "name": "SMTP (E-Mail Versand)"
+        }
+      },
+      "parameters": {
+        "fromEmail": "protokoll@ihr-unternehmen.de",
+        "toEmail": "={{ $json.attendees.join(', ') }}",
+        "subject": "={{ $json.email_subject }}",
+        "emailFormat": "html",
+        "html": "=<h2>{{ $json.title }}</h2>\n<p><strong>Datum:</strong> {{ new Date($json.received_at).toLocaleDateString('de-DE') }}</p>\n<p><strong>Teilnehmer:</strong> {{ $json.attendees.join(', ') || 'Nicht angegeben' }}</p>\n\n<h3>Zusammenfassung</h3>\n<ul>{{ $json.summary.map(s => `<li>${s}</li>`).join('') }}</ul>\n\n<h3>Entscheidungen</h3>\n{{ $json.decisions.length > 0 ? '<ol>' + $json.decisions.map((d,i) => `<li>${d.decision}${d.owner ? ' <em>(' + d.owner + ')</em>' : ''}</li>`).join('') + '</ol>' : '<p><em>Keine Entscheidungen.</em></p>' }}\n\n<h3>Aufgaben</h3>\n{{ $json.action_items.length > 0 ? '<ul>' + $json.action_items.map(a => `<li>☐ ${a.owner ? '<strong>' + a.owner + ':</strong> ' : ''}${a.task}${a.due_date ? ' — bis ' + a.due_date : ''}</li>`).join('') + '</ul>' : '<p><em>Keine Aufgaben.</em></p>' }}\n\n{{ $json.open_questions.length > 0 ? '<h3>Offene Fragen</h3><ul>' + $json.open_questions.map(q => '<li>' + q + '</li>').join('') + '</ul>' : '' }}\n\n{{ $json.follow_up_date ? '<p><strong>Nächstes Meeting:</strong> ' + $json.follow_up_date + '</p>' : '' }}\n\n<hr>\n<p><small><em>Automatisch erstellt vom Meeting-Protokoll Bot</em></small></p>",
+        "options": {}
+      }
+    },
+    {
+      "id": "success-response",
+      "name": "Ergebnis zurückgeben",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1960, 180],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"title\": \"{{ $('Markdown formatieren').first().json.title }}\",\n  \"summary\": {{ JSON.stringify($('Markdown formatieren').first().json.summary) }},\n  \"action_items_count\": {{ $('Markdown formatieren').first().json.action_items.length }},\n  \"transcript_words\": {{ $('Markdown formatieren').first().json.word_count }},\n  \"markdown\": {{ JSON.stringify($('Markdown formatieren').first().json.markdown) }}\n}",
+        "options": { "responseCode": 200 }
+      }
+    }
+  ],
+  "connections": {
+    "Meeting Audio Webhook": {
+      "main": [[{ "node": "Eingabe validieren", "type": "main", "index": 0 }]]
+    },
+    "Eingabe validieren": {
+      "main": [[{ "node": "Validierung OK?", "type": "main", "index": 0 }]]
+    },
+    "Validierung OK?": {
+      "main": [
+        [{ "node": "Transkription (Whisper API)", "type": "main", "index": 0 }],
+        [{ "node": "Fehler zurückgeben", "type": "main", "index": 0 }]
+      ]
+    },
+    "Transkription (Whisper API)": {
+      "main": [[{ "node": "Transkript extrahieren", "type": "main", "index": 0 }]]
+    },
+    "Transkript extrahieren": {
+      "main": [[{ "node": "Zusammenfassung (Claude API)", "type": "main", "index": 0 }]]
+    },
+    "Zusammenfassung (Claude API)": {
+      "main": [[{ "node": "Markdown formatieren", "type": "main", "index": 0 }]]
+    },
+    "Markdown formatieren": {
+      "main": [
+        [{ "node": "Protokoll per E-Mail versenden", "type": "main", "index": 0 }],
+        [{ "node": "Ergebnis zurückgeben", "type": "main", "index": 0 }]
+      ]
+    },
+    "Protokoll per E-Mail versenden": {
+      "main": [[{ "node": "Ergebnis zurückgeben", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "instanceId": "meeting-protokoll-demo",
+    "notes": "Voraussetzungen: OpenAI API Key (Whisper), Anthropic Claude API Key, SMTP-Zugangsdaten. TODO v2: Audio-Chunking für Dateien >25MB, lokale Whisper-Option für On-Premise-Datenschutz, Google Docs Archivierung."
+  }
+}
