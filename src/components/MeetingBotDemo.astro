@@ -1,0 +1,235 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+const { lang = 'de' } = Astro.props;
+const isDE = lang === 'de';
+
+const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/meeting-protokoll';
+
+const t = {
+  title: isDE ? 'Live-Demo: Meeting-Protokoll Bot' : 'Live Demo: Meeting Minutes Bot',
+  subtitle: isDE
+    ? 'Laden Sie eine Audioaufnahme hoch. Der Bot transkribiert und erstellt ein strukturiertes Protokoll.'
+    : 'Upload an audio recording. The bot transcribes and creates a structured summary.',
+  fileLabel: isDE ? 'Audioaufnahme auswählen' : 'Select audio recording',
+  fileHint: isDE ? 'MP3, WAV, M4A, OGG · max. 25 MB' : 'MP3, WAV, M4A, OGG · max. 25 MB',
+  titleLabel: isDE ? 'Meeting-Titel (optional)' : 'Meeting title (optional)',
+  titlePlaceholder: isDE ? 'z. B. Wochentliches Team-Standup' : 'e.g. Weekly team standup',
+  attendeesLabel: isDE ? 'Teilnehmer (optional, kommagetrennt)' : 'Attendees (optional, comma-separated)',
+  attendeesPlaceholder: isDE ? 'z. B. Anna, Stefan, Maria' : 'e.g. Alice, Bob, Carol',
+  submit: isDE ? 'Protokoll erstellen →' : 'Create Minutes →',
+  loading: isDE ? 'Transkribiere und analysiere...' : 'Transcribing and analyzing...',
+  loadingStep1: isDE ? 'Schritt 1/2: Spracherkennung (Whisper)' : 'Step 1/2: Speech recognition (Whisper)',
+  loadingStep2: isDE ? 'Schritt 2/2: Protokoll-Erstellung (KI)' : 'Step 2/2: Minutes generation (AI)',
+  loadingHint: isDE ? '~30–60 Sekunden' : '~30–60 seconds',
+  resultTitle: isDE ? 'Meeting-Protokoll' : 'Meeting Minutes',
+  summaryTitle: isDE ? 'Zusammenfassung' : 'Summary',
+  actionsTitle: isDE ? 'Aufgaben' : 'Action Items',
+  transcriptWords: isDE ? 'Wörter im Transkript' : 'Words in transcript',
+  noActions: isDE ? 'Keine Aufgaben erkannt.' : 'No action items detected.',
+  privacy: isDE
+    ? '🔒 Ihre Audiodatei wird für die Transkription verarbeitet und danach nicht gespeichert.'
+    : '🔒 Your audio file is processed for transcription and not stored afterward.',
+  fileTooLarge: isDE ? 'Datei zu groß. Maximal 25 MB.' : 'File too large. Maximum 25 MB.',
+  errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
+  tryAnother: isDE ? 'Nochmal testen' : 'Try another',
+};
+---
+
+<div id="meeting-demo" class="mt-12 p-6 md:p-8 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl not-prose">
+  <div class="flex items-center gap-3 mb-2">
+    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+    </span>
+    <h3 class="text-lg font-bold text-secondary-900 dark:text-white">{t.title}</h3>
+  </div>
+  <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
+
+  <form id="meeting-form" class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-2">
+        {t.fileLabel}
+      </label>
+      <div class="relative border-2 border-dashed border-secondary-300 dark:border-secondary-600 rounded-xl p-6 text-center hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+        <input type="file" id="meeting-file" accept=".mp3,.wav,.m4a,.ogg,audio/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto mb-2 text-secondary-400 dark:text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+        </svg>
+        <p id="meeting-filename" class="text-sm text-secondary-500 dark:text-secondary-400">{t.fileHint}</p>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label for="meeting-title" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.titleLabel}</label>
+        <input type="text" id="meeting-title" placeholder={t.titlePlaceholder}
+          class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+      </div>
+      <div>
+        <label for="meeting-attendees" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">{t.attendeesLabel}</label>
+        <input type="text" id="meeting-attendees" placeholder={t.attendeesPlaceholder}
+          class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+      </div>
+    </div>
+
+    <p id="meeting-error" class="hidden text-sm text-red-600 dark:text-red-400"></p>
+
+    <button type="submit" id="meeting-submit" disabled
+      class="w-full btn-secondary py-3 font-semibold opacity-50 cursor-not-allowed transition-all">
+      {t.submit}
+    </button>
+
+    <p class="text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
+  </form>
+
+  <div id="meeting-loading" class="hidden mt-6 text-center py-8 space-y-3">
+    <div class="inline-flex items-center gap-3 text-secondary-600 dark:text-secondary-400">
+      <svg class="animate-spin w-5 h-5 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span id="meeting-loading-step" class="font-medium">{t.loading}</span>
+    </div>
+    <p class="text-xs text-secondary-400">({t.loadingHint})</p>
+  </div>
+
+  <div id="meeting-results" class="hidden mt-6 space-y-4">
+    <div class="flex items-center justify-between">
+      <h4 class="font-semibold text-secondary-900 dark:text-white flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        {t.resultTitle}
+      </h4>
+      <span id="meeting-wordcount" class="text-xs text-secondary-400 dark:text-secondary-500"></span>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2">{t.summaryTitle}</p>
+      <ul id="meeting-summary" class="space-y-1.5"></ul>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2">{t.actionsTitle}</p>
+      <ul id="meeting-actions" class="space-y-1.5"></ul>
+    </div>
+
+    <button id="meeting-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+      ← {t.tryAnother}
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ WEBHOOK_URL, t }}>
+  const form = document.getElementById('meeting-form');
+  const fileInput = document.getElementById('meeting-file');
+  const filenameEl = document.getElementById('meeting-filename');
+  const submitBtn = document.getElementById('meeting-submit');
+  const errorEl = document.getElementById('meeting-error');
+  const loadingEl = document.getElementById('meeting-loading');
+  const loadingStep = document.getElementById('meeting-loading-step');
+  const resultsEl = document.getElementById('meeting-results');
+  const summaryEl = document.getElementById('meeting-summary');
+  const actionsEl = document.getElementById('meeting-actions');
+  const wordcountEl = document.getElementById('meeting-wordcount');
+  const retryBtn = document.getElementById('meeting-retry');
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    if (file.size > 25 * 1024 * 1024) {
+      showError(t.fileTooLarge);
+      fileInput.value = '';
+      return;
+    }
+    filenameEl.textContent = file.name;
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    hideError();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const file = fileInput.files?.[0];
+    if (!file) return;
+
+    form.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden');
+
+    // Switch loading message after ~15s to hint at step 2
+    const stepTimer = setTimeout(() => {
+      loadingStep.textContent = t.loadingStep2;
+    }, 15000);
+
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('title', document.getElementById('meeting-title').value.trim() || 'Meeting');
+      fd.append('attendees', document.getElementById('meeting-attendees').value.trim());
+      fd.append('language', 'de');
+
+      const resp = await fetch(WEBHOOK_URL, { method: 'POST', body: fd });
+      clearTimeout(stepTimer);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      renderResults(data);
+    } catch {
+      clearTimeout(stepTimer);
+      loadingEl.classList.add('hidden');
+      form.classList.remove('hidden');
+      showError(t.errorGeneric);
+    }
+  });
+
+  retryBtn.addEventListener('click', () => {
+    resultsEl.classList.add('hidden');
+    form.classList.remove('hidden');
+    fileInput.value = '';
+    filenameEl.textContent = t.fileHint;
+    submitBtn.disabled = true;
+    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    document.getElementById('meeting-title').value = '';
+    document.getElementById('meeting-attendees').value = '';
+    loadingStep.textContent = t.loading;
+  });
+
+  function makeBullet(text, isAction) {
+    const li = document.createElement('li');
+    li.className = 'flex items-start gap-2 text-sm text-secondary-700 dark:text-secondary-300';
+    const icon = document.createElement('span');
+    icon.className = isAction
+      ? 'flex-shrink-0 mt-0.5 w-4 h-4 rounded border border-secondary-300 dark:border-secondary-600'
+      : 'flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-500';
+    li.appendChild(icon);
+    const span = document.createElement('span');
+    span.textContent = text;
+    li.appendChild(span);
+    return li;
+  }
+
+  function renderResults(data) {
+    loadingEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+
+    if (data.transcript_words) {
+      wordcountEl.textContent = `${data.transcript_words} ${t.transcriptWords}`;
+    }
+
+    const summary = Array.isArray(data.summary) ? data.summary : [];
+    summaryEl.replaceChildren(...summary.map((s) => makeBullet(s, false)));
+
+    const actions = Array.isArray(data.action_items) ? data.action_items : [];
+    if (actions.length === 0) {
+      actionsEl.replaceChildren(makeBullet(t.noActions, false));
+    } else {
+      const items = actions.map((a) => {
+        const text = typeof a === 'string' ? a : [a.assignee, a.task, a.due_date].filter(Boolean).join(' · ');
+        return makeBullet(text, true);
+      });
+      actionsEl.replaceChildren(...items);
+    }
+  }
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+  function hideError() { errorEl.classList.add('hidden'); }
+</script>
