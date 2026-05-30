@@ -4,7 +4,8 @@ description: "Häufige Datensynchronisationsprobleme und wie automatisierte Lös
 pubDate: 2025-02-19
 category: integration
 tags: ["datensync", "datenqualitaet", "integration"]
-draft: true
+heroImage: "/images/blog/data-sync-nightmares.png"
+draft: false
 lang: de
 alternateSlug: "data-sync-nightmares"
 ---

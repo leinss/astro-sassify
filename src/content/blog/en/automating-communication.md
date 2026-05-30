@@ -151,3 +151,9 @@ The first 5 minutes after a lead submits a form determine whether they convert o
 ---
 
 *Interested in a custom implementation for your business? [Book a free discovery call.](/en/#contact)*
+
+## Technical Deep Dive
+
+Interested in the architecture behind the system — two-step classification and generation, prompt design, escalation logic, and monitoring?
+
+→ **[Lead Response Automation with n8n and Kimi K2: Architecture and Prompting](https://leinss.xyz/en/blog/blitz-antwort-technical/)** *(leinss.xyz)*

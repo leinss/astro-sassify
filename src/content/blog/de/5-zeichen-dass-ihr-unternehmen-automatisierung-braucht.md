@@ -4,7 +4,8 @@ description: "Versinkt Ihr Team in repetitiven Aufgaben? Hier sind fünf klare I
 pubDate: 2025-01-15
 category: automation
 tags: ["workflow", "effizienz", "unternehmenswachstum"]
-draft: true
+heroImage: "/images/blog/5-signs-automation.png"
+draft: false
 lang: de
 alternateSlug: "5-signs-your-business-needs-automation"
 ---

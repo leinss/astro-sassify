@@ -4,7 +4,8 @@ description: "Discover how cloud-based automation tools can cut your operational
 pubDate: 2025-01-29
 category: automation
 tags: ["cloud", "cost-reduction", "efficiency"]
-draft: true
+heroImage: "/images/blog/cloud-automation-costs.png"
+draft: false
 lang: en
 alternateSlug: "cloud-automatisierung-reduziert-kosten"
 ---

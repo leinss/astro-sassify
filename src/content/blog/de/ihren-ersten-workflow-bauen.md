@@ -4,7 +4,8 @@ description: "Ein praktischer Leitfaden zur Erstellung Ihres ersten Business-Aut
 pubDate: 2025-03-19
 category: automation
 tags: ["einstieg", "workflow", "anleitung"]
-draft: true
+heroImage: "/images/blog/building-your-first-workflow.png"
+draft: false
 lang: de
 alternateSlug: "building-your-first-workflow"
 ---

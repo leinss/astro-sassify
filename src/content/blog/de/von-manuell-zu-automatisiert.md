@@ -4,7 +4,8 @@ description: "Ein praktischer Fahrplan für kleine Unternehmen, die ihre Automat
 pubDate: 2025-01-22
 category: automation
 tags: ["kleine-unternehmen", "einstieg", "digitale-transformation"]
-draft: true
+heroImage: "/images/blog/from-manual-to-automated.png"
+draft: false
 lang: de
 alternateSlug: "from-manual-to-automated"
 ---

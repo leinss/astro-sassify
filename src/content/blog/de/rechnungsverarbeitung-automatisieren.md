@@ -116,3 +116,9 @@ Sie möchten Ihre Rechnungsverarbeitung automatisieren?
 3. **Pilotprojekt**: Starten Sie mit einem Lieferanten-Typ
 
 [Kostenloses Erstgespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) – Ich zeige Ihnen, wie der Workflow für Ihre Situation aussehen würde.
+
+## Technischer Deep-Dive
+
+Interesse an den technischen Details — PDF-zu-Bild-Konvertierung, Claude tool_use für strukturierte Extraktion, Validierungslogik und DATEV-Export?
+
+→ **[Claude Vision API für Rechnungsextraktion: Technische Umsetzung mit n8n](https://leinss.xyz/de/blog/ki-rechnungsleser-technik/)** *(leinss.xyz)*

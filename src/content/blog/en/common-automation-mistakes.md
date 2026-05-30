@@ -4,7 +4,8 @@ description: "Learn from others' mistakes: the most common automation pitfalls a
 pubDate: 2025-03-05
 category: automation
 tags: ["best-practices", "pitfalls", "planning"]
-draft: true
+heroImage: "/images/blog/common-automation-mistakes.png"
+draft: false
 lang: en
 alternateSlug: "haeufige-automatisierungsfehler"
 ---
