@@ -97,6 +97,12 @@ Download the complete n8n workflow for free and import it into your own instance
 
 Import: n8n → Workflows → Import from File → Upload JSON → Set credentials (Anthropic API Key)
 
+## Technical Deep Dive
+
+If you're interested in the implementation details — why Kimi k2.5 instead of Claude tool-use, how RFC 4180-compliant CSV quoting works in JavaScript, and which prompt engineering techniques ensure reliable JSON output:
+
+→ **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/en/blog/excel-retter-technical/)** *(leinss.xyz)*
+
 ---
 
 *Interested in a tailored solution for your specific data challenges? [Get in touch.](/en/#contact)*
