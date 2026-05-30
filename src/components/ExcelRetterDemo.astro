@@ -1,0 +1,301 @@
+---
+interface Props {
+  lang?: 'de' | 'en';
+}
+const { lang = 'de' } = Astro.props;
+const isDE = lang === 'de';
+
+const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/excel-retter';
+
+const SAMPLE_CSV = isDE
+  ? `Name,E-Mail,Telefon,Unternehmen\n  Anna Müller ,anna.mueller@gmail.com,+49 176 12345678,Bäckerei Schmidt GmbH\nHans meier,HANS@GMAIL.COM,0176 98765432,bäckerei schmidt gmbh\nanna mueller,anna.mueller@gmail.com,,\nThomas Schmidt,thomas@,+49 (89) 123-456,Müller AG\n  Lisa Weber  ,lisa.weber@company.de,+4930123456,   Müller AG   `
+  : `Name,Email,Phone,Company\n  Anna Miller ,anna.miller@gmail.com,+1 555 123 4567,Acme Corp\nJohn DOE,JOHN@GMAIL.COM,555-987-6543,acme corp\nanna miller,anna.miller@gmail.com,,\nTom Smith,tom@,+1 (555) 234-567,Globex Inc.\n  Lisa Brown  ,lisa.brown@company.com,15552345678,   Globex Inc   `;
+
+const t = {
+  title: isDE ? 'Live-Demo: Excel-Retter' : 'Live Demo: Spreadsheet Cleaner',
+  subtitle: isDE
+    ? 'Fügen Sie CSV-Daten ein. Die KI bereinigt, normalisiert und entfernt Duplikate.'
+    : 'Paste CSV data. The AI cleans, normalizes, and removes duplicates.',
+  dataLabel: isDE ? 'CSV-Daten einfügen' : 'Paste CSV data',
+  sampleBtn: isDE ? 'Beispieldaten laden' : 'Load sample data',
+  instructionsLabel: isDE ? 'Zusätzliche Anweisungen (optional)' : 'Additional instructions (optional)',
+  instructionsPlaceholder: isDE
+    ? 'z. B. Nur deutsche Telefonnummern behalten'
+    : 'e.g. Keep only US phone numbers',
+  submit: isDE ? 'Daten bereinigen →' : 'Clean Data →',
+  loading: isDE ? 'Analysiere und bereinige Daten...' : 'Analyzing and cleaning data...',
+  loadingHint: isDE ? '~15–30 Sekunden' : '~15–30 seconds',
+  resultTitle: isDE ? 'Bereinigte Daten' : 'Cleaned Data',
+  changesTitle: isDE ? 'Vorgenommene Änderungen' : 'Changes Made',
+  downloadBtn: isDE ? 'CSV herunterladen' : 'Download CSV',
+  tryAnother: isDE ? 'Nochmal testen' : 'Try another',
+  noChanges: isDE ? 'Keine Änderungen notwendig.' : 'No changes needed.',
+  privacy: isDE
+    ? '🔒 Ihre Daten werden für die Bereinigung verarbeitet und danach nicht gespeichert.'
+    : '🔒 Your data is processed for cleaning and not stored afterward.',
+  errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
+  statTotal: isDE ? 'Zeilen gesamt' : 'Total rows',
+  statModified: isDE ? 'Bereinigt' : 'Modified',
+  statDuplicates: isDE ? 'Duplikate entfernt' : 'Duplicates removed',
+  statIssues: isDE ? 'Probleme gefunden' : 'Issues found',
+};
+---
+
+<div id="excel-demo" class="mt-12 p-6 md:p-8 bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl not-prose">
+  <div class="flex items-center gap-3 mb-2">
+    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+      </svg>
+    </span>
+    <h3 class="text-lg font-bold text-secondary-900 dark:text-white">{t.title}</h3>
+  </div>
+  <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
+
+  <form id="excel-form" class="space-y-4">
+    <div>
+      <div class="flex items-center justify-between mb-2">
+        <label class="block text-sm font-medium text-secondary-700 dark:text-secondary-300">
+          {t.dataLabel}
+        </label>
+        <button type="button" id="excel-sample-btn"
+          class="text-xs text-primary-600 dark:text-primary-400 hover:underline">
+          {t.sampleBtn}
+        </button>
+      </div>
+      <textarea id="excel-csv" rows="7" spellcheck="false"
+        class="w-full px-3 py-2 text-xs font-mono rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-y"
+        placeholder="Name,E-Mail,Telefon&#10;Anna Müller,anna@example.com,+49 176 12345678&#10;..."></textarea>
+    </div>
+
+    <div>
+      <label for="excel-instructions" class="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1">
+        {t.instructionsLabel}
+      </label>
+      <input type="text" id="excel-instructions" placeholder={t.instructionsPlaceholder}
+        class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+    </div>
+
+    <p id="excel-error" class="hidden text-sm text-red-600 dark:text-red-400"></p>
+
+    <button type="submit" id="excel-submit" disabled
+      class="w-full py-3 font-semibold rounded-xl bg-green-600 hover:bg-green-700 text-white opacity-50 cursor-not-allowed transition-all">
+      {t.submit}
+    </button>
+
+    <p class="text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
+  </form>
+
+  <div id="excel-loading" class="hidden mt-6 text-center py-8 space-y-3">
+    <div class="inline-flex items-center gap-3 text-secondary-600 dark:text-secondary-400">
+      <svg class="animate-spin w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+      </svg>
+      <span class="font-medium">{t.loading}</span>
+    </div>
+    <p class="text-xs text-secondary-400">({t.loadingHint})</p>
+  </div>
+
+  <div id="excel-results" class="hidden mt-6 space-y-5">
+    <div id="excel-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2">
+        {t.resultTitle}
+      </p>
+      <div class="overflow-x-auto rounded-lg border border-secondary-200 dark:border-secondary-700">
+        <table id="excel-table" class="w-full text-xs">
+          <thead id="excel-thead" class="bg-secondary-50 dark:bg-secondary-800"></thead>
+          <tbody id="excel-tbody" class="divide-y divide-secondary-100 dark:divide-secondary-700"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-secondary-500 dark:text-secondary-400 mb-2">
+        {t.changesTitle}
+      </p>
+      <ul id="excel-changes" class="space-y-1"></ul>
+    </div>
+
+    <div class="flex items-center gap-4 pt-2">
+      <button id="excel-download"
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-green-600 hover:bg-green-700 text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        {t.downloadBtn}
+      </button>
+      <button id="excel-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+        ← {t.tryAnother}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ WEBHOOK_URL, SAMPLE_CSV, t }}>
+  const form = document.getElementById('excel-form');
+  const csvInput = document.getElementById('excel-csv');
+  const submitBtn = document.getElementById('excel-submit');
+  const sampleBtn = document.getElementById('excel-sample-btn');
+  const instructionsInput = document.getElementById('excel-instructions');
+  const errorEl = document.getElementById('excel-error');
+  const loadingEl = document.getElementById('excel-loading');
+  const resultsEl = document.getElementById('excel-results');
+  const statsEl = document.getElementById('excel-stats');
+  const theadEl = document.getElementById('excel-thead');
+  const tbodyEl = document.getElementById('excel-tbody');
+  const changesEl = document.getElementById('excel-changes');
+  const downloadBtn = document.getElementById('excel-download');
+  const retryBtn = document.getElementById('excel-retry');
+
+  let cleanedCsv = '';
+
+  function updateSubmitState() {
+    const hasContent = csvInput.value.trim().length > 0;
+    submitBtn.disabled = !hasContent;
+    submitBtn.classList.toggle('opacity-50', !hasContent);
+    submitBtn.classList.toggle('cursor-not-allowed', !hasContent);
+  }
+
+  csvInput.addEventListener('input', updateSubmitState);
+
+  sampleBtn.addEventListener('click', () => {
+    csvInput.value = SAMPLE_CSV;
+    updateSubmitState();
+    hideError();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!csvInput.value.trim()) return;
+
+    form.classList.add('hidden');
+    loadingEl.classList.remove('hidden');
+    resultsEl.classList.add('hidden');
+    hideError();
+
+    try {
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          csv_data: csvInput.value.trim(),
+          instructions: instructionsInput.value.trim(),
+          language: 'de',
+        }),
+      });
+
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data = await resp.json();
+      if (!data.success) throw new Error(data.error || 'Unknown error');
+      cleanedCsv = data.cleaned_csv || '';
+      renderResults(data);
+    } catch {
+      loadingEl.classList.add('hidden');
+      form.classList.remove('hidden');
+      showError(t.errorGeneric);
+    }
+  });
+
+  retryBtn.addEventListener('click', () => {
+    resultsEl.classList.add('hidden');
+    form.classList.remove('hidden');
+    cleanedCsv = '';
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    if (!cleanedCsv) return;
+    const blob = new Blob([cleanedCsv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'bereinigte-daten.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  function makeStatCard(label, value, colorClass) {
+    const div = document.createElement('div');
+    div.className = `p-3 rounded-lg ${colorClass} text-center`;
+    const num = document.createElement('div');
+    num.className = 'text-2xl font-bold';
+    num.textContent = String(value);
+    const lbl = document.createElement('div');
+    lbl.className = 'text-xs mt-0.5 opacity-80';
+    lbl.textContent = label;
+    div.appendChild(num);
+    div.appendChild(lbl);
+    return div;
+  }
+
+  function renderStats(stats) {
+    const items = [
+      { label: t.statTotal, value: stats.total_rows ?? 0, cls: 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300' },
+      { label: t.statModified, value: stats.rows_modified ?? 0, cls: 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300' },
+      { label: t.statDuplicates, value: stats.duplicates_removed ?? 0, cls: 'bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300' },
+      { label: t.statIssues, value: stats.issues_found ?? 0, cls: 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300' },
+    ];
+    statsEl.replaceChildren(...items.map(({ label, value, cls }) => makeStatCard(label, value, cls)));
+  }
+
+  function renderTable(headers, rows) {
+    const trHead = document.createElement('tr');
+    for (const h of headers) {
+      const th = document.createElement('th');
+      th.className = 'px-3 py-2 text-left font-semibold text-secondary-700 dark:text-secondary-300 whitespace-nowrap';
+      th.textContent = h;
+      trHead.appendChild(th);
+    }
+    theadEl.replaceChildren(trHead);
+
+    const trRows = rows.map((row, i) => {
+      const tr = document.createElement('tr');
+      tr.className = i % 2 === 0
+        ? 'bg-white dark:bg-transparent'
+        : 'bg-secondary-50 dark:bg-secondary-800/30';
+      for (const h of headers) {
+        const td = document.createElement('td');
+        td.className = 'px-3 py-2 text-secondary-700 dark:text-secondary-300 whitespace-nowrap';
+        td.textContent = row[h] ?? '';
+        tr.appendChild(td);
+      }
+      return tr;
+    });
+    tbodyEl.replaceChildren(...trRows);
+  }
+
+  function renderChanges(changes) {
+    if (!changes || changes.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'text-sm text-secondary-500 dark:text-secondary-400';
+      li.textContent = t.noChanges;
+      changesEl.replaceChildren(li);
+      return;
+    }
+    const items = changes.map((c) => {
+      const li = document.createElement('li');
+      li.className = 'flex items-start gap-2 text-sm text-secondary-700 dark:text-secondary-300';
+      const dot = document.createElement('span');
+      dot.className = 'flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500';
+      const span = document.createElement('span');
+      span.textContent = c;
+      li.appendChild(dot);
+      li.appendChild(span);
+      return li;
+    });
+    changesEl.replaceChildren(...items);
+  }
+
+  function renderResults(data) {
+    loadingEl.classList.add('hidden');
+    resultsEl.classList.remove('hidden');
+    renderStats(data.stats || {});
+    renderTable(data.headers || [], data.cleaned_rows || []);
+    renderChanges(data.changes || []);
+  }
+
+  function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+  function hideError() { errorEl.classList.add('hidden'); }
+</script>
