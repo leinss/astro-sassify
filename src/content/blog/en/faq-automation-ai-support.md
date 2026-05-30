@@ -5,7 +5,7 @@ pubDate: 2025-04-10
 category: automation
 tags: ["faq", "support", "ai", "rag", "n8n", "vector-database"]
 heroImage: "/images/blog/faq-automation.png"
-draft: true
+draft: false
 lang: en
 alternateSlug: "faq-assistent-ki-support"
 ---
