@@ -111,6 +111,12 @@ The FAQ Assistant consists of two n8n workflows:
 
 After importing into your n8n instance and setting up a Supabase database, you'll be up and running within one to two hours. The SQL setup for the vector database is available in the [GitHub repository](https://github.com/leinss).
 
+## Technical Deep Dive
+
+If you're interested in the implementation details — why PostgreSQL full-text search instead of a vector database, how the OR search logic works, and which n8n item-splitting pitfalls to watch out for:
+
+→ **[Building a FAQ Assistant with n8n, PostgreSQL FTS, and Kimi k2.5](https://leinss.xyz/en/blog/faq-assistant-technical/)** *(leinss.xyz)*
+
 ---
 
 *Interested in a custom FAQ solution for your business? [Get in touch.](/en/#contact)*

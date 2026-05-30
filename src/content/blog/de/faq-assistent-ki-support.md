@@ -111,6 +111,12 @@ Der FAQ-Assistent besteht aus zwei n8n-Workflows:
 
 Nach dem Import in Ihre n8n-Instanz und dem Einrichten einer Supabase-Datenbank sind Sie in ein bis zwei Stunden einsatzbereit. Die SQL-Einrichtung für die Vektordatenbank finden Sie im [GitHub-Repository](https://github.com/leinss).
 
+## Technischer Deep Dive
+
+Wenn Sie die Implementierungsdetails interessieren — warum PostgreSQL Full-Text-Search statt Vektordatenbank, wie die OR-Suchlogik funktioniert und welche n8n-Fallgruben beim Item-Splitting lauern:
+
+→ **[FAQ-Assistent mit n8n, PostgreSQL FTS und Kimi k2.5 bauen](https://leinss.xyz/de/blog/faq-assistent-technik/)** *(leinss.xyz)*
+
 ---
 
 *Interesse an einer maßgeschneiderten FAQ-Lösung für Ihr Unternehmen? [Sprechen Sie mich an.](/de/#contact)*
