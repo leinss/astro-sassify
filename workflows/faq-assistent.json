@@ -62,24 +62,24 @@
     },
     {
       "id": "generate-embedding",
-      "name": "Frage einbetten (OpenAI)",
+      "name": "Frage einbetten (Kimi)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [860, 200],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "openai-api-header-auth",
-          "name": "OpenAI API (Bearer)"
+          "id": "kimi-api-header-auth",
+          "name": "Kimi API (Moonshot)"
         }
       },
       "parameters": {
         "method": "POST",
-        "url": "https://api.openai.com/v1/embeddings",
+        "url": "https://api.moonshot.ai/v1/embeddings",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ { input: $json.question, model: 'text-embedding-3-small' } }}",
+        "jsonBody": "={{ { input: $json.question, model: 'moonshot-v1-embedding' } }}",
         "options": {}
       }
     },
@@ -112,35 +112,29 @@
       "typeVersion": 2,
       "position": [1300, 200],
       "parameters": {
-        "jsCode": "const searchResults = $input.first().json;\nconst validated = $('Eingabe validieren').first().json;\nconst question = validated.question;\nconst language = validated.language;\n\nconst matches = Array.isArray(searchResults) ? searchResults : [];\nconst context = matches.length > 0\n  ? matches.map((m, i) => '[' + (i+1) + '] (Quelle: ' + (m.source || 'FAQ') + ')\\n' + m.content).join('\\n\\n')\n  : null;\nconst sources = [...new Set(matches.map(m => m.source).filter(Boolean))];\nconst maxSimilarity = matches.length > 0 ? Math.max(...matches.map(m => m.similarity || 0)) : 0;\nconst isDE = language === 'de';\n\nconst systemPrompt = isDE\n  ? 'Du bist ein hilfreicher FAQ-Assistent f\\u00fcr Leinss Consulting. Beantworte Fragen NUR basierend auf dem bereitgestellten Kontext. Antworte immer auf Deutsch. Gib EXAKT dieses JSON zur\\u00fcck: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}'\n  : 'You are a helpful FAQ assistant for Leinss Consulting. Answer questions ONLY based on the provided context. Respond in English. Return EXACTLY this JSON: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}';\n\nconst contextBlock = context\n  ? (isDE ? 'Wissensbank-Kontext:\\n\\n' : 'Knowledge base context:\\n\\n') + context\n  : (isDE ? 'KEIN KONTEXT GEFUNDEN. Teile mit, dass du keine Informationen zu dieser Frage hast, und empfehle direkte Kontaktaufnahme.' : 'NO CONTEXT FOUND. Politely say you have no information about this question and suggest direct contact.');\n\nconst claudeRequest = {\n  model: 'claude-sonnet-4-6',\n  max_tokens: 1024,\n  messages: [\n    { role: 'system', content: systemPrompt },\n    { role: 'user', content: contextBlock + '\\n\\n' + (isDE ? 'Frage: ' : 'Question: ') + question }\n  ]\n};\n\nreturn [{ json: { claudeRequest, question, language, sources, maxSimilarity, hasContext: matches.length > 0 } }];"
+        "jsCode": "const searchResults = $input.first().json;\nconst validated = $('Eingabe validieren').first().json;\nconst question = validated.question;\nconst language = validated.language;\n\nconst matches = Array.isArray(searchResults) ? searchResults : [];\nconst context = matches.length > 0\n  ? matches.map((m, i) => '[' + (i+1) + '] (Quelle: ' + (m.source || 'FAQ') + ')\\n' + m.content).join('\\n\\n')\n  : null;\nconst sources = [...new Set(matches.map(m => m.source).filter(Boolean))];\nconst maxSimilarity = matches.length > 0 ? Math.max(...matches.map(m => m.similarity || 0)) : 0;\nconst isDE = language === 'de';\n\nconst systemPrompt = isDE\n  ? 'Du bist ein hilfreicher FAQ-Assistent f\\u00fcr Leinss Consulting. Beantworte Fragen NUR basierend auf dem bereitgestellten Kontext. Antworte immer auf Deutsch. Gib EXAKT dieses JSON zur\\u00fcck: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}'\n  : 'You are a helpful FAQ assistant for Leinss Consulting. Answer questions ONLY based on the provided context. Respond in English. Return EXACTLY this JSON: {\"answer\": \"...\", \"sources\": [...], \"confidence\": 0.0, \"escalate\": false, \"escalation_reason\": null}';\n\nconst contextBlock = context\n  ? (isDE ? 'Wissensbank-Kontext:\\n\\n' : 'Knowledge base context:\\n\\n') + context\n  : (isDE ? 'KEIN KONTEXT GEFUNDEN. Teile mit, dass du keine Informationen zu dieser Frage hast, und empfehle direkte Kontaktaufnahme.' : 'NO CONTEXT FOUND. Politely say you have no information about this question and suggest direct contact.');\n\nconst kimiRequest = {\n  model: 'kimi-k2.5',\n  max_tokens: 1024,\n  messages: [\n    { role: 'system', content: systemPrompt },\n    { role: 'user', content: contextBlock + '\\n\\n' + (isDE ? 'Frage: ' : 'Question: ') + question }\n  ]\n};\n\nreturn [{ json: { kimiRequest, question, language, sources, maxSimilarity, hasContext: matches.length > 0 } }];"
       }
     },
     {
-      "id": "call-claude",
-      "name": "Antwort generieren (Claude)",
+      "id": "call-kimi",
+      "name": "Antwort generieren (Kimi)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [1520, 200],
       "credentials": {
         "httpHeaderAuth": {
-          "id": "anthropic-api-header-auth",
-          "name": "Anthropic API (Claude)"
+          "id": "kimi-api-header-auth",
+          "name": "Kimi API (Moonshot)"
         }
       },
       "parameters": {
         "method": "POST",
-        "url": "https://api.anthropic.com/v1/messages",
+        "url": "https://api.moonshot.ai/v1/chat/completions",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            { "name": "anthropic-version", "value": "2023-06-01" }
-          ]
-        },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ $json.claudeRequest }}",
+        "jsonBody": "={{ $json.kimiRequest }}",
         "options": {}
       }
     },
@@ -151,7 +145,7 @@
       "typeVersion": 2,
       "position": [1740, 200],
       "parameters": {
-        "jsCode": "const meta = $('Anfrage aufbauen').first().json;\nconst response = $input.first().json;\nconst content = response.content?.[0]?.text;\nif (!content) throw new Error('Claude returned empty response');\n\nlet data;\ntry {\n  data = JSON.parse(content);\n} catch {\n  const match = content.match(/```(?:json)?\\s*([\\s\\S]+?)```/);\n  if (!match) {\n    const jsonMatch = content.match(/\\{[\\s\\S]+\\}/);\n    if (!jsonMatch) throw new Error('Could not parse JSON from Claude response: ' + content.substring(0, 200));\n    data = JSON.parse(jsonMatch[0]);\n  } else {\n    data = JSON.parse(match[1]);\n  }\n}\n\nconst simConf = meta.hasContext ? Math.min(meta.maxSimilarity, 1.0) : 0.1;\nconst finalConf = parseFloat(Math.max(\n  Math.min(data.confidence || 0.5, simConf + 0.1),\n  meta.hasContext ? 0.3 : 0.1\n).toFixed(2));\n\nreturn [{\n  json: {\n    answer: data.answer,\n    sources: data.sources || meta.sources || [],\n    confidence: finalConf,\n    escalate: data.escalate === true || finalConf < 0.5 || !meta.hasContext,\n    escalation_reason: data.escalation_reason || null\n  }\n}];"
+        "jsCode": "const meta = $('Anfrage aufbauen').first().json;\nconst response = $input.first().json;\nconst content = response.choices?.[0]?.message?.content;\nif (!content) throw new Error('Kimi returned empty response');\n\nlet data;\ntry {\n  data = JSON.parse(content);\n} catch {\n  const match = content.match(/```(?:json)?\\s*([\\s\\S]+?)```/);\n  if (!match) {\n    const jsonMatch = content.match(/\\{[\\s\\S]+\\}/);\n    if (!jsonMatch) throw new Error('Could not parse JSON from Kimi response: ' + content.substring(0, 200));\n    data = JSON.parse(jsonMatch[0]);\n  } else {\n    data = JSON.parse(match[1]);\n  }\n}\n\nconst simConf = meta.hasContext ? Math.min(meta.maxSimilarity, 1.0) : 0.1;\nconst finalConf = parseFloat(Math.max(\n  Math.min(data.confidence || 0.5, simConf + 0.1),\n  meta.hasContext ? 0.3 : 0.1\n).toFixed(2));\n\nreturn [{\n  json: {\n    answer: data.answer,\n    sources: data.sources || meta.sources || [],\n    confidence: finalConf,\n    escalate: data.escalate === true || finalConf < 0.5 || !meta.hasContext,\n    escalation_reason: data.escalation_reason || null\n  }\n}];"
       }
     },
     {
@@ -176,20 +170,20 @@
     },
     "Validierung OK?": {
       "main": [
-        [{ "node": "Frage einbetten (OpenAI)", "type": "main", "index": 0 }],
+        [{ "node": "Frage einbetten (Kimi)", "type": "main", "index": 0 }],
         [{ "node": "Fehler zurückgeben", "type": "main", "index": 0 }]
       ]
     },
-    "Frage einbetten (OpenAI)": {
+    "Frage einbetten (Kimi)": {
       "main": [[{ "node": "Wissensdatenbank durchsuchen", "type": "main", "index": 0 }]]
     },
     "Wissensdatenbank durchsuchen": {
       "main": [[{ "node": "Anfrage aufbauen", "type": "main", "index": 0 }]]
     },
     "Anfrage aufbauen": {
-      "main": [[{ "node": "Antwort generieren (Claude)", "type": "main", "index": 0 }]]
+      "main": [[{ "node": "Antwort generieren (Kimi)", "type": "main", "index": 0 }]]
     },
-    "Antwort generieren (Claude)": {
+    "Antwort generieren (Kimi)": {
       "main": [[{ "node": "Antwort formatieren", "type": "main", "index": 0 }]]
     },
     "Antwort formatieren": {
