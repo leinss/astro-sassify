@@ -52,7 +52,7 @@ const enPath = getLocalizedPath("en")
 ---
 
 <header
-  class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-sm border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-sm z-50 py-4 transition-colors duration-300 header-transition"
+  class="sticky top-0 w-full bg-white/90 dark:bg-secondary-950/90 backdrop-blur-xs border-b border-secondary-200/20 dark:border-secondary-800/20 shadow-xs z-50 py-4 transition-colors duration-300 header-transition"
   id="header"
 >
   <div class="container-custom flex items-center justify-between">
@@ -130,7 +130,7 @@ const enPath = getLocalizedPath("en")
       <!-- Dark mode toggle - visible on larger screens -->
       <button
         x-on:click="darkMode = !darkMode"
-        class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
+        class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
         aria-label="Toggle dark mode"
       >
         <svg
@@ -173,7 +173,7 @@ const enPath = getLocalizedPath("en")
       <div x-data="{ open: false, showAllPages: false }" @keydown.escape.window="open = false">
         <button
           @click="open = !open"
-          class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+          class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle menu"
         >
           <svg

@@ -64,7 +64,7 @@ const t = {
         </button>
       </div>
       <textarea id="excel-csv" rows="7" spellcheck="false"
-        class="w-full px-3 py-2 text-xs font-mono rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-y"
+        class="w-full px-3 py-2 text-xs font-mono rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-hidden focus:ring-2 focus:ring-green-500 focus:border-transparent resize-y"
         placeholder="Name,E-Mail,Telefon&#10;Anna Müller,anna@example.com,+49 176 12345678&#10;..."></textarea>
     </div>
 
@@ -73,7 +73,7 @@ const t = {
         {t.instructionsLabel}
       </label>
       <input type="text" id="excel-instructions" placeholder={t.instructionsPlaceholder}
-        class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+        class="w-full px-3 py-2 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-hidden focus:ring-2 focus:ring-green-500 focus:border-transparent" />
     </div>
 
     <p id="excel-error" class="hidden text-sm text-red-600 dark:text-red-400"></p>
@@ -278,7 +278,7 @@ const t = {
       const li = document.createElement('li');
       li.className = 'flex items-start gap-2 text-sm text-secondary-700 dark:text-secondary-300';
       const dot = document.createElement('span');
-      dot.className = 'flex-shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500';
+      dot.className = 'shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500';
       const span = document.createElement('span');
       span.textContent = c;
       li.appendChild(dot);

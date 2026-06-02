@@ -54,12 +54,12 @@ const questions: FAQItem[] = questionKeys.map(key => {
           <div x-data="{ open: false }" class="relative">
             <button
               @click="open = !open"
-              class="flex justify-between items-center w-full text-left focus:outline-none"
+              class="flex justify-between items-center w-full text-left focus:outline-hidden"
             >
               <span class="text-base sm:text-lg md:text-xl font-medium">
                 {item.question}
               </span>
-              <span class="ml-6 flex-shrink-0">
+              <span class="ml-6 shrink-0">
                 <svg
                   class="h-6 w-6 text-primary-600 dark:text-primary-400 transition-transform"
                   :class="{ 'rotate-180': open }"

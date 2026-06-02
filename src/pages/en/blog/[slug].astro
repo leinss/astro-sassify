@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 
-import { getCollection, type CollectionEntry } from "astro:content"
+import { getCollection, render, type CollectionEntry } from "astro:content"
 import Layout from "../../../layouts/Layout.astro"
 import Header from "../../../components/Header.astro"
 import Footer from "../../../components/Footer.astro"
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
   return posts.map((post) => {
     // Strip the language folder prefix from the slug (e.g., "en/my-post" -> "my-post")
-    const slug = post.slug.replace(/^en\//, "")
+    const slug = post.id.replace(/^en\//, "")
     return {
       params: { slug },
       props: { post },
@@ -37,7 +37,7 @@ interface Props {
 }
 
 const { post } = Astro.props
-const { Content } = await post.render()
+const { Content } = await render(post)
 
 // Format date
 const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
@@ -61,7 +61,7 @@ const alternateUrl = post.data.alternateSlug
   ? `/de/blog/${post.data.alternateSlug}/`
   : null
 
-const slug = post.slug.replace(/^en\//, "")
+const slug = post.id.replace(/^en\//, "")
 const showInvoiceDemo = slug === "automating-invoice-processing"
 const showBlitzDemo = slug === "automating-communication"
 const showMeetingDemo = slug === "meeting-minutes-automation"
@@ -75,7 +75,7 @@ const showFAQDemo = slug === "faq-automation-ai-support"
 >
   <Header lang={lang} alternateHref={alternateUrl || undefined} />
 
-  <main class="min-h-screen bg-gradient-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900">
+  <main class="min-h-screen bg-linear-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900">
     <article class="py-12 md:py-20">
       <div class="container-custom max-w-4xl">
         <!-- Back Link -->

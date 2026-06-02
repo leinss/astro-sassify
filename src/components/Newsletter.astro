@@ -15,12 +15,12 @@ const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz"
 const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
 ---
 
-<section id="newsletter" class="section relative overflow-hidden bg-gradient-to-b from-primary-100 to-white dark:from-primary-950 dark:to-secondary-950">
+<section id="newsletter" class="section relative overflow-hidden bg-linear-to-b from-primary-100 to-white dark:from-primary-950 dark:to-secondary-950">
   <div class="absolute inset-0 z-0 opacity-30">
     <div class="absolute inset-0 bg-grid-pattern"></div>
   </div>
   <div class="container-custom max-w-4xl relative z-10">
-    <div class="card p-8 md:p-12 border border-primary-200/50 dark:border-primary-800/30 bg-white/80 dark:bg-secondary-900/80 backdrop-blur-sm">
+    <div class="card p-8 md:p-12 border border-primary-200/50 dark:border-primary-800/30 bg-white/80 dark:bg-secondary-900/80 backdrop-blur-xs">
       <div class="text-center mb-8">
         <h2 class="mb-4 text-secondary-900 dark:text-white">{t.newsletter.title}</h2>
         <p class="text-secondary-700 dark:text-secondary-300 max-w-2xl mx-auto">
@@ -88,14 +88,14 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
         <!-- Form Input -->
         <div x-show="!submitted" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
           <div class="flex flex-col sm:flex-row gap-4">
-            <div class="flex-grow">
+            <div class="grow">
               <label for="newsletter-email" class="sr-only">{t.newsletter.placeholder}</label>
               <input
                 type="email"
                 id="newsletter-email"
                 x-model="email"
                 placeholder={t.newsletter.placeholder}
-                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-gray-400 dark:placeholder-secondary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 transition-all"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-gray-400 dark:placeholder-secondary-500 focus:outline-hidden focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 transition-all"
                 :disabled="loading"
                 required
               />

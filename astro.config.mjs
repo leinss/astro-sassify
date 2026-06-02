@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config"
-import tailwind from "@astrojs/tailwind"
+import tailwindcss from "@tailwindcss/vite"
 import alpinejs from "@astrojs/alpinejs"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
@@ -11,7 +11,6 @@ export default defineConfig({
   // Static output for GitHub Pages (newsletter uses Listmonk public API directly)
   output: "static",
   integrations: [
-    tailwind(),
     alpinejs(),
     react(),
     sitemap({
@@ -57,5 +56,8 @@ export default defineConfig({
   build: {
     // Improve transition performance
     inlineStylesheets: "auto",
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
 })
