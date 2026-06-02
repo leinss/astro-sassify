@@ -1,6 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary-50: #ecfeff;
+  --color-primary-100: #cffafe;
+  --color-primary-200: #a5f3fc;
+  --color-primary-300: #67e8f9;
+  --color-primary-400: #22d3ee;
+  --color-primary-500: #06b6d4;
+  --color-primary-600: #0891b2;
+  --color-primary-700: #0e7490;
+  --color-primary-800: #155e75;
+  --color-primary-900: #164e63;
+  --color-primary-950: #083344;
+
+  --color-secondary-50: #d1fae5;
+  --color-secondary-100: #d1fae5;
+  --color-secondary-200: #a7f3d0;
+  --color-secondary-300: #6ee7b7;
+  --color-secondary-400: #34d399;
+  --color-secondary-500: #10b981;
+  --color-secondary-600: #059669;
+  --color-secondary-700: #065f46;
+  --color-secondary-800: #065f46;
+  --color-secondary-900: #064e3b;
+  --color-secondary-950: #022c22;
+
+  --color-accent-50: #fff1f2;
+  --color-accent-100: #ffe4e6;
+  --color-accent-200: #fecdd3;
+  --color-accent-300: #fda4af;
+  --color-accent-400: #fb7185;
+  --color-accent-500: #f43f5e;
+  --color-accent-600: #e11d48;
+  --color-accent-700: #be123c;
+  --color-accent-800: #9f1239;
+  --color-accent-900: #881337;
+  --color-accent-950: #4c0519;
+
+  --color-warning-50: #fff7ed;
+  --color-warning-100: #ffedd5;
+  --color-warning-200: #fed7aa;
+  --color-warning-300: #fdba74;
+  --color-warning-400: #fb923c;
+  --color-warning-500: #f97316;
+  --color-warning-600: #ea580c;
+  --color-warning-700: #c2410c;
+  --color-warning-800: #9a3412;
+  --color-warning-900: #7c2d12;
+  --color-warning-950: #431407;
+
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-display: Lexend, system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.5s ease-in-out;
+  --animate-slide-down: slideDown 0.5s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 rounded-lg font-medium transition-all duration-300 focus:outline-hidden text-xs sm:text-sm md:text-base;
+}
+
+@utility btn-primary {
+  @apply btn bg-accent-400 hover:bg-accent-500 text-black shadow-md hover:shadow-lg;
+}
+
+@utility btn-cta {
+  @apply btn btn-primary px-6 md:px-6 lg:px-8 py-3 md:py-4 text-sm sm:text-base md:text-lg;
+}
+
+@utility btn-secondary {
+  @apply btn bg-primary-600 hover:bg-primary-700 text-white shadow-md hover:shadow-lg;
+}
+
+@utility btn-accent {
+  @apply btn bg-accent-500 hover:bg-accent-600 text-black shadow-md hover:shadow-lg;
+}
+
+@utility btn-outline {
+  @apply btn border-2 border-primary-500 dark:border-primary-400 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white dark:hover:text-white text-primary-600 dark:text-primary-400;
+}
+
+@utility container-custom {
+  @apply container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl;
+}
+
+@utility section {
+  @apply py-8 sm:py-10 md:py-12 lg:py-16 xl:py-24;
+}
+
+@utility card {
+  @apply bg-white dark:bg-secondary-900 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-secondary-200 dark:border-secondary-800;
+}
 
 @layer base {
   html {
@@ -38,44 +180,6 @@
 
   p:not(:is(.prose *)) {
     @apply text-sm sm:text-base md:text-lg leading-relaxed;
-  }
-}
-
-@layer components {
-  .btn {
-    @apply inline-flex items-center justify-center px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 rounded-lg font-medium transition-all duration-300 focus:outline-none text-xs sm:text-sm md:text-base;
-  }
-
-  .btn-primary {
-    @apply btn bg-accent-400 hover:bg-accent-500 text-black shadow-md hover:shadow-lg;
-  }
-
-  .btn-cta {
-    @apply btn btn-primary px-6 md:px-6 lg:px-8 py-3 md:py-4 text-sm sm:text-base md:text-lg;
-  }
-
-  .btn-secondary {
-    @apply btn bg-primary-600 hover:bg-primary-700 text-white shadow-md hover:shadow-lg;
-  }
-
-  .btn-accent {
-    @apply btn bg-accent-500 hover:bg-accent-600 text-black shadow-md hover:shadow-lg;
-  }
-
-  .btn-outline {
-    @apply btn border-2 border-primary-500 dark:border-primary-400 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white dark:hover:text-white text-primary-600 dark:text-primary-400;
-  }
-
-  .container-custom {
-    @apply container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 max-w-7xl;
-  }
-
-  .section {
-    @apply py-8 sm:py-10 md:py-12 lg:py-16 xl:py-24;
-  }
-
-  .card {
-    @apply bg-white dark:bg-secondary-900 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-secondary-200 dark:border-secondary-800;
   }
 }
 
@@ -238,5 +342,5 @@
 
 /* Focus styles for keyboard navigation */
 :focus-visible {
-  @apply outline-none ring-2 ring-primary-500 dark:ring-primary-400;
+  @apply outline-hidden ring-2 ring-primary-500 dark:ring-primary-400;
 }

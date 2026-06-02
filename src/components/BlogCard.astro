@@ -55,7 +55,7 @@ const t = i18n[lang]
 const basePath = lang === "en" ? "/en" : "/de"
 
 // Strip the language folder prefix from the slug (e.g., "en/my-post" -> "my-post")
-const cleanSlug = post.slug.replace(/^(en|de)\//, "")
+const cleanSlug = post.id.replace(/^(en|de)\//, "")
 
 // Format date based on language
 const formattedDate = post.data.pubDate.toLocaleDateString(
@@ -107,7 +107,7 @@ const optimizedImage = optimizedImages[heroImagePath]
     )}
     <!-- Category Badge overlay -->
     <div class="absolute top-4 left-4">
-      <span class="px-3 py-1 text-xs font-medium rounded-full bg-primary-500/90 text-white backdrop-blur-sm">
+      <span class="px-3 py-1 text-xs font-medium rounded-full bg-primary-500/90 text-white backdrop-blur-xs">
         {categoryLabels[post.data.category]?.[lang] || post.data.category}
       </span>
     </div>
