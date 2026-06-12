@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro build && astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint:blog-parity": "node scripts/blog-parity-lint.mjs"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",
