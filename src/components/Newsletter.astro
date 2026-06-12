@@ -32,6 +32,8 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
         class="max-w-xl mx-auto"
         x-data={`{
           email: '',
+          extra_field: '',
+          loadedAt: Date.now(),
           loading: false,
           submitted: false,
           success: false,
@@ -39,6 +41,21 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
         }`}
         @submit.prevent={`
           if (loading) return;
+
+          // Spam protection: filled hidden field = bot → silent fake success.
+          if (extra_field) {
+            submitted = true;
+            success = true;
+            message = '${lang === "de" ? "Vielen Dank! Bitte bestätigen Sie Ihre Anmeldung in der E-Mail, die wir Ihnen gesendet haben." : "Thank you! Please confirm your subscription in the email we sent you."}';
+            return;
+          }
+
+          // Timing check: sub-2s submit is suspicious but may be a real user
+          // (autofill). Show error + allow retry instead of silently swallowing.
+          if ((Date.now() - loadedAt) < 2000) {
+            message = '${lang === "de" ? "Bitte warten Sie einen Moment und versuchen Sie es erneut." : "Please wait a moment and try again."}';
+            return;
+          }
 
           if (!email) {
             message = '${lang === "de" ? "Bitte geben Sie Ihre E-Mail-Adresse ein." : "Please enter your email address."}';
@@ -85,6 +102,18 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
           });
         `}
       >
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+          <label for="newsletter-extra">{lang === "de" ? "Leer lassen" : "Leave blank"}</label>
+          <input
+            type="text"
+            id="newsletter-extra"
+            name="extra_field"
+            x-model="extra_field"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
         <!-- Form Input -->
         <div x-show="!submitted" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
           <div class="flex flex-col sm:flex-row gap-4">

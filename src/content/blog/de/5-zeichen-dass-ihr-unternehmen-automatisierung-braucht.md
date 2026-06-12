@@ -48,4 +48,4 @@ Wenn der einzige Weg, mehr Geschäft zu bewältigen, darin besteht, mehr Leute f
 
 Wenn Sie Ihr Unternehmen in diesen Zeichen wiedererkannt haben, ist es vielleicht Zeit, Automatisierung zu erkunden. Die gute Nachricht: Sie müssen nicht alles auf einmal automatisieren. Beginnen Sie mit einem schmerzhaften Prozess und bauen Sie darauf auf.
 
-Möchten Sie Ihre besten Automatisierungsmöglichkeiten identifizieren? [Buchen Sie eine kostenlose Beratung](/de/#contact) und lassen Sie uns Ihre spezifische Situation besprechen.
+Möchten Sie Ihre besten Automatisierungsmöglichkeiten identifizieren? [Buchen Sie eine kostenlose Beratung](https://cal.com/tobias-leinss/strategiegespraech) und lassen Sie uns Ihre spezifische Situation besprechen.

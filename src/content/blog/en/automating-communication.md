@@ -75,7 +75,7 @@ data migration without lost contacts, and automations that work
 in HubSpot the same way they did in Pipedrive.
 
 Do you have 30 minutes this week for a quick call?
-Book here: https://cal.com/tobias-leinss/consultation
+Book here: https://cal.com/tobias-leinss/strategymeeting
 
 Best,
 Tobias Leinss
@@ -150,7 +150,7 @@ The first 5 minutes after a lead submits a form determine whether they convert o
 
 ---
 
-*Interested in a custom implementation for your business? [Book a free discovery call.](/en/#contact)*
+*Interested in a custom implementation for your business? [Book a free discovery call.](https://cal.com/tobias-leinss/strategymeeting)*
 
 ## Technical Deep Dive
 

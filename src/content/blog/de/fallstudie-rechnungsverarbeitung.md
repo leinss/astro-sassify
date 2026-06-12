@@ -280,4 +280,4 @@ Verarbeiten Sie manuell Stapel von Dokumenten?
 2. **Sammeln**: 20 typische Dokumente in ihren chaotischsten Formaten
 3. **Testen**: Wir können einen Proof-of-Concept mit Ihren Beispielen durchführen
 
-[Kostenlose Erstberatung buchen](https://cal.com/tobias-leinss/strategymeeting) — Ich zeige Ihnen, welche Genauigkeit Sie mit Ihren Dokumenttypen erwarten können.
+[Kostenlose Erstberatung buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, welche Genauigkeit Sie mit Ihren Dokumenttypen erwarten können.

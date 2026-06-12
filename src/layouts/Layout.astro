@@ -1,4 +1,15 @@
 ---
+// Self-hosted fonts (GDPR — no Google Fonts CDN request, no visitor IP to Google).
+// Latin subset only (de/en site); weights mirror the previous Google Fonts request.
+import '@fontsource/inter/latin-300.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/lexend/latin-400.css';
+import '@fontsource/lexend/latin-500.css';
+import '@fontsource/lexend/latin-600.css';
+import '@fontsource/lexend/latin-700.css';
 import '../styles/global.css';
 import '../styles/transitions.css';
 import { ClientRouter } from 'astro:transitions';
@@ -13,6 +24,7 @@ export interface Props {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  alternateUrl?: string | null;
 }
 
 // Detect language from URL
@@ -26,6 +38,7 @@ const {
   type = "website",
   publishedTime,
   modifiedTime,
+  alternateUrl,
 } = Astro.props;
 ---
 
@@ -49,12 +62,10 @@ const {
       type={type}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
+      alternateUrl={alternateUrl}
     />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts self-hosted via @fontsource (imported in the layout frontmatter) -->
 
     <ClientRouter />
   </head>

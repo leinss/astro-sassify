@@ -376,4 +376,4 @@ Verkaufen Sie über mehrere Plattformen?
 2. **Schmerzpunkte finden**: Überverkäufe, Listing-Zeit, Abweichungen?
 3. **Mit Sync starten**: Zuerst Inventar fixen, dann KI-Features hinzufügen
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategymeeting) — Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.

@@ -328,4 +328,4 @@ Ertrinkt Ihr Support-Team in repetitiven Anfragen?
 2. **Prüfen**: Welche Anfragen könnten mit vorhandenen Daten auto-beantwortet werden?
 3. **Pilotieren**: Mit einer Kategorie starten (z.B. Bestellstatus)
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategymeeting) — Ich analysiere Ihre Support-Muster und zeige was automatisierbar ist.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich analysiere Ihre Support-Muster und zeige was automatisierbar ist.

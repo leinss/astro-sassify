@@ -23,13 +23,17 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 // Count posts by type
 const caseStudyCount = posts.filter(p => p.data.category === 'case-study').length
 const articleCount = posts.length - caseStudyCount
+
+const alternateHref = "/en/blog/"
 ---
 
 <Layout
   title={`Blog - ${i18n[lang].meta.title}`}
   description="Artikel und Insights zu Geschäftsprozess-Automatisierung, Workflow-Optimierung und digitaler Transformation."
+  lang={lang}
+  alternateUrl={alternateHref}
 >
-  <Header lang={lang} />
+  <Header lang={lang} alternateHref={alternateHref} />
 
   <main class="min-h-screen bg-linear-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900">
     <!-- Hero Section -->

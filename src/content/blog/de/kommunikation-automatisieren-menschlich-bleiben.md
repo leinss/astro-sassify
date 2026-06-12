@@ -75,7 +75,7 @@ Datenmigration ohne verlorene Kontakte, und Automationen, die in
 HubSpot so funktionieren wie zuvor in Pipedrive.
 
 Hätten Sie diese Woche 30 Minuten für ein kurzes Gespräch? 
-Hier buchen: https://cal.com/tobias-leinss/beratung
+Hier buchen: https://cal.com/tobias-leinss/strategiegespraech
 
 Mit freundlichen Grüßen,
 Tobias Leinss
@@ -150,7 +150,7 @@ Die ersten 5 Minuten nach einem Lead-Submit entscheiden über Conversion oder K�
 
 ---
 
-*Interessiert an einer individuellen Implementierung für Ihr Unternehmen? [Buchen Sie ein kostenloses Erstgespräch.](/de/#contact)*
+*Interessiert an einer individuellen Implementierung für Ihr Unternehmen? [Buchen Sie ein kostenloses Erstgespräch.](https://cal.com/tobias-leinss/strategiegespraech)*
 
 ## Technischer Deep-Dive
 
