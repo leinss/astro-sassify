@@ -32,6 +32,8 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
         class="max-w-xl mx-auto"
         x-data={`{
           email: '',
+          website: '',
+          loadedAt: Date.now(),
           loading: false,
           submitted: false,
           success: false,
@@ -39,6 +41,15 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
         }`}
         @submit.prevent={`
           if (loading) return;
+
+          // Spam protection: a filled honeypot or a sub-2s submit is a bot.
+          // No-op silently (mimic success, send no request to Listmonk).
+          if (website || (Date.now() - loadedAt) < 2000) {
+            submitted = true;
+            success = true;
+            message = '${lang === "de" ? "Vielen Dank! Bitte bestätigen Sie Ihre Anmeldung in der E-Mail, die wir Ihnen gesendet haben." : "Thank you! Please confirm your subscription in the email we sent you."}';
+            return;
+          }
 
           if (!email) {
             message = '${lang === "de" ? "Bitte geben Sie Ihre E-Mail-Adresse ein." : "Please enter your email address."}';
@@ -85,6 +96,19 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
           });
         `}
       >
+        <!-- Honeypot: hidden from humans; bots that fill it are silently rejected. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+          <label for="newsletter-website">Website (leave blank)</label>
+          <input
+            type="text"
+            id="newsletter-website"
+            name="website"
+            x-model="website"
+            tabindex="-1"
+            autocomplete="off"
+          />
+        </div>
+
         <!-- Form Input -->
         <div x-show="!submitted" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
           <div class="flex flex-col sm:flex-row gap-4">
