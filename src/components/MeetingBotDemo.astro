@@ -119,7 +119,7 @@ const t = {
   </div>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, t }}>
+<script define:vars={{ WEBHOOK_URL, t, lang }}>
   const form = document.getElementById('meeting-form');
   const fileInput = document.getElementById('meeting-file');
   const filenameEl = document.getElementById('meeting-filename');
@@ -166,7 +166,7 @@ const t = {
       fd.append('file', file);
       fd.append('title', document.getElementById('meeting-title').value.trim() || 'Meeting');
       fd.append('attendees', document.getElementById('meeting-attendees').value.trim());
-      fd.append('language', 'de');
+      fd.append('language', lang);
 
       const resp = await fetch(WEBHOOK_URL, { method: 'POST', body: fd });
       clearTimeout(stepTimer);
