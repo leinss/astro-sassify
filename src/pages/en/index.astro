@@ -15,10 +15,11 @@ import i18n from "../../assets/i18n.json"
 
 // English version
 const lang = "en"
+const alternateHref = "/de/"
 ---
 
-<Layout title={`Tobias Leinss - ${i18n[lang].meta.title}`}>
-  <Header lang={lang} />
+<Layout title={`Tobias Leinss - ${i18n[lang].meta.title}`} lang={lang} alternateUrl={alternateHref}>
+  <Header lang={lang} alternateHref={alternateHref} />
   <main>
     <Hero lang={lang} />
     <ProblemSolutions lang={lang} />

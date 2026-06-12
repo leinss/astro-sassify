@@ -9,6 +9,7 @@ export interface Props {
   modifiedTime?: string;
   author?: string;
   canonicalUrl?: string;
+  alternateUrl?: string | null;
 }
 
 const {
@@ -21,19 +22,28 @@ const {
   modifiedTime,
   author = "Tobias Leinss",
   canonicalUrl,
+  alternateUrl,
 } = Astro.props;
 
 const siteUrl = "https://leinss-consulting.de";
 const currentUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
 const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
-// Alternate URLs for language switching
-const altDe = Astro.url.pathname.startsWith("/en")
-  ? Astro.url.pathname.replace(/^\/en/, "/de")
-  : Astro.url.pathname;
-const altEn = Astro.url.pathname.startsWith("/de")
-  ? Astro.url.pathname.replace(/^\/de/, "/en")
-  : Astro.url.pathname;
+// hreflang alternates — only emit a pair when an actual counterpart exists.
+// `alternateUrl` (relative or absolute) is the verified opposite-language URL;
+// when omitted the page has no translated twin and we emit self only.
+const altUrlAbsolute = alternateUrl
+  ? alternateUrl.startsWith("http")
+    ? alternateUrl
+    : `${siteUrl}${alternateUrl}`
+  : null;
+const altLang = lang === "de" ? "en" : "de";
+const hreflangs = [
+  { hreflang: lang, href: currentUrl },
+  ...(altUrlAbsolute ? [{ hreflang: altLang, href: altUrlAbsolute }] : []),
+];
+// x-default points at the German URL of this page (the default locale).
+const xDefaultHref = lang === "de" ? currentUrl : altUrlAbsolute;
 
 // JSON-LD Organization Schema
 const organizationSchema = {
@@ -111,10 +121,13 @@ const webPageSchema = {
 <meta name="author" content={author} />
 <link rel="canonical" href={currentUrl} />
 
-<!-- Language Alternates -->
-<link rel="alternate" hreflang="de" href={`${siteUrl}${altDe}`} />
-<link rel="alternate" hreflang="en" href={`${siteUrl}${altEn}`} />
-<link rel="alternate" hreflang="x-default" href={`${siteUrl}/de`} />
+<!-- Language Alternates (only emitted when a translated counterpart exists) -->
+{hreflangs.map((alt) => (
+  <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+))}
+{xDefaultHref && (
+  <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
+)}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
@@ -123,7 +136,7 @@ const webPageSchema = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
-<meta property="og:locale:alternate" content={lang === "de" ? "en_US" : "de_DE"} />
+{altUrlAbsolute && <meta property="og:locale:alternate" content={lang === "de" ? "en_US" : "de_DE"} />}
 <meta property="og:site_name" content="Leinss Consulting" />
 
 {type === "article" && publishedTime && (

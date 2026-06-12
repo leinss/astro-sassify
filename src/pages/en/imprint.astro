@@ -7,10 +7,11 @@ import Footer from "../../components/Footer.astro"
 import HeroSection from "../../components/HeroSection.astro"
 
 const lang = "en"
+const alternateHref = "/de/impressum/"
 ---
 
-<Layout title="Imprint - Tobias Leinss">
-  <Header lang={lang} />
+<Layout title="Imprint - Tobias Leinss" lang={lang} alternateUrl={alternateHref}>
+  <Header lang={lang} alternateHref={alternateHref} />
   <main class="flex-1 flex flex-col">
     <HeroSection title="Imprint" description="" />
 

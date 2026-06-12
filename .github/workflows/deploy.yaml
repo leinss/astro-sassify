@@ -26,6 +26,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Lint Blog Parity
+        run: pnpm run lint:blog-parity
+
       - name: Build Astro
         run: pnpm run build
 

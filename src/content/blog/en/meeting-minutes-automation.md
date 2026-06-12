@@ -189,4 +189,4 @@ If the number is more than 2 hours, automation is a guaranteed win.
 
 ---
 
-*Want to set this up for your team or adapt it to your specific tools (Confluence, Notion, Teams)? [Book a free discovery call.](/en/#contact)*
+*Want to set this up for your team or adapt it to your specific tools (Confluence, Notion, Teams)? [Book a free discovery call.](https://cal.com/tobias-leinss/strategymeeting)*

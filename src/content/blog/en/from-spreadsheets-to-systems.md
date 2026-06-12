@@ -105,4 +105,4 @@ If you're interested in the implementation details — why Kimi k2.5 instead of 
 
 ---
 
-*Interested in a tailored solution for your specific data challenges? [Get in touch.](/en/#contact)*
+*Interested in a tailored solution for your specific data challenges? [Get in touch.](https://cal.com/tobias-leinss/strategymeeting)*
