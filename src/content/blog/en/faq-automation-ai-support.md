@@ -119,4 +119,4 @@ If you're interested in the implementation details — why PostgreSQL full-text 
 
 ---
 
-*Interested in a custom FAQ solution for your business? [Get in touch.](/en/#contact)*
+*Interested in a custom FAQ solution for your business? [Get in touch.](https://cal.com/tobias-leinss/strategymeeting)*

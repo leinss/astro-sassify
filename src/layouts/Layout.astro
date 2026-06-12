@@ -13,6 +13,7 @@ export interface Props {
   type?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  alternateUrl?: string | null;
 }
 
 // Detect language from URL
@@ -26,6 +27,7 @@ const {
   type = "website",
   publishedTime,
   modifiedTime,
+  alternateUrl,
 } = Astro.props;
 ---
 
@@ -49,6 +51,7 @@ const {
       type={type}
       publishedTime={publishedTime}
       modifiedTime={modifiedTime}
+      alternateUrl={alternateUrl}
     />
 
     <!-- Fonts -->

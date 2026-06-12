@@ -119,4 +119,4 @@ Wenn Sie die Implementierungsdetails interessieren — warum PostgreSQL Full-Tex
 
 ---
 
-*Interesse an einer maßgeschneiderten FAQ-Lösung für Ihr Unternehmen? [Sprechen Sie mich an.](/de/#contact)*
+*Interesse an einer maßgeschneiderten FAQ-Lösung für Ihr Unternehmen? [Sprechen Sie mich an.](https://cal.com/tobias-leinss/strategiegespraech)*

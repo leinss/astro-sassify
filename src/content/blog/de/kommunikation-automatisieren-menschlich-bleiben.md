@@ -150,7 +150,7 @@ Die ersten 5 Minuten nach einem Lead-Submit entscheiden 체ber Conversion oder K�
 
 ---
 
-*Interessiert an einer individuellen Implementierung f체r Ihr Unternehmen? [Buchen Sie ein kostenloses Erstgespr채ch.](/de/#contact)*
+*Interessiert an einer individuellen Implementierung f체r Ihr Unternehmen? [Buchen Sie ein kostenloses Erstgespr채ch.](https://cal.com/tobias-leinss/strategiegespraech)*
 
 ## Technischer Deep-Dive
 

@@ -48,4 +48,4 @@ If the only way to handle more business is to hire more people for repetitive ta
 
 If you recognized your business in these signs, it might be time to explore automation. The good news: you don't have to automate everything at once. Start with one painful process and build from there.
 
-Want to identify your best automation opportunities? [Book a free consultation](/en/#contact) and let's discuss your specific situation.
+Want to identify your best automation opportunities? [Book a free consultation](https://cal.com/tobias-leinss/strategymeeting) and let's discuss your specific situation.

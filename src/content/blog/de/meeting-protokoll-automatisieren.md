@@ -189,4 +189,4 @@ Wenn die Zahl größer als 2 Stunden ist, lohnt sich die Automatisierung garanti
 
 ---
 
-*Möchten Sie den Bot für Ihr Team einrichten oder an Ihre spezifischen Tools (Confluence, Notion, Teams) anpassen? [Buchen Sie ein kostenloses Erstgespräch.](/de/#contact)*
+*Möchten Sie den Bot für Ihr Team einrichten oder an Ihre spezifischen Tools (Confluence, Notion, Teams) anpassen? [Buchen Sie ein kostenloses Erstgespräch.](https://cal.com/tobias-leinss/strategiegespraech)*
