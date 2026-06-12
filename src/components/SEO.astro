@@ -136,7 +136,7 @@ const webPageSchema = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:locale" content={lang === "de" ? "de_DE" : "en_US"} />
-<meta property="og:locale:alternate" content={lang === "de" ? "en_US" : "de_DE"} />
+{altUrlAbsolute && <meta property="og:locale:alternate" content={lang === "de" ? "en_US" : "de_DE"} />}
 <meta property="og:site_name" content="Leinss Consulting" />
 
 {type === "article" && publishedTime && (

@@ -223,4 +223,4 @@ Haben Sie eine ähnliche Lead-Management-Herausforderung?
 2. **Priorisieren**: Starten Sie mit einer Quelle (z.B. Website-Formulare)
 3. **Messen**: Tracken Sie die Reaktionszeit vor und nach der Änderung
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategymeeting) — Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.

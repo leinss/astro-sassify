@@ -60,10 +60,26 @@ function loadPosts() {
   const posts = new Map(); // `${lang}/${slug}` -> { lang, slug, file, data }
   for (const lang of LANGS) {
     const dir = join(BLOG_DIR, lang);
-    for (const file of readdirSync(dir)) {
+    let entries;
+    try {
+      entries = readdirSync(dir);
+    } catch (err) {
+      console.error(`ERROR  Cannot read blog directory ${dir}: ${err.message}`);
+      process.exitCode = 1;
+      continue;
+    }
+    for (const file of entries) {
       if (!/\.(md|mdx)$/.test(file)) continue;
       const slug = file.replace(/\.(md|mdx)$/, "");
-      const data = parseFrontmatter(readFileSync(join(dir, file), "utf8"));
+      let raw;
+      try {
+        raw = readFileSync(join(dir, file), "utf8");
+      } catch (err) {
+        console.error(`ERROR  ${lang}/${file}: cannot read file: ${err.message}`);
+        process.exitCode = 1;
+        continue;
+      }
+      const data = parseFrontmatter(raw);
       if (!data) {
         console.error(`ERROR  ${lang}/${file}: missing or malformed front-matter`);
         process.exitCode = 1;
@@ -80,6 +96,7 @@ function main() {
   const errors = [];
   const warnings = [];
 
+  const visitedPairs = new Set();
   for (const post of posts.values()) {
     // Drafts are excluded from publication/hreflang, so don't enforce parity.
     if (post.data.draft === true) continue;
@@ -94,7 +111,17 @@ function main() {
     const twin = posts.get(`${otherLang}/${alt}`);
 
     if (!twin) {
-      errors.push(`${post.file}: alternateSlug "${alt}" has no file at ${otherLang}/${alt}.md (broken hreflang target)`);
+      errors.push(`${post.file}: alternateSlug "${alt}" has no matching file in ${otherLang}/ (broken hreflang target)`);
+      continue;
+    }
+
+    // Deduplicate: skip if the reverse pair was already checked.
+    const pairKey = [post.file, twin.file].sort().join('|');
+    if (visitedPairs.has(pairKey)) continue;
+    visitedPairs.add(pairKey);
+
+    if (twin.data.draft === true) {
+      errors.push(`${post.file}: published post points to draft twin ${twin.file} — hreflang target will 404 (twin must also be published)`);
       continue;
     }
     if (twin.data.lang !== otherLang) {

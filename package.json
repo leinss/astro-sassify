@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/blog-parity-lint.mjs && astro build",
     "preview": "astro build && astro preview",
     "astro": "astro",
     "lint:blog-parity": "node scripts/blog-parity-lint.mjs"

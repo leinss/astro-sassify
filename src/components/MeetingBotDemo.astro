@@ -173,10 +173,13 @@ const t = {
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
       renderResults(data);
-    } catch {
+    } catch (err) {
       clearTimeout(stepTimer);
       loadingEl.classList.add('hidden');
       form.classList.remove('hidden');
+      const isNetwork = err instanceof TypeError;
+      const isParseError = err instanceof SyntaxError;
+      console.error('[MeetingBotDemo]', isNetwork ? 'Network error' : isParseError ? 'Response parse error' : 'Request error', err);
       showError(t.errorGeneric);
     }
   });

@@ -75,7 +75,7 @@ Datenmigration ohne verlorene Kontakte, und Automationen, die in
 HubSpot so funktionieren wie zuvor in Pipedrive.
 
 Hätten Sie diese Woche 30 Minuten für ein kurzes Gespräch? 
-Hier buchen: https://cal.com/tobias-leinss/beratung
+Hier buchen: https://cal.com/tobias-leinss/strategiegespraech
 
 Mit freundlichen Grüßen,
 Tobias Leinss

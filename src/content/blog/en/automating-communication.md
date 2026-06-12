@@ -75,7 +75,7 @@ data migration without lost contacts, and automations that work
 in HubSpot the same way they did in Pipedrive.
 
 Do you have 30 minutes this week for a quick call?
-Book here: https://cal.com/tobias-leinss/consultation
+Book here: https://cal.com/tobias-leinss/strategymeeting
 
 Best,
 Tobias Leinss
