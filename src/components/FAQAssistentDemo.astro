@@ -255,7 +255,9 @@ const t = {
         showError(data.error || t.errorGeneric);
         return;
       }
-      if (!res.ok || !data) throw new Error('HTTP ' + res.status);
+      // Require a successful, well-formed answer; otherwise (non-OK / garbage 200 / missing
+      // success) fall through to the sample rather than rendering a blank "Answer".
+      if (!res.ok || !data || !data.success) throw new Error('HTTP ' + res.status);
 
       loadingEl.classList.add('hidden');
       renderResult(data);

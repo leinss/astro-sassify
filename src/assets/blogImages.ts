@@ -42,6 +42,10 @@ export const blogImages: Record<string, ImageMetadata> = {
   "/images/blog/faq-automation.png": faqAutomation,
 }
 
+// Memoize per heroImage: de/en twins (and any reused hero) resolve to the same emitted
+// derivative, so getImage() runs once per distinct image instead of once per blog page.
+const ogImageCache = new Map<string, string>()
+
 /**
  * Resolve a post's `heroImage` string into an emitted, social-card-sized OG image URL.
  * Returns a root-relative `/_astro/…png` path (SEO.astro absolutizes it), or `undefined`
@@ -53,14 +57,19 @@ export async function getBlogOgImage(
   if (!heroImage) return undefined
   const src = blogImages[heroImage]
   if (!src) return undefined
-  // PNG (not WebP) for broad social-scraper compatibility; cropped to the 1.91:1 OG ratio.
-  const og = await getImage({
-    src,
-    width: 1200,
-    height: 630,
-    fit: "cover",
-    position: "center",
-    format: "png",
-  })
-  return og.src
+  let url = ogImageCache.get(heroImage)
+  if (url === undefined) {
+    // PNG (not WebP) for broad social-scraper compatibility; cropped to the 1.91:1 OG ratio.
+    const og = await getImage({
+      src,
+      width: 1200,
+      height: 630,
+      fit: "cover",
+      position: "center",
+      format: "png",
+    })
+    url = og.src
+    ogImageCache.set(heroImage, url)
+  }
+  return url
 }

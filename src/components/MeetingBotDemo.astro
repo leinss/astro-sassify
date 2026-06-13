@@ -219,7 +219,10 @@ const t = {
       const resp = await fetch(WEBHOOK_URL, { method: 'POST', body: fd, signal: AbortSignal.timeout(TIMEOUT_MS) });
       clearTimeout(stepTimer);
       const data = await resp.json().catch(() => null);
-      if (!resp.ok || !data) throw new Error(`HTTP ${resp.status}`);
+      // Treat an unexpected/empty 200 (no minutes shape) as a failure → sample fallback,
+      // so a misconfigured backend never renders a blank "result" as if it succeeded.
+      const valid = data && (Array.isArray(data.summary) || Array.isArray(data.action_items));
+      if (!resp.ok || !valid) throw new Error(`HTTP ${resp.status}`);
       renderResults(data);
     } catch (err) {
       clearTimeout(stepTimer);

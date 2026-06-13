@@ -255,7 +255,9 @@ const t = {
         showError(data.error || t.errorGeneric);
         return;
       }
-      if (!resp.ok || !data) throw new Error(`HTTP ${resp.status}`);
+      // Require a successful, well-formed result; otherwise (non-OK / garbage 200 / missing
+      // success) fall through to the sample so a broken backend never shows empty "Cleaned Data".
+      if (!resp.ok || !data || !data.success) throw new Error(`HTTP ${resp.status}`);
 
       cleanedCsv = data.cleaned_csv || '';
       renderResults(data);
