@@ -1,4 +1,6 @@
 ---
+import config from '../assets/config.ts';
+
 interface Props {
   lang?: 'de' | 'en';
 }
@@ -6,6 +8,22 @@ const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
 const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/blitz-antwort-lead';
+const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
+
+// Abort the request after this long; the displayed hint is ~30–60 s, so allow headroom.
+const TIMEOUT_MS = 90000;
+
+// Canned fallback shown when the live endpoint is unreachable (timeout/network/offline).
+const SAMPLE = {
+  subject: isDE
+    ? 'Ihre Anfrage zur CRM-Integration – kurzer Vorschlag'
+    : 'Your CRM integration request — a quick proposal',
+  body: isDE
+    ? 'Guten Tag Frau Schneider,\n\nvielen Dank für Ihre Nachricht. Als Agentur mit rund 20 Mitarbeitenden stehen Sie vermutlich vor der Herausforderung, Kundendaten über mehrere Tools hinweg synchron zu halten.\n\nGenau dabei helfe ich regelmäßig: HubSpot oder Pipedrive sauber mit Projekt-Tools wie Asana oder Monday verbinden – ohne doppelte Pflege.\n\nHätten Sie diese Woche 15 Minuten für ein kurzes Gespräch? Sie können direkt einen Termin wählen.\n\nMit freundlichen Grüßen\nTobias Leinss'
+    : "Hello Ms. Schneider,\n\nThank you for your message. As an agency of around 20 people, you're likely facing the challenge of keeping customer data in sync across several tools.\n\nThat's exactly what I help with: cleanly connecting HubSpot or Pipedrive to project tools like Asana or Monday — without double data entry.\n\nWould you have 15 minutes this week for a short call? You can pick a slot directly.\n\nBest regards,\nTobias Leinss",
+  lead_score: 8,
+  kategorie: 'agency',
+};
 
 const t = {
   title: isDE ? 'Live-Demo: Blitz-Antwort Generator' : 'Live Demo: Instant Response Generator',
@@ -35,6 +53,10 @@ const t = {
     : 'This is a real AI-generated response — not pre-written. In your implementation, this email would be sent directly to the given address.',
   errorRequired: isDE ? 'Bitte Name, Unternehmen und Nachricht ausfüllen.' : 'Please fill in name, company, and message.',
   errorGeneric: isDE ? 'Anfrage fehlgeschlagen. Bitte erneut versuchen.' : 'Request failed. Please try again.',
+  offlineBadge: isDE
+    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline – this is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
   kategorie: {
     smb: isDE ? 'KMU' : 'SMB',
     agency: isDE ? 'Agentur' : 'Agency',
@@ -98,6 +120,9 @@ const t = {
   </div>
 
   <div id="blitz-results" class="hidden mt-6 space-y-4">
+    <div id="blitz-offline" class="hidden p-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-300">
+      {t.offlineBadge}
+    </div>
     <div class="flex items-center justify-between">
       <h4 class="font-semibold text-secondary-900 dark:text-white flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -124,13 +149,19 @@ const t = {
       <p class="text-xs text-amber-700 dark:text-amber-400 mt-1">{t.noteText}</p>
     </div>
 
-    <button id="blitz-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
-      ← {t.tryAnother}
-    </button>
+    <div class="flex flex-wrap items-center gap-4">
+      <button id="blitz-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+        ← {t.tryAnother}
+      </button>
+      <a id="blitz-offline-cta" href="" target="_blank" rel="noopener noreferrer"
+        class="hidden inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 text-white transition-colors">
+        {t.offlineCta}
+      </a>
+    </div>
   </div>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, t }}>
+<script define:vars={{ WEBHOOK_URL, t, calUrl, SAMPLE, TIMEOUT_MS }}>
   const form = document.getElementById('blitz-form');
   const nameInput = document.getElementById('blitz-name');
   const companyInput = document.getElementById('blitz-company');
@@ -144,6 +175,8 @@ const t = {
   const scoreBadge = document.getElementById('blitz-score-badge');
   const categoryBadge = document.getElementById('blitz-category-badge');
   const retryBtn = document.getElementById('blitz-retry');
+  const offlineEl = document.getElementById('blitz-offline');
+  const offlineCta = document.getElementById('blitz-offline-cta');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -166,14 +199,16 @@ const t = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, company, message, email }),
+        signal: AbortSignal.timeout(TIMEOUT_MS),
       });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const data = await resp.json();
+      const data = await resp.json().catch(() => null);
+      // No success flag from this endpoint; require the generated body. An unexpected/empty
+      // 200 → sample fallback rather than showing "(keine Antwort generiert)" as a real reply.
+      if (!resp.ok || !data || !data.body) throw new Error(`HTTP ${resp.status}`);
       renderResults(data);
-    } catch {
-      loadingEl.classList.add('hidden');
-      form.classList.remove('hidden');
-      showError(t.errorGeneric);
+    } catch (err) {
+      console.error('[BlitzAntwortDemo]', err);
+      renderFallback();
     }
   });
 
@@ -184,7 +219,17 @@ const t = {
     companyInput.value = '';
     messageInput.value = '';
     emailInput.value = '';
+    offlineEl.classList.add('hidden');
+    offlineCta.classList.add('hidden');
   });
+
+  // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
+  function renderFallback() {
+    renderResults(SAMPLE);
+    offlineEl.classList.remove('hidden');
+    offlineCta.href = calUrl;
+    offlineCta.classList.remove('hidden');
+  }
 
   function renderResults(data) {
     loadingEl.classList.add('hidden');

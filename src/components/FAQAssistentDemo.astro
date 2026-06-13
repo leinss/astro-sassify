@@ -1,4 +1,6 @@
 ---
+import config from '../assets/config.ts';
+
 interface Props {
   lang?: 'de' | 'en';
 }
@@ -6,6 +8,21 @@ const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
 const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/faq-assistent';
+const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
+
+// Abort the request after this long; the displayed hint is ~30–60 s, so allow headroom.
+const TIMEOUT_MS = 90000;
+
+// Canned fallback shown when the live endpoint is unreachable (timeout/network/offline).
+const SAMPLE = {
+  success: true,
+  answer: isDE
+    ? 'Eine Automatisierungsberatung startet mit einem kostenlosen Strategiegespräch (ca. 30 Min.). Danach erhalten Sie ein Festpreisangebot oder eine projektbasierte Kalkulation – je nach Umfang. Typische Einstiegsprojekte liegen im niedrigen vierstelligen Bereich.'
+    : 'Automation consulting starts with a free 30-minute strategy call. You then get a fixed-price quote or a project-based estimate, depending on scope. Typical entry projects start in the low four-figure range.',
+  confidence: 0.88,
+  sources: isDE ? ['Leistungen', 'FAQ', 'Preise'] : ['Services', 'FAQ', 'Pricing'],
+  escalate: false,
+};
 
 const t = {
   title: isDE ? 'Live-Demo: FAQ-Assistent' : 'Live Demo: FAQ Assistant',
@@ -32,6 +49,10 @@ const t = {
     : '🔒 Your question is processed and not stored afterward.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
   errorEmpty: isDE ? 'Bitte stellen Sie eine Frage.' : 'Please enter a question.',
+  offlineBadge: isDE
+    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline – this is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
 };
 ---
 
@@ -82,6 +103,9 @@ const t = {
   </div>
 
   <div id="faq-result" class="hidden mt-6">
+    <div id="faq-offline" class="hidden mb-4 p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 text-xs text-amber-800 dark:text-amber-300">
+      {t.offlineBadge}
+    </div>
     <div id="faq-escalate" class="hidden mb-4 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
       <p class="text-sm text-amber-800 dark:text-amber-300 flex items-start gap-2">
         <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,16 +134,22 @@ const t = {
       </div>
     </div>
 
-    <button id="faq-reset"
-      class="mt-5 text-sm text-violet-600 dark:text-violet-400 hover:underline">
-      ← {t.tryAnother}
-    </button>
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      <button id="faq-reset"
+        class="text-sm text-violet-600 dark:text-violet-400 hover:underline">
+        ← {t.tryAnother}
+      </button>
+      <a id="faq-offline-cta" href="" target="_blank" rel="noopener noreferrer"
+        class="hidden inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-violet-600 hover:bg-violet-700 text-white transition-colors">
+        {t.offlineCta}
+      </a>
+    </div>
   </div>
 
   <p class="mt-4 text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, t, lang }}>
+<script define:vars={{ WEBHOOK_URL, t, lang, calUrl, SAMPLE, TIMEOUT_MS }}>
   const questionInput = document.getElementById('faq-question');
   const submitBtn = document.getElementById('faq-submit');
   const errorEl = document.getElementById('faq-error');
@@ -133,6 +163,8 @@ const t = {
   const sourcesRow = document.getElementById('faq-sources-row');
   const sourcesList = document.getElementById('faq-sources-list');
   const resetBtn = document.getElementById('faq-reset');
+  const offlineEl = document.getElementById('faq-offline');
+  const offlineCta = document.getElementById('faq-offline-cta');
 
   document.querySelectorAll('.faq-sample-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -157,6 +189,44 @@ const t = {
     inputArea.classList.remove('hidden');
     questionInput.value = '';
     errorEl.classList.add('hidden');
+    offlineEl.classList.add('hidden');
+    offlineCta.classList.add('hidden');
+  }
+
+  function renderResult(data) {
+    answerText.textContent = data.answer || '';
+
+    const pct = Math.round((data.confidence || 0) * 100);
+    confBar.style.width = pct + '%';
+    confBar.className = 'h-full rounded-full transition-all duration-500 ' +
+      (pct >= 70 ? 'bg-green-500' : pct >= 45 ? 'bg-amber-500' : 'bg-red-500');
+    confPct.textContent = pct + '%';
+
+    // Clear and repopulate sources using safe DOM methods
+    while (sourcesList.firstChild) sourcesList.removeChild(sourcesList.firstChild);
+    if (data.sources && data.sources.length > 0) {
+      data.sources.forEach(s => {
+        const tag = document.createElement('span');
+        tag.className = 'text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full';
+        tag.textContent = String(s);
+        sourcesList.appendChild(tag);
+      });
+      sourcesRow.classList.remove('hidden');
+    } else {
+      sourcesRow.classList.add('hidden');
+    }
+
+    escalateEl.classList.toggle('hidden', !data.escalate);
+    resultEl.classList.remove('hidden');
+  }
+
+  // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
+  function renderFallback() {
+    loadingEl.classList.add('hidden');
+    renderResult(SAMPLE);
+    offlineEl.classList.remove('hidden');
+    offlineCta.href = calUrl;
+    offlineCta.classList.remove('hidden');
   }
 
   async function submitQuestion() {
@@ -164,6 +234,8 @@ const t = {
     if (!question) { showError(t.errorEmpty); return; }
 
     errorEl.classList.add('hidden');
+    offlineEl.classList.add('hidden');
+    offlineCta.classList.add('hidden');
     inputArea.classList.add('hidden');
     loadingEl.classList.remove('hidden');
 
@@ -172,40 +244,26 @@ const t = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question, language: lang }),
+        signal: AbortSignal.timeout(TIMEOUT_MS),
       });
-      const data = await res.json();
-      loadingEl.classList.add('hidden');
+      const data = await res.json().catch(() => null);
 
-      if (!data.success) throw new Error(data.error || t.errorGeneric);
-
-      answerText.textContent = data.answer || '';
-
-      const pct = Math.round((data.confidence || 0) * 100);
-      confBar.style.width = pct + '%';
-      confBar.className = 'h-full rounded-full transition-all duration-500 ' +
-        (pct >= 70 ? 'bg-green-500' : pct >= 45 ? 'bg-amber-500' : 'bg-red-500');
-      confPct.textContent = pct + '%';
-
-      // Clear and repopulate sources using safe DOM methods
-      while (sourcesList.firstChild) sourcesList.removeChild(sourcesList.firstChild);
-      if (data.sources && data.sources.length > 0) {
-        data.sources.forEach(s => {
-          const tag = document.createElement('span');
-          tag.className = 'text-xs px-2 py-0.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-full';
-          tag.textContent = String(s);
-          sourcesList.appendChild(tag);
-        });
-        sourcesRow.classList.remove('hidden');
-      } else {
-        sourcesRow.classList.add('hidden');
+      // Server responded but rejected the input — show the real reason, not a sample.
+      if (data && data.success === false) {
+        loadingEl.classList.add('hidden');
+        inputArea.classList.remove('hidden');
+        showError(data.error || t.errorGeneric);
+        return;
       }
+      // Require a successful, well-formed answer; otherwise (non-OK / garbage 200 / missing
+      // success) fall through to the sample rather than rendering a blank "Answer".
+      if (!res.ok || !data || !data.success) throw new Error('HTTP ' + res.status);
 
-      escalateEl.classList.toggle('hidden', !data.escalate);
-      resultEl.classList.remove('hidden');
-    } catch (err) {
       loadingEl.classList.add('hidden');
-      inputArea.classList.remove('hidden');
-      showError(err.message || t.errorGeneric);
+      renderResult(data);
+    } catch (err) {
+      console.error('[FAQAssistentDemo]', err);
+      renderFallback();
     }
   }
 </script>
