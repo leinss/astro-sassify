@@ -1,4 +1,6 @@
 ---
+import config from '../assets/config.ts';
+
 interface Props {
   lang?: 'de' | 'en';
 }
@@ -6,10 +8,53 @@ const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
 const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/excel-retter';
+const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
+
+// Abort the request after this long; the displayed hint is ~15–30 s, so allow headroom.
+const TIMEOUT_MS = 60000;
 
 const SAMPLE_CSV = isDE
   ? `Name,E-Mail,Telefon,Unternehmen\n  Anna Müller ,anna.mueller@gmail.com,+49 176 12345678,Bäckerei Schmidt GmbH\nHans meier,HANS@GMAIL.COM,0176 98765432,bäckerei schmidt gmbh\nanna mueller,anna.mueller@gmail.com,,\nThomas Schmidt,thomas@,+49 (89) 123-456,Müller AG\n  Lisa Weber  ,lisa.weber@company.de,+4930123456,   Müller AG   `
   : `Name,Email,Phone,Company\n  Anna Miller ,anna.miller@gmail.com,+1 555 123 4567,Acme Corp\nJohn DOE,JOHN@GMAIL.COM,555-987-6543,acme corp\nanna miller,anna.miller@gmail.com,,\nTom Smith,tom@,+1 (555) 234-567,Globex Inc.\n  Lisa Brown  ,lisa.brown@company.com,15552345678,   Globex Inc   `;
+
+// Canned fallback shown when the live endpoint is unreachable. Mirrors a cleaned SAMPLE_CSV:
+// 5 input rows → 1 duplicate removed → 4 rows, with normalization + one flagged invalid email.
+const sampleHeaders = isDE ? ['Name', 'E-Mail', 'Telefon', 'Unternehmen'] : ['Name', 'Email', 'Phone', 'Company'];
+const sampleRows = isDE
+  ? [
+      ['Anna Müller', 'anna.mueller@gmail.com', '+49 176 12345678', 'Bäckerei Schmidt GmbH'],
+      ['Hans Meier', 'hans@gmail.com', '+49 176 98765432', 'Bäckerei Schmidt GmbH'],
+      ['Thomas Schmidt', 'thomas@', '+49 89 123456', 'Müller AG'],
+      ['Lisa Weber', 'lisa.weber@company.de', '+49 30 123456', 'Müller AG'],
+    ]
+  : [
+      ['Anna Miller', 'anna.miller@gmail.com', '+1 555 123 4567', 'Acme Corp'],
+      ['John Doe', 'john@gmail.com', '+1 555 987 6543', 'Acme Corp'],
+      ['Tom Smith', 'tom@', '+1 555 234 567', 'Globex Inc.'],
+      ['Lisa Brown', 'lisa.brown@company.com', '+1 555 234 5678', 'Globex Inc.'],
+    ];
+const SAMPLE = {
+  success: true,
+  stats: { total_rows: 5, rows_modified: 4, duplicates_removed: 1, issues_found: 1 },
+  headers: sampleHeaders,
+  cleaned_rows: sampleRows.map((r) => Object.fromEntries(sampleHeaders.map((h, i) => [h, r[i]]))),
+  changes: isDE
+    ? [
+        'Führende und anhängende Leerzeichen entfernt',
+        'E-Mail-Adressen in Kleinschreibung normalisiert',
+        'Telefonnummern ins einheitliche +49-Format gebracht',
+        '1 Duplikat entfernt (anna mueller)',
+        '1 ungültige E-Mail markiert (thomas@)',
+      ]
+    : [
+        'Removed leading and trailing whitespace',
+        'Normalized email addresses to lowercase',
+        'Standardized phone numbers to a consistent format',
+        'Removed 1 duplicate (anna miller)',
+        'Flagged 1 invalid email (tom@)',
+      ],
+  cleaned_csv: [sampleHeaders.join(','), ...sampleRows.map((r) => r.join(','))].join('\n'),
+};
 
 const t = {
   title: isDE ? 'Live-Demo: Excel-Retter' : 'Live Demo: Spreadsheet Cleaner',
@@ -38,6 +83,10 @@ const t = {
   statModified: isDE ? 'Bereinigt' : 'Modified',
   statDuplicates: isDE ? 'Duplikate entfernt' : 'Duplicates removed',
   statIssues: isDE ? 'Probleme gefunden' : 'Issues found',
+  offlineBadge: isDE
+    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline – this is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
 };
 ---
 
@@ -98,6 +147,9 @@ const t = {
   </div>
 
   <div id="excel-results" class="hidden mt-6 space-y-5">
+    <div id="excel-offline" class="hidden p-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-300">
+      {t.offlineBadge}
+    </div>
     <div id="excel-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3"></div>
 
     <div>
@@ -130,11 +182,15 @@ const t = {
       <button id="excel-retry" class="text-sm text-primary-600 dark:text-primary-400 hover:underline">
         ← {t.tryAnother}
       </button>
+      <a id="excel-offline-cta" href="" target="_blank" rel="noopener noreferrer"
+        class="hidden inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-primary-600 hover:bg-primary-700 text-white transition-colors">
+        {t.offlineCta}
+      </a>
     </div>
   </div>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, SAMPLE_CSV, t }}>
+<script define:vars={{ WEBHOOK_URL, SAMPLE_CSV, t, lang, calUrl, SAMPLE, TIMEOUT_MS }}>
   const form = document.getElementById('excel-form');
   const csvInput = document.getElementById('excel-csv');
   const submitBtn = document.getElementById('excel-submit');
@@ -149,6 +205,8 @@ const t = {
   const changesEl = document.getElementById('excel-changes');
   const downloadBtn = document.getElementById('excel-download');
   const retryBtn = document.getElementById('excel-retry');
+  const offlineEl = document.getElementById('excel-offline');
+  const offlineCta = document.getElementById('excel-offline-cta');
 
   let cleanedCsv = '';
 
@@ -183,19 +241,27 @@ const t = {
         body: JSON.stringify({
           csv_data: csvInput.value.trim(),
           instructions: instructionsInput.value.trim(),
-          language: 'de',
+          language: lang,
         }),
+        signal: AbortSignal.timeout(TIMEOUT_MS),
       });
 
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const data = await resp.json();
-      if (!data.success) throw new Error(data.error || 'Unknown error');
+      const data = await resp.json().catch(() => null);
+
+      // Server responded but rejected the input — show the real reason, not a sample.
+      if (data && data.success === false) {
+        loadingEl.classList.add('hidden');
+        form.classList.remove('hidden');
+        showError(data.error || t.errorGeneric);
+        return;
+      }
+      if (!resp.ok || !data) throw new Error(`HTTP ${resp.status}`);
+
       cleanedCsv = data.cleaned_csv || '';
       renderResults(data);
-    } catch {
-      loadingEl.classList.add('hidden');
-      form.classList.remove('hidden');
-      showError(t.errorGeneric);
+    } catch (err) {
+      console.error('[ExcelRetterDemo]', err);
+      renderFallback();
     }
   });
 
@@ -203,7 +269,18 @@ const t = {
     resultsEl.classList.add('hidden');
     form.classList.remove('hidden');
     cleanedCsv = '';
+    offlineEl.classList.add('hidden');
+    offlineCta.classList.add('hidden');
   });
+
+  // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
+  function renderFallback() {
+    cleanedCsv = SAMPLE.cleaned_csv || '';
+    renderResults(SAMPLE);
+    offlineEl.classList.remove('hidden');
+    offlineCta.href = calUrl;
+    offlineCta.classList.remove('hidden');
+  }
 
   downloadBtn.addEventListener('click', () => {
     if (!cleanedCsv) return;
