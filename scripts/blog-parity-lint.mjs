@@ -11,6 +11,10 @@
  *   2. the twin points back (bidirectional `alternateSlug`);
  *   3. the twin's `lang` is the opposite locale;
  *   4. parity fields match across the pair: pubDate, category, heroImage, draft.
+ * Plus, per published post (twin or not):
+ *   5. `heroImage` is present and maps to a key in src/assets/blogImages.ts —
+ *      an unmapped/absent hero silently loses its per-post OG image and renders
+ *      a broken BlogCard thumbnail. The map is the single source of truth.
  * Also flags posts missing `alternateSlug` (orphans with no translated twin)
  * as warnings — they get a self-only hreflang and that is allowed, but the
  * site's standout strength is full parity, so surface them.
@@ -91,10 +95,37 @@ function loadPosts() {
   return posts;
 }
 
+/** Read the `/images/blog/...` keys of the shared blogImages map (src/assets/blogImages.ts).
+ *  These are the only hero paths that resolve to an OG image + card thumbnail. */
+function loadMappedHeroes() {
+  const file = join(ROOT, "src", "assets", "blogImages.ts");
+  const src = readFileSync(file, "utf8");
+  return new Set([...src.matchAll(/"(\/images\/blog\/[^"]+)"\s*:/g)].map((m) => m[1]));
+}
+
 function main() {
   const posts = loadPosts();
   const errors = [];
   const warnings = [];
+
+  // (5) Every published post's heroImage must resolve to a blogImages map key.
+  let mappedHeroes;
+  try {
+    mappedHeroes = loadMappedHeroes();
+  } catch (err) {
+    console.error(`ERROR  cannot read src/assets/blogImages.ts: ${err.message}`);
+    process.exitCode = 1;
+    mappedHeroes = null;
+  }
+  for (const post of posts.values()) {
+    if (post.data.draft === true) continue;
+    const hero = post.data.heroImage;
+    if (!hero) {
+      errors.push(`${post.file}: missing heroImage (no per-post OG image / card thumbnail)`);
+    } else if (mappedHeroes && !mappedHeroes.has(hero)) {
+      errors.push(`${post.file}: heroImage "${hero}" is not mapped in src/assets/blogImages.ts (→ no OG image, broken card thumbnail)`);
+    }
+  }
 
   const visitedPairs = new Set();
   for (const post of posts.values()) {
