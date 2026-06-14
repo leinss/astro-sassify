@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets"
+import i18n from "../assets/i18n.json"
+import { BsArrowRight } from "react-icons/bs"
+import { IoCheckmarkCircle } from "react-icons/io5"
+
+interface Props {
+  lang: "en" | "de"
+  image: ImageMetadata
+  href: string
+  title: string
+  tagline: string
+  problem: string
+  solution: string
+  result: string
+  tags: string[]
+  live?: boolean
+}
+
+const {
+  lang,
+  image,
+  href,
+  title,
+  tagline,
+  problem,
+  solution,
+  result,
+  tags,
+  live = true,
+} = Astro.props
+
+const t = i18n[lang].portfolio
+---
+
+<article
+  class="group flex flex-col bg-secondary-50 dark:bg-secondary-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover-lift"
+>
+  <!-- Hero image + live badge -->
+  <a href={href} class="block aspect-video relative overflow-hidden" aria-label={title}>
+    <Image
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      loading="lazy"
+      widths={[400, 600, 800]}
+      sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
+    />
+    {live && (
+      <div class="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/95 text-white backdrop-blur-xs">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+        </span>
+        {t.live_badge}
+      </div>
+    )}
+  </a>
+
+  <!-- Body -->
+  <div class="p-6 flex flex-col grow">
+    <h3 class="text-xl font-bold text-secondary-900 dark:text-white">
+      {title}
+    </h3>
+    <p class="text-primary-600 dark:text-primary-400 font-medium mb-4">
+      {tagline}
+    </p>
+
+    <div class="space-y-3 text-sm grow">
+      <div>
+        <span class="block font-semibold text-secondary-500 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
+          {t.problem_label}
+        </span>
+        <p class="text-secondary-700 dark:text-secondary-300">{problem}</p>
+      </div>
+      <div>
+        <span class="block font-semibold text-secondary-500 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
+          {t.solution_label}
+        </span>
+        <p class="text-secondary-700 dark:text-secondary-300">{solution}</p>
+      </div>
+      <div class="flex items-start gap-2 p-3 rounded-lg bg-primary-50 dark:bg-primary-900/20">
+        <IoCheckmarkCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-0.5" />
+        <div>
+          <span class="block font-semibold text-primary-700 dark:text-primary-300 uppercase tracking-wide text-xs mb-0.5">
+            {t.result_label}
+          </span>
+          <p class="text-secondary-800 dark:text-secondary-200 font-medium">{result}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mt-4">
+      {tags.map((tag) => (
+        <span class="px-2.5 py-1 text-xs bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <a
+      href={href}
+      class="mt-5 inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold group-hover:gap-3 transition-all"
+    >
+      {t.demo_cta}
+      <BsArrowRight className="w-4 h-4" />
+    </a>
+  </div>
+</article>
+
+<style>
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+</style>
