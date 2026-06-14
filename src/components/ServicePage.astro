@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import config from '../assets/config.ts';
 import i18n from '../assets/i18n.json';
 import { BsCheckCircleFill, BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+import ROICalculator from './ROICalculator.astro';
 
 // Import pillar images
 import pillarCRM from '../assets/images/pillars/pillar-1-crm-a.png';
@@ -133,6 +134,9 @@ const alternateBasePath = lang === 'en' ? '/de' : '/en';
     </div>
   </div>
 </section>
+
+<!-- ROI Calculator -->
+<ROICalculator lang={lang} pillar={pillar} />
 
 <!-- CTA Section -->
 <section class="py-20 bg-primary-50 dark:bg-primary-950">
