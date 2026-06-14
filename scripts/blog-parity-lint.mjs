@@ -103,6 +103,28 @@ function loadMappedHeroes() {
   return new Set([...src.matchAll(/"(\/images\/blog\/[^"]+)"\s*:/g)].map((m) => m[1]));
 }
 
+/** Demo slugs the portfolio page links to (per language) and the slugs that
+ *  actually gate a demo widget in each blog [slug].astro route. These must
+ *  match: a "Live demo" badge must point at a post that really mounts a widget,
+ *  and no built demo should be missing from the portfolio. */
+function loadDemoSlugs() {
+  const read = (...p) => readFileSync(join(ROOT, ...p), "utf8");
+  const portfolio = read("src", "components", "PortfolioPage.astro");
+  const en = new Set();
+  const de = new Set();
+  for (const m of portfolio.matchAll(/slug:\s*lang === "en" \? "([^"]+)" : "([^"]+)"/g)) {
+    en.add(m[1]);
+    de.add(m[2]);
+  }
+  const gate = (lang) =>
+    new Set(
+      [...read("src", "pages", lang, "blog", "[slug].astro").matchAll(/slug === "([^"]+)"/g)].map(
+        (m) => m[1],
+      ),
+    );
+  return { en, de, enGate: gate("en"), deGate: gate("de") };
+}
+
 function main() {
   const posts = loadPosts();
   const errors = [];
@@ -168,6 +190,30 @@ function main() {
         errors.push(`${post.file} vs ${twin.file}: ${field} mismatch ("${a ?? "(unset)"}" vs "${b ?? "(unset)"}")`);
       }
     }
+  }
+
+  // (6) Portfolio demo links must stay in sync with the blog routes that mount
+  //     the demo widgets — otherwise a "Live demo" badge can point at a post
+  //     with no widget, or a built demo can silently drop off the portfolio.
+  try {
+    const demo = loadDemoSlugs();
+    const compare = (lang, portfolioSet, gateSet) => {
+      for (const s of portfolioSet) {
+        if (!gateSet.has(s)) {
+          errors.push(`PortfolioPage.astro: ${lang} demo slug "${s}" is not gated in src/pages/${lang}/blog/[slug].astro (Live-demo badge → post with no widget)`);
+        }
+      }
+      for (const s of gateSet) {
+        if (!portfolioSet.has(s)) {
+          errors.push(`src/pages/${lang}/blog/[slug].astro: demo slug "${s}" is not featured on the portfolio page (PortfolioPage.astro)`);
+        }
+      }
+    };
+    compare("de", demo.de, demo.deGate);
+    compare("en", demo.en, demo.enGate);
+  } catch (err) {
+    console.error(`ERROR  cannot verify portfolio demo-slug parity: ${err.message}`);
+    process.exitCode = 1;
   }
 
   for (const w of warnings) console.warn(`WARN   ${w}`);
