@@ -22,17 +22,19 @@
       "book_a_call": "Book a Call"
     },
     "hero": {
-      "subline": "Stop wasting time on repetitive tasks. Automate your business workflows.",
-      "headline_start": "Streamline Your Business",
-      "headline_end": " with Intelligent Automation.",
-      "intro_text": "Manual processes slow you down. We help mid-sized companies automate workflows, connect their tools, and build systems that scale.\n\nFrom CRM automation to document processing – turn hours of manual work into automated pipelines.",
+      "subline": "Less manual work. More time for what matters.",
+      "headline_start": "Automation for mid-sized companies",
+      "headline_end": "built, documented, handed over.",
+      "intro_text": "n8n, AI, and clean integrations instead of disconnected island solutions.\n\nEvery automation pays for itself in time saved or fewer errors — and your team keeps full control, with no vendor lock-in.",
       "point_1_start": "CRM & Sales",
       "point_1_end": "Automate lead management, follow-ups, and deal progression. Never miss an opportunity again.",
       "point_2_start": "Document Workflows",
       "point_2_end": "Process invoices, generate reports, and sync data automatically between your systems.",
       "point_3_start": "Smart Integrations",
       "point_3_end": "Connect your tools. Sync data across platforms. Build workflows that work together.",
-      "cta": "Book your free consultation"
+      "cta": "Book your free consultation",
+      "cta_primary": "Free strategy call",
+      "cta_reassurance": "30-day fix guarantee · no vendor lock-in"
     },
     "problem_solution": {
       "problem_headline": "Sound familiar?",
@@ -353,17 +355,19 @@
       "book_a_call": "Gespräch buchen"
     },
     "hero": {
-      "subline": "Schluss mit zeitraubenden, manuellen Aufgaben. Automatisieren Sie Ihre Geschäftsprozesse.",
-      "headline_start": "Optimieren Sie Ihr Unternehmen",
-      "headline_end": " mit intelligenter Automatisierung.",
-      "intro_text": "Manuelle Prozesse bremsen Sie aus. Ich helfe mittelständischen Unternehmen, Workflows zu automatisieren, Tools zu verbinden und Systeme zu bauen, die mitwachsen.\n\nVon CRM-Automatisierung bis Dokumentenverarbeitung – verwandeln Sie Stunden manueller Arbeit in automatisierte Pipelines.",
+      "subline": "Weniger manuelle Arbeit. Mehr Zeit fürs Wesentliche.",
+      "headline_start": "Automatisierung für den Mittelstand",
+      "headline_end": "gebaut, dokumentiert, übergeben.",
+      "intro_text": "n8n, KI und saubere Integrationen statt Insellösungen.\n\nJede Automatisierung zahlt sich in gesparter Zeit oder weniger Fehlern aus – und Ihr Team behält die volle Kontrolle, ohne Vendor-Lock-in.",
       "point_1_start": "CRM & Vertrieb",
       "point_1_end": "Automatisieren Sie Lead-Management, Follow-ups und Deal-Fortschritt. Verpassen Sie keine Chance mehr.",
       "point_2_start": "Dokumenten-Workflows",
       "point_2_end": "Verarbeiten Sie Rechnungen, generieren Sie Berichte und synchronisieren Sie Daten automatisch zwischen Systemen.",
       "point_3_start": "Smarte Integrationen",
       "point_3_end": "Verbinden Sie Ihre Tools. Synchronisieren Sie Daten über Plattformen hinweg. Bauen Sie Workflows, die zusammenarbeiten.",
-      "cta": "Kostenloses Erstgespräch buchen"
+      "cta": "Kostenloses Erstgespräch buchen",
+      "cta_primary": "Kostenloses Strategiegespräch",
+      "cta_reassurance": "30 Tage Fix-Garantie · kein Vendor-Lock-in"
     },
     "problem_solution": {
       "problem_headline": "Kommt Ihnen das bekannt vor?",
