@@ -59,15 +59,20 @@ Options:
   process.exit(msg ? 1 : 0);
 }
 
+function requireVal(v, flag) {
+  if (v === undefined || v.startsWith("--")) usage(`${flag} requires a value`);
+  return v;
+}
+
 function parseArgs(argv) {
   const o = { from: "de" };
   const positional = [];
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "-h" || a === "--help") usage();
-    else if (a === "--from") o.from = argv[++i];
-    else if (a === "--slug") o.slug = argv[++i];
-    else if (a === "--webhook") o.webhook = argv[++i];
+    else if (a === "--from") o.from = requireVal(argv[++i], a);
+    else if (a === "--slug") o.slug = requireVal(argv[++i], a);
+    else if (a === "--webhook") o.webhook = requireVal(argv[++i], a);
     else if (a === "--force") o.force = true;
     else if (a === "--dry-run") o.dryRun = true;
     else if (a.startsWith("--")) usage(`unknown option: ${a}`);
@@ -76,6 +81,17 @@ function parseArgs(argv) {
   if (positional.length !== 1) usage("exactly one <source-slug> is required");
   o.sourceSlug = positional[0];
   return o;
+}
+
+// Slugs become file paths under src/content/blog — reject anything that could
+// escape that directory (path separators, "..", or other unexpected characters).
+const SLUG_RE = /^[A-Za-z0-9._-]+$/;
+function assertSafeSlug(slug, what) {
+  if (!SLUG_RE.test(slug) || slug.includes("..")) {
+    usage(
+      `unsafe ${what} "${slug}" — only letters, digits, dot, underscore and hyphen are allowed (no path separators or "..")`,
+    );
+  }
 }
 
 /** Split a markdown file into raw front-matter text and the body that follows. */
@@ -129,7 +145,7 @@ function assemble(srcFields, tr, target, sourceSlug) {
   if (srcFields.author) lines.push(`author: ${quote(unquote(srcFields.author))}`);
   lines.push(`lang: ${target}`);
   lines.push(`alternateSlug: ${quote(sourceSlug)}`);
-  return `---\n${lines.join("\n")}\n---\n\n${tr.body.replace(/\s+$/, "")}\n`;
+  return `---\n${lines.join("\n")}\n---\n\n${tr.body.trim()}\n`;
 }
 
 async function callWebhook(url, payload) {
@@ -165,6 +181,7 @@ async function callWebhook(url, payload) {
 async function main() {
   const opts = parseArgs(process.argv.slice(2));
   if (opts.from !== "de" && opts.from !== "en") usage("--from must be 'de' or 'en'");
+  assertSafeSlug(opts.sourceSlug, "source slug");
   const target = opts.from === "de" ? "en" : "de";
 
   const srcPath = join(BLOG_DIR, opts.from, `${opts.sourceSlug}.md`);
@@ -180,6 +197,7 @@ async function main() {
       `source post has no alternateSlug — set one on ${rel(srcPath)} or pass --slug <target-slug>`,
     );
   }
+  assertSafeSlug(targetSlug, "target slug");
 
   const targetPath = join(BLOG_DIR, target, `${targetSlug}.md`);
   if (!opts.dryRun && existsSync(targetPath) && !opts.force) {
