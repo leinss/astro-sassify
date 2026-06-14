@@ -15,6 +15,7 @@
       "faq": "FAQ",
       "contact": "Contact",
       "blog": "Blog",
+      "portfolio": "Projects",
       "switch_theme_dark": "Dark Mode",
       "switch_theme_light": "Light Mode",
       "switch_language": "Auf Deutsch",
@@ -255,6 +256,66 @@
         "cta": "Connect your systems",
         "back_to_services": "Back to Services"
       }
+    },
+    "portfolio": {
+      "meta_title": "Projects & Live Demos - Business Automation in Action",
+      "meta_description": "Try real automation systems right in your browser: AI invoice reading, instant lead response, meeting minutes, spreadsheet migration, and an AI support assistant — plus client case studies.",
+      "title": "Projects & Live Demos",
+      "subtitle": "Don't take my word for it — try the automation yourself. Every demo below is a working system you can run in your browser, built with the same tools I use on client projects.",
+      "demos_title": "Try the demos",
+      "demos_subtitle": "Five working automations. Each one runs live — give it your own input and watch it work.",
+      "case_studies_title": "Client case studies",
+      "case_studies_subtitle": "How these building blocks come together into measurable results.",
+      "live_badge": "Live demo",
+      "problem_label": "Problem",
+      "solution_label": "Solution",
+      "result_label": "Result",
+      "demo_cta": "Try the demo",
+      "cta_title": "See what this could do for your business",
+      "cta_subtitle": "Book a free 20-minute call. Describe one process that eats your time, and I'll tell you whether it's automatable — and roughly how.",
+      "cta_button": "Book your free call",
+      "projects": {
+        "invoice": {
+          "title": "AI Invoice Reader",
+          "tagline": "From PDF to booked data in seconds",
+          "problem": "Teams retype invoice data into accounting software by hand — slow, error-prone, and impossible to audit.",
+          "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward — with a human-review path for anything uncertain.",
+          "result": "Invoice handling drops from about 4 hours a week to roughly 15 minutes.",
+          "tags": ["Vision AI", "Document workflow", "n8n"]
+        },
+        "lead": {
+          "title": "Lightning Lead Response",
+          "tagline": "Answer every lead in minutes, not hours",
+          "problem": "Leads that wait hours for a reply go cold, and enquiries that arrive after hours are lost overnight.",
+          "solution": "Each incoming lead is scored and answered with a personalised, on-brand reply within minutes, scheduled to business hours, and logged to your CRM with a follow-up task.",
+          "result": "Response time falls from around 6 hours to under 5 minutes — the window where leads are far more likely to convert.",
+          "tags": ["Lead automation", "Personalised AI", "CRM"]
+        },
+        "meeting": {
+          "title": "Meeting Minutes Bot",
+          "tagline": "From a one-hour call to structured notes",
+          "problem": "Notes are incomplete, action items get lost, and there's no searchable record of what was decided.",
+          "solution": "Upload the recording: it's transcribed, summarised, and turned into clear decisions and owner-assigned action items, then distributed and archived.",
+          "result": "A one-hour meeting becomes structured minutes in about two minutes.",
+          "tags": ["Transcription", "Summarisation", "n8n"]
+        },
+        "excel": {
+          "title": "Spreadsheet Rescue",
+          "tagline": "From spreadsheet chaos to a clean system",
+          "problem": "Critical processes run on fragile spreadsheets — manual entry, version chaos, silent formula breaks, and no validation.",
+          "solution": "The workflow analyses your sheet, proposes a clean schema, then deduplicates, standardises and validates the data on its way into a proper system.",
+          "result": "Messy, copy-pasted tables become a structured, validated dataset you can trust.",
+          "tags": ["Data migration", "Schema detection", "Validation"]
+        },
+        "faq": {
+          "title": "AI Support Assistant",
+          "tagline": "Instant, sourced answers from your knowledge base",
+          "problem": "Support teams answer the same questions over and over while customers wait for a reply.",
+          "solution": "A retrieval workflow searches your knowledge base and an LLM returns a concise, sourced answer with a confidence score — escalating to a human when it isn't sure.",
+          "result": "Common questions are answered instantly, with sources, around the clock.",
+          "tags": ["Retrieval", "Full-text search", "Support AI"]
+        }
+      }
     }
   },
   "de": {
@@ -273,6 +334,7 @@
       "faq": "FAQ",
       "contact": "Kontakt",
       "blog": "Blog",
+      "portfolio": "Projekte",
       "switch_theme_dark": "Dunkelmodus",
       "switch_theme_light": "Hellmodus",
       "switch_language": "Switch to English",
@@ -512,6 +574,66 @@
         ],
         "cta": "Systeme verbinden",
         "back_to_services": "Zurück zu Leistungen"
+      }
+    },
+    "portfolio": {
+      "meta_title": "Projekte & Live-Demos - Geschäftsautomatisierung in Aktion",
+      "meta_description": "Echte Automatisierungssysteme direkt im Browser ausprobieren: KI-Rechnungslesung, Blitz-Lead-Antwort, Meeting-Protokolle, Tabellen-Migration und ein KI-Support-Assistent — plus Kunden-Fallstudien.",
+      "title": "Projekte & Live-Demos",
+      "subtitle": "Verlassen Sie sich nicht auf Versprechen — testen Sie die Automatisierung selbst. Jede Demo unten ist ein funktionierendes System, das direkt in Ihrem Browser läuft, gebaut mit denselben Tools wie für Kundenprojekte.",
+      "demos_title": "Demos ausprobieren",
+      "demos_subtitle": "Fünf funktionierende Automatisierungen. Jede läuft live — geben Sie eigene Daten ein und sehen Sie zu.",
+      "case_studies_title": "Kunden-Fallstudien",
+      "case_studies_subtitle": "Wie diese Bausteine zu messbaren Ergebnissen zusammenkommen.",
+      "live_badge": "Live-Demo",
+      "problem_label": "Problem",
+      "solution_label": "Lösung",
+      "result_label": "Ergebnis",
+      "demo_cta": "Demo ausprobieren",
+      "cta_title": "Sehen Sie, was das für Ihr Unternehmen leisten kann",
+      "cta_subtitle": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. Beschreiben Sie einen Prozess, der Zeit frisst, und ich sage Ihnen, ob er automatisierbar ist — und grob wie.",
+      "cta_button": "Kostenloses Gespräch buchen",
+      "projects": {
+        "invoice": {
+          "title": "KI-Rechnungsleser",
+          "tagline": "Vom PDF zu verbuchten Daten in Sekunden",
+          "problem": "Teams tippen Rechnungsdaten manuell in die Buchhaltung — langsam, fehleranfällig und ohne Prüfspur.",
+          "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter — mit Prüfpfad für alles Unklare.",
+          "result": "Die Rechnungsbearbeitung sinkt von rund 4 Stunden pro Woche auf etwa 15 Minuten.",
+          "tags": ["Vision-KI", "Dokumenten-Workflow", "n8n"]
+        },
+        "lead": {
+          "title": "Blitz-Antwort für Leads",
+          "tagline": "Jeden Lead in Minuten beantworten, nicht in Stunden",
+          "problem": "Leads, die Stunden auf Antwort warten, werden kalt — und Anfragen nach Feierabend gehen über Nacht verloren.",
+          "solution": "Jeder eingehende Lead wird bewertet und innerhalb von Minuten mit einer persönlichen, markengerechten Antwort beantwortet, auf Geschäftszeiten geplant und mit Folgeaufgabe im CRM protokolliert.",
+          "result": "Die Reaktionszeit fällt von rund 6 Stunden auf unter 5 Minuten — das Zeitfenster, in dem Leads am ehesten konvertieren.",
+          "tags": ["Lead-Automation", "Persönliche KI", "CRM"]
+        },
+        "meeting": {
+          "title": "Meeting-Protokoll-Bot",
+          "tagline": "Vom einstündigen Call zum strukturierten Protokoll",
+          "problem": "Notizen sind unvollständig, Action Items gehen verloren, und es gibt kein durchsuchbares Protokoll der Entscheidungen.",
+          "solution": "Aufnahme hochladen: Sie wird transkribiert, zusammengefasst und in klare Entscheidungen und zugewiesene Action Items verwandelt, dann verteilt und archiviert.",
+          "result": "Ein einstündiges Meeting wird in etwa zwei Minuten zum strukturierten Protokoll.",
+          "tags": ["Transkription", "Zusammenfassung", "n8n"]
+        },
+        "excel": {
+          "title": "Excel-Retter",
+          "tagline": "Vom Tabellen-Chaos zum sauberen System",
+          "problem": "Kritische Prozesse laufen auf fragilen Tabellen — manuelle Eingabe, Versions-Chaos, stille Formelfehler und keine Validierung.",
+          "solution": "Der Workflow analysiert Ihre Tabelle, schlägt ein sauberes Schema vor und bereinigt, standardisiert und validiert die Daten auf dem Weg in ein echtes System.",
+          "result": "Aus unsauberen, zusammenkopierten Tabellen wird ein strukturierter, validierter Datensatz, dem Sie vertrauen können.",
+          "tags": ["Datenmigration", "Schema-Erkennung", "Validierung"]
+        },
+        "faq": {
+          "title": "KI-Support-Assistent",
+          "tagline": "Sofortige, belegte Antworten aus Ihrer Wissensbasis",
+          "problem": "Support-Teams beantworten dieselben Fragen immer wieder, während Kunden auf Antwort warten.",
+          "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert — und eskaliert an einen Menschen, wenn es unsicher ist.",
+          "result": "Häufige Fragen werden sofort beantwortet, mit Quellen, rund um die Uhr.",
+          "tags": ["Retrieval", "Volltextsuche", "Support-KI"]
+        }
       }
     }
   }

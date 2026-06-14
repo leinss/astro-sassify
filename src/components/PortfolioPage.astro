@@ -1,0 +1,180 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "../layouts/Layout.astro"
+import Header from "./Header.astro"
+import Footer from "./Footer.astro"
+import BackToTop from "./BackToTop.astro"
+import BlogCard from "./BlogCard.astro"
+import ProjectCard from "./ProjectCard.astro"
+import i18n from "../assets/i18n.json"
+import config from "../assets/config.ts"
+import { blogImages } from "../assets/blogImages.ts"
+
+interface Props {
+  lang: "en" | "de"
+}
+
+const { lang } = Astro.props
+const t = i18n[lang]
+const p = t.portfolio
+
+const basePath = lang === "en" ? "/en" : "/de"
+const alternateHref = lang === "en" ? "/de/projekte/" : "/en/projects/"
+const calUrl =
+  lang === "en"
+    ? config.external_links.strategy_call_en
+    : config.external_links.strategy_call_de
+
+interface ProjectContent {
+  title: string
+  tagline: string
+  problem: string
+  solution: string
+  result: string
+  tags: string[]
+}
+
+const pc = p.projects as Record<
+  "invoice" | "lead" | "meeting" | "excel" | "faq",
+  ProjectContent
+>
+
+// Non-translatable wiring: optimized image + the blog-post slug (per language)
+// whose page hosts the live demo widget.
+const projects = [
+  {
+    image: blogImages["/images/blog/invoice-automation.png"],
+    slug: lang === "en" ? "automating-invoice-processing" : "rechnungsverarbeitung-automatisieren",
+    content: pc.invoice,
+  },
+  {
+    image: blogImages["/images/blog/communication-automation.png"],
+    slug: lang === "en" ? "automating-communication" : "kommunikation-automatisieren-menschlich-bleiben",
+    content: pc.lead,
+  },
+  {
+    image: blogImages["/images/blog/meeting-automation.png"],
+    slug: lang === "en" ? "meeting-minutes-automation" : "meeting-protokoll-automatisieren",
+    content: pc.meeting,
+  },
+  {
+    image: blogImages["/images/blog/from-spreadsheets-to-systems.png"],
+    slug: lang === "en" ? "from-spreadsheets-to-systems" : "von-tabellen-zu-systemen",
+    content: pc.excel,
+  },
+  {
+    image: blogImages["/images/blog/faq-automation.png"],
+    slug: lang === "en" ? "faq-automation-ai-support" : "faq-assistent-ki-support",
+    content: pc.faq,
+  },
+]
+
+// Case-study posts rendered with the standard BlogCard.
+const caseStudies = (
+  await getCollection(
+    "blog",
+    ({ data }) => data.lang === lang && !data.draft && data.category === "case-study",
+  )
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+---
+
+<Layout
+  title={p.meta_title}
+  description={p.meta_description}
+  lang={lang}
+  alternateUrl={alternateHref}
+>
+  <Header lang={lang} alternateHref={alternateHref} />
+
+  <main class="min-h-screen bg-linear-to-b from-primary-50 to-white dark:from-secondary-950 dark:to-secondary-900">
+    <!-- Hero -->
+    <section class="py-16 md:py-24">
+      <div class="container-custom">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-secondary-900 dark:text-white mb-6">
+            {p.title}
+          </h1>
+          <p class="text-xl text-secondary-600 dark:text-secondary-400">
+            {p.subtitle}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live demos -->
+    <section class="pb-12">
+      <div class="container-custom">
+        <div class="max-w-3xl mb-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-secondary-900 dark:text-white mb-3">
+            {p.demos_title}
+          </h2>
+          <p class="text-secondary-600 dark:text-secondary-400">
+            {p.demos_subtitle}
+          </p>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((proj) => (
+            <ProjectCard
+              lang={lang}
+              image={proj.image}
+              href={`${basePath}/blog/${proj.slug}/`}
+              title={proj.content.title}
+              tagline={proj.content.tagline}
+              problem={proj.content.problem}
+              solution={proj.content.solution}
+              result={proj.content.result}
+              tags={proj.content.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Case studies -->
+    {caseStudies.length > 0 && (
+      <section class="pb-16">
+        <div class="container-custom">
+          <div class="max-w-3xl mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-secondary-900 dark:text-white mb-3">
+              {p.case_studies_title}
+            </h2>
+            <p class="text-secondary-600 dark:text-secondary-400">
+              {p.case_studies_subtitle}
+            </p>
+          </div>
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {caseStudies.map((post) => <BlogCard post={post} lang={lang} />)}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Closing CTA -->
+    <section class="pb-24">
+      <div class="container-custom">
+        <div class="max-w-4xl mx-auto text-center bg-white dark:bg-secondary-800/50 border border-secondary-200 dark:border-secondary-700 rounded-2xl p-8 md:p-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-secondary-900 dark:text-white mb-4">
+            {p.cta_title}
+          </h2>
+          <p class="text-secondary-600 dark:text-secondary-400 mb-8 max-w-2xl mx-auto">
+            {p.cta_subtitle}
+          </p>
+          <a
+            href={calUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary inline-flex items-center"
+          >
+            {p.cta_button}
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+  <BackToTop />
+</Layout>
