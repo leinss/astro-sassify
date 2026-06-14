@@ -8,7 +8,8 @@
     "build": "node scripts/blog-parity-lint.mjs && astro build",
     "preview": "astro build && astro preview",
     "astro": "astro",
-    "lint:blog-parity": "node scripts/blog-parity-lint.mjs"
+    "lint:blog-parity": "node scripts/blog-parity-lint.mjs",
+    "translate:post": "node scripts/translate-post.mjs"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",

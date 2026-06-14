@@ -1,0 +1,84 @@
+{
+  "name": "Blog Translation Co-Pilot",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "blog-translate",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "blog-translate"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build the translation prompt from the incoming post payload.\n// The webhook nests the POST body under `.body`; fall back to the root for\n// manual test executions.\nconst input = $input.first().json;\nconst data = input.body ?? input;\n\nconst sourceLang = data.sourceLang === 'en' ? 'en' : 'de';\nconst targetLang = data.targetLang === 'de' ? 'de' : (data.targetLang || 'en');\nconst names = { de: 'German', en: 'English' };\n\nconst system = [\n  `You are a professional translator for Leinss Consulting, a business-process automation consultancy serving German SMEs.`,\n  `Translate the blog post from ${names[sourceLang]} to ${names[targetLang]}.`,\n  `Rules:`,\n  `- Preserve ALL Markdown structure exactly: headings, lists, tables, blockquotes, links, and fenced code blocks. Translate prose only — never translate code, identifiers, or URLs.`,\n  `- Keep the tone professional, clear, and benefit-oriented; match the register of the source.`,\n  `- Translate tags into idiomatic lowercase-hyphen slugs in the target language where a natural equivalent exists; keep universal terms unchanged (product names, 'roi', 'n8n', 'ai', 'crm').`,\n  `- Do not add, remove, or summarise content.`,\n  `Return ONLY a valid JSON object with this exact shape and nothing else:`,\n  `{\"title\": string, \"description\": string, \"tags\": string[], \"body\": string}`,\n  `No markdown fences, no commentary.`\n].join('\\n');\n\nconst userPayload = {\n  title: data.title || '',\n  description: data.description || '',\n  tags: Array.isArray(data.tags) ? data.tags : [],\n  body: data.body || ''\n};\n\nreturn [{\n  json: {\n    system,\n    userContent: JSON.stringify(userPayload),\n    model: 'claude-sonnet-4-6',\n    max_tokens: 8000\n  }\n}];"
+      },
+      "id": "build-prompt",
+      "name": "Build Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "={{ $env.ANTHROPIC_API_KEY }}" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: $json.model, max_tokens: $json.max_tokens, system: $json.system, messages: [{ role: 'user', content: $json.userContent }] }) }}",
+        "options": { "timeout": 180000 }
+      },
+      "id": "llm-translate",
+      "name": "Translate (Claude)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract the model's text output and parse the strict-JSON translation.\nconst res = $input.first().json;\nlet text = '';\nif (Array.isArray(res.content)) {\n  text = res.content.map((c) => c.text || '').join('');\n} else if (typeof res === 'string') {\n  text = res;\n}\ntext = text.trim().replace(/^```(?:json)?\\s*/i, '').replace(/\\s*```$/, '');\n\nlet parsed;\ntry {\n  parsed = JSON.parse(text);\n} catch (e) {\n  throw new Error('LLM did not return valid JSON: ' + text.slice(0, 200));\n}\n\nreturn [{\n  json: {\n    title: parsed.title,\n    description: parsed.description,\n    tags: Array.isArray(parsed.tags) ? parsed.tags : [],\n    body: parsed.body\n  }\n}];"
+      },
+      "id": "parse-response",
+      "name": "Parse Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Respond",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1120, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Build Prompt", "type": "main", "index": 0 }]] },
+    "Build Prompt": { "main": [[{ "node": "Translate (Claude)", "type": "main", "index": 0 }]] },
+    "Translate (Claude)": { "main": [[{ "node": "Parse Response", "type": "main", "index": 0 }]] },
+    "Parse Response": { "main": [[{ "node": "Respond", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "description": "Drafts the opposite-language twin of a blog post. POST {sourceLang, targetLang, title, description, tags, body} to the webhook; returns {title, description, tags, body} translated. Driven by scripts/translate-post.mjs."
+  }
+}
