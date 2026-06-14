@@ -118,6 +118,18 @@
       "q_13": "What if the automation doesn't work as expected?",
       "a_13": "Every project includes a testing phase before go-live. But if something breaks after deployment:\n\n* First 30 days: I fix it at no extra cost\n* All projects come with documentation so your team can troubleshoot basics\n* I offer support packages for ongoing maintenance\n\nAutomation isn't set-and-forget. Systems change, APIs update, requirements evolve. I build with maintainability in mind and stay available when you need adjustments."
     },
+    "roi": {
+      "title": "Calculate your savings potential",
+      "subtitle": "Drag the sliders to estimate what automating this kind of work could free up each year. Adjust the numbers to match your team.",
+      "hours_label": "Hours per week spent on this task",
+      "cost_label": "Loaded cost per hour",
+      "automation_label": "Share that can be automated",
+      "savings_label": "Estimated annual savings",
+      "hours_saved_label": "Hours freed up per year",
+      "per_year": "per year",
+      "disclaimer": "A rough estimate based on your inputs — not a quote. Most automation projects pay for themselves within 3–6 months.",
+      "cta": "Get your exact ROI on a call"
+    },
     "newsletter": {
       "title": "Stay Updated",
       "subtitle": "Get automation tips, case studies, and insights delivered to your inbox.",
@@ -375,6 +387,18 @@
       "a_12": "Agenturen haben Overhead, Account Manager und Junioren, die die eigentliche Arbeit machen. Bei mir:\n\n* Sie sprechen direkt mit der Person, die Ihre Automatisierung baut\n* Keine Übergaben, keine Kommunikationsebenen\n* Schnellere Iteration – Änderungen passieren in Stunden, nicht Wochen\n* Geringere Kosten – kein Agenturaufschlag\n\nFür komplexe Enterprise-Projekte machen Agenturen Sinn. Für fokussierte Automatisierungsarbeit ist ein erfahrener Builder schneller und kosteneffizienter.",
       "q_13": "Was, wenn die Automatisierung nicht wie erwartet funktioniert?",
       "a_13": "Jedes Projekt enthält eine Testphase vor dem Go-Live. Aber falls nach dem Deployment etwas nicht läuft:\n\n* Erste 30 Tage: Ich behebe es ohne Zusatzkosten\n* Alle Projekte kommen mit Dokumentation, damit Ihr Team Basics selbst lösen kann\n* Ich biete Support-Pakete für laufende Wartung\n\nAutomatisierung ist nicht \"einrichten und vergessen\". Systeme ändern sich, APIs werden aktualisiert, Anforderungen entwickeln sich. Ich baue mit Wartbarkeit im Blick und bleibe verfügbar, wenn Sie Anpassungen brauchen."
+    },
+    "roi": {
+      "title": "Berechnen Sie Ihr Sparpotenzial",
+      "subtitle": "Verschieben Sie die Regler, um zu schätzen, was die Automatisierung solcher Arbeit pro Jahr freisetzen könnte. Passen Sie die Werte an Ihr Team an.",
+      "hours_label": "Stunden pro Woche für diese Aufgabe",
+      "cost_label": "Vollkosten pro Stunde",
+      "automation_label": "Anteil, der automatisierbar ist",
+      "savings_label": "Geschätzte jährliche Ersparnis",
+      "hours_saved_label": "Freigesetzte Stunden pro Jahr",
+      "per_year": "pro Jahr",
+      "disclaimer": "Eine grobe Schätzung auf Basis Ihrer Eingaben – kein Angebot. Die meisten Automatisierungsprojekte amortisieren sich innerhalb von 3–6 Monaten.",
+      "cta": "Konkreten ROI im Gespräch berechnen"
     },
     "newsletter": {
       "title": "Bleiben Sie auf dem Laufenden",
