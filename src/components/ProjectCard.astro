@@ -14,7 +14,6 @@ interface Props {
   solution: string
   result: string
   tags: string[]
-  live?: boolean
 }
 
 const {
@@ -27,7 +26,6 @@ const {
   solution,
   result,
   tags,
-  live = true,
 } = Astro.props
 
 const t = i18n[lang].portfolio
@@ -46,15 +44,13 @@ const t = i18n[lang].portfolio
       widths={[400, 600, 800]}
       sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
     />
-    {live && (
-      <div class="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/95 text-white backdrop-blur-xs">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-        </span>
-        {t.live_badge}
-      </div>
-    )}
+    <div class="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full bg-emerald-500/95 text-white backdrop-blur-xs">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+      </span>
+      {t.live_badge}
+    </div>
   </a>
 
   <!-- Body -->
