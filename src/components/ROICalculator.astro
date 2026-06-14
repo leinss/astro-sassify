@@ -17,17 +17,29 @@ const calUrl =
 const locale = lang === "de" ? "de-DE" : "en-US"
 
 // Per-pillar starting points for the sliders — the visitor adjusts them to match
-// their own team. Conservative defaults so the headline figure stays credible.
-const defaults: Record<Props["pillar"], { hours: number; rate: number }> = {
-  crm: { hours: 8, rate: 70 },
-  documents: { hours: 6, rate: 80 },
-  communication: { hours: 5, rate: 65 },
-  integrations: { hours: 4, rate: 75 },
+// their own team. `automationPct` is the share of the task that can be automated
+// (a percentage), NOT an hourly rate. Conservative defaults keep the headline credible.
+const defaults: Record<Props["pillar"], { hours: number; automationPct: number }> = {
+  crm: { hours: 8, automationPct: 70 },
+  documents: { hours: 6, automationPct: 80 },
+  communication: { hours: 5, automationPct: 65 },
+  integrations: { hours: 4, automationPct: 75 },
 }
 const d = defaults[pillar]
 
 const WEEKS = 46 // working weeks per year (accounts for holidays and leave)
 const DEFAULT_HOURLY_EUR = 50
+
+// Server-rendered initial figures: shown before Alpine hydrates (and as a graceful
+// fallback if it never does); the reactive getters take over on load.
+const initialHoursSaved = Math.round(d.hours * (d.automationPct / 100) * WEEKS)
+const initialSavings = initialHoursSaved * DEFAULT_HOURLY_EUR
+const eur = new Intl.NumberFormat(locale, {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+})
+const num = new Intl.NumberFormat(locale)
 ---
 
 <section class="py-16 bg-secondary-50 dark:bg-secondary-900">
@@ -45,10 +57,10 @@ const DEFAULT_HOURLY_EUR = 50
         x-data={`{
           hours: ${d.hours},
           cost: ${DEFAULT_HOURLY_EUR},
-          automation: ${d.rate},
+          automation: ${d.automationPct},
           weeks: ${WEEKS},
           get hoursSavedYear() { return Math.round(this.hours * (this.automation / 100) * this.weeks) },
-          get savings() { return Math.round(this.hours * (this.automation / 100) * this.weeks * this.cost) },
+          get savings() { return this.hoursSavedYear * this.cost },
           fmtEur(n) { return new Intl.NumberFormat('${locale}', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n) },
           fmtNum(n) { return new Intl.NumberFormat('${locale}').format(n) }
         }`}
@@ -62,7 +74,7 @@ const DEFAULT_HOURLY_EUR = 50
                   {t.hours_label}
                 </label>
                 <span class="text-sm font-bold text-primary-600 dark:text-primary-400">
-                  <span x-text="hours"></span> h
+                  <span x-text="hours">{d.hours}</span> h
                 </span>
               </div>
               <input
@@ -71,9 +83,11 @@ const DEFAULT_HOURLY_EUR = 50
                 min="1"
                 max="40"
                 step="1"
+                value={d.hours}
                 x-model.number="hours"
                 class="roi-slider"
                 aria-label={t.hours_label}
+                :aria-valuetext="hours + ' h'"
               />
             </div>
 
@@ -82,7 +96,7 @@ const DEFAULT_HOURLY_EUR = 50
                 <label for="roi-cost" class="text-sm font-medium text-secondary-700 dark:text-secondary-300">
                   {t.cost_label}
                 </label>
-                <span class="text-sm font-bold text-primary-600 dark:text-primary-400" x-text="fmtEur(cost)"></span>
+                <span class="text-sm font-bold text-primary-600 dark:text-primary-400" x-text="fmtEur(cost)">{eur.format(DEFAULT_HOURLY_EUR)}</span>
               </div>
               <input
                 id="roi-cost"
@@ -90,9 +104,11 @@ const DEFAULT_HOURLY_EUR = 50
                 min="20"
                 max="150"
                 step="5"
+                value={DEFAULT_HOURLY_EUR}
                 x-model.number="cost"
                 class="roi-slider"
                 aria-label={t.cost_label}
+                :aria-valuetext="fmtEur(cost)"
               />
             </div>
 
@@ -102,7 +118,7 @@ const DEFAULT_HOURLY_EUR = 50
                   {t.automation_label}
                 </label>
                 <span class="text-sm font-bold text-primary-600 dark:text-primary-400">
-                  <span x-text="automation"></span> %
+                  <span x-text="automation">{d.automationPct}</span> %
                 </span>
               </div>
               <input
@@ -111,9 +127,11 @@ const DEFAULT_HOURLY_EUR = 50
                 min="10"
                 max="95"
                 step="5"
+                value={d.automationPct}
                 x-model.number="automation"
                 class="roi-slider"
                 aria-label={t.automation_label}
+                :aria-valuetext="automation + ' %'"
               />
             </div>
           </div>
@@ -126,15 +144,14 @@ const DEFAULT_HOURLY_EUR = 50
             <p
               class="text-4xl md:text-5xl font-extrabold text-primary-600 dark:text-primary-400 my-2 tabular-nums"
               x-text="fmtEur(savings)"
-            >
-            </p>
+            >{eur.format(initialSavings)}</p>
             <p class="text-sm text-secondary-500 dark:text-secondary-400">{t.per_year}</p>
             <div class="mt-5 pt-5 border-t border-primary-100 dark:border-primary-800">
               <p class="text-sm text-secondary-600 dark:text-secondary-400">
                 {t.hours_saved_label}
               </p>
               <p class="text-2xl font-bold text-secondary-900 dark:text-white tabular-nums">
-                <span x-text="fmtNum(hoursSavedYear)"></span> h
+                <span x-text="fmtNum(hoursSavedYear)">{num.format(initialHoursSaved)}</span> h
               </p>
             </div>
           </div>
