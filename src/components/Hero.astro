@@ -92,15 +92,18 @@ const t = i18n[lang];
         </ul>
       </div>
     </div>
-    <div class="flex flex-wrap gap-4 mt-12 md:mt-16 justify-center">
+    <div class="flex flex-col items-center gap-3 mt-12 md:mt-16">
       <a
         href={lang === "de" ? config.external_links.strategy_call_de : config.external_links.strategy_call_en}
         class="btn-cta"
         target="_blank"
         rel="noopener noreferrer"
       >
-        {t.hero.cta}
+        {t.hero.cta_primary}
       </a>
+      <p class="text-sm text-secondary-500 dark:text-secondary-400">
+        {t.hero.cta_reassurance}
+      </p>
     </div>
   </div>
 </section>
