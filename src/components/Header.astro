@@ -19,6 +19,9 @@ const t = i18n[lang]
 // Get the base path for links based on language
 const basePath = lang === "en" ? "/en" : "/de"
 
+// Portfolio route differs per language (projekte vs projects)
+const portfolioPath = lang === "en" ? "/en/projects" : "/de/projekte"
+
 // Get current URL for language switching
 const { pathname, hash } = Astro.url
 
@@ -112,6 +115,12 @@ const enPath = getLocalizedPath("en")
         href={`${basePath}/services/`}
         class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >{t.header.services}</a
+      >
+
+      <a
+        href={`${portfolioPath}/`}
+        class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+        >{t.header.portfolio}</a
       >
 
       <a
@@ -260,6 +269,13 @@ const enPath = getLocalizedPath("en")
             @click="open = false"
             class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30 mt-1"
             >{t.header.services}</a
+          >
+
+          <a
+            href={`${portfolioPath}/`}
+            @click="open = false"
+            class="block px-4 py-2 text-sm font-semibold text-secondary-900 dark:text-white hover:bg-primary-50 dark:hover:bg-primary-900/30"
+            >{t.header.portfolio}</a
           >
 
           <a
