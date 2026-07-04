@@ -23,9 +23,9 @@
     },
     "hero": {
       "subline": "Less manual work. More time for what matters.",
-      "headline_start": "Automation for mid-sized companies",
-      "headline_end": "built, documented, handed over.",
-      "intro_text": "n8n, AI, and clean integrations instead of disconnected island solutions.\n\nEvery automation pays for itself in time saved or fewer errors — and your team keeps full control, with no vendor lock-in.",
+      "headline_start": "Automation your business owns",
+      "headline_end": "engineered, documented, handed to your team.",
+      "intro_text": "The fast start is proven tools — n8n, AI, clean integrations. The lasting result is a system you own and run on your own infrastructure, engineered by someone who knows every layer of the stack.\n\nNot low-code you rent and can't change: durable, adaptable automation with a clear payback, documented and handed to your team. No black boxes, no vendor lock-in.",
       "point_1_start": "CRM & Sales",
       "point_1_end": "Automate lead management, follow-ups, and deal progression. Never miss an opportunity again.",
       "point_2_start": "Document Workflows",
@@ -34,7 +34,7 @@
       "point_3_end": "Connect your tools. Sync data across platforms. Build workflows that work together.",
       "cta": "Book your free consultation",
       "cta_primary": "Free strategy call",
-      "cta_reassurance": "30-day fix guarantee · no vendor lock-in"
+      "cta_reassurance": "30-day fix guarantee · you own the code · no lock-in"
     },
     "problem_solution": {
       "problem_headline": "Sound familiar?",
@@ -61,7 +61,7 @@
     },
     "solution_details": {
       "intro_1": "You have the vision – we build the automation.",
-      "intro_2": "I help businesses design and implement automation systems that actually work. From CRM workflows to multi-tool integrations.",
+      "intro_2": "I help businesses design and build automation systems they own and control — from CRM workflows to custom multi-tool integrations. Systems that actually work, and keep working.",
       "solution_1_headline": "CRM & Sales Automation",
       "solution_1_text": "Automate lead scoring, assignment, and nurturing. Build sequences that follow up automatically. Track deals without manual data entry. Your sales team sells more, reports less.",
       "solution_2_headline": "Document & Data Workflows",
@@ -82,13 +82,13 @@
     "about_me": {
       "title": "About Me",
       "tools_label": "Tools & Platforms",
-      "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
+      "tools": ["Self-hosted n8n", "Python & TypeScript", "APIs & backends", "Docker & DevOps", "Claude & OpenAI APIs"],
       "mission_title": "Mission",
-      "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them. Less time lost to repetitive tasks, fewer errors, and a team that gets its focus back.\n\nEvery automation has a clear payback and stays maintainable by your own people. No black boxes, no dependency on me.",
+      "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
       "career_title": "Experience",
-      "career": "I'm a software engineer with a background in AI, blockchain, and full-stack development.\n\nI've worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and shipped AI-powered software. I've co-founded startups and won a stack of hackathons, so I've seen automation from both the technical and the business side.\n\nThese days I focus on systems that scale, automating digital processes, and wiring modern tools into how a business actually runs.",
+      "career": "I'm a full-stack software engineer with a background in AI, blockchain, and DevOps.\n\nI've worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and shipped AI-powered software. I've co-founded startups and won a stack of hackathons, so I've seen automation from both the technical and the business side.\n\nThese days I put that full-stack background to work for mid-sized companies: automation engineered to scale, owned by you, and wired cleanly into how your business actually runs.",
       "background_title": "Approach",
-      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nMy job is to bring that same modern automation to businesses that are ready to grow without a dedicated IT team for every project."
+      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nLow-code tools are a fast way to start, and I use them where they fit. But durable, adaptable automation that grows with you takes real engineering — the full-stack kind, not a freelancer wiring up someone else's SaaS. That's what I bring to businesses ready to grow without a dedicated IT team."
     },
     "faq": {
       "tag": "FAQ",
@@ -99,7 +99,7 @@
       "q_2": "What exactly do you offer?",
       "a_2": "I offer consulting and implementation for business automation. This includes:\n\n* Process analysis and automation roadmapping\n* Workflow automation (CRM, sales, operations)\n* Document processing and data pipeline setup\n* System integration and API development",
       "q_3": "What tools do you work with?",
-      "a_3": "I work with modern automation platforms like n8n, Make, Zapier, as well as custom integrations using APIs. The choice depends on your needs:\n\n* No-code tools for simpler workflows\n* Custom development for complex requirements\n* Hybrid approaches that combine both",
+      "a_3": "I start with whatever gets you value fastest — often a low-code platform like n8n for simpler workflows. But I'm a full-stack engineer, not a low-code-only freelancer, so when a workflow needs to be durable, adaptable, or owned outright, I build it in real code:\n\n* Low-code (n8n) for a fast, simple start\n* Custom development for anything complex or long-lived\n* Usually a hybrid — the easy parts fast, the important parts engineered to last",
       "q_4": "How long does implementation take?",
       "a_4": "It depends on complexity:\n\n* Simple automations: 1-2 weeks\n* CRM workflow overhauls: 4-8 weeks\n* Multi-system integrations: 2-3 months\n\nWe start with quick wins and build from there.",
       "q_5": "Do we need technical expertise in-house?",
@@ -155,7 +155,7 @@
         "meta_title": "Automation Services - Cut the Manual Work in Your Business",
         "meta_description": "Explore our automation services: CRM & Sales, Document Workflows, Communication Automation, and System Integrations. Find the right solution for your business.",
         "title": "Our Automation Services",
-        "subtitle": "Four areas of automation that give your team its week back.",
+        "subtitle": "Four areas where the right automation gives your team its week back — built to be owned, not rented.",
         "cta": "Book a free consultation"
       },
       "crm": {
@@ -356,9 +356,9 @@
     },
     "hero": {
       "subline": "Weniger manuelle Arbeit. Mehr Zeit fürs Wesentliche.",
-      "headline_start": "Automatisierung für den Mittelstand",
-      "headline_end": "gebaut, dokumentiert, übergeben.",
-      "intro_text": "n8n, KI und saubere Integrationen statt Insellösungen.\n\nJede Automatisierung zahlt sich in gesparter Zeit oder weniger Fehlern aus – und Ihr Team behält die volle Kontrolle, ohne Vendor-Lock-in.",
+      "headline_start": "Automatisierung, die Ihnen gehört",
+      "headline_end": "entwickelt, dokumentiert, an Ihr Team übergeben.",
+      "intro_text": "Der schnelle Start sind bewährte Tools – n8n, KI, saubere Integrationen. Das bleibende Ergebnis ist ein System, das Ihnen gehört und auf Ihrer eigenen Infrastruktur läuft, entwickelt von jemandem, der jede Ebene des Stacks kennt.\n\nKein Low-Code zum Mieten, das Sie nicht ändern können: belastbare, anpassbare Automatisierung mit klarem Return, dokumentiert und an Ihr Team übergeben. Keine Blackbox, kein Vendor-Lock-in.",
       "point_1_start": "CRM & Vertrieb",
       "point_1_end": "Automatisieren Sie Lead-Management, Follow-ups und Deal-Fortschritt. Verpassen Sie keine Chance mehr.",
       "point_2_start": "Dokumenten-Workflows",
@@ -367,7 +367,7 @@
       "point_3_end": "Verbinden Sie Ihre Tools. Synchronisieren Sie Daten über Plattformen hinweg. Bauen Sie Workflows, die zusammenarbeiten.",
       "cta": "Kostenloses Erstgespräch buchen",
       "cta_primary": "Kostenloses Strategiegespräch",
-      "cta_reassurance": "30 Tage Fix-Garantie · kein Vendor-Lock-in"
+      "cta_reassurance": "30 Tage Fix-Garantie · Sie besitzen den Code · kein Lock-in"
     },
     "problem_solution": {
       "problem_headline": "Kommt Ihnen das bekannt vor?",
@@ -394,7 +394,7 @@
     },
     "solution_details": {
       "intro_1": "Sie haben die Vision – ich baue die Automatisierung.",
-      "intro_2": "Ich helfe Unternehmen, Automatisierungssysteme zu entwerfen und zu implementieren, die tatsächlich funktionieren. Von CRM-Workflows bis zu Multi-Tool-Integrationen.",
+      "intro_2": "Ich helfe Unternehmen, Automatisierungssysteme zu entwerfen und zu bauen, die ihnen gehören und die sie kontrollieren – von CRM-Workflows bis zu individuellen Multi-Tool-Integrationen. Systeme, die funktionieren und funktionieren bleiben.",
       "solution_1_headline": "CRM & Vertriebsautomatisierung",
       "solution_1_text": "Automatisieren Sie Lead-Scoring, Zuweisung und Nurturing. Bauen Sie Sequenzen, die automatisch nachfassen. Verfolgen Sie Deals ohne manuelle Dateneingabe. Ihr Vertriebsteam verkauft mehr, reportet weniger.",
       "solution_2_headline": "Dokumenten- & Daten-Workflows",
@@ -415,13 +415,13 @@
     "about_me": {
       "title": "Über Mich",
       "tools_label": "Tools & Plattformen",
-      "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
+      "tools": ["Selbst gehostetes n8n", "Python & TypeScript", "APIs & Backends", "Docker & DevOps", "Claude & OpenAI APIs"],
       "mission_title": "Mission",
-      "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie dann. Weniger Zeit für Routineaufgaben, weniger Fehler, ein Team, das seinen Fokus zurückbekommt.\n\nJede Automatisierung hat einen klaren Return und bleibt von Ihren eigenen Leuten wartbar. Keine Blackbox, keine Abhängigkeit von mir.",
+      "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",
       "career_title": "Erfahrung",
-      "career": "Ich bin Software Engineer mit Hintergrund in KI, Blockchain und Fullstack-Entwicklung.\n\nIch habe an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ökosystemen von Ethereum und Cosmos gebaut und KI-gestützte Software ausgeliefert. Ich habe Startups mitgegründet und eine ganze Reihe Hackathons gewonnen – Automatisierung kenne ich also von der technischen wie von der geschäftlichen Seite.\n\nHeute konzentriere ich mich auf skalierbare Systeme, die Automatisierung digitaler Prozesse und das saubere Einbinden moderner Tools in den echten Geschäftsalltag.",
+      "career": "Ich bin Fullstack-Softwareentwickler mit Hintergrund in KI, Blockchain und DevOps.\n\nIch habe an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ökosystemen von Ethereum und Cosmos gebaut und KI-gestützte Software ausgeliefert. Ich habe Startups mitgegründet und eine ganze Reihe Hackathons gewonnen – Automatisierung kenne ich also von der technischen wie von der geschäftlichen Seite.\n\nHeute bringe ich diesen Fullstack-Hintergrund für den Mittelstand ein: Automatisierung, die auf Skalierung ausgelegt ist, die Ihnen gehört und sauber in den echten Geschäftsalltag eingebunden ist.",
       "background_title": "Ansatz",
-      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nMeine Aufgabe ist es, genau diese moderne Automatisierung zu Unternehmen zu bringen, die wachsen wollen – ohne für jedes Projekt ein eigenes IT-Team zu haben."
+      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nLow-Code-Tools sind ein schneller Start, und ich nutze sie, wo sie passen. Aber belastbare, anpassbare Automatisierung, die mit Ihnen wächst, braucht echtes Engineering – die Fullstack-Art, nicht einen Freelancer, der fremde SaaS zusammensteckt. Genau das bringe ich zu Unternehmen, die wachsen wollen, ohne für jedes Projekt ein eigenes IT-Team zu haben."
     },
     "faq": {
       "tag": "FAQ",
@@ -432,7 +432,7 @@
       "q_2": "Was genau bieten Sie an?",
       "a_2": "Ich biete Beratung und Implementierung für Geschäftsautomatisierung. Dazu gehören:\n\n* Prozessanalyse und Automatisierungs-Roadmapping\n* Workflow-Automatisierung (CRM, Vertrieb, Operations)\n* Dokumentenverarbeitung und Datenpipeline-Einrichtung\n* Systemintegration und API-Entwicklung",
       "q_3": "Mit welchen Tools arbeiten Sie?",
-      "a_3": "Ich arbeite mit modernen Automatisierungsplattformen wie n8n, Make, Zapier sowie mit individuellen Integrationen über APIs. Die Wahl hängt von Ihren Bedürfnissen ab:\n\n* No-Code-Tools für einfachere Workflows\n* Custom-Entwicklung für komplexe Anforderungen\n* Hybride Ansätze, die beides kombinieren",
+      "a_3": "Ich starte mit dem, was am schnellsten Nutzen bringt – oft einer Low-Code-Plattform wie n8n für einfachere Workflows. Aber ich bin Fullstack-Engineer, kein reiner Low-Code-Freelancer: Wenn ein Workflow belastbar, anpassbar oder wirklich Ihr Eigentum sein muss, baue ich ihn in echtem Code:\n\n* Low-Code (n8n) für den schnellen, einfachen Start\n* Custom-Entwicklung für alles Komplexe oder Langlebige\n* Meist ein Hybrid – die einfachen Teile schnell, die wichtigen Teile auf Dauer entwickelt",
       "q_4": "Wie lange dauert die Implementierung?",
       "a_4": "Das hängt von der Komplexität ab:\n\n* Einfache Automatisierungen: 1-2 Wochen\n* CRM-Workflow-Umbauten: 4-8 Wochen\n* Multi-System-Integrationen: 2-3 Monate\n\nWir beginnen mit Quick Wins und bauen darauf auf.",
       "q_5": "Brauchen wir interne technische Expertise?",
@@ -488,7 +488,7 @@
         "meta_title": "Automatisierungslösungen - Optimieren Sie Ihr Unternehmen",
         "meta_description": "Entdecken Sie unsere Automatisierungslösungen: CRM & Vertrieb, Dokumenten-Workflows, Kommunikationsautomatisierung und Systemintegrationen.",
         "title": "Unsere Automatisierungslösungen",
-        "subtitle": "Vier Bereiche der Automatisierung, die Ihrem Team die Woche zurückgeben.",
+        "subtitle": "Vier Bereiche, in denen die richtige Automatisierung Ihrem Team die Woche zurückgibt – gebaut, um zu besitzen, nicht zu mieten.",
         "cta": "Kostenloses Erstgespräch buchen"
       },
       "crm": {

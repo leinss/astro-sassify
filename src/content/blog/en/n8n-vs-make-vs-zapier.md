@@ -10,9 +10,9 @@ lang: en
 alternateSlug: "n8n-vs-make-vs-zapier"
 ---
 
-> **Short answer:** Pick Zapier if you want the fastest setup and have simple, low-volume automations. Pick Make for visual, mid-complexity workflows with branching. Pick n8n if you need complex logic, high volume, custom code, or your data has to stay on your own servers — it's the cheapest at scale and the only one you can self-host. The pricing model matters more than the sticker price: Zapier bills per task, Make per operation, n8n per workflow run.
+> **Short answer:** Pick Zapier for the fastest setup and simple, low-volume automations. Pick Make for visual, mid-complexity workflows with branching. Pick n8n if you need complex logic, high volume, custom code, or your data has to stay on your own servers — it's the cheapest at scale and the only one you can self-host. But treat all three as the easy on-ramp: they're low-code tools for *starting* fast; robust, adaptable automation you own eventually moves into real code. The pricing model matters more than the sticker price: Zapier bills per task, Make per operation, n8n per workflow run.
 
-I build automations for a living, mostly in n8n, but the honest answer to "which tool" is: it depends on your volume, your complexity, and how sensitive your data is. Here's how the three compare on the things that actually change the decision.
+I'm a full-stack engineer who builds automation for a living, and I use all three where they fit. Here's the honest framing up front: these are low-code tools — the easy way to *start*. Which one is right depends on your volume, complexity, and how sensitive your data is. Here's how they compare on the things that actually change the decision.
 
 ## The comparison at a glance
 
@@ -71,8 +71,16 @@ The trade-off is the steepest learning curve of the three. That's exactly the ga
 
 Prices and free tiers shift constantly — check each vendor's current pricing page before you commit. The *pricing basis* above is the part that rarely changes and the part that decides your cost at scale.
 
+## Low-code is the on-ramp, not the destination
+
+Here's the part most tool comparisons skip: all three are **low-code tools — the easy way to start**. That's genuinely valuable. You get a working automation in days, cheaply, without a project.
+
+But "easy to wire up" isn't the same as durable, adaptable, or *yours*. As a workflow becomes load-bearing — more volume, more edge cases, tighter coupling to your own systems — a low-code canvas starts to fight you. That's the point where a full-stack engineer builds it properly: real code, your own APIs, running on infrastructure you control and can extend, not rented from a SaaS you can't change.
+
+So the honest sequence is: start on low-code (usually self-hosted n8n, so you own it from day one), then move the load-bearing parts into code you own as they matter. The tool is the on-ramp. Owning and understanding your automation is the destination — the difference between wiring tools together and engineering a system.
+
 ## Where I'd start
 
-Most of my clients land on n8n once volume grows, because the cost curve stays flat and the data stays home. But the best tool is the one that fits the process in front of you. If you want a second opinion on which fits yours, [book a free 20-minute call](https://cal.com/tobias-leinss/strategymeeting) and we'll map it to your actual workflows.
+Most of my clients start on self-hosted n8n — owned from day one, with a flat cost curve — then we move the load-bearing pieces into code as they grow. You get the fast start *and* something you own. If you want a second opinion on where that line sits for your workflows, [book a free 20-minute call](https://cal.com/tobias-leinss/strategymeeting) and we'll map it to your actual processes.
 
 Related reading: [what automation actually returns](/en/blog/roi-of-automation/) and [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/).

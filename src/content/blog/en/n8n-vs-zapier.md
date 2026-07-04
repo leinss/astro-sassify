@@ -10,7 +10,7 @@ lang: en
 alternateSlug: "n8n-vs-zapier"
 ---
 
-> **Short answer:** Zapier is faster to start and has more app integrations; n8n is cheaper at scale, self-hostable, and far more capable for complex or high-volume work. For a small team with a few simple automations, Zapier is fine. For a growing SMB — especially one with data-residency needs under the DSGVO — n8n usually wins once volume climbs, because it bills per workflow run instead of per task and can run entirely on your own server.
+> **Short answer:** Zapier is faster to start and has more app integrations; n8n is cheaper at scale, self-hostable, and far more capable for complex or high-volume work. For a small team with a few simple automations, Zapier is fine. For a growing SMB — especially one with data-residency needs under the DSGVO — n8n usually wins once volume climbs, because it bills per workflow run instead of per task and can run entirely on your own server. The deeper point: both are low-code. The real edge isn't picking the better tool — it's owning your automation and having someone who can extend it in code when it matters.
 
 Zapier and n8n get compared constantly, but they're built for different stages of a company. Here's the head-to-head without the marketing gloss.
 
@@ -58,8 +58,14 @@ That's why teams often start on Zapier and move to n8n once automation becomes c
 
 Migrating isn't all-or-nothing — you can keep simple Zaps and move the heavy, high-volume workflows to n8n. See how the three big tools stack up in [n8n vs Make vs Zapier](/en/blog/n8n-vs-make-vs-zapier/).
 
+## The real question isn't the tool — it's ownership
+
+Zapier vs n8n is worth getting right, but don't lose the bigger point: both are low-code tools. Zapier rents you convenience; self-hosted n8n at least lets you *own* the thing from day one — your infrastructure, your data, and automation a full-stack engineer can extend in real code as it grows load-bearing.
+
+Low-code gets you started. Owning it — and knowing how to build past the low-code ceiling — is what keeps it working at scale. That's the line between wiring tools together and engineering a system you control.
+
 ## Getting a second opinion
 
-I build most client work in self-hosted n8n, precisely because the cost curve stays flat and the data stays in the EU. If you're weighing a move — or just want to know whether it's worth it for your volume — [book a free 20-minute call](https://cal.com/tobias-leinss/strategymeeting) and I'll give you a straight answer.
+I'm a full-stack engineer, so I start clients on self-hosted n8n for the fast, owned on-ramp — then build past its ceiling in real code when a workflow needs it. If you're weighing a move, or want to know where that line sits for your volume, [book a free 20-minute call](https://cal.com/tobias-leinss/strategymeeting) and I'll give you a straight answer.
 
 Related reading: [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/).
