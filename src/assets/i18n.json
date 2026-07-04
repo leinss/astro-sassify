@@ -2,7 +2,7 @@
   "en": {
     "meta": {
       "title": "Business Automation Solutions - Turn Manual Work Into Digital Efficiency",
-      "description": "Automate your business processes, connect your tools, and free up time for what matters. CRM automation, document workflows, and seamless integrations.",
+      "description": "Automate your business processes, connect your tools, and free up time for what matters. CRM automation, document workflows, and system integrations.",
       "privacy_policy": "Privacy Policy",
       "imprint": "Imprint"
     },
@@ -54,7 +54,7 @@
       "solution_1_text": "Automatically score leads, assign them to the right people, and trigger follow-up sequences. CRM updates itself, deals move forward, and your team focuses on closing.",
       "solution_2_headline": "process documents automatically?",
       "solution_2_text": "Extract data from invoices, contracts, and forms. Route them for approval. Sync to your accounting system. What took hours now takes seconds.",
-      "solution_3_headline": "streamline your communication?",
+      "solution_3_headline": "put customer communication on autopilot?",
       "solution_3_text": "Automated onboarding sequences, appointment reminders, support ticket routing. The right message reaches the right person at the right time.",
       "solution_4_headline": "connect all your tools?",
       "solution_4_text": "Build real-time data sync between your CRM, ERP, shop system, and spreadsheets. One source of truth. No more manual exports."
@@ -84,11 +84,11 @@
       "tools_label": "Tools & Platforms",
       "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
       "mission_title": "Mission",
-      "mission_statement": "Tobias believes businesses shouldn't spend their time on work a computer could do better.\n\nHis mission is to help mid-sized companies identify automation opportunities and implement solutions that actually work – saving time, reducing errors, and freeing teams to focus on what matters.\n\nHe combines technical expertise with a practical approach: every automation should have clear ROI and be maintainable by your team.",
+      "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them. Less time lost to repetitive tasks, fewer errors, and a team that gets its focus back.\n\nEvery automation has a clear payback and stays maintainable by your own people. No black boxes, no dependency on me.",
       "career_title": "Experience",
-      "career": "Tobias is a software engineer with deep experience in AI, blockchain, and full-stack development.\n\nHe has worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and developed AI-powered software solutions. As a co-founder of multiple startups and winner of numerous hackathons, he understands both the technical and business sides of automation.\n\nHis focus is on building scalable systems, automating digital processes, and integrating modern tools into business operations.",
+      "career": "I'm a software engineer with a background in AI, blockchain, and full-stack development.\n\nI've worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and shipped AI-powered software. I've co-founded startups and won a stack of hackathons, so I've seen automation from both the technical and the business side.\n\nThese days I focus on systems that scale, automating digital processes, and wiring modern tools into how a business actually runs.",
       "background_title": "Approach",
-      "background": "Growing up in the Stuttgart region – the heart of German manufacturing and SMEs – Tobias understands the challenges mid-sized businesses face.\n\nThese companies need to digitize and automate, but can't afford enterprise consultants or year-long implementation projects.\n\nHis goal is to bring modern automation capabilities to businesses that are ready to grow but don't have dedicated IT teams for every initiative."
+      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nMy job is to bring that same modern automation to businesses that are ready to grow without a dedicated IT team for every project."
     },
     "faq": {
       "tag": "FAQ",
@@ -109,9 +109,9 @@
       "q_7": "What about data security?",
       "a_7": "All implementations follow GDPR requirements. Data stays in your systems or approved EU/German providers. I don't require access to production data for development – we work with test data and strict access controls.",
       "q_8": "What does it cost?",
-      "a_8": "Pricing depends on scope:\n\n* Automation audit and roadmap: Fixed price\n* Implementation projects: Project-based pricing\n* Ongoing support: Monthly retainer\n\nEvery project starts with a free consultation to understand your needs and provide a quote.",
+      "a_8": "I work three ways, and you know the price before any work starts:\n\n* Automation audit + roadmap — a fixed price; you keep the prioritized plan even if we stop there\n* Implementation — quoted per project, scoped so it pays for itself in saved time or fewer errors\n* Ongoing support — a monthly retainer, only if you want one\n\nEvery engagement opens with a free call and a written quote. No hourly surprises.",
       "q_9": "Can you integrate with our existing systems?",
-      "a_9": "Most likely yes. As a fullstack developer, I can work with any system that has an API – which covers most modern business tools.\n\nIf I haven't worked with your specific software before, I'll be upfront about it. The learning curve for a new API is usually days, not weeks. We can discuss your specific stack in the initial call.",
+      "a_9": "Yes — in almost every case. As a fullstack developer, I can work with any system that has an API, and that covers most modern business tools.\n\nIf I haven't worked with your specific software before, I'll say so. Learning a new API usually takes days, not weeks. We go through your exact stack on the first call.",
       "q_10": "What happens after implementation?",
       "a_10": "You own everything. Code, documentation, credentials – all yours. I provide training so your team can manage day-to-day operations. For ongoing optimization or support, I offer maintenance packages.",
       "q_11": "How do we get started?",
@@ -152,10 +152,10 @@
     },
     "services": {
       "index": {
-        "meta_title": "Automation Services - Streamline Your Business",
+        "meta_title": "Automation Services - Cut the Manual Work in Your Business",
         "meta_description": "Explore our automation services: CRM & Sales, Document Workflows, Communication Automation, and System Integrations. Find the right solution for your business.",
         "title": "Our Automation Services",
-        "subtitle": "Four pillars of business automation to transform how you work.",
+        "subtitle": "Four areas of automation that give your team its week back.",
         "cta": "Book a free consultation"
       },
       "crm": {
@@ -245,7 +245,7 @@
       "integrations": {
         "slug": "integrations-apis",
         "meta_title": "Integrations & APIs - Connect Your Business Tools",
-        "meta_description": "Build seamless integrations between your CRM, ERP, shop system, and other tools. One source of truth, no manual exports.",
+        "meta_description": "Build reliable integrations between your CRM, ERP, shop system, and other tools. One source of truth, no manual exports.",
         "title": "Integrations & APIs",
         "subtitle": "Your tools should talk to each other. We make it happen.",
         "problem_title": "The Challenge",
@@ -335,7 +335,7 @@
   "de": {
     "meta": {
       "title": "Geschäftsautomatisierung - Manuelle Arbeit in digitale Effizienz verwandeln",
-      "description": "Automatisieren Sie Ihre Geschäftsprozesse, verbinden Sie Ihre Tools und gewinnen Sie Zeit für das Wesentliche. CRM-Automatisierung, Dokumenten-Workflows und nahtlose Integrationen.",
+      "description": "Automatisieren Sie Ihre Geschäftsprozesse, verbinden Sie Ihre Tools und gewinnen Sie Zeit für das Wesentliche. CRM-Automatisierung, Dokumenten-Workflows und saubere Systemintegrationen.",
       "privacy_policy": "Datenschutzerklärung",
       "imprint": "Impressum"
     },
@@ -387,7 +387,7 @@
       "solution_1_text": "Leads werden automatisch bewertet, den richtigen Personen zugewiesen und Follow-up-Sequenzen ausgelöst. Das CRM aktualisiert sich selbst, Deals schreiten voran, und Ihr Team konzentriert sich aufs Abschließen.",
       "solution_2_headline": "Dokumente automatisch verarbeiten könnten?",
       "solution_2_text": "Extrahieren Sie Daten aus Rechnungen, Verträgen und Formularen. Leiten Sie sie zur Freigabe weiter. Synchronisieren Sie mit Ihrem Buchhaltungssystem. Was Stunden dauerte, braucht jetzt Sekunden.",
-      "solution_3_headline": "Ihre Kommunikation rationalisieren könnten?",
+      "solution_3_headline": "Ihre Kundenkommunikation auf Autopilot stellen könnten?",
       "solution_3_text": "Automatisierte Onboarding-Sequenzen, Terminerinnerungen, Support-Ticket-Routing. Die richtige Nachricht erreicht die richtige Person zur richtigen Zeit.",
       "solution_4_headline": "alle Ihre Tools verbinden könnten?",
       "solution_4_text": "Bauen Sie Echtzeit-Datensynchronisation zwischen CRM, ERP, Shop-System und Tabellen. Eine Quelle der Wahrheit. Keine manuellen Exporte mehr."
@@ -417,11 +417,11 @@
       "tools_label": "Tools & Plattformen",
       "tools": ["n8n", "Make", "Zapier", "Claude API", "OpenAI API"],
       "mission_title": "Mission",
-      "mission_statement": "Tobias ist überzeugt: Unternehmen sollten ihre Zeit nicht mit Arbeit verbringen, die ein Computer besser erledigen kann.\n\nSeine Mission ist es, mittelständischen Unternehmen zu helfen, Automatisierungspotenziale zu identifizieren und Lösungen zu implementieren, die tatsächlich funktionieren – Zeit sparen, Fehler reduzieren und Teams für das Wesentliche freistellen.\n\nEr kombiniert technische Expertise mit einem praktischen Ansatz: Jede Automatisierung sollte einen klaren ROI haben und von Ihrem Team wartbar sein.",
+      "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie dann. Weniger Zeit für Routineaufgaben, weniger Fehler, ein Team, das seinen Fokus zurückbekommt.\n\nJede Automatisierung hat einen klaren Return und bleibt von Ihren eigenen Leuten wartbar. Keine Blackbox, keine Abhängigkeit von mir.",
       "career_title": "Erfahrung",
-      "career": "Tobias ist Software Engineer mit tiefgreifender Erfahrung in KI, Blockchain und Fullstack-Entwicklung.\n\nEr hat an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ethereum- und Cosmos-Ökosystemen gebaut und KI-gestützte Softwarelösungen entwickelt. Als Mitgründer mehrerer Startups und Gewinner zahlreicher Hackathons versteht er sowohl die technische als auch die geschäftliche Seite der Automatisierung.\n\nSein Fokus liegt auf dem Aufbau skalierbarer Systeme, der Automatisierung digitaler Prozesse und der Integration moderner Tools in Geschäftsabläufe.",
+      "career": "Ich bin Software Engineer mit Hintergrund in KI, Blockchain und Fullstack-Entwicklung.\n\nIch habe an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ökosystemen von Ethereum und Cosmos gebaut und KI-gestützte Software ausgeliefert. Ich habe Startups mitgegründet und eine ganze Reihe Hackathons gewonnen – Automatisierung kenne ich also von der technischen wie von der geschäftlichen Seite.\n\nHeute konzentriere ich mich auf skalierbare Systeme, die Automatisierung digitaler Prozesse und das saubere Einbinden moderner Tools in den echten Geschäftsalltag.",
       "background_title": "Ansatz",
-      "background": "Aufgewachsen in der Region Stuttgart – dem Herzen der deutschen Industrie und des Mittelstands – versteht Tobias die Herausforderungen mittelständischer Unternehmen.\n\nDiese Unternehmen müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelange Implementierungsprojekte leisten.\n\nSein Ziel ist es, moderne Automatisierungsfähigkeiten zu Unternehmen zu bringen, die bereit sind zu wachsen, aber keine dedizierten IT-Teams für jede Initiative haben."
+      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nMeine Aufgabe ist es, genau diese moderne Automatisierung zu Unternehmen zu bringen, die wachsen wollen – ohne für jedes Projekt ein eigenes IT-Team zu haben."
     },
     "faq": {
       "tag": "FAQ",
@@ -442,9 +442,9 @@
       "q_7": "Was ist mit Datensicherheit?",
       "a_7": "Alle Implementierungen entsprechen DSGVO-Anforderungen. Daten bleiben in Ihren Systemen oder bei zugelassenen EU/deutschen Anbietern. Ich benötige keinen Zugriff auf Produktionsdaten für die Entwicklung – wir arbeiten mit Testdaten und strengen Zugriffskontrollen.",
       "q_8": "Was kostet das?",
-      "a_8": "Die Preise hängen vom Umfang ab:\n\n* Automatisierungs-Audit und Roadmap: Festpreis\n* Implementierungsprojekte: Projektbasierte Preise\n* Laufender Support: Monatliche Pauschale\n\nJedes Projekt beginnt mit einer kostenlosen Beratung, um Ihre Bedürfnisse zu verstehen und ein Angebot zu erstellen.",
+      "a_8": "Ich arbeite auf drei Arten, und Sie kennen den Preis, bevor die Arbeit beginnt:\n\n* Automatisierungs-Audit + Roadmap – zum Festpreis; den priorisierten Plan behalten Sie, selbst wenn wir danach aufhören\n* Umsetzung – pro Projekt kalkuliert, so zugeschnitten, dass sie sich durch gesparte Zeit oder weniger Fehler trägt\n* Laufender Support – eine monatliche Pauschale, nur wenn Sie eine wollen\n\nJede Zusammenarbeit startet mit einem kostenlosen Gespräch und einem schriftlichen Angebot. Keine Überraschungen nach Stunden.",
       "q_9": "Können Sie sich in unsere bestehenden Systeme integrieren?",
-      "a_9": "Höchstwahrscheinlich ja. Als Fullstack-Entwickler kann ich mit jedem System arbeiten, das eine API hat – und das sind die meisten modernen Business-Tools.\n\nWenn ich mit Ihrer spezifischen Software noch nicht gearbeitet habe, sage ich das offen. Die Einarbeitungszeit für eine neue API ist in der Regel Tage, nicht Wochen. Wir können Ihren konkreten Stack im Erstgespräch besprechen.",
+      "a_9": "Ja – in nahezu jedem Fall. Als Fullstack-Entwickler kann ich mit jedem System arbeiten, das eine API hat, und das trifft auf die meisten modernen Business-Tools zu.\n\nWenn ich mit Ihrer konkreten Software noch nicht gearbeitet habe, sage ich das offen. Eine neue API einzuarbeiten dauert in der Regel Tage, nicht Wochen. Ihren genauen Stack gehen wir im Erstgespräch durch.",
       "q_10": "Was passiert nach der Implementierung?",
       "a_10": "Alles gehört Ihnen. Code, Dokumentation, Zugangsdaten – alles. Ich biete Schulungen an, damit Ihr Team den täglichen Betrieb selbst managen kann. Für laufende Optimierung oder Support biete ich Wartungspakete.",
       "q_11": "Wie starten wir?",
@@ -488,7 +488,7 @@
         "meta_title": "Automatisierungslösungen - Optimieren Sie Ihr Unternehmen",
         "meta_description": "Entdecken Sie unsere Automatisierungslösungen: CRM & Vertrieb, Dokumenten-Workflows, Kommunikationsautomatisierung und Systemintegrationen.",
         "title": "Unsere Automatisierungslösungen",
-        "subtitle": "Vier Säulen der Geschäftsautomatisierung für Ihre Transformation.",
+        "subtitle": "Vier Bereiche der Automatisierung, die Ihrem Team die Woche zurückgeben.",
         "cta": "Kostenloses Erstgespräch buchen"
       },
       "crm": {
@@ -578,7 +578,7 @@
       "integrations": {
         "slug": "integrationen-apis",
         "meta_title": "Integrationen & APIs - Verbinden Sie Ihre Business-Tools",
-        "meta_description": "Bauen Sie nahtlose Integrationen zwischen CRM, ERP, Shop-System und anderen Tools. Eine Quelle der Wahrheit, keine manuellen Exporte.",
+        "meta_description": "Bauen Sie zuverlässige Integrationen zwischen CRM, ERP, Shop-System und anderen Tools. Eine Quelle der Wahrheit, keine manuellen Exporte.",
         "title": "Integrationen & APIs",
         "subtitle": "Ihre Tools sollten miteinander sprechen. Wir machen es möglich.",
         "problem_title": "Die Herausforderung",
