@@ -180,7 +180,7 @@ vs. hundreds of euros in time costs.
 
 If you're interested in the details behind the workflow — how Whisper handles accents, why Claude Tool Use is used instead of text output, and how to extend the system for >25MB files:
 
-→ **[Building an AI Meeting Assistant with Whisper, Claude, and n8n](https://leinss.xyz/en/blog/meeting-bot-whisper-claude-n8n/)** *(leinss.xyz)*
+→ **[Building an AI Meeting Assistant with Whisper, Claude, and n8n](https://leinss.xyz/blog/en/meeting-assistant-technical/)** *(leinss.xyz)*
 
 ## Your Next Step
 

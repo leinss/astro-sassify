@@ -159,4 +159,4 @@ For related reading, see [5 signs your business needs automation](/en/blog/5-sig
 
 Interested in the architecture behind the system — two-step classification and generation, prompt design, escalation logic, and monitoring?
 
-→ **[Lead Response Automation with n8n and Kimi K2: Architecture and Prompting](https://leinss.xyz/en/blog/blitz-antwort-technical/)** *(leinss.xyz)*
+→ **[Lead Response Automation with n8n and Kimi K2: Architecture and Prompting](https://leinss.xyz/blog/en/lead-response-technical/)** *(leinss.xyz)*

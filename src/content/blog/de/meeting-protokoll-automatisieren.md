@@ -180,7 +180,7 @@ vs. hunderte Euro Zeitkosten.
 
 Wenn Sie die Details hinter dem Workflow interessieren — wie Whisper mit deutschen Akzenten umgeht, warum Claude Tool Use statt Text-Ausgabe verwendet wird, und wie Sie das System für >25MB-Dateien erweitern:
 
-→ **[KI-Meeting-Assistent bauen mit Whisper, Claude und n8n](https://leinss.xyz/de/blog/meeting-protokoll-bot/)** *(leinss.xyz)*
+→ **[KI-Meeting-Assistent bauen mit Whisper, Claude und n8n](https://leinss.xyz/blog/de/meeting-assistant-technical/)** *(leinss.xyz)*
 
 ## Ihr nächster Schritt
 

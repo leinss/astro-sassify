@@ -104,7 +104,7 @@ Import: n8n → Workflows → Import from File → Upload JSON → Set credentia
 
 If you're interested in the implementation details — why Kimi k2.5 instead of Claude tool-use, how RFC 4180-compliant CSV quoting works in JavaScript, and which prompt engineering techniques ensure reliable JSON output:
 
-→ **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/en/blog/excel-retter-technical/)** *(leinss.xyz)*
+→ **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/blog/en/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
 Related reading: [solving data-sync nightmares](/en/blog/data-sync-nightmares/).
 

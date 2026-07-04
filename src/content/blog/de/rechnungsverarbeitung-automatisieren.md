@@ -133,4 +133,4 @@ Testen Sie zuerst den [Rechnungsleser als Demo](/de/projekte/) mit Ihrer eigenen
 
 Interesse an den technischen Details — PDF-zu-Bild-Konvertierung, Claude tool_use für strukturierte Extraktion, Validierungslogik und DATEV-Export?
 
-→ **[Claude Vision API für Rechnungsextraktion: Technische Umsetzung mit n8n](https://leinss.xyz/de/blog/ki-rechnungsleser-technik/)** *(leinss.xyz)*
+→ **[Claude Vision API für Rechnungsextraktion: Technische Umsetzung mit n8n](https://leinss.xyz/blog/de/invoice-extractor-technical/)** *(leinss.xyz)*

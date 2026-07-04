@@ -104,7 +104,7 @@ Importieren: n8n → Workflows → Import from File → JSON hochladen → Crede
 
 Wenn Sie die Implementierungsdetails interessieren — warum Kimi k2.5 statt Claude Tool-Use, wie RFC 4180-konformes CSV-Quoting in JavaScript funktioniert und welche Prompt-Engineering-Techniken für zuverlässige JSON-Ausgabe sorgen:
 
-→ **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/de/blog/excel-retter-technik/)** *(leinss.xyz)*
+→ **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/blog/de/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
 Zum Weiterlesen: [Datensync-Albträume lösen](/de/blog/datensync-albtraeume-loesen/).
 
