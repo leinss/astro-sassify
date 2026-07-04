@@ -158,6 +158,11 @@
         "subtitle": "Four areas where the right automation gives your team its week back — built to be owned, not rented.",
         "cta": "Book a free consultation"
       },
+      "depth": {
+        "title": "How we actually build it",
+        "text": "No-code tools are where we start, not where we stop. When a workflow needs real code — batching, retries, state, custom logic — we write and own it, so it holds up in production.",
+        "link_text": "Read: where n8n stops and code starts"
+      },
       "crm": {
         "slug": "crm-sales-automation",
         "meta_title": "CRM & Sales Automation - Automate Your Pipeline",
@@ -494,6 +499,11 @@
         "title": "Unsere Automatisierungslösungen",
         "subtitle": "Vier Bereiche, in denen die richtige Automatisierung Ihrem Team die Woche zurückgibt – gebaut, um zu besitzen, nicht zu mieten.",
         "cta": "Kostenloses Erstgespräch buchen"
+      },
+      "depth": {
+        "title": "Wie wir es tatsächlich bauen",
+        "text": "No-Code-Tools sind unser Start, nicht unser Ende. Wenn ein Workflow echten Code braucht – Batching, Retries, Zustand, eigene Logik – schreiben und besitzen wir ihn, damit er im Produktivbetrieb hält.",
+        "link_text": "Lesen: Wo n8n aufhört und Code anfängt"
       },
       "crm": {
         "slug": "crm-vertriebsautomatisierung",
