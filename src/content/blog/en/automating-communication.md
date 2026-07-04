@@ -134,9 +134,9 @@ At 10 qualified inquiries per week, the system saves **2–3 hours** and measura
 
 ## Download the Workflow
 
-Download the complete n8n workflow and import it into your own n8n instance:
-
-[→ Blitz-Antwort Workflow (JSON)](/workflows/blitz-antwort.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it into your own n8n and inspect every node yourself.
+>
+> [→ Blitz-Antwort Workflow (JSON)](/workflows/blitz-antwort.json)
 
 **Requirements:**
 - n8n (self-hosted or cloud)

@@ -104,6 +104,8 @@ The FAQ Assistant is not an off-the-shelf product — it adapts to your operatio
 
 ## Download the workflows
 
+> **📥 Not screenshots — the real workflows.** These are the exact n8n JSONs, exported from a running instance. Import them and inspect every node yourself.
+
 The FAQ Assistant consists of two n8n workflows:
 
 - **Reply workflow**: processes incoming questions and returns answers  

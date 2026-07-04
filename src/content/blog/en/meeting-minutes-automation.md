@@ -161,9 +161,9 @@ vs. hundreds of euros in time costs.
 
 ## Download the Workflow
 
-Download the complete n8n workflow here:
-
-[→ Meeting Minutes Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+>
+> [→ Meeting Minutes Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
 
 **Requirements:**
 - n8n (self-hosted or cloud)

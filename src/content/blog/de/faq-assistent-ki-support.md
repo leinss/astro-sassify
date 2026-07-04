@@ -104,6 +104,8 @@ Der FAQ-Assistent ist kein Fertigprodukt – er passt sich Ihrem Betrieb an:
 
 ## Die Workflows herunterladen
 
+> **📥 Keine Screenshots — die echten Workflows.** Das sind die exakten n8n-JSONs, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+
 Der FAQ-Assistent besteht aus zwei n8n-Workflows:
 
 - **Antwort-Workflow**: verarbeitet eingehende Fragen und gibt Antworten zurück  

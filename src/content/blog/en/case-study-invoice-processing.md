@@ -264,13 +264,10 @@ Finally, validated data exports to your accounting system format (DATEV XML, CSV
 
 ### Get the Starter Workflow
 
-Download the workflow JSON and import it into n8n:
-
-**Cloud Version (Claude API):**
-[Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
-
-**Local Version (Ollama):**
-[Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+>
+> **Cloud version (Claude API):** [Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
+> **Local version (Ollama):** [Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
 
 **Quick Setup:**
 1. Import JSON via n8n Settings → Import Workflow

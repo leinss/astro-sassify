@@ -315,9 +315,9 @@ For tickets marked `auto_resolvable: true` with high confidence and non-angry se
 
 ### Get the Starter Workflow
 
-Download and import into n8n:
-
-[Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+>
+> [Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
 
 **Quick Setup:**
 1. Import JSON via n8n Settings → Import Workflow

@@ -214,9 +214,9 @@ Jedes Tier triggert entsprechende Aktionen:
 
 ### Starter-Workflow herunterladen
 
-Herunterladen und in n8n importieren:
-
-[Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+>
+> [Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
 
 **Schnellstart:**
 1. JSON importieren via n8n Einstellungen → Workflow importieren

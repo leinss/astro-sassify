@@ -264,13 +264,10 @@ Schließlich exportieren validierte Daten in Ihr Buchhaltungssystem-Format (DATE
 
 ### Starter-Workflow herunterladen
 
-Laden Sie die Workflow-JSON herunter und importieren Sie sie in n8n:
-
-**Cloud-Version (Claude API):**
-[Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
-
-**Lokale Version (Ollama):**
-[Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+>
+> **Cloud-Version (Claude API):** [Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
+> **Lokale Version (Ollama):** [Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
 
 **Schnellstart:**
 1. JSON importieren via n8n Einstellungen → Workflow importieren

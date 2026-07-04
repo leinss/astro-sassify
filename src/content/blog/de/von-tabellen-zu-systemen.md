@@ -94,9 +94,9 @@ Die Daten werden ausschließlich für die KI-Verarbeitung genutzt und danach nic
 
 ## Workflow herunterladen
 
-Den vollständigen n8n-Workflow können Sie kostenlos herunterladen und auf Ihrer eigenen Instanz importieren:
-
-[n8n-Workflow herunterladen (JSON)](/workflows/excel-retter.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
+>
+> [n8n-Workflow herunterladen (JSON)](/workflows/excel-retter.json)
 
 Importieren: n8n → Workflows → Import from File → JSON hochladen → Credentials setzen (Anthropic API Key)
 
