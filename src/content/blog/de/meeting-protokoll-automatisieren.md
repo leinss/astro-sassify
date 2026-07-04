@@ -161,9 +161,9 @@ vs. hunderte Euro Zeitkosten.
 
 ## Laden Sie den Workflow herunter
 
-Den vollständigen n8n-Workflow können Sie hier herunterladen:
-
-[→ Meeting-Protokoll Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+>
+> [→ Meeting-Protokoll Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
 
 **Voraussetzungen:**
 - n8n (Self-hosted oder Cloud)

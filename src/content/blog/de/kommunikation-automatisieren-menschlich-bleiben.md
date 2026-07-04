@@ -134,9 +134,9 @@ Bei 10 qualifizierten Anfragen pro Woche spart das System **2–3 Stunden** und 
 
 ## Laden Sie den Workflow herunter
 
-Den vollständigen n8n-Workflow können Sie hier herunterladen und in Ihrer eigenen n8n-Instanz importieren:
-
-[→ Blitz-Antwort Workflow (JSON)](/workflows/blitz-antwort.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
+>
+> [→ Blitz-Antwort Workflow (JSON)](/workflows/blitz-antwort.json)
 
 **Voraussetzungen:**
 - n8n (Self-hosted oder Cloud)

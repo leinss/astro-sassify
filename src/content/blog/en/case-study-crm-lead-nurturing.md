@@ -214,9 +214,9 @@ Each tier triggers appropriate actions:
 
 ### Get the Starter Workflow
 
-Download and import into n8n:
-
-[Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+>
+> [Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
 
 **Quick Setup:**
 1. Import JSON via n8n Settings → Import Workflow

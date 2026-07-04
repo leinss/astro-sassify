@@ -367,9 +367,9 @@ Dieser Node ist im Starter standardmäßig deaktiviert – für Neuprodukt-Workf
 
 ### Starter-Workflow herunterladen
 
-Herunterladen und in n8n importieren:
-
-[Download n8n-ecommerce-sync.json](/workflows/n8n-ecommerce-sync.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+>
+> [Download n8n-ecommerce-sync.json](/workflows/n8n-ecommerce-sync.json)
 
 **Schnellstart:**
 1. JSON importieren via n8n Einstellungen → Workflow importieren
