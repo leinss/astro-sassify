@@ -315,9 +315,9 @@ Für Tickets mit `auto_resolvable: true`, hoher Konfidenz und nicht-verärgtem S
 
 ### Starter-Workflow herunterladen
 
-Herunterladen und in n8n importieren:
-
-[Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
+> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+>
+> [Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
 
 **Schnellstart:**
 1. JSON importieren via n8n Einstellungen → Workflow importieren

@@ -94,9 +94,9 @@ Data is used exclusively for AI processing and not stored afterward. The workflo
 
 ## Download the Workflow
 
-Download the complete n8n workflow for free and import it into your own instance:
-
-[Download n8n Workflow (JSON)](/workflows/excel-retter.json)
+> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it into your own n8n and inspect every node yourself.
+>
+> [Download n8n Workflow (JSON)](/workflows/excel-retter.json)
 
 Import: n8n → Workflows → Import from File → Upload JSON → Set credentials (Anthropic API Key)
 
