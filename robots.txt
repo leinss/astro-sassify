@@ -3,6 +3,23 @@
 User-agent: *
 Allow: /
 
+# AI search/answer crawlers explicitly allowed — we want to be citable in
+# AI Overviews, ChatGPT, Perplexity, Claude and Copilot answers.
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
 # Sitemap
 Sitemap: https://leinss-consulting.de/sitemap-index.xml
 
