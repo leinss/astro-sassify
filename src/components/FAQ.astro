@@ -1,6 +1,7 @@
 ---
 import i18n from "../assets/i18n.json"
 import config from "../assets/config.ts"
+import { faqPageSchema } from "../assets/schema.ts"
 
 interface Props {
   lang: "en" | "de";
@@ -9,6 +10,11 @@ interface Props {
 // Get language from props
 const { lang } = Astro.props;
 const t = i18n[lang]
+
+// FAQPage JSON-LD — built from the same keys rendered below, so structured
+// data always matches the visible accordion (Google requirement) and stays
+// extractable for AI answer engines.
+const faqSchema = faqPageSchema(t.faq as Record<string, string>)
 
 interface FAQItem {
   questionKey: string;
@@ -108,3 +114,5 @@ const questions: FAQItem[] = questionKeys.map(key => {
     </div>
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />

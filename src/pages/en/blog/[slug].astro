@@ -9,6 +9,7 @@ import BackToTop from "../../../components/BackToTop.astro"
 import i18n from "../../../assets/i18n.json"
 import config from "../../../assets/config.ts"
 import { getBlogOgImage } from "../../../assets/blogImages.ts"
+import { SITE_URL, breadcrumbSchema } from "../../../assets/schema.ts"
 import InvoiceDemoWidget from "../../../components/InvoiceDemoWidget.astro"
 import BlitzAntwortDemo from "../../../components/BlitzAntwortDemo.astro"
 import MeetingBotDemo from "../../../components/MeetingBotDemo.astro"
@@ -48,6 +49,15 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
   day: "numeric",
 })
 
+// "Last updated" freshness signal — AI engines and search weight recency.
+const formattedUpdated = post.data.updatedDate
+  ? post.data.updatedDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : null
+
 // Category labels
 const categoryLabels: Record<string, string> = {
   automation: "Automation",
@@ -66,6 +76,13 @@ const alternateUrl = post.data.alternateSlug
 // Per-post OG image (falls back to the site default when no hero is mapped)
 const ogImage = await getBlogOgImage(post.data.heroImage)
 
+// BreadcrumbList: Home > Blog > this post
+const crumbs = breadcrumbSchema([
+  { name: t.header.home, url: `${SITE_URL}/en/` },
+  { name: t.header.blog, url: `${SITE_URL}/en/blog/` },
+  { name: post.data.title, url: `${SITE_URL}${Astro.url.pathname}` },
+])
+
 const slug = post.id.replace(/^en\//, "")
 const showInvoiceDemo = slug === "automating-invoice-processing"
 const showBlitzDemo = slug === "automating-communication"
@@ -81,6 +98,7 @@ const showFAQDemo = slug === "faq-automation-ai-support"
   image={ogImage}
   type="article"
   publishedTime={post.data.pubDate.toISOString()}
+  modifiedTime={post.data.updatedDate?.toISOString()}
   alternateUrl={alternateUrl}
 >
   <Header lang={lang} alternateHref={alternateUrl || undefined} />
@@ -108,6 +126,11 @@ const showFAQDemo = slug === "faq-automation-ai-support"
             <time datetime={post.data.pubDate.toISOString()} class="text-secondary-500 dark:text-secondary-400">
               {formattedDate}
             </time>
+            {formattedUpdated && (
+              <span class="text-sm text-secondary-500 dark:text-secondary-400">
+                · Updated {formattedUpdated}
+              </span>
+            )}
             {alternateUrl && (
               <a
                 href={alternateUrl}
@@ -211,4 +234,6 @@ const showFAQDemo = slug === "faq-automation-ai-support"
 
   <Footer lang={lang} />
   <BackToTop />
+
+  <script type="application/ld+json" set:html={JSON.stringify(crumbs)} />
 </Layout>
