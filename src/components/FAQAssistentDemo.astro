@@ -47,6 +47,9 @@ const t = {
   privacy: isDE
     ? '🔒 Ihre Frage wird verarbeitet und danach nicht gespeichert.'
     : '🔒 Your question is processed and not stored afterward.',
+  selfHosted: isDE
+    ? '⚙️ Kein Mock-up — Ihre Frage läuft durch selbst gehostetes n8n auf Infrastruktur, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up — your question runs through self-hosted n8n on infrastructure I host and control, not a rented cloud service.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
   errorEmpty: isDE ? 'Bitte stellen Sie eine Frage.' : 'Please enter a question.',
   offlineBadge: isDE
@@ -147,6 +150,7 @@ const t = {
   </div>
 
   <p class="mt-4 text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
+  <p class="mt-1 text-xs font-medium text-secondary-500 dark:text-secondary-400">{t.selfHosted}</p>
 </div>
 
 <script define:vars={{ WEBHOOK_URL, t, lang, calUrl, SAMPLE, TIMEOUT_MS }}>
