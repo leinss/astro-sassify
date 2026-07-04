@@ -159,4 +159,4 @@ Zum Weiterlesen: [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/b
 
 Interesse an der Architektur hinter dem System — zweistufige Klassifikation und Generierung, Prompt-Design, Eskalationslogik und Monitoring?
 
-→ **[Lead-Response-Automatisierung mit n8n und Kimi K2: Architektur und Prompting](https://leinss.xyz/de/blog/blitz-antwort-technik/)** *(leinss.xyz)*
+→ **[Lead-Response-Automatisierung mit n8n und Kimi K2: Architektur und Prompting](https://leinss.xyz/blog/de/lead-response-technical/)** *(leinss.xyz)*

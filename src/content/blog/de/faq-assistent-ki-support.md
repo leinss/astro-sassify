@@ -120,7 +120,7 @@ Nach dem Import in Ihre n8n-Instanz und dem Einrichten einer Supabase-Datenbank 
 
 Wenn Sie die Implementierungsdetails interessieren — warum PostgreSQL Full-Text-Search statt Vektordatenbank, wie die OR-Suchlogik funktioniert und welche n8n-Fallgruben beim Item-Splitting lauern:
 
-→ **[FAQ-Assistent mit n8n, PostgreSQL FTS und Kimi k2.5 bauen](https://leinss.xyz/de/blog/faq-assistent-technik/)** *(leinss.xyz)*
+→ **[RAG-FAQ-Assistent mit n8n, Vektorsuche und Kimi K2 bauen](https://leinss.xyz/blog/de/faq-assistant-technical/)** *(leinss.xyz)*
 
 Zum Weiterlesen: [Kundenkommunikation automatisieren, ohne die menschliche Note zu verlieren](/de/blog/kommunikation-automatisieren-menschlich-bleiben/).
 

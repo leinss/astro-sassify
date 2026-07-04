@@ -133,4 +133,4 @@ Try the [invoice-reader demo](/en/projects/) on your own PDF first, or read more
 
 Interested in the technical details — PDF-to-image conversion, Claude tool_use for structured extraction, validation logic, and DATEV export?
 
-→ **[Claude Vision API for Invoice Extraction: Technical Implementation with n8n](https://leinss.xyz/en/blog/invoice-extractor-technical/)** *(leinss.xyz)*
+→ **[Claude Vision API for Invoice Extraction: Technical Implementation with n8n](https://leinss.xyz/blog/en/invoice-extractor-technical/)** *(leinss.xyz)*
