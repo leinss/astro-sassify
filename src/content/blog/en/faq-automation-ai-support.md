@@ -120,7 +120,7 @@ After importing into your n8n instance and setting up a Supabase database, you'l
 
 If you're interested in the implementation details — why PostgreSQL full-text search instead of a vector database, how the OR search logic works, and which n8n item-splitting pitfalls to watch out for:
 
-→ **[Building a FAQ Assistant with n8n, PostgreSQL FTS, and Kimi k2.5](https://leinss.xyz/en/blog/faq-assistant-technical/)** *(leinss.xyz)*
+→ **[Building a RAG FAQ Assistant with n8n, vector search, and Kimi K2](https://leinss.xyz/blog/en/faq-assistant-technical/)** *(leinss.xyz)*
 
 Related reading: [automating customer communication without losing the human touch](/en/blog/automating-communication/).
 
