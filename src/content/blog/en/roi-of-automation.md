@@ -50,6 +50,8 @@ Don't just count the build. The full picture:
 
 The trap is treating this as a one-time build cost and forgetting the recurring lines. Subscriptions and maintenance run every year, same as your gains.
 
+> **Own it, don't rent it.** Those recurring lines only exist while you're renting. Automation you own on your own infrastructure turns per-run and subscription fees into a one-off build, so the yearly cost that eats your gains largely goes away. That's the longer game behind [the self-hosted stack I run instead of paying for SaaS](https://leinss.xyz/blog/en/self-hosted-stack/).
+
 ## Building the business case
 
 1. **Start with one specific process.** You can't calculate ROI for "automation" in the abstract — pick a real workflow with real numbers.

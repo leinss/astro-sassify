@@ -51,6 +51,8 @@ Any of the three is a solid first project. Pick the one that maps to your worst 
 
 You don't need custom development for the basics. No-code tools like n8n, Make, or Zapier connect your existing apps without a line of code, which is plenty for a first automation. You can graduate to something more custom once a workflow proves itself and you hit its limits.
 
+> **Rented tools are the on-ramp, not the destination.** n8n, Make, and Zapier are the right way to start, and for a long while the right way to stay. The pieces worth owning are the ones that become load-bearing, the workflow your business quietly runs on. That's the sequence in [the self-hosted stack I run instead of paying for SaaS](https://leinss.xyz/blog/en/self-hosted-stack/).
+
 ## Next steps
 
 Start small, prove value, build from there — that's the whole plan. Want a hand picking the first process? [Book a free call](https://cal.com/tobias-leinss/strategymeeting), describe one task that eats your time, and I'll tell you whether it's worth automating. If you'd rather see the step-by-step build, read [building your first workflow](/en/blog/building-your-first-workflow/).

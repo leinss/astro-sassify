@@ -55,6 +55,8 @@ If the only way to handle more work is to hire more people for repetitive tasks,
 
 **Fix this first:** workflows built to handle 10x the volume without 10x the staff — usually by [connecting your tools](/en/services/integrations-apis/) so data moves on its own.
 
+> **A quieter sixth sign: the tools have become the bill.** When your automation runs on rented SaaS, growing usage grows the invoice, per task, per run, per seat. Past a certain volume, owning the runtime costs less than renting it. See [the self-hosted stack I run instead of paying for SaaS](https://leinss.xyz/blog/en/self-hosted-stack/).
+
 ## How to start
 
 Pick the one process that hurts most and fix that first, then build out from there. If you want a second opinion on where the ROI is, [book a free 20-minute call](https://cal.com/tobias-leinss/strategymeeting) and we'll find your best first target together.

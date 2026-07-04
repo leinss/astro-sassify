@@ -51,6 +51,8 @@ Jede der drei ist ein solides erstes Projekt. Wählen Sie die, die zu Ihrem schl
 
 Für die Grundlagen brauchen Sie keine Custom-Entwicklung. No-Code-Tools wie n8n, Make oder Zapier verbinden Ihre bestehenden Apps ohne eine Zeile Code, was für eine erste Automatisierung völlig reicht. Zu etwas Individuellerem können Sie wechseln, sobald sich ein Workflow bewährt hat und Sie an seine Grenzen stoßen.
 
+> **Gemietete Tools sind die Auffahrt, nicht das Ziel.** n8n, Make und Zapier sind der richtige Weg zu starten, und lange auch der richtige Weg zu bleiben. Zu besitzen lohnt sich bei den Teilen, die tragend werden, dem Workflow, auf dem Ihr Geschäft still läuft. Das ist die Reihenfolge in [dem selbst gehosteten Stack, den ich statt SaaS betreibe](https://leinss.xyz/blog/de/self-hosted-stack/).
+
 ## Nächste Schritte
 
 Klein anfangen, Wert beweisen, darauf aufbauen — das ist der ganze Plan. Brauchen Sie Hilfe bei der Wahl des ersten Prozesses? [Buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), beschreiben Sie eine Aufgabe, die Ihre Zeit frisst, und ich sage Ihnen, ob sich die Automatisierung lohnt. Wenn Sie lieber den Schritt-für-Schritt-Aufbau sehen, lesen Sie [Ihren ersten Workflow bauen](/de/blog/ihren-ersten-workflow-bauen/).

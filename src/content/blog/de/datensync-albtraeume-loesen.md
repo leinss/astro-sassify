@@ -54,4 +54,6 @@ Die Reihenfolge zählt hier. Wählen Sie die Quelle der Wahrheit falsch, erbt al
 
 Das ist die ganze Methode. Der meiste Aufwand steckt in Schritt eins und zwei — sobald Sie wissen, wo die Wahrheit liegt, ist die Automatisierung mechanisch. Das ist der Kern der Arbeit an [Integrationen & APIs](/de/services/integrationen-apis/), und Sie können einen Live-Sync in den [Demos](/de/projekte/) sehen.
 
+> **Die Quelle der Wahrheit besitzen, nicht mieten.** Sobald Sie entschieden haben, wo die Wahrheit liegt, zählt, wessen Server das ist. Halten Sie sie in einer Datenbank, die Ihnen gehört, bleiben die Daten Ihre und in der EU, statt in einem proprietären Speicher eines Anbieters, den Sie nicht vollständig exportieren können. Genau dieser Abwägung widmet sich [selbst gehostetes Supabase vs Firebase](https://leinss.xyz/blog/de/self-hosted-supabase-vs-firebase/).
+
 Sync-Probleme sind lösbar; sie brauchen nur die richtige Reihenfolge. Wenn Ihre teuer werden, [buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und wir kartieren sie. Zum größeren Bild rund um das Verbinden von Tools siehe [die Macht der Integration](/de/blog/die-macht-der-integration/).
