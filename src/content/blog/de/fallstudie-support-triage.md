@@ -2,6 +2,7 @@
 title: "Fallstudie: KI-Support-Triage für E-Commerce"
 description: "Ein fiktives Szenario: Erstantwortzeit von 8 Stunden auf 15 Minuten reduzieren und 60% der Support-Tickets automatisch lösen – mit KI-gestützter Klassifizierung und Routing."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
 tags: ["support", "triage", "n8n", "slack", "ai", "claude", "ollama", "e-commerce"]
@@ -10,11 +11,22 @@ lang: de
 alternateSlug: "case-study-support-triage"
 ---
 
-# KI-Support-Triage für E-Commerce
+> **Kurz gesagt:** Das 5-köpfige Support-Team eines E-Commerce-Händlers erstickte unter 8-Stunden-Erstantwortzeiten und einer Flut repetitiver "Wo ist meine Bestellung?"-Tickets. Eine KI-Triage-Schicht auf n8n und Claude klassifizierte, routete und beantwortete häufige Anfragen – die Erstantwort sank auf 15 Minuten, 60% der Tickets wurden ohne Agent gelöst, und die Kundenzufriedenheit stieg von 3,2 auf 4,6.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was KI-gestützte Support-Triage erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
 
-Das Support-Team eines Online-Händlers war überlastet. Kundenanfragen häuften sich, dringende Probleme gingen unter, und die Antwortzeiten dehnten sich auf Tage aus. Dieser Workflow demonstriert, wie ein KI-Triage-System klassifizieren, routen und häufige Anfragen automatisch beantworten kann.
+Das Support-Team eines Online-Händlers war überlastet. Anfragen häuften sich, dringende Probleme gingen zwischen Routinefällen unter, und die Antwortzeiten dehnten sich auf Tage aus. Hier ist die Triage-Schicht, die ich baue, um häufige Anfragen automatisch zu klassifizieren, zu routen und zu beantworten – und die Zahlen, die sie bewegt hat.
+
+## Auf einen Blick
+
+| | |
+|---|---|
+| **Kunde / Branche** | E-Commerce-Händler, 50.000 Bestellungen/Monat, 5-köpfiges Support-Team |
+| **Problem** | Keine Priorisierung, 8 Std. Erstantwort, 70% der Tickets repetitiv, CSAT 3,2/5 |
+| **Lösung** | n8n-Triage + Claude-Klassifizierung (Ollama-Vorfilter) + Slack-Routing + KI-Auto-Antworten |
+| **Ergebnis** | Erstantwort 8 Std. → 15 Min, 60% auto-gelöst, Lösungszeit -83%, CSAT 3,2 → 4,6 |
+
+Genau diese Art von Aufbau mache ich unter [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/). Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
 
 ## Die Herausforderung
 
@@ -326,6 +338,8 @@ Ertrinkt Ihr Support-Team in repetitiven Anfragen?
 
 1. **Kategorisieren**: Welcher Prozentsatz der Tickets ist wirklich repetitiv?
 2. **Prüfen**: Welche Anfragen könnten mit vorhandenen Daten auto-beantwortet werden?
-3. **Pilotieren**: Mit einer Kategorie starten (z.B. Bestellstatus)
+3. **Pilotieren**: Mit einer Kategorie starten, z.B. Bestellstatus.
+
+Für das größere Bild, wo KI in den Kundensupport passt, siehe [Kommunikation automatisieren und trotzdem menschlich bleiben](/de/blog/kommunikation-automatisieren-menschlich-bleiben/).
 
 [Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich analysiere Ihre Support-Muster und zeige was automatisierbar ist.

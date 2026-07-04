@@ -2,6 +2,7 @@
 title: "Case Study: AI Support Triage for E-commerce"
 description: "A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
 tags: ["support", "triage", "n8n", "slack", "ai", "claude", "ollama", "e-commerce"]
@@ -10,13 +11,24 @@ lang: en
 alternateSlug: "fallstudie-support-triage"
 ---
 
-# AI Support Triage for E-commerce
+> **Short answer:** An e-commerce retailer's 5-person support team was buried under 8-hour first-response times and a wall of repetitive "where's my order?" tickets. An AI triage layer on n8n and Claude classified, routed, and auto-answered common queries — first response dropped to 15 minutes, 60% of tickets resolved without an agent, and CSAT rose from 3.2 to 4.6.
 
-> **Note:** This is a fictional scenario demonstrating what AI-powered support triage can achieve. The company profile and metrics are representative examples based on common industry patterns.
+> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
 
-An online retailer's support team was overwhelmed. Customer messages piled up, urgent issues got buried, and response times stretched to days. This workflow demonstrates how an AI triage system can classify, route, and resolve common queries automatically.
+An online retailer's support team was overwhelmed. Messages piled up, urgent issues got buried under routine ones, and response times stretched to days. Here's the triage layer I'd build to classify, route, and answer common queries automatically, and the numbers it moved.
 
-## The Challenge
+## At a glance
+
+| | |
+|---|---|
+| **Client / Industry** | E-commerce retailer, 50k monthly orders, 5-person support team |
+| **Problem** | No prioritization, 8-hour first response, 70% of tickets repetitive, CSAT 3.2/5 |
+| **Solution** | n8n triage + Claude classification (Ollama pre-filter) + Slack routing + AI auto-responses |
+| **Result** | First response 8 hrs → 15 min, 60% auto-resolved, resolution time -83%, CSAT 3.2 → 4.6 |
+
+This is the kind of build I do under [communication automation](/en/services/communication-automation/). See the [live demos](/en/projects/) for working examples.
+
+## The challenge
 
 **Example Company**: E-commerce retailer, 50k monthly orders, 5-person support team
 
@@ -320,12 +332,14 @@ This starter implements classification and routing. A full implementation would 
 
 For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** — covers intent classification, context retrieval, and response generation.
 
-## Your Turn
+## Your turn
 
 Support team drowning in repetitive queries?
 
 1. **Categorize**: What % of tickets are truly repetitive?
-2. **Audit**: Which queries could be auto-answered with data you have?
-3. **Pilot**: Start with one category (e.g., order status)
+2. **Audit**: Which queries could be auto-answered with data you already have?
+3. **Pilot**: Start with one category, e.g. order status.
+
+For the wider picture on where AI fits into customer support, see [automating communication without losing the human touch](/en/blog/automating-communication/).
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll analyze your support patterns and show what's automatable.

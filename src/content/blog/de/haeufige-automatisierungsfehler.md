@@ -2,6 +2,7 @@
 title: "Häufige Automatisierungsfehler und wie Sie sie vermeiden"
 description: "Aus den Fehlern anderer lernen: die häufigsten Automatisierungsfallen und wie Sie sie umgehen."
 pubDate: 2025-03-05
+updatedDate: 2026-07-04
 category: automation
 tags: ["best-practices", "fallstricke", "planung"]
 heroImage: "/images/blog/common-automation-mistakes.png"
@@ -10,46 +11,57 @@ lang: de
 alternateSlug: "common-automation-mistakes"
 ---
 
-# Häufige Automatisierungsfehler und wie Sie sie vermeiden
+> **Kurz gesagt:** Die meisten Automatisierungsprojekte scheitern an der Planung, nicht an der Technik. Diese sechs Fehler kosten am häufigsten Kopf: einen kaputten Prozess automatisieren, zu groß anfangen, keinen Verantwortlichen haben, Randfälle ignorieren, ohne Monitoring laufen und über-engineeren. Reparieren Sie einen schlechten Prozess, bevor Sie ihn automatisieren, liefern Sie zuerst einen kleinen Erfolg und geben Sie ihm einen Besitzer.
 
-Automatisierungsprojekte scheitern öfter als nötig. Hier sind die häufigsten Fehler – und wie Sie sie vermeiden.
+Ich habe genug Automatisierungsprojekte stocken oder still verrotten sehen. Das Muster ist fast immer gleich: Die Technik lief, die Planung nicht. Hier sind die sechs Fehler, die mir am häufigsten begegnen – und was Sie stattdessen tun.
 
-## Fehler 1: Einen schlechten Prozess automatisieren
+## Die sechs Fehler auf einen Blick
 
-Wenn Ihr Prozess kaputt ist, lässt Automatisierung ihn nur schneller scheitern.
+| # | Fehler | Lösung |
+|---|--------|--------|
+| 1 | Einen schlechten Prozess automatisieren | Prozess zuerst abbilden und reparieren |
+| 2 | Zu groß anfangen | Einen kleinen, schmerzhaften Prozess liefern |
+| 3 | Kein klarer Verantwortlicher | Verantwortung vor dem Bauen zuweisen |
+| 4 | Randfälle ignorieren | Ausnahmen abbilden, Fehlerbehandlung einbauen |
+| 5 | Keine Überwachung | Alarme einbauen, damit Fehler schnell auffallen |
+| 6 | Über-Engineering | Für heute bauen, an echten Bedürfnissen iterieren |
 
-**Die Lösung:** Kartieren und verbessern Sie den Prozess vor der Automatisierung. Fragen Sie "Warum machen wir das so?" bevor Sie fragen "Wie automatisieren wir das?"
+## 1. Einen schlechten Prozess automatisieren
 
-## Fehler 2: Zu groß anfangen
+Wenn Ihr Prozess kaputt ist, lässt Automatisierung ihn nur schneller scheitern – und im großen Stil.
 
-Das ambitionierte "Alles automatisieren"-Projekt, das Monate dauert und nichts liefert.
+**Die Lösung:** Bilden Sie den Prozess ab und verbessern Sie ihn, bevor Sie automatisieren. Fragen Sie "Warum machen wir das so?", bevor Sie fragen "Wie automatisieren wir das?" Der [Schritt-für-Schritt-Leitfaden für Ihren ersten Workflow](/de/blog/ihren-ersten-workflow-bauen/) beginnt genau hier, beim Abbilden.
 
-**Die Lösung:** Beginnen Sie mit einem spezifischen, schmerzhaften Prozess. Erzielen Sie einen Erfolg. Bauen Sie darauf auf.
+## 2. Zu groß anfangen
 
-## Fehler 3: Kein klarer Verantwortlicher
+Das ambitionierte "Alles automatisieren"-Projekt, das Monate läuft und nichts liefert.
 
-Automatisierung braucht jemanden, der für Wartung, Updates und Fehlerbehebung verantwortlich ist.
+**Die Lösung:** Beginnen Sie mit einem spezifischen, schmerzhaften Prozess. Erzielen Sie einen Erfolg. Bauen Sie darauf auf, sobald er sich bewährt hat.
 
-**Die Lösung:** Weisen Sie Verantwortlichkeit zu, bevor Sie bauen. Inkludieren Sie Schulung und Dokumentation.
+## 3. Kein klarer Verantwortlicher
 
-## Fehler 4: Randfälle ignorieren
+Automatisierung braucht jemanden, der für Wartung, Updates und Fehlerbehebung zuständig ist – etwa wenn ein angebundenes Tool seine API ändert.
 
-Die Automatisierung funktioniert perfekt – bis sie auf ein Szenario trifft, das Sie nicht geplant haben.
+**Die Lösung:** Weisen Sie Verantwortung zu, bevor Sie bauen. Planen Sie Schulung und Dokumentation ein, damit das Wissen nicht in einem Kopf hängt.
 
-**Die Lösung:** Kartieren Sie Randfälle während des Designs. Bauen Sie Fehlerbehandlung und Benachrichtigungen für unerwartete Situationen ein.
+## 4. Randfälle ignorieren
 
-## Fehler 5: Keine Überwachung
+Der Workflow läuft perfekt – bis er auf ein Szenario trifft, das Sie nicht geplant haben, und still scheitert oder das Falsche tut.
 
-Einrichten und vergessen... bis es stillschweigend kaputt geht und niemand es bemerkt.
+**Die Lösung:** Bilden Sie Randfälle beim Design ab. Bauen Sie Fehlerbehandlung und Benachrichtigungen für alles Unerwartete ein.
 
-**Die Lösung:** Bauen Sie Monitoring und Alarme ein. Wissen Sie sofort, wenn etwas schiefgeht.
+## 5. Keine Überwachung
 
-## Fehler 6: Über-Engineering
+Einrichten und vergessen – bis es still kaputtgeht und eine Woche lang niemand etwas merkt.
 
-Für hypothetische zukünftige Anforderungen bauen, die vielleicht nie eintreten.
+**Die Lösung:** Bauen Sie Monitoring und Alarme ein. Sie wollen im Moment des Fehlers Bescheid wissen, nicht wenn ein Kunde es Ihnen sagt.
 
-**Die Lösung:** Bauen Sie für aktuelle Bedürfnisse. Iterieren Sie basierend auf tatsächlichen Anforderungen.
+## 6. Über-Engineering
+
+Für hypothetische zukünftige Anforderungen bauen, die vielleicht nie eintreten – auf Kosten dessen, überhaupt etwas zu liefern.
+
+**Die Lösung:** Bauen Sie für aktuelle Bedürfnisse. Iterieren Sie auf Basis dessen, was tatsächlich auftaucht.
 
 ## Das Fazit
 
-Die meisten Automatisierungsfehler sind Planungsfehler. Nehmen Sie sich Zeit für richtiges Design, fangen Sie klein an und iterieren Sie.
+Die meisten Automatisierungsfehler sind Planungsfehler, keine technischen. Sauber designen, klein anfangen, iterieren. Wenn Sie das nicht auf die harte Tour lernen wollen, [buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und ich helfe Ihnen, einen ersten Prozess zu wählen, der alle sechs vermeidet. Unsicher, wo Sie anfangen sollen? [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) ist ein schneller Selbsttest.

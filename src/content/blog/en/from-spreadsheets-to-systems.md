@@ -2,6 +2,7 @@
 title: "Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI"
 description: "How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work."
 pubDate: 2025-03-12
+updatedDate: 2026-07-04
 category: automation
 tags: ["spreadsheets", "excel", "contacts", "data-cleaning", "n8n", "ai"]
 heroImage: "/images/blog/from-spreadsheets-to-systems.png"
@@ -10,11 +11,13 @@ lang: en
 alternateSlug: "von-tabellen-zu-systemen"
 ---
 
+> **Short answer:** To clean a messy contact list automatically, feed the CSV to a workflow that sends each row to Claude and returns structured JSON: trimmed whitespace, lowercased emails, phone numbers in one format, properly capitalised names, matched company names, and duplicates removed — including fuzzy matches. Cleaning 100 contacts drops from hours to about 20 seconds.
+
 Every business has one: the contact list that grew over years. Names with inconsistent capitalization, email addresses in ALL CAPS, phone numbers in four different formats, company names sometimes "LLC" and sometimes "llc" – and somewhere in there, duplicate entries hiding.
 
 Cleaning it manually costs hours, sometimes days. And just when you're done, new entries come in and break everything again.
 
-## What Really Happens With Dirty Data?
+## What does dirty data actually cost you?
 
 The visible problems are obvious. But the invisible ones are more expensive:
 
@@ -41,7 +44,7 @@ The result: a clean CSV file ready to download, plus a summary of every change m
 
 ## Live Demo
 
-Test it with sample data or your own:
+Test it with sample data or your own. This is one of several [document & data workflows](/en/services/document-workflows/) I build; more run on the [live demos page](/en/projects/).
 
 ## How the Workflow Works
 
@@ -102,6 +105,8 @@ Import: n8n → Workflows → Import from File → Upload JSON → Set credentia
 If you're interested in the implementation details — why Kimi k2.5 instead of Claude tool-use, how RFC 4180-compliant CSV quoting works in JavaScript, and which prompt engineering techniques ensure reliable JSON output:
 
 → **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/en/blog/excel-retter-technical/)** *(leinss.xyz)*
+
+Related reading: [solving data-sync nightmares](/en/blog/data-sync-nightmares/).
 
 ---
 

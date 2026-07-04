@@ -2,6 +2,7 @@
 title: "Case Study: Multi-Platform Inventory Sync for Retail"
 description: "A fictional scenario showing how to eliminate 95% of stock discrepancies and reduce listing time from 30 minutes to 3 minutes across Shopify, WooCommerce, and Amazon."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
 tags: ["e-commerce", "inventory", "n8n", "shopify", "woocommerce", "amazon", "ai", "claude", "ollama"]
@@ -10,13 +11,24 @@ lang: en
 alternateSlug: "fallstudie-ecommerce-sync"
 ---
 
-# Multi-Platform Inventory Sync for Retail
+> **Short answer:** A multi-channel retailer with 2,000 SKUs kept overselling because stock lived in spreadsheets and synced by hand. One central n8n hub with real-time webhooks cut stock discrepancies by 95%, dropped new-product listing time from 30 minutes to 3, and delivered its first-ever zero-oversell Black Friday.
 
-> **Note:** This is a fictional scenario demonstrating what a unified inventory system can achieve. The company profile and metrics are representative examples based on common industry patterns.
+> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
 
-A growing retailer sold across Shopify, WooCommerce, Amazon, and eBay. Each platform lived in isolation—overselling was common, listings were inconsistent, and the team spent hours on manual updates. This workflow demonstrates how a unified inventory system with AI-powered automation solves these challenges.
+A retailer sold across Shopify, WooCommerce, Amazon, and eBay. Each platform lived in isolation, so overselling was routine, listings drifted apart, and the team burned hours on manual updates. Here's the central sync hub I'd build, and the numbers it moved.
 
-## The Challenge
+## At a glance
+
+| | |
+|---|---|
+| **Client / Industry** | Multi-channel retailer, 2,000 SKUs, 4 sales platforms |
+| **Problem** | Stock in spreadsheets, manual sync, overselling, 30+ min per listing |
+| **Solution** | Central n8n hub + Airtable source of truth + real-time webhooks + AI listing content |
+| **Result** | Stock discrepancies -95%, oversells 8-12/mo → 0-1, listing time 30 → 3 min, inventory accuracy 85% → 99.7% |
+
+This is the kind of build I do under [integrations & APIs](/en/services/integrations-apis/) — connecting tools so data moves on its own. See the [live demos](/en/projects/) for working examples.
+
+## The challenge
 
 **Example Company**: Multi-channel retailer, 2,000 SKUs, 4 sales platforms
 
@@ -150,7 +162,7 @@ Creating marketplace-specific listings used to take 30 minutes. Now:
 - eBay listing (marketplace-specific keywords)
 - Translations (German, French, Spanish)
 
-**Example Transformation**:
+**Before → after**:
 
 *Input*:
 ```
@@ -368,12 +380,14 @@ Download and import into n8n:
 
 This starter handles the core sync loop. A production system would add stock buffers for slow platforms, conflict resolution for simultaneous orders, anomaly detection (Ollama), multi-location support, and retry logic for API failures—the resilience layer that handles Black Friday traffic without breaking a sweat.
 
-## Your Turn
+## Your turn
 
 Selling across multiple platforms?
 
 1. **Map the mess**: Which platforms? What's the current sync method?
 2. **Find the pain**: Oversells, listing time, discrepancies?
-3. **Start with sync**: Fix inventory first, then add AI features
+3. **Start with sync**: Fix inventory first, then add AI features.
+
+If keeping systems in step is a recurring headache, [solving data-sync nightmares](/en/blog/data-sync-nightmares/) covers the patterns that stop them recurring.
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll assess your multi-platform setup and recommend a sync strategy.

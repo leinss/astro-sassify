@@ -2,6 +2,7 @@
 title: "Automating Invoice Processing with AI"
 description: "How to reduce your invoice processing from hours to seconds using n8n and Claude Vision API. A practical example with ROI calculation."
 pubDate: 2025-01-22
+updatedDate: 2026-07-04
 heroImage: "/images/blog/invoice-automation.png"
 category: documents
 tags: ["invoices", "ai", "n8n", "automation", "case-study"]
@@ -10,13 +11,24 @@ lang: en
 alternateSlug: "rechnungsverarbeitung-automatisieren"
 ---
 
-# Automating Invoice Processing with AI
+> **Short answer:** Invoice automation reads a PDF invoice, extracts the supplier, number, dates, line items, and totals with an AI vision model, checks the numbers add up, and pushes the data into your accounting system. It cuts handling from 8–10 minutes to under a minute per invoice and pays for itself in 2–3 months.
 
-Processing invoices manually costs time, frustration, and money. In this article, I'll show you how to automate your invoice processing using n8n and AI-powered document understanding.
+Processing invoices by hand costs time and money, and it's the kind of work that never gets faster. Here's how I automate it with n8n and an AI model that actually reads documents instead of guessing at them.
 
-## The Problem: Manual Invoice Processing
+## What does invoice automation actually do?
 
-The typical invoice processing workflow looks like this:
+| Stage | Manual | Automated |
+|-------|--------|-----------|
+| Read the PDF | Open and eyeball it | AI extracts structured fields |
+| Enter into accounting | Retype every value | Data pushed via API |
+| Check the numbers | Hope you caught the typo | Automatic plausibility checks |
+| File the document | Rename and move by hand | Sorted and archived on rule |
+
+The service page for this is [document & data workflows](/en/services/document-workflows/), and you can run the [invoice-reader demo](/en/projects/) on a real PDF below.
+
+## Why is manual invoice processing so slow?
+
+The typical invoice workflow looks like this:
 
 1. Receive invoice as PDF via email
 2. Manually open and read the data
@@ -26,9 +38,9 @@ The typical invoice processing workflow looks like this:
 
 With 50 invoices per month, that's easily **4-8 hours** of repetitive work.
 
-## The Solution: AI-Powered Extraction
+## How does AI extract data from an invoice?
 
-Modern Vision APIs like Claude from Anthropic can not only read documents but understand them. This means:
+Vision models like Claude from Anthropic don't just read a document, they understand it. In practice that means:
 
 - **Structured data extraction**: Invoice number, date, line items, amounts
 - **Context understanding**: Recognition of invoice types, currencies, tax rates
@@ -115,7 +127,7 @@ Want to automate your invoice processing?
 2. **Define goal**: Which systems should receive the data?
 3. **Pilot project**: Start with one supplier type
 
-[Book a free consultation](https://cal.com/tobias-leinss/strategymeeting) – I'll show you what the workflow would look like for your situation.
+Try the [invoice-reader demo](/en/projects/) on your own PDF first, or read more on [document & data workflows](/en/services/document-workflows/). When you're ready, [book a free consultation](https://cal.com/tobias-leinss/strategymeeting) – I'll show you what the workflow would look like for your situation.
 
 ## Technical Deep Dive
 

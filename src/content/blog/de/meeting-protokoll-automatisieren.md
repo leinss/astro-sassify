@@ -2,6 +2,7 @@
 title: "Nie wieder Meeting-Protokolle schreiben: KI-Automatisierung für Besprechungen"
 description: "Ein 1-stündiges Meeting produziert 20 Minuten Nacharbeit – Protokoll schreiben, verteilen, nachfassen. Mit n8n, Whisper und Claude erledigt ein Workflow das in 90 Sekunden."
 pubDate: 2025-03-10
+updatedDate: 2026-07-04
 category: automation
 tags: ["meeting", "protokoll", "transkription", "n8n", "ki", "whisper"]
 heroImage: "/images/blog/meeting-automation.png"
@@ -10,7 +11,7 @@ lang: de
 alternateSlug: "meeting-minutes-automation"
 ---
 
-# Nie wieder Meeting-Protokolle schreiben: KI-Automatisierung für Besprechungen
+> **Kurz gesagt:** Ein Protokoll-Workflow nimmt Ihre Audioaufnahme, transkribiert sie mit Whisper und lässt Claude daraus eine strukturierte Zusammenfassung mit Entscheidungen und Aufgaben machen. Anschließend geht sie automatisch per E-Mail an alle. Das Ganze läuft in 60–90 Sekunden und ersetzt rund 35 Minuten Handarbeit pro Meeting.
 
 Ein 1-stündiges Meeting produziert 20–30 Minuten Nacharbeit: Protokoll schreiben, formatieren, an alle Teilnehmer schicken, Aufgaben in den Projektmanager eintragen. Wer macht das? Meistens die Person, die sowieso schon zu viel zu tun hat.
 
@@ -28,7 +29,7 @@ Dabei sind die Qualitätsprobleme noch nicht eingerechnet:
 - Entscheidungen sind im Protokoll begraben, nicht auffindbar
 - Verschiedene Teilnehmer erinnern sich unterschiedlich
 
-## Der Meeting-Protokoll Bot: So funktioniert er
+## Wie funktioniert der Meeting-Protokoll-Bot?
 
 Ich habe einen n8n-Workflow entwickelt, der eine Audioaufnahme in ein strukturiertes Meeting-Protokoll verwandelt — vollautomatisch.
 
@@ -185,7 +186,9 @@ Wenn Sie die Details hinter dem Workflow interessieren — wie Whisper mit deuts
 
 Wie viele Meetings haben Sie pro Woche? Multiplizieren Sie mit 35 Minuten — das ist Ihre monatliche Zeitverschwendung für Protokolle.
 
-Wenn die Zahl größer als 2 Stunden ist, lohnt sich die Automatisierung garantiert.
+Wenn die Zahl größer als 2 Stunden ist, lohnt sich die Automatisierung deutlich.
+
+Das ergänzt meine übrige Arbeit rund um [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/), und verwandte Workflows sehen Sie auf der [Demo-Seite](/de/projekte/). Einen Überblick, was zuerst automatisiert gehört, gibt [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/).
 
 ---
 
