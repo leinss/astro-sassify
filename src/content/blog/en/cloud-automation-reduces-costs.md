@@ -11,7 +11,7 @@ lang: en
 alternateSlug: "cloud-automatisierung-reduziert-kosten"
 ---
 
-> **Short answer:** Cloud automation cuts operational costs in four ways: it removes labor hours spent on repetitive tasks, drops the 1–3% manual data-entry error rate to near zero, charges per use instead of per capacity, and shortens the delay between a task starting and finishing. For most businesses these savings cover the cost within 3–6 months.
+> **Short answer:** Cloud automation cuts operational costs in four ways: it removes labor hours spent on repetitive tasks, drops the 1–3% manual data-entry error rate to near zero, swaps idle-capacity costs for pay-per-use pricing, and shortens the delay between a task starting and finishing. For most businesses these savings cover the cost within 3–6 months.
 
 Cloud automation isn't only a technology question — it changes what your operations cost to run. Here's where the savings actually come from, and how to estimate them for your own business.
 
@@ -40,6 +40,12 @@ Four distinct savings, each measurable on its own:
 A few details worth expanding: 30 minutes saved daily per employee doesn't sound like much until you multiply it across a team and a year. The error savings are real money too — every correction has a downstream cost, from a re-sent invoice to a lost customer. And pay-per-use pricing means you're not funding idle capacity the way you would with on-premise systems.
 
 For the error side specifically, [document & data workflows](/en/services/document-workflows/) is where most of the savings sit; the [invoice-reader demo](/en/projects/) shows the mechanism on real files.
+
+## Does cloud automation stay cheap as you grow?
+
+Up to a point. The infrastructure saving above comes from pay-per-use pricing, which is a real win when volume is low or spiky. That same model turns on you once a workflow runs thousands of times a month. Zapier and Make charge per task; per-seat SaaS charges per head. The bill grows with the very success you automated for. Labor savings compound in your favor; per-task pricing compounds against you.
+
+That is the case for owning the runtime once a workflow proves itself. A self-hosted engine like n8n runs on a fixed-cost server you control, so cost stops tracking volume. I run my own [self-hosted stack](https://leinss.xyz/blog/en/self-hosted-stack/) for that reason. Rented cloud tools are the right on-ramp; infrastructure you own is where the durable saving sits.
 
 ## How to estimate your own savings
 
