@@ -2,6 +2,7 @@
 title: "Fallstudie: KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei"
 description: "Ein fiktives Szenario: Rechnungsverarbeitung von 15 Minuten auf 90 Sekunden pro Dokument mit 99,2% Genauigkeit reduzieren – mit n8n, Claude Vision und intelligenter Validierung."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]
@@ -10,11 +11,22 @@ lang: de
 alternateSlug: "case-study-invoice-processing"
 ---
 
-# KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei
+> **Kurz gesagt:** Eine Steuerkanzlei mit 8 Mitarbeitern tippte täglich 80-120 Rechnungen von Hand ab, je 12-15 Minuten. Eine Vision-KI-Pipeline auf Basis von n8n und Claude Vision drückte das auf 90 Sekunden pro Dokument, verarbeitete 99,2% ohne menschliches Eingreifen und löste den 3-5-Tage-Rückstau auf denselben Tag auf. Amortisation nach 5 Wochen.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was KI-gestützte Rechnungsverarbeitung erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
 
-Eine mittelgroße Steuerkanzlei erstickte in Papier. Ihre Mandanten schickten monatlich Hunderte von Rechnungen in jedem erdenklichen Format—PDFs, Scans, Fotos von Belegen. Dieser Workflow demonstriert, wie eine KI-gestützte Extraktionspipeline die Dokumentenverarbeitung transformieren kann.
+Eine Steuerkanzlei erstickte in Papier. Mandanten schickten monatlich Hunderte Rechnungen in jedem erdenklichen Format – PDFs, Scans, Handyfotos von Belegen. Hier ist die Extraktionspipeline, die ich baue, um sie automatisch zu lesen, zu validieren und abzulegen – und die Zahlen, die sie bewegt hat.
+
+## Auf einen Blick
+
+| | |
+|---|---|
+| **Kunde / Branche** | Steuerkanzlei, 8 Mitarbeiter, 120+ Geschäftsmandanten |
+| **Problem** | 80-120 Rechnungen/Tag von Hand getippt, je 12-15 Min, 3-5% Fehlerquote, 3-5 Tage Rückstau |
+| **Lösung** | n8n-Eingang + Claude-Vision-Extraktion (oder lokal Ollama + DeepSeek-OCR) + Validierung + DATEV-/CSV-Export |
+| **Ergebnis** | 15 Min → 90 Sek pro Rechnung, 99,2% ohne Eingriff, Fehlerquote 3-5% → 0,8%, Rückstau eliminiert, Amortisation in 5 Wochen |
+
+Genau diese Art von Aufbau mache ich unter [Dokumenten-Workflows](/de/services/dokumenten-workflows/). Die [Rechnungsleser-Demo](/de/projekte/) können Sie an echten Dokumenten ausprobieren.
 
 ## Die Herausforderung
 

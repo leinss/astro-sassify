@@ -2,6 +2,7 @@
 title: "Never Write Meeting Notes Again: AI Automation for Meeting Documentation"
 description: "A 1-hour meeting generates 20 minutes of follow-up work — writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow handles this in 90 seconds."
 pubDate: 2025-03-10
+updatedDate: 2026-07-04
 category: automation
 tags: ["meeting", "minutes", "transcription", "n8n", "ai", "whisper"]
 heroImage: "/images/blog/meeting-automation.png"
@@ -10,7 +11,7 @@ lang: en
 alternateSlug: "meeting-protokoll-automatisieren"
 ---
 
-# Never Write Meeting Notes Again: AI Automation for Meeting Documentation
+> **Short answer:** A meeting-minutes workflow takes your audio recording, transcribes it with Whisper, and has Claude turn the transcript into a structured summary with decisions and action items. It then emails everyone automatically. The whole thing runs in 60–90 seconds and replaces roughly 35 minutes of manual work per meeting.
 
 A 1-hour meeting generates 20–30 minutes of follow-up work: writing the notes, formatting them, sending them to all attendees, logging action items in the project manager. Who does all that? Usually the person who already has too much on their plate.
 
@@ -28,7 +29,7 @@ And that's before accounting for quality problems:
 - Decisions are buried in prose, not findable
 - Different attendees remember things differently
 
-## The Meeting Minutes Bot: How It Works
+## How does the meeting minutes bot work?
 
 I built an n8n workflow that turns an audio recording into a structured meeting summary — completely automated.
 
@@ -185,7 +186,9 @@ If you're interested in the details behind the workflow — how Whisper handles 
 
 How many meetings do you have per week? Multiply by 35 minutes — that's your monthly waste on documentation.
 
-If the number is more than 2 hours, automation is a guaranteed win.
+If the number is more than 2 hours, automation is a clear win.
+
+This sits alongside my other [communication automation](/en/services/communication-automation/) work, and you can see related workflows on the [live demos page](/en/projects/). For a broader picture of what to automate first, read [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/).
 
 ---
 

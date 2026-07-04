@@ -1,0 +1,26 @@
+# Leinss Consulting
+
+> Business-process automation for German-speaking small and mid-sized companies (Mittelstand). n8n, AI, and clean system integrations that cut manual work — built, documented, and handed to your team with no vendor lock-in. Solo consultant, DSGVO-compliant, based in Baden-Württemberg, Germany. Works in German and English.
+
+Leinss Consulting automates repetitive work across four areas: CRM & sales, document & data workflows, communication, and system/API integrations. Every engagement is scoped to pay for itself in time saved or errors avoided, and the client keeps full ownership of the workflows. The site hosts five live, interactive AI demos with measured results from real projects — for example: invoice handling dropped from ~4 hours/week to ~15 minutes, and lead-response time fell from ~6 hours to under 5 minutes.
+
+The site is bilingual: German pages live under `/de/`, English under `/en/`. English URLs are listed below; replace `/en/` with `/de/` for the German equivalent.
+
+## Services
+- [CRM & Sales Automation](https://leinss-consulting.de/en/services/crm-sales-automation/): Lead scoring, smart assignment, multi-channel follow-ups, pipeline-stage automation, real-time CRM sync.
+- [Document & Data Workflows](https://leinss-consulting.de/en/services/document-workflows/): Invoice extraction and booking, automated report generation, contract data extraction, form processing, approval workflows.
+- [Communication Automation](https://leinss-consulting.de/en/services/communication-automation/): Customer onboarding sequences, intelligent ticket routing, appointment reminders, status notifications, feedback/NPS automation.
+- [Integrations & APIs](https://leinss-consulting.de/en/services/integrations-apis/): Real-time CRM↔ERP sync, e-commerce integration, custom API development, webhook triggers, data-warehouse reporting.
+
+## Live demos & case studies
+- [Projects & live AI demos](https://leinss-consulting.de/en/projects/): AI invoice reader, lightning lead response, meeting-minutes bot, spreadsheet rescue, AI support assistant — each with the problem, the workflow, and the measured result.
+
+## Blog
+- [Automation blog](https://leinss-consulting.de/en/blog/): Practical, no-code-friendly guides on automating SMB processes with n8n and AI (CRM, documents, communication, integrations, case studies).
+
+## Contact
+- [Book a free strategy call (English)](https://cal.com/tobias-leinss/strategymeeting)
+- [Kostenloses Strategiegespräch buchen (Deutsch)](https://cal.com/tobias-leinss/strategiegespraech)
+
+## About
+- Solo consultant: Tobias Leinss — software engineer with a background in AI, automation, and full-stack development. Direct access, no agency layers, no vendor lock-in. Serves companies across the DACH region.

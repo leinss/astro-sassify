@@ -2,6 +2,7 @@
 title: "Common Automation Mistakes and How to Avoid Them"
 description: "Learn from others' mistakes: the most common automation pitfalls and how to steer clear of them."
 pubDate: 2025-03-05
+updatedDate: 2026-07-04
 category: automation
 tags: ["best-practices", "pitfalls", "planning"]
 heroImage: "/images/blog/common-automation-mistakes.png"
@@ -10,46 +11,57 @@ lang: en
 alternateSlug: "haeufige-automatisierungsfehler"
 ---
 
-# Common Automation Mistakes and How to Avoid Them
+> **Short answer:** Most automation projects fail for planning reasons, not technical ones. The six that catch people out: automating a broken process, starting too big, having no owner, ignoring edge cases, running with no monitoring, and over-engineering. Fix a bad process before you automate it, ship one small win first, and give it an owner.
 
-Automation projects fail more often than they should. Here are the most common mistakes – and how to avoid them.
+I've watched plenty of automation projects stall or quietly rot. The pattern is almost always the same: the tech worked, the planning didn't. Here are the six mistakes I see most, and what to do instead.
 
-## Mistake 1: Automating a Bad Process
+## The six mistakes at a glance
 
-If your process is broken, automation just makes it fail faster.
+| # | Mistake | Fix |
+|---|---------|-----|
+| 1 | Automating a bad process | Map and fix the process first |
+| 2 | Starting too big | Ship one small, painful process |
+| 3 | No clear owner | Assign ownership before you build |
+| 4 | Ignoring edge cases | Map exceptions, add error handling |
+| 5 | No monitoring | Build in alerts so failures surface fast |
+| 6 | Over-engineering | Build for today, iterate on real needs |
 
-**The Fix:** Map and improve the process before automating. Ask "why do we do it this way?" before "how do we automate this?"
+## 1. Automating a bad process
 
-## Mistake 2: Starting Too Big
+If your process is broken, automation just makes it fail faster — and at scale.
 
-The ambitious "automate everything" project that takes months and delivers nothing.
+**The fix:** Map and improve the process before you automate it. Ask "why do we do it this way?" before "how do we automate this?" The [step-by-step guide to your first workflow](/en/blog/building-your-first-workflow/) starts exactly here, with mapping.
 
-**The Fix:** Start with one specific, painful process. Get a win. Build from there.
+## 2. Starting too big
 
-## Mistake 3: No Clear Owner
+The ambitious "automate everything" project that runs for months and ships nothing.
 
-Automation needs someone responsible for maintaining it, updating it, and fixing issues.
+**The fix:** Start with one specific, painful process. Get a win. Build out from there once it's proven.
 
-**The Fix:** Assign ownership before you build. Include training and documentation.
+## 3. No clear owner
 
-## Mistake 4: Ignoring Edge Cases
+Automation needs someone responsible for maintaining it, updating it, and fixing it when a connected tool changes its API.
 
-The automation works perfectly – until it encounters a scenario you didn't plan for.
+**The fix:** Assign ownership before you build. Include training and documentation so it doesn't live in one person's head.
 
-**The Fix:** Map out edge cases during design. Build in error handling and notifications for unexpected situations.
+## 4. Ignoring edge cases
 
-## Mistake 5: No Monitoring
+The workflow runs perfectly — until it hits a scenario you didn't plan for, and fails silently or does the wrong thing.
 
-Set it and forget it... until it silently breaks and no one notices.
+**The fix:** Map out edge cases during design. Build in error handling and notifications for anything unexpected.
 
-**The Fix:** Build in monitoring and alerts. Know immediately when something goes wrong.
+## 5. No monitoring
 
-## Mistake 6: Over-Engineering
+Set it and forget it, until it quietly breaks and no one notices for a week.
 
-Building for hypothetical future needs that may never materialize.
+**The fix:** Build in monitoring and alerts. You want to know the moment something goes wrong, not when a customer tells you.
 
-**The Fix:** Build for current needs. Iterate based on actual requirements.
+## 6. Over-engineering
 
-## The Bottom Line
+Building for hypothetical future needs that may never arrive, at the cost of shipping anything now.
 
-Most automation failures are planning failures. Take time to design properly, start small, and iterate.
+**The fix:** Build for current needs. Iterate based on what actually comes up.
+
+## The bottom line
+
+Most automation failures are planning failures, not technical ones. Design properly, start small, and iterate. If you'd rather not learn these the hard way, [book a free call](https://cal.com/tobias-leinss/strategymeeting) and I'll help you pick a first process that avoids all six. Not sure where to start? The [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check.

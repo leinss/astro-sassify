@@ -2,6 +2,7 @@
 title: "Fallstudie: Automatisierte Lead-Pflege für ein SaaS-Startup"
 description: "Ein fiktives Szenario: Lead-Reaktionszeit von 2 Tagen auf 4 Stunden reduzieren und qualifizierte Leads um 35% steigern – mit n8n, Notion und KI-gestütztem Lead-Scoring."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]
@@ -10,11 +11,22 @@ lang: de
 alternateSlug: "case-study-crm-lead-nurturing"
 ---
 
-# Automatisierte Lead-Pflege für ein SaaS-Startup
+> **Kurz gesagt:** Ein B2B-SaaS-Startup mit 15 Mitarbeitern hat seine Lead-Bearbeitung mit n8n, Notion und KI-Scoring automatisiert. Die Reaktionszeit sank von 2 Tagen auf 4 Stunden, qualifizierte Leads stiegen von 12% auf 35%, und jeder Vertriebsmitarbeiter gewann 6 Stunden pro Woche zurück. Der Aufbau war nach 6 Wochen bezahlt.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was ein automatisiertes Lead-Nurturing-System erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
 
-Ein wachsendes B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Manuelle Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit mit Administration als mit Verkaufen. Dieser Workflow demonstriert, wie ein automatisiertes Lead-Nurturing-System eine Sales-Pipeline transformieren kann.
+Ein B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit damit, Daten zwischen Tools zu kopieren, als zu verkaufen. Hier ist das System, mit dem ich das löse – und die Zahlen, die es bewegt hat.
+
+## Auf einen Blick
+
+| | |
+|---|---|
+| **Kunde / Branche** | B2B-SaaS-Startup, 15 Mitarbeiter, €2M ARR |
+| **Problem** | Leads versanken in Postfächern, kein systematisches Follow-up, Vertrieb in Admin-Arbeit vergraben |
+| **Lösung** | n8n-Orchestrierung + Notion-CRM + KI-Lead-Scoring (Claude / Ollama) |
+| **Ergebnis** | Reaktionszeit 2 Tage → 4 Stunden, qualifizierte Leads 12% → 35%, Admin 8 → 2 Std./Woche/Mitarbeiter, Amortisation in 6 Wochen |
+
+Genau diese Art von Aufbau mache ich unter [CRM- & Vertriebsautomatisierung](/de/services/crm-vertriebsautomatisierung/). Die [Lead-Response-Demo](/de/projekte/) läuft live zum Ausprobieren.
 
 ## Die Herausforderung
 
@@ -219,8 +231,10 @@ Dieser Starter implementiert die Kern-Scoring- und Routing-Logik. Eine Produktio
 
 Haben Sie eine ähnliche Lead-Management-Herausforderung?
 
-1. **Audit**: Bilden Sie Ihren aktuellen Lead-Flow ab—wo sind die Lücken?
-2. **Priorisieren**: Starten Sie mit einer Quelle (z.B. Website-Formulare)
-3. **Messen**: Tracken Sie die Reaktionszeit vor und nach der Änderung
+1. **Audit**: Bilden Sie Ihren aktuellen Lead-Flow ab — wo sind die Lücken?
+2. **Priorisieren**: Starten Sie mit einer Quelle, z.B. Website-Formulare.
+3. **Messen**: Tracken Sie die Reaktionszeit vor und nach der Änderung.
+
+Wenn langsame Follow-ups der eigentliche Übeltäter sind, ist [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) ein schneller Selbsttest, wo der ROI liegt.
 
 [Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.

@@ -4,6 +4,7 @@ import config from '../assets/config.ts';
 import i18n from '../assets/i18n.json';
 import { BsCheckCircleFill, BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import ROICalculator from './ROICalculator.astro';
+import { SITE_URL, breadcrumbSchema } from '../assets/schema.ts';
 
 // Import pillar images
 import pillarCRM from '../assets/images/pillars/pillar-1-crm-a.png';
@@ -32,6 +33,14 @@ const heroImage = pillarImages[pillar];
 // Get alternate language slug for language switcher
 const alternateSlug = i18n[lang === 'en' ? 'de' : 'en'].services[pillar].slug;
 const alternateBasePath = lang === 'en' ? '/de' : '/en';
+
+// BreadcrumbList: Home > Services > this pillar
+const nav = i18n[lang].header;
+const crumbs = breadcrumbSchema([
+  { name: nav.home, url: `${SITE_URL}${basePath}/` },
+  { name: nav.services, url: `${SITE_URL}${basePath}/services/` },
+  { name: t.title, url: `${SITE_URL}${Astro.url.pathname}` },
+]);
 ---
 
 <section class="relative pt-24 pb-16 overflow-hidden bg-primary-50 dark:bg-primary-950">
@@ -157,6 +166,8 @@ const alternateBasePath = lang === 'en' ? '/de' : '/en';
     </a>
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify(crumbs)} />
 
 <style>
   .bg-grid-pattern {

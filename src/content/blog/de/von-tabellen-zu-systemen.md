@@ -2,6 +2,7 @@
 title: "Excel-Hölle verlassen: Kontaktlisten automatisch bereinigen mit n8n und KI"
 description: "Wie Sie mit n8n und Claude messy Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen – statt Stunden manuell zu arbeiten."
 pubDate: 2025-03-12
+updatedDate: 2026-07-04
 category: automation
 tags: ["tabellen", "excel", "kontakte", "datenbereinigung", "n8n", "ki"]
 heroImage: "/images/blog/from-spreadsheets-to-systems.png"
@@ -10,11 +11,13 @@ lang: de
 alternateSlug: "from-spreadsheets-to-systems"
 ---
 
+> **Kurz gesagt:** Um eine unordentliche Kontaktliste automatisch zu bereinigen, geben Sie die CSV an einen Workflow, der jede Zeile an Claude schickt und strukturiertes JSON zurückliefert: bereinigte Leerzeichen, klein geschriebene E-Mails, Telefonnummern in einem Format, korrekt kapitalisierte Namen, zusammengeführte Firmennamen und entfernte Duplikate – auch Fuzzy-Matches. 100 Kontakte zu bereinigen sinkt von Stunden auf rund 20 Sekunden.
+
 Jedes Unternehmen hat sie: die Kontaktliste, die über Jahre gewachsen ist. Namen mit unterschiedlicher Schreibweise, E-Mail-Adressen in Großbuchstaben, Telefonnummern in vier verschiedenen Formaten, Firmennamen die mal "GmbH" und mal "gmbh" heißen – und irgendwo stecken doppelte Einträge drin.
 
 Das manuelle Bereinigen kostet je nach Größe Stunden bis Tage. Und kaum ist man fertig, kommen neue Einträge rein, die alles wieder durcheinanderbringen.
 
-## Was passiert wirklich mit schmutzigen Daten?
+## Was kostet Sie schmutzige Daten wirklich?
 
 Die sichtbaren Probleme kennt jeder. Aber die unsichtbaren sind teurer:
 
@@ -41,7 +44,7 @@ Am Ende gibt es eine bereinigte CSV-Datei zum Download plus eine Zusammenfassung
 
 ## Live-Demo
 
-Testen Sie es mit Beispieldaten oder Ihren eigenen:
+Testen Sie es mit Beispieldaten oder Ihren eigenen. Das ist einer von mehreren [Dokumenten- & Daten-Workflows](/de/services/dokumenten-workflows/), die ich baue; weitere laufen auf der [Demo-Seite](/de/projekte/).
 
 ## Wie der Workflow aufgebaut ist
 
@@ -102,6 +105,8 @@ Importieren: n8n → Workflows → Import from File → JSON hochladen → Crede
 Wenn Sie die Implementierungsdetails interessieren — warum Kimi k2.5 statt Claude Tool-Use, wie RFC 4180-konformes CSV-Quoting in JavaScript funktioniert und welche Prompt-Engineering-Techniken für zuverlässige JSON-Ausgabe sorgen:
 
 → **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/de/blog/excel-retter-technik/)** *(leinss.xyz)*
+
+Zum Weiterlesen: [Datensync-Albträume lösen](/de/blog/datensync-albtraeume-loesen/).
 
 ---
 

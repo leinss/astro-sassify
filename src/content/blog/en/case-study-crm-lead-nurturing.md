@@ -2,6 +2,7 @@
 title: "Case Study: Automated Lead Nurturing for a SaaS Startup"
 description: "A fictional scenario showing how to reduce lead response time from 2 days to 4 hours and increase qualified leads by 35% using n8n, Notion, and AI-powered lead scoring."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]
@@ -10,13 +11,24 @@ lang: en
 alternateSlug: "fallstudie-crm-leadpflege"
 ---
 
-# Automated Lead Nurturing for a SaaS Startup
+> **Short answer:** A 15-person B2B SaaS startup automated its lead handling with n8n, Notion, and AI scoring. Lead response time dropped from 2 days to 4 hours, qualified leads rose from 12% to 35%, and each rep got 6 hours a week back. The build paid for itself in 6 weeks.
 
-> **Note:** This is a fictional scenario demonstrating what an automated lead nurturing system can achieve. The company profile and metrics are representative examples based on common industry patterns.
+> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
 
-A growing B2B SaaS company was losing deals because leads went cold. Manual follow-ups were inconsistent, and the sales team spent more time on admin than selling. This workflow demonstrates how an automated lead nurturing system can transform a sales pipeline.
+A B2B SaaS company was losing deals because leads went cold. Follow-ups were inconsistent, and the sales team spent more time copying data between tools than selling. Here's the system I'd build to fix it, and the numbers it moved.
 
-## The Challenge
+## At a glance
+
+| | |
+|---|---|
+| **Client / Industry** | B2B SaaS startup, 15 employees, €2M ARR |
+| **Problem** | Leads sat in inboxes, no systematic follow-up, reps buried in admin |
+| **Solution** | n8n orchestration + Notion CRM + AI lead scoring (Claude / Ollama) |
+| **Result** | Response time 2 days → 4 hours, qualified leads 12% → 35%, admin 8 → 2 hrs/week/rep, payback in 6 weeks |
+
+This is the kind of build I do under [CRM & sales automation](/en/services/crm-sales-automation/). You can watch the [lead-response demo](/en/projects/) run live.
+
+## The challenge
 
 **Example Company**: B2B SaaS startup, 15 employees, €2M ARR
 
@@ -215,12 +227,14 @@ Download and import into n8n:
 
 This starter implements the core scoring and routing logic. A production implementation would include lead enrichment via Clearbit/Apollo, CRM sync (HubSpot, Pipedrive), multi-step email sequences with delay nodes, and escalation logic for uncontacted hot leads—refinements that come from understanding your specific sales process.
 
-## Your Turn
+## Your turn
 
 Running a similar lead management challenge?
 
-1. **Audit**: Map your current lead flow—where are the gaps?
-2. **Prioritize**: Start with one source (e.g., website forms)
-3. **Measure**: Track response time before and after
+1. **Audit**: Map your current lead flow — where are the gaps?
+2. **Prioritize**: Start with one source, e.g. website forms.
+3. **Measure**: Track response time before and after.
+
+If slow follow-up is the real culprit, the [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check on where the ROI sits.
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll walk through what this would look like for your setup.
