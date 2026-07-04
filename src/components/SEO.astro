@@ -1,4 +1,6 @@
 ---
+import { SITE_URL } from "../assets/schema.ts";
+
 export interface Props {
   title: string;
   description: string;
@@ -25,7 +27,7 @@ const {
   alternateUrl,
 } = Astro.props;
 
-const siteUrl = "https://leinss-consulting.de";
+const siteUrl = SITE_URL;
 const currentUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
 const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
@@ -99,9 +101,15 @@ const webPageSchema = {
   ...(type === "article" && publishedTime && {
     datePublished: publishedTime,
     dateModified: modifiedTime || publishedTime,
+    image: imageUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": currentUrl,
+    },
     author: {
       "@type": "Person",
       name: author,
+      url: "https://linkedin.com/in/tobiasleinss",
     },
   }),
   publisher: {

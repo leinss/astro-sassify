@@ -2,6 +2,7 @@
 title: "24/7 AI Support Without the Night Shift: FAQ Automation for Your Business"
 description: "How to automate repetitive support questions with n8n, OpenAI embeddings, and Claude — and focus your time on the requests that actually need you."
 pubDate: 2025-04-10
+updatedDate: 2026-07-04
 category: automation
 tags: ["faq", "support", "ai", "rag", "n8n", "vector-database"]
 heroImage: "/images/blog/faq-automation.png"
@@ -9,6 +10,8 @@ draft: false
 lang: en
 alternateSlug: "faq-assistent-ki-support"
 ---
+
+> **Short answer:** An AI FAQ assistant answers repetitive support questions automatically using RAG: it searches your knowledge base for the most relevant entries, then has Claude write a reply based only on those sources. When its confidence is low it escalates to a human. This handles the 70–80% of enquiries that are predictable, 24/7.
 
 Opening hours. Pricing. How long does delivery take? What happens after I submit my request? For your customers, these are important questions. For you, they're the same four sentences you've typed for the twentieth time this week.
 
@@ -20,7 +23,7 @@ Answering support requests manually creates a dilemma: fast responses require ti
 
 The frustrating part: most of these questions are predictable. For many small businesses, 70–80% of incoming enquiries revolve around the same topics. The knowledge to answer them already exists — it just isn't in the right system yet.
 
-That's exactly where the **FAQ Assistant** comes in.
+That's exactly where the **FAQ Assistant** comes in. It's part of my [communication automation](/en/services/communication-automation/) work, and you can try it live in the demo below or on the [live demos page](/en/projects/).
 
 ## What is RAG — and why does it matter?
 
@@ -116,6 +119,8 @@ After importing into your n8n instance and setting up a Supabase database, you'l
 If you're interested in the implementation details — why PostgreSQL full-text search instead of a vector database, how the OR search logic works, and which n8n item-splitting pitfalls to watch out for:
 
 → **[Building a FAQ Assistant with n8n, PostgreSQL FTS, and Kimi k2.5](https://leinss.xyz/en/blog/faq-assistant-technical/)** *(leinss.xyz)*
+
+Related reading: [automating customer communication without losing the human touch](/en/blog/automating-communication/).
 
 ---
 

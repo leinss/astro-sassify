@@ -2,6 +2,7 @@
 title: "24/7 KI-Support ohne Nachtschicht: FAQ-Assistent für Ihr Unternehmen"
 description: "Wie Sie mit n8n, OpenAI-Embeddings und Claude wiederkehrende Support-Anfragen automatisieren – und sich auf die Fragen konzentrieren, die wirklich Ihre Zeit brauchen."
 pubDate: 2025-04-10
+updatedDate: 2026-07-04
 category: automation
 tags: ["faq", "support", "ki", "rag", "n8n", "vektordatenbank"]
 heroImage: "/images/blog/faq-automation.png"
@@ -9,6 +10,8 @@ draft: false
 lang: de
 alternateSlug: "faq-automation-ai-support"
 ---
+
+> **Kurz gesagt:** Ein KI-FAQ-Assistent beantwortet wiederkehrende Support-Fragen automatisch per RAG: Er durchsucht Ihre Wissensbasis nach den passendsten Einträgen und lässt Claude eine Antwort formulieren, die nur auf diesen Quellen basiert. Ist die Sicherheit gering, leitet er an einen Menschen weiter. So werden die 70–80 % vorhersehbaren Anfragen abgedeckt, rund um die Uhr.
 
 Öffnungszeiten. Preise. Wie lange dauert die Lieferung? Was passiert nach der Anfrage? Für Ihre Kunden sind das wichtige Fragen. Für Sie sind es die gleichen vier Sätze, die Sie diese Woche zum zwanzigsten Mal tippen.
 
@@ -20,7 +23,7 @@ Wer Support-Anfragen manuell beantwortet, steht vor einem Zielkonflikt: Schnelle
 
 Das Tragische daran: Die meisten dieser Fragen sind vorhersehbar. 70–80 % der eingehenden Anfragen vieler kleiner Unternehmen drehen sich um dieselben Themen. Das Wissen für die Antworten ist längst vorhanden – es steckt nur noch nicht im richtigen System.
 
-Genau hier setzt der **FAQ-Assistent** an.
+Genau hier setzt der **FAQ-Assistent** an. Er ist Teil meiner Arbeit rund um [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/), und Sie können ihn unten in der Demo oder auf der [Demo-Seite](/de/projekte/) live testen.
 
 ## Was ist RAG – und warum ist das wichtig?
 
@@ -116,6 +119,8 @@ Nach dem Import in Ihre n8n-Instanz und dem Einrichten einer Supabase-Datenbank 
 Wenn Sie die Implementierungsdetails interessieren — warum PostgreSQL Full-Text-Search statt Vektordatenbank, wie die OR-Suchlogik funktioniert und welche n8n-Fallgruben beim Item-Splitting lauern:
 
 → **[FAQ-Assistent mit n8n, PostgreSQL FTS und Kimi k2.5 bauen](https://leinss.xyz/de/blog/faq-assistent-technik/)** *(leinss.xyz)*
+
+Zum Weiterlesen: [Kundenkommunikation automatisieren, ohne die menschliche Note zu verlieren](/de/blog/kommunikation-automatisieren-menschlich-bleiben/).
 
 ---
 

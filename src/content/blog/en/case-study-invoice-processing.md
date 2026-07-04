@@ -2,6 +2,7 @@
 title: "Case Study: AI-Powered Invoice Processing for an Accounting Firm"
 description: "A fictional scenario showing how to cut invoice processing from 15 minutes to 90 seconds per document with 99.2% accuracy using n8n, Claude Vision, and intelligent validation."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]
@@ -10,13 +11,24 @@ lang: en
 alternateSlug: "fallstudie-rechnungsverarbeitung"
 ---
 
-# AI-Powered Invoice Processing for an Accounting Firm
+> **Short answer:** An 8-person accounting firm was hand-keying 80-120 invoices a day at 12-15 minutes each. A vision-AI pipeline built on n8n and Claude Vision cut that to 90 seconds per document, processed 99.2% without human intervention, and cleared a 3-5 day backlog to same-day. Payback took 5 weeks.
 
-> **Note:** This is a fictional scenario demonstrating what AI-powered invoice processing can achieve. The company profile and metrics are representative examples based on common industry patterns.
+> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
 
-A mid-sized accounting firm was drowning in paper. Their clients sent hundreds of invoices monthly in every format imaginable—PDFs, scans, photos of receipts. This workflow demonstrates how an AI-powered extraction pipeline can transform document processing.
+An accounting firm was drowning in paper. Clients sent hundreds of invoices a month in every format imaginable — PDFs, scans, phone photos of receipts. Here's the extraction pipeline I'd build to read, validate, and file them automatically, and the numbers it moved.
 
-## The Challenge
+## At a glance
+
+| | |
+|---|---|
+| **Client / Industry** | Accounting firm, 8 staff, 120+ business clients |
+| **Problem** | 80-120 invoices/day hand-keyed at 12-15 min each, 3-5% error rate, 3-5 day backlog |
+| **Solution** | n8n intake + Claude Vision extraction (or local Ollama + DeepSeek-OCR) + validation + DATEV/CSV export |
+| **Result** | 15 min → 90 sec per invoice, 99.2% touchless, error rate 3-5% → 0.8%, backlog eliminated, payback in 5 weeks |
+
+This is the kind of build I do under [document & data workflows](/en/services/document-workflows/). You can try the [invoice-reader demo](/en/projects/) on real documents.
+
+## The challenge
 
 **Example Company**: Accounting firm, 8 staff, 120+ business clients
 

@@ -2,6 +2,7 @@
 title: "Fallstudie: Multi-Plattform Inventar-Sync für Retail"
 description: "Ein fiktives Szenario: 95% der Bestandsabweichungen eliminieren und Listing-Zeit von 30 Minuten auf 3 Minuten reduzieren – über Shopify, WooCommerce und Amazon."
 pubDate: 2025-01-27
+updatedDate: 2026-07-04
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
 tags: ["e-commerce", "inventory", "n8n", "shopify", "woocommerce", "amazon", "ai", "claude", "ollama"]
@@ -10,11 +11,22 @@ lang: de
 alternateSlug: "case-study-ecommerce-sync"
 ---
 
-# Multi-Plattform Inventar-Sync für Retail
+> **Kurz gesagt:** Ein Multi-Channel-Händler mit 2.000 SKUs verkaufte ständig zu viel, weil der Bestand in Spreadsheets lag und von Hand synchronisiert wurde. Ein zentraler n8n-Hub mit Echtzeit-Webhooks senkte die Bestandsabweichungen um 95%, reduzierte die Listing-Zeit von 30 auf 3 Minuten und brachte den ersten Black Friday ganz ohne Überverkäufe.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was ein einheitliches Inventarsystem erreichen kann. Das Unternehmensprofil und die Metriken sind repräsentative Beispiele basierend auf typischen Branchenmustern.
+> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
 
-Ein wachsender Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lebte isoliert—Überverkäufe waren häufig, Listings waren inkonsistent, und das Team verbrachte Stunden mit manuellen Updates. Dieser Workflow demonstriert, wie ein einheitliches Inventarsystem mit KI-gestützter Automatisierung diese Herausforderungen löst.
+Ein Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lief isoliert, also waren Überverkäufe Routine, Listings drifteten auseinander, und das Team verbrannte Stunden mit manuellen Updates. Hier ist der zentrale Sync-Hub, den ich baue – und die Zahlen, die er bewegt hat.
+
+## Auf einen Blick
+
+| | |
+|---|---|
+| **Kunde / Branche** | Multi-Channel-Händler, 2.000 SKUs, 4 Verkaufsplattformen |
+| **Problem** | Bestand in Spreadsheets, manueller Sync, Überverkäufe, 30+ Min pro Listing |
+| **Lösung** | Zentraler n8n-Hub + Airtable als Single Source of Truth + Echtzeit-Webhooks + KI-Listing-Content |
+| **Ergebnis** | Bestandsabweichungen -95%, Überverkäufe 8-12/Mon → 0-1, Listing-Zeit 30 → 3 Min, Bestandsgenauigkeit 85% → 99,7% |
+
+Genau diese Art von Aufbau mache ich unter [Integrationen & APIs](/de/services/integrationen-apis/) – Tools so verbinden, dass Daten von selbst fließen. Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
 
 ## Die Herausforderung
 
@@ -150,7 +162,7 @@ Marktplatzspezifische Listings erstellen dauerte früher 30 Minuten. Jetzt:
 - eBay-Listing (marktplatzspezifische Keywords)
 - Übersetzungen (Deutsch, Englisch, Französisch)
 
-**Beispiel-Transformation**:
+**Vorher → nachher**:
 
 *Input*:
 ```
@@ -374,6 +386,8 @@ Verkaufen Sie über mehrere Plattformen?
 
 1. **Das Chaos erfassen**: Welche Plattformen? Was ist die aktuelle Sync-Methode?
 2. **Schmerzpunkte finden**: Überverkäufe, Listing-Zeit, Abweichungen?
-3. **Mit Sync starten**: Zuerst Inventar fixen, dann KI-Features hinzufügen
+3. **Mit Sync starten**: Zuerst Inventar fixen, dann KI-Features hinzufügen.
+
+Wenn Systeme ständig auseinanderlaufen, zeigt [Datensync-Albträume lösen](/de/blog/datensync-albtraeume-loesen/) die Muster, die das dauerhaft stoppen.
 
 [Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.
