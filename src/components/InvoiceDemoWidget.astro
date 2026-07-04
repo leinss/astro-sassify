@@ -29,6 +29,9 @@ const t = {
   privacy: isDE
     ? '🔒 Ihre Datei wird nur für diese Analyse verarbeitet und danach nicht gespeichert.'
     : '🔒 Your file is only processed for this analysis and not stored afterward.',
+  selfHosted: isDE
+    ? '⚙️ Kein Mock-up — Ihre Datei läuft durch selbst gehostetes n8n auf Infrastruktur, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up — your file runs through self-hosted n8n on infrastructure I host and control, not a rented cloud service.',
   fileTooLarge: isDE ? 'Datei zu groß. Maximal 10 MB.' : 'File too large. Maximum 10 MB.',
   errorGeneric: isDE ? 'Analyse fehlgeschlagen. Bitte erneut versuchen.' : 'Analysis failed. Please try again.',
   description: isDE ? 'Menge × Einzelpreis' : 'Qty × Unit Price',
@@ -66,6 +69,7 @@ const t = {
     </button>
 
     <p class="text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
+    <p class="mt-1 text-xs font-medium text-secondary-500 dark:text-secondary-400">{t.selfHosted}</p>
   </form>
 
   <div id="invoice-loading" class="hidden mt-6 text-center py-8">
