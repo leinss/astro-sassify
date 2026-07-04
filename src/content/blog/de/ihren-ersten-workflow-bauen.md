@@ -57,7 +57,7 @@ Die Optionen reichen von No-Code bis Custom-Entwicklung:
 - **Low-Code:** n8n, Retool, Airtable-Automatisierungen
 - **Code:** eigene Scripts, APIs, Cloud-Functions
 
-Beginnen Sie mit dem einfachsten Tool, das Ihre Anforderungen erfüllt. Auf etwas Mächtigeres können Sie umsteigen, sobald sich der Workflow bewährt hat.
+Beginnen Sie mit dem einfachsten Tool, das Ihre Anforderungen erfüllt — ein No-Code-Baukasten ist der richtige Einstieg für den ersten Workflow. Wissen Sie nur, wohin die Leiter führt: Sobald sich ein Workflow bewährt und häufig läuft, beißen nutzungsbasierte No-Code-Preise und Anbieter-Grenzen, und der nächste Schritt ist Low-Code, das Sie selbst hosten können (n8n), plus Code für die Teile, bei denen der Baukasten sich querstellt.
 
 ## Schritt 5: Einen Prototyp bauen
 
@@ -106,6 +106,16 @@ Ihre erste Version wird nicht perfekt sein. Planen Sie:
 3. **Meeting-Erinnerungen** — Kalenderevent → automatische Erinnerungssequenz. Siehe [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/).
 4. **Berichterstellung** — geplanter Trigger → Datensammlung → formatierte Ausgabe. Siehe [Dokumenten- & Daten-Workflows](/de/services/dokumenten-workflows/).
 5. **Kunden-Onboarding** — neue Anmeldung → Willkommens-E-Mail-Sequenz.
+
+## Wo das an Grenzen stößt, und was danach kommt
+
+Ihr erster Workflow lebt problemlos auf einem No-Code-Tool. Die Reibung zeigt sich später, und es lohnt sich, sie vorher zu kennen:
+
+- **Nutzungsbasierte Preise** — die Abrechnung pro Aufgabe, bei 100 Läufen im Monat vernachlässigbar, schmerzt bei 100.000.
+- **Die Wand** — jedes No-Code-Tool hat Dinge, die es schlicht nicht kann; Sie stoßen genau dann darauf, wenn der Workflow am wichtigsten ist.
+- **Datenkontrolle** — Ihr Prozess und seine Daten laufen auf fremden Servern, zu deren Bedingungen.
+
+Nichts davon spricht gegen No-Code. Es heißt nur: Behandeln Sie es als Einstieg. Wenn sich ein Workflow rechnet, holen Sie ihn auf Infrastruktur, die Sie besitzen (eine selbst gehostete Engine wie n8n), und greifen Sie für die kniffligen Teile zu Code. Ich betreibe meine Automatisierungen aus genau diesen Gründen auf meinem eigenen [selbst gehosteten Stack](https://leinss.xyz/blog/de/self-hosted-stack/).
 
 ## Klein anfangen
 

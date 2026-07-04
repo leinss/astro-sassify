@@ -1,5 +1,5 @@
 ---
-title: "Connecting Your Tools: The Power of Integration"
+title: "Connecting Your Tools: What Integration Actually Buys You"
 description: "Learn how connecting your business tools creates compound efficiency gains and eliminates data silos."
 pubDate: 2025-02-05
 updatedDate: 2026-07-04
@@ -48,6 +48,12 @@ These four connections come up in almost every project I run:
 | Accounting ↔ everything | Financial data, always current |
 
 None of these needs a rebuild. Each is a defined connection between two systems you already own — the work of [integrations & APIs](/en/services/integrations-apis/). You can watch a couple running live in the [demos](/en/projects/).
+
+## Who owns the wires?
+
+One caveat decides your long-term cost and control: what runs the connections? The easy path is a hosted middleman (Zapier, Make) that charges per task and routes your data through its servers. That is fine to start with. But the integration layer is the nervous system of your operation, and renting it means per-task bills that climb with volume, plus someone else holding your data flow.
+
+The alternative is to own the hub. A self-hosted engine like n8n runs the same connections on a server you control, at fixed cost, with your data staying yours. I run my integrations on my own [self-hosted stack](https://leinss.xyz/blog/en/self-hosted-stack/). Start on a hosted tool if you need to move today; own the layer once it carries real traffic.
 
 ## Where to start
 

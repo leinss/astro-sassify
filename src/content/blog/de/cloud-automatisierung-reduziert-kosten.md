@@ -11,7 +11,7 @@ lang: de
 alternateSlug: "cloud-automation-reduces-costs"
 ---
 
-> **Kurz gesagt:** Cloud-Automatisierung senkt Betriebskosten auf vier Wegen: Sie entfernt Arbeitsstunden für repetitive Aufgaben, drückt die typische Fehlerquote manueller Dateneingabe von 1–3% auf nahezu null, rechnet nach Nutzung statt nach Kapazität ab und verkürzt die Verzögerung zwischen Start und Ende einer Aufgabe. Bei den meisten Unternehmen decken diese Einsparungen die Kosten in 3–6 Monaten.
+> **Kurz gesagt:** Cloud-Automatisierung senkt Betriebskosten auf vier Wegen: Sie entfernt Arbeitsstunden für repetitive Aufgaben, drückt die typische Fehlerquote manueller Dateneingabe von 1–3% auf nahezu null, tauscht Leerkapazitätskosten gegen nutzungsbasierte Abrechnung und verkürzt die Verzögerung zwischen Start und Ende einer Aufgabe. Bei den meisten Unternehmen decken diese Einsparungen die Kosten in 3–6 Monaten.
 
 Cloud-Automatisierung ist nicht nur eine Technologiefrage — sie verändert, was Ihr Betrieb im Lauf kostet. Hier steht, woher die Einsparungen tatsächlich kommen und wie Sie sie für Ihr eigenes Unternehmen abschätzen.
 
@@ -40,6 +40,12 @@ Vier klar getrennte Einsparungen, jede für sich messbar:
 Ein paar Details lohnen sich: 30 gesparte Minuten pro Mitarbeiter und Tag klingen nach wenig, bis Sie sie über ein Team und ein Jahr hochrechnen. Auch die Fehlereinsparung ist echtes Geld — jede Korrektur hat Folgekosten, von der neu versendeten Rechnung bis zum verlorenen Kunden. Und nutzungsbasierte Abrechnung bedeutet, dass Sie keine Leerkapazität mitfinanzieren, wie es bei lokalen Systemen der Fall wäre.
 
 Speziell für die Fehlerseite: In [Dokumenten-Workflows](/de/services/dokumenten-workflows/) steckt der größte Teil der Einsparung; die [Rechnungsleser-Demo](/de/projekte/) zeigt den Mechanismus an echten Dateien.
+
+## Bleibt Cloud-Automatisierung günstig, wenn Sie wachsen?
+
+Bis zu einem Punkt. Die Infrastruktur-Einsparung oben stammt aus der nutzungsbasierten Abrechnung — ein echter Vorteil bei geringem oder schwankendem Volumen. Genau dieses Modell wendet sich gegen Sie, sobald ein Workflow tausende Male im Monat läuft. Zapier und Make rechnen pro Aufgabe ab; SaaS pro Kopf. Die Rechnung wächst mit genau dem Erfolg, für den Sie automatisiert haben. Personaleinsparungen summieren sich zu Ihren Gunsten, nutzungsbasierte Preise gegen Sie.
+
+Das ist das Argument dafür, die Laufzeitumgebung selbst zu besitzen, sobald sich ein Workflow bewährt hat. Eine selbst gehostete Engine wie n8n läuft auf einem Server mit festen Kosten, den Sie kontrollieren; die Kosten koppeln sich vom Volumen ab. Ich betreibe aus genau diesem Grund meinen eigenen [selbst gehosteten Stack](https://leinss.xyz/blog/de/self-hosted-stack/). Gemietete Cloud-Tools sind der richtige Einstieg; selbst betriebene Infrastruktur ist, wo die dauerhafte Einsparung liegt.
 
 ## Wie Sie Ihre eigenen Einsparungen abschätzen
 
