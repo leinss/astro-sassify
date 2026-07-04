@@ -54,4 +54,6 @@ The order matters here. Get the source of truth wrong and everything downstream 
 
 That's the whole method. Most of the work is in steps one and two — once you know where the truth lives, the automation is mechanical. This is the core of [integrations & APIs](/en/services/integrations-apis/) work, and you can watch a live sync in the [demos](/en/projects/).
 
+> **Own the source of truth, don't rent it.** Once you've decided where the truth lives, it matters whose server that is. Keep it in a database you own and the data stays yours and in the EU, instead of inside a vendor's proprietary store you can't fully export. That trade-off is the whole of [self-hosted Supabase vs Firebase](https://leinss.xyz/blog/en/self-hosted-supabase-vs-firebase/).
+
 Sync problems are solvable; they just need the right order of operations. If yours are getting expensive, [book a free call](https://cal.com/tobias-leinss/strategymeeting) and we'll map them. For the wider case on connecting tools, see [the power of integration](/en/blog/power-of-integration/).
