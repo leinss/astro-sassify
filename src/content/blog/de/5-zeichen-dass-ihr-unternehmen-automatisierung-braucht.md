@@ -55,6 +55,8 @@ Wenn der einzige Weg zu mehr Geschäft mehr Leute für repetitive Aufgaben sind,
 
 **Zuerst angehen:** Workflows, die das 10-fache Volumen bewältigen, ohne 10-mal so viel Personal – meist, indem Sie [Ihre Tools verbinden](/de/services/integrationen-apis/), sodass Daten von selbst fließen.
 
+> **Ein leiseres sechstes Zeichen: die Tools sind jetzt die Rechnung.** Läuft Ihre Automatisierung auf gemieteter SaaS, wächst mit der Nutzung die Rechnung, pro Aufgabe, pro Durchlauf, pro Platz. Ab einem gewissen Volumen kostet es weniger, die Laufzeit zu besitzen, als sie zu mieten. Siehe [den selbst gehosteten Stack, den ich statt SaaS betreibe](https://leinss.xyz/blog/de/self-hosted-stack/).
+
 ## So starten Sie
 
 Nehmen Sie den einen Prozess, der am meisten schmerzt, und lösen Sie zuerst den – dann bauen Sie darauf auf. Wenn Sie eine zweite Meinung dazu wollen, wo der ROI liegt, [buchen Sie ein kostenloses 20-Minuten-Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und wir finden gemeinsam Ihr bestes erstes Ziel.

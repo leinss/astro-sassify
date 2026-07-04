@@ -50,6 +50,8 @@ Zählen Sie nicht nur den Aufbau. Das vollständige Bild:
 
 Die Falle: den Aufbau als einmalige Kosten zu behandeln und die wiederkehrenden Posten zu vergessen. Abonnements und Wartung laufen jedes Jahr weiter, genau wie Ihr Gewinn.
 
+> **Besitzen statt mieten.** Diese wiederkehrenden Posten gibt es nur, solange Sie mieten. Automatisierung, die Ihnen auf eigener Infrastruktur gehört, macht aus Gebühren pro Durchlauf und Abo einen einmaligen Aufbau, sodass die jährliche Kostenzeile, die Ihren Gewinn auffrisst, weitgehend wegfällt. Das ist das längere Spiel hinter [dem selbst gehosteten Stack, den ich statt SaaS betreibe](https://leinss.xyz/blog/de/self-hosted-stack/).
+
 ## Den Business Case aufbauen
 
 1. **Mit einem konkreten Prozess beginnen.** Den ROI für "Automatisierung" abstrakt zu berechnen funktioniert nicht — nehmen Sie einen echten Workflow mit echten Zahlen.

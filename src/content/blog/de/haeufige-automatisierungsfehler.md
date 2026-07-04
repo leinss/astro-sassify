@@ -62,6 +62,8 @@ Für hypothetische zukünftige Anforderungen bauen, die vielleicht nie eintreten
 
 **Die Lösung:** Bauen Sie für aktuelle Bedürfnisse. Iterieren Sie auf Basis dessen, was tatsächlich auftaucht.
 
+> **Der siebte Fehler: den ganzen Stack mieten.** Die sechs oben sind Projektfehler. Der strategische ist, alles, worauf Sie angewiesen sind, in Tools zu betreiben, die Sie weder ändern noch verlassen können, wo jeder Workflow eine Preis-E-Mail von einem Problem entfernt ist. Die tragenden Teile zu besitzen ist die Lösung, und genau das ist der Fall in [dem selbst gehosteten Stack, den ich statt SaaS betreibe](https://leinss.xyz/blog/de/self-hosted-stack/).
+
 ## Das Fazit
 
 Die meisten Automatisierungsfehler sind Planungsfehler, keine technischen. Sauber designen, klein anfangen, iterieren. Wenn Sie das nicht auf die harte Tour lernen wollen, [buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und ich helfe Ihnen, einen ersten Prozess zu wählen, der alle sechs vermeidet. Unsicher, wo Sie anfangen sollen? [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) ist ein schneller Selbsttest.

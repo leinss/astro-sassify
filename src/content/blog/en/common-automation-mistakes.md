@@ -62,6 +62,8 @@ Building for hypothetical future needs that may never arrive, at the cost of shi
 
 **The fix:** Build for current needs. Iterate based on what actually comes up.
 
+> **The seventh mistake: renting the whole stack.** The six above are project mistakes. The strategic one is running everything you depend on inside tools you can't change or leave, where every workflow is one pricing email away from a problem. Owning the load-bearing pieces is the fix, and it's the case I make in [the self-hosted stack I run instead of paying for SaaS](https://leinss.xyz/blog/en/self-hosted-stack/).
+
 ## The bottom line
 
 Most automation failures are planning failures, not technical ones. Design properly, start small, and iterate. If you'd rather not learn these the hard way, [book a free call](https://cal.com/tobias-leinss/strategymeeting) and I'll help you pick a first process that avoids all six. Not sure where to start? The [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check.
