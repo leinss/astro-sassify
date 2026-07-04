@@ -57,7 +57,7 @@ Options run from no-code to custom development:
 - **Low-code:** n8n, Retool, Airtable automations
 - **Code:** custom scripts, APIs, cloud functions
 
-Start with the simplest tool that meets your needs. You can always graduate to something more powerful once the workflow proves itself.
+Start with the simplest tool that meets your needs — a no-code builder is the right on-ramp for a first workflow. Just know where the ladder leads: once a workflow proves itself and runs often, metered no-code pricing and vendor limits start to bite, and the move is onto low-code you can host yourself (n8n) plus code for the parts the builder fights you on.
 
 ## Step 5: Build a prototype
 
@@ -106,6 +106,16 @@ Your first version won't be perfect. Plan to:
 3. **Meeting reminders** — calendar event → automated reminder sequence. See [communication automation](/en/services/communication-automation/).
 4. **Report generation** — scheduled trigger → data collection → formatted output. See [document & data workflows](/en/services/document-workflows/).
 5. **Customer onboarding** — new signup → welcome email sequence.
+
+## Where this breaks, and what comes next
+
+Your first workflow will live happily on a no-code tool. The friction shows up later, and it is worth knowing in advance:
+
+- **Metered pricing** — per-task billing that was trivial at 100 runs a month hurts at 100,000.
+- **The wall** — every no-code tool has things it simply cannot do; you hit it exactly when the workflow matters most.
+- **Data control** — your process and its data run on someone else's servers, under their terms.
+
+None of that means avoid no-code. It means treat it as the on-ramp. When a workflow earns its keep, move it onto infrastructure you own (a self-hosted engine like n8n) and drop into code for the parts that need it. I run my automations on my own [self-hosted stack](https://leinss.xyz/blog/en/self-hosted-stack/) for exactly these reasons.
 
 ## Start small
 

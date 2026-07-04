@@ -1,5 +1,5 @@
 ---
-title: "Tools verbinden: Die Macht der Integration"
+title: "Tools verbinden: Was Integration wirklich bringt"
 description: "Erfahren Sie, wie die Verbindung Ihrer Business-Tools kumulative Effizienzgewinne schafft und Datensilos eliminiert."
 pubDate: 2025-02-05
 updatedDate: 2026-07-04
@@ -48,6 +48,12 @@ Diese vier Verbindungen kommen in fast jedem Projekt vor, das ich betreue:
 | Buchhaltung ↔ alles | Finanzdaten, immer aktuell |
 
 Keine davon braucht einen Neubau. Jede ist eine definierte Verbindung zwischen zwei Systemen, die Sie bereits besitzen — die Arbeit von [Integrationen & APIs](/de/services/integrationen-apis/). Ein paar davon können Sie live in den [Demos](/de/projekte/) sehen.
+
+## Wem gehören die Verbindungen?
+
+Ein Punkt entscheidet über Ihre langfristigen Kosten und Kontrolle: Was betreibt die Verbindungen? Der bequeme Weg ist ein gehosteter Mittelsmann (Zapier, Make), der pro Aufgabe abrechnet und Ihre Daten über seine Server leitet. Für den Anfang ist das in Ordnung. Doch die Integrationsschicht ist das Nervensystem Ihres Betriebs, und sie zu mieten bedeutet Rechnungen pro Aufgabe, die mit dem Volumen steigen, und einen Fremden, der Ihren Datenfluss in der Hand hält.
+
+Die Alternative: den Knotenpunkt selbst besitzen. Eine selbst gehostete Engine wie n8n betreibt dieselben Verbindungen auf einem Server, den Sie kontrollieren, zu festen Kosten, und Ihre Daten bleiben Ihre. Ich betreibe meine Integrationen auf meinem eigenen [selbst gehosteten Stack](https://leinss.xyz/blog/de/self-hosted-stack/). Starten Sie auf einem gehosteten Tool, wenn Sie heute loslegen müssen; besitzen Sie die Schicht, sobald sie echten Verkehr trägt.
 
 ## Wo Sie anfangen
 
