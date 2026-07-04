@@ -19,6 +19,8 @@ interface Props {
 
 const { lang, pillar } = Astro.props;
 const t = i18n[lang].services[pillar];
+const tDepth = i18n[lang].services.depth;
+const flagshipUrl = `https://leinss.xyz/blog/${lang}/where-n8n-stops-and-code-starts/`;
 const basePath = lang === 'en' ? '/en' : '/de';
 
 // Select the appropriate image
@@ -106,6 +108,27 @@ const crumbs = breadcrumbSchema([
       <p class="text-lg text-secondary-700 dark:text-secondary-300 leading-relaxed">
         {t.solution_text}
       </p>
+    </div>
+
+    <!-- Engineering depth cross-link -->
+    <div class="max-w-3xl mx-auto mt-16 pt-16 border-t border-secondary-200 dark:border-secondary-800 reveal">
+      <div class="p-6 bg-primary-50 dark:bg-primary-900/20 rounded-lg border border-primary-100 dark:border-primary-800">
+        <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
+          {tDepth.title}
+        </h3>
+        <p class="text-secondary-700 dark:text-secondary-300 mb-4 leading-relaxed">
+          {tDepth.text}
+        </p>
+        <a
+          href={flagshipUrl}
+          class="inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {tDepth.link_text}
+          <BsArrowRight className="w-4 h-4" />
+        </a>
+      </div>
     </div>
 
     <!-- Use Cases -->
