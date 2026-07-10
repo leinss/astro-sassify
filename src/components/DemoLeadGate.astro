@@ -1,0 +1,249 @@
+---
+// Reusable lead-magnet gate for the live demos.
+//
+// The basic demo result stays free (1-try-free UX). This component gates only
+// the *take-home artifact* (downloadable transcript / minutes / n8n workflow)
+// behind a double-opt-in email capture wired to Listmonk — same public API,
+// honeypot and timing check as Newsletter.astro.
+//
+// Integration (per demo):
+//   1. Render <DemoLeadGate lang={lang} id="meeting" ... /> after the results block.
+//   2. In the demo script, once results render, prepare the artifact:
+//        window.__demoGate.arm('meeting', { text, filename, mime });
+//      then reveal the gate node (remove the `hidden` class on #<id>-gate).
+//   3. The gate handles email → Listmonk subscribe → reveal download button.
+//
+// A single dedicated Listmonk list collects all demo leads (double opt-in).
+// Until the owner creates that list, LIST_UUID falls back to the newsletter
+// list so the flow works end-to-end; swap the UUID per docs/emails setup.
+
+interface Props {
+  lang?: "en" | "de";
+  /** Stable per-demo id used for DOM ids and the JS registry. */
+  id: string;
+  /** Short label describing the gated artifact, e.g. "das vollständige Protokoll". */
+  artifactLabel?: string;
+}
+
+const { lang = "de", id, artifactLabel } = Astro.props;
+const isDE = lang === "de";
+
+// Listmonk public subscription config — dedicated demo-leads list.
+// TODO(owner): replace with the dedicated "Demo Leads" list UUID (see docs/emails/README.md).
+// Falls back to the newsletter list so the gate is functional before that list exists.
+const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz";
+const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071";
+
+const label =
+  artifactLabel ?? (isDE ? "das vollständige Ergebnis" : "the full result");
+
+const t = {
+  headline: isDE
+    ? "Das komplette Ergebnis zum Mitnehmen"
+    : "Get the complete take-home result",
+  sub: isDE
+    ? `Sie haben die Live-Demo getestet. Tragen Sie Ihre E-Mail ein und laden Sie ${label} herunter — inklusive der n8n-Workflow-Vorlage dahinter.`
+    : `You have tried the live demo. Enter your email to download ${label} — including the n8n workflow blueprint behind it.`,
+  placeholder: isDE ? "Ihre E-Mail-Adresse" : "Your email address",
+  button: isDE ? "Ergebnis freischalten" : "Unlock result",
+  confirmTitle: isDE ? "Fast geschafft!" : "Almost there!",
+  confirmBody: isDE
+    ? "Bitte bestätigen Sie Ihre Anmeldung in der E-Mail, die wir Ihnen gesendet haben. Ihren Download starten Sie direkt hier:"
+    : "Please confirm your subscription in the email we just sent you. Start your download right here:",
+  alreadyBody: isDE
+    ? "Sie sind bereits angemeldet. Ihr Download:"
+    : "You are already subscribed. Your download:",
+  download: isDE ? "Jetzt herunterladen" : "Download now",
+  invalidEmail: isDE
+    ? "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+    : "Please enter a valid email address.",
+  tooFast: isDE
+    ? "Bitte warten Sie einen Moment und versuchen Sie es erneut."
+    : "Please wait a moment and try again.",
+  error: isDE
+    ? "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+    : "An error occurred. Please try again later.",
+  privacy: isDE
+    ? "Double-Opt-In. Kein Spam, jederzeit abbestellbar."
+    : "Double opt-in. No spam, unsubscribe anytime.",
+};
+---
+
+<div
+  id={`${id}-gate`}
+  class="hidden mt-6 rounded-xl border border-primary-200 dark:border-primary-800/50 bg-primary-50/60 dark:bg-primary-950/30 p-5"
+>
+  <!-- Capture form -->
+  <div id={`${id}-gate-form`}>
+    <div class="flex items-start gap-3 mb-3">
+      <span
+        class="flex items-center justify-center w-8 h-8 shrink-0 rounded-full bg-primary-100 dark:bg-primary-900/40 text-primary-600 dark:text-primary-400"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg
+        >
+      </span>
+      <div>
+        <p class="font-semibold text-secondary-900 dark:text-white">{t.headline}</p>
+        <p class="text-sm text-secondary-600 dark:text-secondary-400 mt-0.5">{t.sub}</p>
+      </div>
+    </div>
+
+    <form id={`${id}-gate-formel`} class="mt-3">
+      <!-- Honeypot (same pattern as Newsletter.astro) -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+        <label for={`${id}-gate-extra`}>{isDE ? "Leer lassen" : "Leave blank"}</label>
+        <input type="text" id={`${id}-gate-extra`} name="extra_field" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          id={`${id}-gate-email`}
+          placeholder={t.placeholder}
+          required
+          class="grow px-4 py-2.5 text-sm rounded-lg border border-secondary-300 dark:border-secondary-600 bg-white dark:bg-secondary-800 text-secondary-900 dark:text-white placeholder-secondary-400 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        />
+        <button
+          type="submit"
+          id={`${id}-gate-submit`}
+          class="btn-primary whitespace-nowrap px-5 py-2.5 text-sm font-semibold flex items-center justify-center gap-2"
+        >
+          <svg
+            id={`${id}-gate-spinner`}
+            class="hidden animate-spin h-4 w-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+          </svg>
+          <span id={`${id}-gate-btnlabel`}>{t.button}</span>
+        </button>
+      </div>
+      <p id={`${id}-gate-error`} class="hidden text-sm text-red-600 dark:text-red-400 mt-2"></p>
+      <p class="text-xs text-secondary-400 dark:text-secondary-500 mt-2">{t.privacy}</p>
+    </form>
+  </div>
+
+  <!-- Success state (reveals download) -->
+  <div id={`${id}-gate-success`} class="hidden text-center py-2">
+    <svg class="w-10 h-10 text-primary-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+      ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
+    >
+    <p id={`${id}-gate-success-title`} class="font-semibold text-secondary-900 dark:text-white mb-1">{t.confirmTitle}</p>
+    <p id={`${id}-gate-success-body`} class="text-sm text-secondary-600 dark:text-secondary-300 mb-4 max-w-md mx-auto">{t.confirmBody}</p>
+    <button
+      id={`${id}-gate-download`}
+      type="button"
+      class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg
+      >
+      {t.download}
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ id, t, LISTMONK_URL, LIST_UUID }}>
+  // Shared gate registry so demo scripts (isolated define:vars scopes) can arm
+  // the download without importing anything.
+  window.__demoGate = window.__demoGate || {
+    _armed: {},
+    arm(gateId, artifact) {
+      this._armed[gateId] = artifact; // { text, filename, mime }
+    },
+  };
+
+  const gate = document.getElementById(`${id}-gate`);
+  if (gate) {
+    const formWrap = document.getElementById(`${id}-gate-form`);
+    const form = document.getElementById(`${id}-gate-formel`);
+    const emailInput = document.getElementById(`${id}-gate-email`);
+    const extra = document.getElementById(`${id}-gate-extra`);
+    const submitBtn = document.getElementById(`${id}-gate-submit`);
+    const spinner = document.getElementById(`${id}-gate-spinner`);
+    const btnLabel = document.getElementById(`${id}-gate-btnlabel`);
+    const errorEl = document.getElementById(`${id}-gate-error`);
+    const successEl = document.getElementById(`${id}-gate-success`);
+    const successBody = document.getElementById(`${id}-gate-success-body`);
+    const downloadBtn = document.getElementById(`${id}-gate-download`);
+
+    const loadedAt = Date.now();
+
+    function showError(msg) {
+      errorEl.textContent = msg;
+      errorEl.classList.remove("hidden");
+    }
+    function setLoading(on) {
+      submitBtn.disabled = on;
+      spinner.classList.toggle("hidden", !on);
+      btnLabel.classList.toggle("opacity-60", on);
+    }
+    function reveal(bodyText) {
+      if (bodyText) successBody.textContent = bodyText;
+      formWrap.classList.add("hidden");
+      successEl.classList.remove("hidden");
+    }
+
+    downloadBtn.addEventListener("click", () => {
+      const art = window.__demoGate._armed[id];
+      if (!art || !art.text) return;
+      const blob = new Blob([art.text], { type: art.mime || "text/plain;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = art.filename || "leinss-demo-result.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      errorEl.classList.add("hidden");
+
+      // Honeypot: filled hidden field = bot → silent fake success, no request.
+      if (extra.value) {
+        reveal();
+        return;
+      }
+      // Timing check: sub-2s submit is suspicious (allow retry, don't swallow).
+      if (Date.now() - loadedAt < 2000) {
+        showError(t.tooFast);
+        return;
+      }
+      const email = emailInput.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError(t.invalidEmail);
+        return;
+      }
+
+      setLoading(true);
+      fetch(`${LISTMONK_URL}/api/public/subscription`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, list_uuids: [LIST_UUID] }),
+      })
+        .then((res) => {
+          if (res.ok) return { ok: true };
+          return res.json().then((d) => ({ ok: false, error: d.message || "" }));
+        })
+        .then((data) => {
+          setLoading(false);
+          if (data.ok) {
+            reveal(t.confirmBody);
+          } else if (data.error && data.error.includes("already")) {
+            reveal(t.alreadyBody);
+          } else {
+            showError(t.error);
+          }
+        })
+        .catch(() => {
+          setLoading(false);
+          showError(t.error);
+        });
+    });
+  }
+</script>

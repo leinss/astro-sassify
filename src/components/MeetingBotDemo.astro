@@ -1,5 +1,6 @@
 ---
 import config from '../assets/config.ts';
+import DemoLeadGate from './DemoLeadGate.astro';
 
 interface Props {
   lang?: 'de' | 'en';
@@ -74,6 +75,14 @@ const t = {
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
     : '⚡ Live demo temporarily offline – this is sample output.',
   offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+  artifactLabel: isDE ? 'das vollständige Protokoll (.md)' : 'the full minutes (.md)',
+  // File header for the downloadable take-home minutes.
+  fileTitle: isDE ? 'Meeting-Protokoll' : 'Meeting Minutes',
+  fileSummary: isDE ? 'Zusammenfassung' : 'Summary',
+  fileActions: isDE ? 'Aufgaben' : 'Action Items',
+  fileFooter: isDE
+    ? 'Erstellt mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + Whisper + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Generated with the live demo on leinss-consulting.de — self-hosted n8n + Whisper + LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -166,6 +175,8 @@ const t = {
         {t.offlineCta}
       </a>
     </div>
+
+    <DemoLeadGate lang={lang} id="meeting" artifactLabel={t.artifactLabel} />
   </div>
 </div>
 
@@ -247,6 +258,7 @@ const t = {
     loadingStep.textContent = t.loading;
     offlineEl.classList.add('hidden');
     offlineCta.classList.add('hidden');
+    document.getElementById('meeting-gate')?.classList.add('hidden');
   });
 
   // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
@@ -283,15 +295,36 @@ const t = {
     summaryEl.replaceChildren(...summary.map((s) => makeBullet(s, false)));
 
     const actions = Array.isArray(data.action_items) ? data.action_items : [];
-    if (actions.length === 0) {
+    const actionTexts = actions.map((a) =>
+      typeof a === 'string' ? a : [a.assignee, a.task, a.due_date].filter(Boolean).join(' · ')
+    );
+    if (actionTexts.length === 0) {
       actionsEl.replaceChildren(makeBullet(t.noActions, false));
     } else {
-      const items = actions.map((a) => {
-        const text = typeof a === 'string' ? a : [a.assignee, a.task, a.due_date].filter(Boolean).join(' · ');
-        return makeBullet(text, true);
-      });
-      actionsEl.replaceChildren(...items);
+      actionsEl.replaceChildren(...actionTexts.map((txt) => makeBullet(txt, true)));
     }
+
+    armGate(summary, actionTexts, data.transcript_words);
+  }
+
+  // Gate the take-home artifact: a downloadable Markdown file of the full minutes.
+  function armGate(summary, actionTexts, words) {
+    const gateEl = document.getElementById('meeting-gate');
+    if (!gateEl || !window.__demoGate) return;
+    const lines = [`# ${t.fileTitle}`, ''];
+    if (words) lines.push(`_${words} ${t.transcriptWords}_`, '');
+    lines.push(`## ${t.fileSummary}`, '');
+    summary.forEach((s) => lines.push(`- ${s}`));
+    lines.push('', `## ${t.fileActions}`, '');
+    if (actionTexts.length === 0) lines.push(`- ${t.noActions}`);
+    else actionTexts.forEach((a) => lines.push(`- [ ] ${a}`));
+    lines.push('', '---', t.fileFooter, '');
+    window.__demoGate.arm('meeting', {
+      text: lines.join('\n'),
+      filename: lang === 'de' ? 'meeting-protokoll.md' : 'meeting-minutes.md',
+      mime: 'text/markdown;charset=utf-8;',
+    });
+    gateEl.classList.remove('hidden');
   }
 
   function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }

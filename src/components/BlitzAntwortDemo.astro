@@ -1,5 +1,6 @@
 ---
 import config from '../assets/config.ts';
+import DemoLeadGate from './DemoLeadGate.astro';
 
 interface Props {
   lang?: 'de' | 'en';
@@ -66,6 +67,14 @@ const t = {
     enterprise: 'Enterprise',
     individual: isDE ? 'Privatperson' : 'Individual',
   },
+  artifactLabel: isDE ? 'die komplette Antwort (.md)' : 'the complete response (.md)',
+  // Downloadable take-home artifact.
+  fileTitle: isDE ? 'KI-generierte Erstantwort' : 'AI-generated first response',
+  fileSubject: isDE ? 'Betreff' : 'Subject',
+  fileScore: isDE ? 'Lead-Score' : 'Lead score',
+  fileFooter: isDE
+    ? 'Erstellt mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + LLM. Die n8n-Workflow-Vorlage (Eingang → Klassifizierung → Antwort-Entwurf) bespreche ich im Erstgespräch.'
+    : 'Generated with the live demo on leinss-consulting.de — self-hosted n8n + LLM. The n8n workflow blueprint (inbox → classification → draft reply) is walked through in the intro call.',
 };
 ---
 
@@ -163,10 +172,12 @@ const t = {
         {t.offlineCta}
       </a>
     </div>
+
+    <DemoLeadGate lang={lang} id="blitz" artifactLabel={t.artifactLabel} />
   </div>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, t, calUrl, SAMPLE, TIMEOUT_MS }}>
+<script define:vars={{ WEBHOOK_URL, t, calUrl, SAMPLE, TIMEOUT_MS, lang }}>
   const form = document.getElementById('blitz-form');
   const nameInput = document.getElementById('blitz-name');
   const companyInput = document.getElementById('blitz-company');
@@ -226,6 +237,7 @@ const t = {
     emailInput.value = '';
     offlineEl.classList.add('hidden');
     offlineCta.classList.add('hidden');
+    document.getElementById('blitz-gate')?.classList.add('hidden');
   });
 
   // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
@@ -251,6 +263,24 @@ const t = {
       categoryBadge.textContent = t.kategorie[data.kategorie] || data.kategorie;
       categoryBadge.classList.remove('hidden');
     }
+
+    armGate(data);
+  }
+
+  // Gate the take-home artifact: a downloadable Markdown copy of the full reply.
+  function armGate(data) {
+    const gateEl = document.getElementById('blitz-gate');
+    if (!gateEl || !window.__demoGate) return;
+    const lines = [`# ${t.fileTitle}`, ''];
+    lines.push(`**${t.fileSubject}:** ${data.subject || ''}`, '');
+    if (data.lead_score) lines.push(`**${t.fileScore}:** ${data.lead_score}/10`, '');
+    lines.push('---', '', data.body || '', '', '---', t.fileFooter, '');
+    window.__demoGate.arm('blitz', {
+      text: lines.join('\n'),
+      filename: lang === 'de' ? 'blitz-antwort.md' : 'instant-response.md',
+      mime: 'text/markdown;charset=utf-8;',
+    });
+    gateEl.classList.remove('hidden');
   }
 
   function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
