@@ -5,6 +5,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import BackToTop from '../../../components/BackToTop.astro';
+import Offers from '../../../components/Offers.astro';
 import { Image } from 'astro:assets';
 import { BsArrowRight } from 'react-icons/bs';
 import config from '../../../assets/config.ts';
@@ -93,6 +94,9 @@ const pillars = [
         </div>
       </div>
     </section>
+
+    <!-- Productized offers with public prices -->
+    <Offers lang={lang} />
 
     <!-- CTA Section -->
     <section class="py-20 bg-primary-50 dark:bg-primary-950 relative">
