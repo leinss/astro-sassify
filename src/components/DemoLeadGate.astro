@@ -13,9 +13,8 @@
 //      then reveal the gate node (remove the `hidden` class on #<id>-gate).
 //   3. The gate handles email → Listmonk subscribe → reveal download button.
 //
-// A single dedicated Listmonk list collects all demo leads (double opt-in).
-// Until the owner creates that list, LIST_UUID falls back to the newsletter
-// list so the flow works end-to-end; swap the UUID per docs/emails setup.
+// A single dedicated Listmonk list ("Demo Leads", public + double opt-in)
+// collects all demo leads. LIST_UUID below points at that list.
 
 interface Props {
   lang?: "en" | "de";
@@ -28,11 +27,10 @@ interface Props {
 const { lang = "de", id, artifactLabel } = Astro.props;
 const isDE = lang === "de";
 
-// Listmonk public subscription config — dedicated demo-leads list.
-// TODO(owner): replace with the dedicated "Demo Leads" list UUID (see docs/emails/README.md).
-// Falls back to the newsletter list so the gate is functional before that list exists.
+// Listmonk public subscription config — dedicated "Demo Leads" list
+// (public, double opt-in). All demo lead-magnet captures land here.
 const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz";
-const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071";
+const LIST_UUID = "bb2ec9fe-821e-419b-83a2-fb72c3fe3fe1";
 
 const label =
   artifactLabel ?? (isDE ? "das vollständige Ergebnis" : "the full result");
