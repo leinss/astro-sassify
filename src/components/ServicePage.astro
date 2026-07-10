@@ -4,6 +4,7 @@ import config from '../assets/config.ts';
 import i18n from '../assets/i18n.json';
 import { BsCheckCircleFill, BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import ROICalculator from './ROICalculator.astro';
+import Offers from './Offers.astro';
 import { SITE_URL, breadcrumbSchema } from '../assets/schema.ts';
 
 // Import pillar images
@@ -169,6 +170,9 @@ const crumbs = breadcrumbSchema([
 
 <!-- ROI Calculator -->
 <ROICalculator lang={lang} pillar={pillar} />
+
+<!-- Productized offers with public prices -->
+<Offers lang={lang} />
 
 <!-- CTA Section -->
 <section class="py-20 bg-primary-50 dark:bg-primary-950">

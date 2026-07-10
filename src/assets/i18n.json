@@ -82,7 +82,13 @@
     "about_me": {
       "title": "About Me",
       "tools_label": "Tools & Platforms",
-      "tools": ["Self-hosted n8n", "Python & TypeScript", "APIs & backends", "Docker & DevOps", "Claude & OpenAI APIs"],
+      "tools": [
+        "Self-hosted n8n",
+        "Python & TypeScript",
+        "APIs & backends",
+        "Docker & DevOps",
+        "Claude & OpenAI APIs"
+      ],
       "mission_title": "Mission",
       "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
       "career_title": "Experience",
@@ -162,6 +168,53 @@
         "title": "How we actually build it",
         "text": "No-code tools are where we start, not where we stop. When a workflow needs real code — batching, retries, state, custom logic — we write and own it, so it holds up in production.",
         "link_text": "Read: where n8n stops and code starts"
+      },
+      "offers": {
+        "eyebrow": "Fixed packages, fixed prices",
+        "title": "Productized packages with public pricing",
+        "subtitle": "Clear scope, clear price, clear timeline — you know where you stand before the first call. Larger work is quoted individually after the intro call.",
+        "net_note": "All prices plus VAT, for the defined scope.",
+        "cta_label": "One of these a fit? Let's confirm it on the intro call.",
+        "timeline_label": "Timeline",
+        "includes_label": "Included",
+        "packages": [
+          {
+            "name": "Infrastructure & Self-Hosting Audit",
+            "price": "€1,900",
+            "timeline": "~1 week",
+            "tagline": "Know where your infrastructure stands — and what to do next.",
+            "includes": [
+              "Review of your current setup (self-hosted or cloud)",
+              "Written findings: risks, cost, lock-in, security",
+              "Prioritised roadmap for migration and hardening",
+              "No black box: the document is yours and actionable without me"
+            ]
+          },
+          {
+            "name": "AI Feature Integration Sprint",
+            "price": "€5,900",
+            "timeline": "2 weeks",
+            "tagline": "One AI feature shipped to production — not just a demo.",
+            "includes": [
+              "One AI/LLM feature integrated into your existing app",
+              "Shipped to production, not parked as a prototype",
+              "Documented and handed over to your team",
+              "Runs on your infrastructure — no vendor lock-in"
+            ]
+          },
+          {
+            "name": "MVP Build",
+            "price": "€14,900",
+            "timeline": "4 weeks",
+            "tagline": "From idea to a usable web app that's yours to own.",
+            "includes": [
+              "Web app from zero to a usable first version",
+              "Core flows built, deployed and running",
+              "Clean code plus documentation and handover",
+              "You own the code and the infrastructure — no black box"
+            ]
+          }
+        ]
       },
       "crm": {
         "slug": "crm-sales-automation",
@@ -304,7 +357,11 @@
           "problem": "Teams retype invoice data into accounting software by hand — slow, error-prone, and impossible to audit.",
           "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward — with a human-review path for anything uncertain.",
           "result": "Invoice handling drops from about 4 hours a week to roughly 15 minutes.",
-          "tags": ["Vision AI", "Document workflow", "n8n"]
+          "tags": [
+            "Vision AI",
+            "Document workflow",
+            "n8n"
+          ]
         },
         "lead": {
           "title": "Lightning Lead Response",
@@ -312,7 +369,11 @@
           "problem": "Leads that wait hours for a reply go cold, and enquiries that arrive after hours are lost overnight.",
           "solution": "Each incoming lead is scored and answered with a personalised, on-brand reply within minutes, scheduled to business hours, and logged to your CRM with a follow-up task.",
           "result": "Response time falls from around 6 hours to under 5 minutes — the window where leads are far more likely to convert.",
-          "tags": ["Lead automation", "Personalised AI", "CRM"]
+          "tags": [
+            "Lead automation",
+            "Personalised AI",
+            "CRM"
+          ]
         },
         "meeting": {
           "title": "Meeting Minutes Bot",
@@ -320,7 +381,11 @@
           "problem": "Notes are incomplete, action items get lost, and there's no searchable record of what was decided.",
           "solution": "Upload the recording: it's transcribed, summarised, and turned into clear decisions and owner-assigned action items, then distributed and archived.",
           "result": "A one-hour meeting becomes structured minutes in about two minutes.",
-          "tags": ["Transcription", "Summarisation", "n8n"]
+          "tags": [
+            "Transcription",
+            "Summarisation",
+            "n8n"
+          ]
         },
         "excel": {
           "title": "Spreadsheet Rescue",
@@ -328,7 +393,11 @@
           "problem": "Critical processes run on fragile spreadsheets — manual entry, version chaos, silent formula breaks, and no validation.",
           "solution": "The workflow analyses your sheet, proposes a clean schema, then deduplicates, standardises and validates the data on its way into a proper system.",
           "result": "Messy, copy-pasted tables become a structured, validated dataset you can trust.",
-          "tags": ["Data migration", "Schema detection", "Validation"]
+          "tags": [
+            "Data migration",
+            "Schema detection",
+            "Validation"
+          ]
         },
         "faq": {
           "title": "AI Support Assistant",
@@ -336,7 +405,11 @@
           "problem": "Support teams answer the same questions over and over while customers wait for a reply.",
           "solution": "A retrieval workflow searches your knowledge base and an LLM returns a concise, sourced answer with a confidence score — escalating to a human when it isn't sure.",
           "result": "Common questions are answered instantly, with sources, around the clock.",
-          "tags": ["Retrieval", "Full-text search", "Support AI"]
+          "tags": [
+            "Retrieval",
+            "Full-text search",
+            "Support AI"
+          ]
         }
       }
     }
@@ -424,7 +497,13 @@
     "about_me": {
       "title": "Über Mich",
       "tools_label": "Tools & Plattformen",
-      "tools": ["Selbst gehostetes n8n", "Python & TypeScript", "APIs & Backends", "Docker & DevOps", "Claude & OpenAI APIs"],
+      "tools": [
+        "Selbst gehostetes n8n",
+        "Python & TypeScript",
+        "APIs & Backends",
+        "Docker & DevOps",
+        "Claude & OpenAI APIs"
+      ],
       "mission_title": "Mission",
       "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",
       "career_title": "Erfahrung",
@@ -504,6 +583,53 @@
         "title": "Wie wir es tatsächlich bauen",
         "text": "No-Code-Tools sind unser Start, nicht unser Ende. Wenn ein Workflow echten Code braucht – Batching, Retries, Zustand, eigene Logik – schreiben und besitzen wir ihn, damit er im Produktivbetrieb hält.",
         "link_text": "Lesen: Wo n8n aufhört und Code anfängt"
+      },
+      "offers": {
+        "eyebrow": "Feste Pakete, feste Preise",
+        "title": "Produktisierte Pakete mit öffentlichem Preis",
+        "subtitle": "Klarer Umfang, klarer Preis, klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Größere Vorhaben werden nach dem Erstgespräch individuell angeboten.",
+        "net_note": "Alle Preise zzgl. USt., für den definierten Umfang.",
+        "cta_label": "Passt eines dieser Pakete? Lassen Sie es uns im Erstgespräch klären.",
+        "timeline_label": "Dauer",
+        "includes_label": "Enthalten",
+        "packages": [
+          {
+            "name": "Infrastruktur- & Self-Hosting-Audit",
+            "price": "1.900 €",
+            "timeline": "ca. 1 Woche",
+            "tagline": "Wissen, wo Ihre Infrastruktur steht – und was als Nächstes zu tun ist.",
+            "includes": [
+              "Prüfung Ihres bestehenden Setups (Self-Hosted oder Cloud)",
+              "Schriftlicher Befund: Risiken, Kosten, Lock-in, Sicherheit",
+              "Priorisierte Roadmap für Migration und Härtung",
+              "Kein Blindflug: das Dokument gehört Ihnen und ist ohne mich umsetzbar"
+            ]
+          },
+          {
+            "name": "AI-Feature-Integrations-Sprint",
+            "price": "5.900 €",
+            "timeline": "2 Wochen",
+            "tagline": "Ein KI-Feature, das in Produktion geht – nicht nur eine Demo.",
+            "includes": [
+              "Ein KI-/LLM-Feature in Ihre bestehende Anwendung integriert",
+              "In Produktion ausgeliefert, nicht als Prototyp geparkt",
+              "Dokumentiert und an Ihr Team übergeben",
+              "Läuft auf Ihrer Infrastruktur – kein Vendor-Lock-in"
+            ]
+          },
+          {
+            "name": "MVP-Entwicklung",
+            "price": "14.900 €",
+            "timeline": "4 Wochen",
+            "tagline": "Von der Idee zur nutzbaren Web-App, die Ihnen gehört.",
+            "includes": [
+              "Web-App von Null auf eine benutzbare erste Version",
+              "Kernabläufe entwickelt, deployt und lauffähig",
+              "Sauberer Code plus Dokumentation und Übergabe",
+              "Sie besitzen Code und Infrastruktur – keine Blackbox"
+            ]
+          }
+        ]
       },
       "crm": {
         "slug": "crm-vertriebsautomatisierung",
@@ -646,7 +772,11 @@
           "problem": "Teams tippen Rechnungsdaten manuell in die Buchhaltung — langsam, fehleranfällig und ohne Prüfspur.",
           "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter — mit Prüfpfad für alles Unklare.",
           "result": "Die Rechnungsbearbeitung sinkt von rund 4 Stunden pro Woche auf etwa 15 Minuten.",
-          "tags": ["Vision-KI", "Dokumenten-Workflow", "n8n"]
+          "tags": [
+            "Vision-KI",
+            "Dokumenten-Workflow",
+            "n8n"
+          ]
         },
         "lead": {
           "title": "Blitz-Antwort für Leads",
@@ -654,7 +784,11 @@
           "problem": "Leads, die Stunden auf Antwort warten, werden kalt — und Anfragen nach Feierabend gehen über Nacht verloren.",
           "solution": "Jeder eingehende Lead wird bewertet und innerhalb von Minuten mit einer persönlichen, markengerechten Antwort beantwortet, auf Geschäftszeiten geplant und mit Folgeaufgabe im CRM protokolliert.",
           "result": "Die Reaktionszeit fällt von rund 6 Stunden auf unter 5 Minuten — das Zeitfenster, in dem Leads am ehesten konvertieren.",
-          "tags": ["Lead-Automation", "Persönliche KI", "CRM"]
+          "tags": [
+            "Lead-Automation",
+            "Persönliche KI",
+            "CRM"
+          ]
         },
         "meeting": {
           "title": "Meeting-Protokoll-Bot",
@@ -662,7 +796,11 @@
           "problem": "Notizen sind unvollständig, Action Items gehen verloren, und es gibt kein durchsuchbares Protokoll der Entscheidungen.",
           "solution": "Aufnahme hochladen: Sie wird transkribiert, zusammengefasst und in klare Entscheidungen und zugewiesene Action Items verwandelt, dann verteilt und archiviert.",
           "result": "Ein einstündiges Meeting wird in etwa zwei Minuten zum strukturierten Protokoll.",
-          "tags": ["Transkription", "Zusammenfassung", "n8n"]
+          "tags": [
+            "Transkription",
+            "Zusammenfassung",
+            "n8n"
+          ]
         },
         "excel": {
           "title": "Excel-Retter",
@@ -670,7 +808,11 @@
           "problem": "Kritische Prozesse laufen auf fragilen Tabellen — manuelle Eingabe, Versions-Chaos, stille Formelfehler und keine Validierung.",
           "solution": "Der Workflow analysiert Ihre Tabelle, schlägt ein sauberes Schema vor und bereinigt, standardisiert und validiert die Daten auf dem Weg in ein echtes System.",
           "result": "Aus unsauberen, zusammenkopierten Tabellen wird ein strukturierter, validierter Datensatz, dem Sie vertrauen können.",
-          "tags": ["Datenmigration", "Schema-Erkennung", "Validierung"]
+          "tags": [
+            "Datenmigration",
+            "Schema-Erkennung",
+            "Validierung"
+          ]
         },
         "faq": {
           "title": "KI-Support-Assistent",
@@ -678,7 +820,11 @@
           "problem": "Support-Teams beantworten dieselben Fragen immer wieder, während Kunden auf Antwort warten.",
           "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert — und eskaliert an einen Menschen, wenn es unsicher ist.",
           "result": "Häufige Fragen werden sofort beantwortet, mit Quellen, rund um die Uhr.",
-          "tags": ["Retrieval", "Volltextsuche", "Support-KI"]
+          "tags": [
+            "Retrieval",
+            "Volltextsuche",
+            "Support-KI"
+          ]
         }
       }
     }
