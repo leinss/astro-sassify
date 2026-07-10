@@ -1,4 +1,6 @@
 ---
+import DemoLeadGate from './DemoLeadGate.astro';
+
 interface Props {
   lang?: 'de' | 'en';
 }
@@ -35,6 +37,13 @@ const t = {
   fileTooLarge: isDE ? 'Datei zu groß. Maximal 10 MB.' : 'File too large. Maximum 10 MB.',
   errorGeneric: isDE ? 'Analyse fehlgeschlagen. Bitte erneut versuchen.' : 'Analysis failed. Please try again.',
   description: isDE ? 'Menge × Einzelpreis' : 'Qty × Unit Price',
+  artifactLabel: isDE ? 'die extrahierten Daten (.md)' : 'the extracted data (.md)',
+  // Headers for the downloadable take-home extraction report.
+  fileTitle: isDE ? 'Extrahierte Rechnungsdaten' : 'Extracted Invoice Data',
+  fileFields: isDE ? 'Kopfdaten' : 'Header Data',
+  fileFooter: isDE
+    ? 'Extrahiert mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + Vision-LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Extracted with the live demo on leinss-consulting.de — self-hosted n8n + vision LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -95,10 +104,12 @@ const t = {
         <table class="w-full text-sm"><tbody id="invoice-lineitems"></tbody></table>
       </div>
     </div>
+
+    <DemoLeadGate lang={lang} id="invoice" artifactLabel={t.artifactLabel} />
   </div>
 </div>
 
-<script define:vars={{ WEBHOOK_URL, t }}>
+<script define:vars={{ WEBHOOK_URL, t, lang }}>
   const form = document.getElementById('invoice-form');
   const fileInput = document.getElementById('invoice-file');
   const filenameEl = document.getElementById('invoice-filename');
@@ -132,6 +143,7 @@ const t = {
     form.classList.add('hidden');
     loadingEl.classList.remove('hidden');
     resultsEl.classList.add('hidden');
+    document.getElementById('invoice-gate')?.classList.add('hidden');
 
     try {
       const base64 = await fileToBase64(file);
@@ -215,6 +227,37 @@ const t = {
       lineItemsSection.classList.remove('hidden');
       lineItemsEl.replaceChildren(...lineItems.map(makeLineItemRow));
     }
+
+    armGate(vendor, invoice, totals, lineItems);
+  }
+
+  // Gate the take-home artifact: a downloadable Markdown extraction report.
+  function armGate(vendor, invoice, totals, lineItems) {
+    const gateEl = document.getElementById('invoice-gate');
+    if (!gateEl || !window.__demoGate) return;
+    const lines = [`# ${t.fileTitle}`, '', `## ${t.fileFields}`, ''];
+    lines.push(`- **${t.vendor}:** ${vendor.name || '—'}`);
+    lines.push(`- **${t.invoiceNr}:** ${invoice.number || '—'}`);
+    lines.push(`- **${t.date}:** ${invoice.date || '—'}`);
+    lines.push(`- **${t.dueDate}:** ${invoice.due_date || '—'}`);
+    lines.push(`- **${t.net}:** ${formatCurrency(totals.net)}`);
+    lines.push(`- **${t.tax}:** ${totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '—'}`);
+    lines.push(`- **${t.gross}:** ${formatCurrency(totals.gross)}`);
+    if (lineItems.length > 0) {
+      lines.push('', `## ${t.lineItems}`, '', `| ${t.description} | ${t.gross} |`, '| --- | ---: |');
+      lineItems.forEach((it) => {
+        const desc = (it.description || '—').replace(/\|/g, '\\|');
+        const qty = it.quantity != null ? `${it.quantity} × ${formatCurrency(it.unit_price)} — ` : '';
+        lines.push(`| ${desc} | ${qty}${formatCurrency(it.total)} |`);
+      });
+    }
+    lines.push('', '---', t.fileFooter, '');
+    window.__demoGate.arm('invoice', {
+      text: lines.join('\n'),
+      filename: lang === 'de' ? 'rechnungsdaten.md' : 'invoice-data.md',
+      mime: 'text/markdown;charset=utf-8;',
+    });
+    gateEl.classList.remove('hidden');
   }
 
   function formatCurrency(val) {

@@ -1,5 +1,6 @@
 ---
 import config from '../assets/config.ts';
+import DemoLeadGate from './DemoLeadGate.astro';
 
 interface Props {
   lang?: 'de' | 'en';
@@ -90,6 +91,14 @@ const t = {
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
     : '⚡ Live demo temporarily offline – this is sample output.',
   offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+  artifactLabel: isDE ? 'den vollständigen Bereinigungs-Report (.md)' : 'the full cleaning report (.md)',
+  // Headers for the downloadable take-home cleaning report.
+  fileTitle: isDE ? 'Datenbereinigungs-Report' : 'Data Cleaning Report',
+  fileStats: isDE ? 'Kennzahlen' : 'Summary',
+  fileData: isDE ? 'Bereinigte Daten (CSV)' : 'Cleaned Data (CSV)',
+  fileFooter: isDE
+    ? 'Bereinigt mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Cleaned with the live demo on leinss-consulting.de — self-hosted n8n + LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -191,6 +200,8 @@ const t = {
         {t.offlineCta}
       </a>
     </div>
+
+    <DemoLeadGate lang={lang} id="excel" artifactLabel={t.artifactLabel} />
   </div>
 </div>
 
@@ -236,6 +247,7 @@ const t = {
     form.classList.add('hidden');
     loadingEl.classList.remove('hidden');
     resultsEl.classList.add('hidden');
+    document.getElementById('excel-gate')?.classList.add('hidden');
     hideError();
 
     try {
@@ -277,6 +289,7 @@ const t = {
     cleanedCsv = '';
     offlineEl.classList.add('hidden');
     offlineCta.classList.add('hidden');
+    document.getElementById('excel-gate')?.classList.add('hidden');
   });
 
   // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
@@ -377,6 +390,30 @@ const t = {
     renderStats(data.stats || {});
     renderTable(data.headers || [], data.cleaned_rows || []);
     renderChanges(data.changes || []);
+    armGate(data.stats || {}, data.changes || [], cleanedCsv);
+  }
+
+  // Gate the take-home artifact: a Markdown cleaning report (stats + change log +
+  // the cleaned CSV embedded). The raw CSV stays free above; this is the fuller deliverable.
+  function armGate(stats, changes, csv) {
+    const gateEl = document.getElementById('excel-gate');
+    if (!gateEl || !window.__demoGate) return;
+    const lines = [`# ${t.fileTitle}`, '', `## ${t.fileStats}`, ''];
+    lines.push(`- ${t.statTotal}: ${stats.total_rows ?? 0}`);
+    lines.push(`- ${t.statModified}: ${stats.rows_modified ?? 0}`);
+    lines.push(`- ${t.statDuplicates}: ${stats.duplicates_removed ?? 0}`);
+    lines.push(`- ${t.statIssues}: ${stats.issues_found ?? 0}`);
+    lines.push('', `## ${t.changesTitle}`, '');
+    if (changes.length === 0) lines.push(`- ${t.noChanges}`);
+    else changes.forEach((c) => lines.push(`- ${c}`));
+    lines.push('', `## ${t.fileData}`, '', '```csv', csv || '', '```');
+    lines.push('', '---', t.fileFooter, '');
+    window.__demoGate.arm('excel', {
+      text: lines.join('\n'),
+      filename: lang === 'de' ? 'bereinigungs-report.md' : 'cleaning-report.md',
+      mime: 'text/markdown;charset=utf-8;',
+    });
+    gateEl.classList.remove('hidden');
   }
 
   function showError(msg) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
