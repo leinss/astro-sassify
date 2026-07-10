@@ -1,5 +1,6 @@
 ---
 import config from '../assets/config.ts';
+import DemoLeadGate from './DemoLeadGate.astro';
 
 interface Props {
   lang?: 'de' | 'en';
@@ -56,6 +57,13 @@ const t = {
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
     : '⚡ Live demo temporarily offline – this is sample output.',
   offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+  artifactLabel: isDE ? 'das vollständige Antwort-Paket (.md)' : 'the full answer pack (.md)',
+  // Headers for the downloadable take-home answer pack.
+  fileTitle: isDE ? 'FAQ-Antwort-Paket' : 'FAQ Answer Pack',
+  fileQuestion: isDE ? 'Frage' : 'Question',
+  fileFooter: isDE
+    ? 'Beantwortet mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + RAG-LLM über die Wissensbasis. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Answered with the live demo on leinss-consulting.de — self-hosted n8n + RAG LLM over the knowledge base. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -147,6 +155,8 @@ const t = {
         {t.offlineCta}
       </a>
     </div>
+
+    <DemoLeadGate lang={lang} id="faq" artifactLabel={t.artifactLabel} />
   </div>
 
   <p class="mt-4 text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
@@ -188,6 +198,8 @@ const t = {
     errorEl.classList.remove('hidden');
   }
 
+  let lastQuestion = '';
+
   function resetForm() {
     resultEl.classList.add('hidden');
     inputArea.classList.remove('hidden');
@@ -195,6 +207,7 @@ const t = {
     errorEl.classList.add('hidden');
     offlineEl.classList.add('hidden');
     offlineCta.classList.add('hidden');
+    document.getElementById('faq-gate')?.classList.add('hidden');
   }
 
   function renderResult(data) {
@@ -222,6 +235,31 @@ const t = {
 
     escalateEl.classList.toggle('hidden', !data.escalate);
     resultEl.classList.remove('hidden');
+
+    armGate(data, pct);
+  }
+
+  // Gate the take-home artifact: a downloadable Markdown answer pack.
+  function armGate(data, pct) {
+    const gateEl = document.getElementById('faq-gate');
+    if (!gateEl || !window.__demoGate) return;
+    const lines = [`# ${t.fileTitle}`, ''];
+    lines.push(`## ${t.fileQuestion}`, '', lastQuestion || '—', '');
+    lines.push(`## ${t.answerTitle}`, '', data.answer || '—', '');
+    lines.push(`_${t.confidenceLabel}: ${pct}%_`, '');
+    const sources = Array.isArray(data.sources) ? data.sources : [];
+    if (sources.length > 0) {
+      lines.push(`## ${t.sourcesLabel}`, '');
+      sources.forEach((s) => lines.push(`- ${s}`));
+      lines.push('');
+    }
+    lines.push('---', t.fileFooter, '');
+    window.__demoGate.arm('faq', {
+      text: lines.join('\n'),
+      filename: lang === 'de' ? 'faq-antwort-paket.md' : 'faq-answer-pack.md',
+      mime: 'text/markdown;charset=utf-8;',
+    });
+    gateEl.classList.remove('hidden');
   }
 
   // Endpoint unreachable (timeout/network/offline): show a canned sample + booking CTA.
@@ -236,10 +274,12 @@ const t = {
   async function submitQuestion() {
     const question = questionInput.value.trim();
     if (!question) { showError(t.errorEmpty); return; }
+    lastQuestion = question;
 
     errorEl.classList.add('hidden');
     offlineEl.classList.add('hidden');
     offlineCta.classList.add('hidden');
+    document.getElementById('faq-gate')?.classList.add('hidden');
     inputArea.classList.add('hidden');
     loadingEl.classList.remove('hidden');
 
