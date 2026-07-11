@@ -1,8 +1,7 @@
 ---
 title: "5 Signs Your Business Needs Workflow Automation"
 description: "Is your team drowning in repetitive tasks? Here are five clear indicators that it's time to automate your business processes."
-pubDate: 2025-01-15
-updatedDate: 2026-07-04
+pubDate: 2026-01-05
 category: automation
 tags: ["workflow", "efficiency", "business-growth"]
 heroImage: "/images/blog/5-signs-automation.png"

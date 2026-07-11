@@ -1,8 +1,7 @@
 ---
 title: "Fallstudie: KI-Support-Triage für E-Commerce"
 description: "Ein fiktives Szenario: Erstantwortzeit von 8 Stunden auf 15 Minuten reduzieren und 60% der Support-Tickets automatisch lösen – mit KI-gestützter Klassifizierung und Routing."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
 tags: ["support", "triage", "n8n", "slack", "ai", "claude", "ollama", "e-commerce"]

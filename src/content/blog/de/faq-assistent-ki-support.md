@@ -1,8 +1,7 @@
 ---
 title: "24/7 KI-Support ohne Nachtschicht: FAQ-Assistent für Ihr Unternehmen"
 description: "Wie Sie mit n8n, OpenAI-Embeddings und Claude wiederkehrende Support-Anfragen automatisieren – und sich auf die Fragen konzentrieren, die wirklich Ihre Zeit brauchen."
-pubDate: 2025-04-10
-updatedDate: 2026-07-04
+pubDate: 2026-05-14
 category: automation
 tags: ["faq", "support", "ki", "rag", "n8n", "vektordatenbank"]
 heroImage: "/images/blog/faq-automation.png"

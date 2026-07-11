@@ -1,8 +1,7 @@
 ---
 title: "Rechnungsverarbeitung automatisieren mit KI"
 description: "Wie Sie mit n8n und Claude Vision API Ihre Rechnungsverarbeitung von Stunden auf Sekunden reduzieren. Ein Praxisbeispiel mit ROI-Berechnung."
-pubDate: 2025-01-22
-updatedDate: 2026-07-04
+pubDate: 2026-04-20
 heroImage: "/images/blog/invoice-automation.png"
 category: documents
 tags: ["rechnungen", "ki", "n8n", "automatisierung", "fallstudie"]

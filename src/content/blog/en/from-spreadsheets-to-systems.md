@@ -1,8 +1,7 @@
 ---
 title: "Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI"
 description: "How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude – instead of spending hours on manual data work."
-pubDate: 2025-03-12
-updatedDate: 2026-07-04
+pubDate: 2026-01-22
 category: automation
 tags: ["spreadsheets", "excel", "contacts", "data-cleaning", "n8n", "ai"]
 heroImage: "/images/blog/from-spreadsheets-to-systems.png"

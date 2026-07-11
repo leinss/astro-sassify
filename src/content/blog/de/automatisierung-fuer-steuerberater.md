@@ -1,7 +1,7 @@
 ---
 title: "Automatisierung für Steuerberater und Steuerkanzleien: Wo Sie starten"
 description: "Wie Steuerkanzleien die Belegerfassung automatisieren, fehlende Mandantenunterlagen automatisch anmahnen und Mandantendaten im Haus behalten — mit einem realistischen ersten Projekt."
-pubDate: 2026-07-04
+pubDate: 2026-05-23
 category: automation
 tags: ["steuerberater", "steuerkanzlei", "belegerfassung", "dsgvo"]
 heroImage: "/images/blog/case-study-invoice.png"
