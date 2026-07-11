@@ -8,7 +8,7 @@ interface Props {
 const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
-const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/meeting-protokoll';
+const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/meeting-protokoll';
 const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
 
 // Audio upload + Whisper + LLM can run long on a cold start; abort well above the ~60 s hint.

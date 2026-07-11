@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: Automatisierte Lead-Pflege für ein SaaS-Startup"
-description: "Ein fiktives Szenario: Lead-Reaktionszeit von 2 Tagen auf 4 Stunden reduzieren und qualifizierte Leads um 35% steigern – mit n8n, Notion und KI-gestütztem Lead-Scoring."
+description: "Beispiel-Implementierung: Wie sich Lead-Reaktionszeit von Tagen auf Stunden bringen und der Anteil qualifizierter Leads deutlich steigern lässt – mit n8n, Notion und KI-gestütztem Lead-Scoring."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: de
 alternateSlug: "case-study-crm-lead-nurturing"
 ---
 
-> **Kurz gesagt:** Ein B2B-SaaS-Startup mit 15 Mitarbeitern hat seine Lead-Bearbeitung mit n8n, Notion und KI-Scoring automatisiert. Die Reaktionszeit sank von 2 Tagen auf 4 Stunden, qualifizierte Leads stiegen von 12% auf 35%, und jeder Vertriebsmitarbeiter gewann 6 Stunden pro Woche zurück. Der Aufbau war nach 6 Wochen bezahlt.
+> **Kurz gesagt:** Ein B2B-SaaS-Startup kann seine Lead-Bearbeitung mit n8n, Notion und KI-Scoring automatisieren, um die Reaktionszeit von Tagen auf wenige Stunden zu senken, den Anteil qualifizierter Leads deutlich zu heben und jedem Vertriebsmitarbeiter mehrere Stunden pro Woche zurückzugeben.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
+> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
 
-Ein B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit damit, Daten zwischen Tools zu kopieren, als zu verkaufen. Hier ist das System, mit dem ich das löse – und die Zahlen, die es bewegt hat.
+Ein B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit damit, Daten zwischen Tools zu kopieren, als zu verkaufen. Hier ist das System, mit dem ich das löse – und die Zahlen, die es bewegen kann.
 
 ## Auf einen Blick
 
@@ -120,9 +120,9 @@ Basierend auf dem KI-Score triggert n8n unterschiedliche Workflows:
 - Tag 3: Bildungsinhalte basierend auf ihrer Branche
 - Tag 7: Soft-Ask für ein Gespräch mit spezifischem Wertversprechen
 
-## Ergebnisse
+## Erreichbare Ergebnisse
 
-Nach 3 Monaten mit dem automatisierten System:
+Was ein solches System für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
 
 | Metrik | Vorher | Nachher | Änderung |
 |--------|--------|---------|----------|
@@ -132,7 +132,7 @@ Nach 3 Monaten mit dem automatisierten System:
 | Verlorene Leads | ~40% | <5% | -87% |
 | Pipeline-Geschwindigkeit | 45 Tage | 28 Tage | -38% |
 
-**ROI**: Implementierungskosten nach 6 Wochen durch erhöhte Conversion amortisiert.
+**ROI**: Durch die höhere Conversion kann sich der Aufbau in der Größenordnung weniger Wochen amortisieren – der konkrete Wert hängt von Ihrem Lead-Volumen und Deal-Größen ab.
 
 ## Implementierungsdetails
 

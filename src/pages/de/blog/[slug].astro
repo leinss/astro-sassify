@@ -150,6 +150,14 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
           </p>
         </header>
 
+        <!-- Live Demo Widgets — surfaced above the article so the interactive
+             proof sits under the intro, not buried at the bottom. -->
+        {showInvoiceDemo && <InvoiceDemoWidget lang="de" />}
+        {showBlitzDemo && <BlitzAntwortDemo lang="de" />}
+        {showMeetingDemo && <MeetingBotDemo lang="de" />}
+        {showExcelDemo && <ExcelRetterDemo lang="de" />}
+        {showFAQDemo && <FAQAssistentDemo lang="de" />}
+
         <!-- Content -->
         <div class="prose prose-lg dark:prose-invert max-w-none
           prose-headings:text-secondary-900 dark:prose-headings:text-white
@@ -165,13 +173,6 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
         ">
           <Content />
         </div>
-
-        <!-- Live Demo Widgets -->
-        {showInvoiceDemo && <InvoiceDemoWidget lang="de" />}
-        {showBlitzDemo && <BlitzAntwortDemo lang="de" />}
-        {showMeetingDemo && <MeetingBotDemo lang="de" />}
-        {showExcelDemo && <ExcelRetterDemo lang="de" />}
-        {showFAQDemo && <FAQAssistentDemo lang="de" />}
 
         <!-- Tags -->
         {post.data.tags && post.data.tags.length > 0 && (

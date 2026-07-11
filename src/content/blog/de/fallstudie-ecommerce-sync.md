@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: Multi-Plattform Inventar-Sync für Retail"
-description: "Ein fiktives Szenario: 95% der Bestandsabweichungen eliminieren und Listing-Zeit von 30 Minuten auf 3 Minuten reduzieren – über Shopify, WooCommerce und Amazon."
+description: "Beispiel-Implementierung: Wie sich der Großteil der Bestandsabweichungen eliminieren und die Listing-Zeit von Minuten auf einen Bruchteil bringen lässt – über Shopify, WooCommerce und Amazon."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: de
 alternateSlug: "case-study-ecommerce-sync"
 ---
 
-> **Kurz gesagt:** Ein Multi-Channel-Händler mit 2.000 SKUs verkaufte ständig zu viel, weil der Bestand in Spreadsheets lag und von Hand synchronisiert wurde. Ein zentraler n8n-Hub mit Echtzeit-Webhooks senkte die Bestandsabweichungen um 95%, reduzierte die Listing-Zeit von 30 auf 3 Minuten und brachte den ersten Black Friday ganz ohne Überverkäufe.
+> **Kurz gesagt:** Ein Multi-Channel-Händler mit Tausenden SKUs, der ständig zu viel verkauft, weil der Bestand in Spreadsheets liegt und von Hand synchronisiert wird, kann einen zentralen n8n-Hub mit Echtzeit-Webhooks einsetzen, um den Großteil der Bestandsabweichungen zu eliminieren, die Listing-Zeit auf einen Bruchteil zu senken und Peak-Tage wie Black Friday ohne Überverkäufe zu überstehen.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
+> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
 
-Ein Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lief isoliert, also waren Überverkäufe Routine, Listings drifteten auseinander, und das Team verbrannte Stunden mit manuellen Updates. Hier ist der zentrale Sync-Hub, den ich baue – und die Zahlen, die er bewegt hat.
+Ein Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lief isoliert, also waren Überverkäufe Routine, Listings drifteten auseinander, und das Team verbrannte Stunden mit manuellen Updates. Hier ist der zentrale Sync-Hub, den ich baue – und die Zahlen, die er bewegen kann.
 
 ## Auf einen Blick
 
@@ -232,9 +232,9 @@ Für Amazons Verzögerung halten wir einen "pending"-Status:
 - Bestätigen wenn Amazon-Feed abgeschlossen
 - Alert wenn Feed fehlschlägt
 
-## Ergebnisse
+## Erreichbare Ergebnisse
 
-Nach 2 Monaten in Produktion:
+Was ein solcher Sync-Hub für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
 
 | Metrik | Vorher | Nachher | Änderung |
 |--------|--------|---------|----------|
@@ -244,12 +244,12 @@ Nach 2 Monaten in Produktion:
 | Inventar-Sync-Frequenz | Täglich | Echtzeit | ∞ |
 | Zeit für Inventar-Ops | 15 Std./Woche | 3 Std./Woche | -80% |
 
-**Zusätzliche Erfolge**:
-- Black Friday: Null Überverkäufe (erstmals überhaupt)
-- Neuer Marktplatz (Kaufland): In 2 Tagen hinzugefügt, nicht 2 Wochen
-- Bestandsgenauigkeit: 99,7% (vorher 85%)
+**Weitere mögliche Effekte**:
+- Peak-Tage wie Black Friday ohne Überverkäufe
+- Neuer Marktplatz in Tagen statt Wochen angebunden
+- Bestandsgenauigkeit nahe 100 % statt der üblichen Spreadsheet-Drift
 
-**ROI**: €4.500/Monat Personalkosten gespart + €2.000/Monat vermiedene Überverkaufskosten.
+**ROI**: In dieser Größenordnung sind Einsparungen von mehreren tausend Euro pro Monat aus Personalzeit plus vermiedenen Überverkaufskosten erreichbar – die konkreten Zahlen hängen von SKU-Anzahl, Kanälen und Marge ab.
 
 ## Technische Details
 

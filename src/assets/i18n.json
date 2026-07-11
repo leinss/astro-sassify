@@ -25,7 +25,7 @@
       "subline": "Less manual work. More time for what matters.",
       "headline_start": "Automation your business owns",
       "headline_end": "engineered, documented, handed to your team.",
-      "intro_text": "The fast start is proven tools — n8n, AI, clean integrations. The lasting result is a system you own and run on your own infrastructure, engineered by someone who knows every layer of the stack.\n\nNot low-code you rent and can't change: durable, adaptable automation with a clear payback, documented and handed to your team. No black boxes, no vendor lock-in.",
+      "intro_text": "The fast start is proven tools — n8n, AI, clean integrations. The lasting result is a custom-tailored system built around your processes, owned by you and run on your own infrastructure, engineered by someone who knows every layer of the stack.\n\nNot off-the-shelf low-code you rent and can't change: durable, bespoke automation with a clear payback, documented and handed to your team. No black boxes, no vendor lock-in.",
       "point_1_start": "CRM & Sales",
       "point_1_end": "Automate lead management, follow-ups, and deal progression. Never miss an opportunity again.",
       "point_2_start": "Document Workflows",
@@ -34,7 +34,18 @@
       "point_3_end": "Connect your tools. Sync data across platforms. Build workflows that work together.",
       "cta": "Book your free consultation",
       "cta_primary": "Free strategy call",
-      "cta_reassurance": "30-day fix guarantee · you own the code · no lock-in"
+      "cta_reassurance": "30-day fix guarantee · you own the code · no lock-in",
+      "trust_label": "Background",
+      "trust_badges": [
+        "Fraunhofer research background",
+        "Ethereum & Cosmos infrastructure",
+        "Hackathon winner",
+        "Co-founded startups",
+        "Runs self-hosted infrastructure in the EU"
+      ],
+      "apps_bridge": "Want to see how I ship? My own apps at leinss.xyz are my work samples — live products I designed, built, and run.",
+      "apps_bridge_cta": "See my apps →",
+      "apps_bridge_url": "https://leinss.xyz"
     },
     "problem_solution": {
       "problem_headline": "Sound familiar?",
@@ -172,7 +183,7 @@
       "offers": {
         "eyebrow": "Fixed packages, clear scope",
         "title": "Productized packages",
-        "subtitle": "Clear scope and clear timeline — you know where you stand before the first call. Pricing depends on the concrete scope and is confirmed on the intro call. Larger work is quoted individually.",
+        "subtitle": "Clear scope and clear timeline — you know where you stand before the first call. Each package is a starting point, then tailored to your processes and handed over documented, so nothing is locked to me. Pricing depends on the concrete scope and is confirmed on the intro call. Larger work is quoted individually.",
         "net_note": "Prices are net, plus VAT, for the defined scope.",
         "cta_label": "One of these a fit? Let's confirm it on the intro call.",
         "timeline_label": "Timeline",
@@ -438,7 +449,7 @@
       "subline": "Weniger manuelle Arbeit. Mehr Zeit fürs Wesentliche.",
       "headline_start": "Automatisierung, die Ihnen gehört",
       "headline_end": "entwickelt, dokumentiert, an Ihr Team übergeben.",
-      "intro_text": "Der schnelle Start sind bewährte Tools – n8n, KI, saubere Integrationen. Das bleibende Ergebnis ist ein System, das Ihnen gehört und auf Ihrer eigenen Infrastruktur läuft, entwickelt von jemandem, der jede Ebene des Stacks kennt.\n\nKein Low-Code zum Mieten, das Sie nicht ändern können: belastbare, anpassbare Automatisierung mit klarem Return, dokumentiert und an Ihr Team übergeben. Keine Blackbox, kein Vendor-Lock-in.",
+      "intro_text": "Der schnelle Start sind bewährte Tools – n8n, KI, saubere Integrationen. Das bleibende Ergebnis ist ein maßgeschneidertes System, das auf Ihre Prozesse zugeschnitten ist, Ihnen gehört und auf Ihrer eigenen Infrastruktur läuft, entwickelt von jemandem, der jede Ebene des Stacks kennt.\n\nKein Low-Code von der Stange zum Mieten, das Sie nicht ändern können: belastbare, maßgeschneiderte Automatisierung mit klarem Return, dokumentiert und an Ihr Team übergeben. Keine Blackbox, kein Vendor-Lock-in.",
       "point_1_start": "CRM & Vertrieb",
       "point_1_end": "Automatisieren Sie Lead-Management, Follow-ups und Deal-Fortschritt. Verpassen Sie keine Chance mehr.",
       "point_2_start": "Dokumenten-Workflows",
@@ -447,7 +458,18 @@
       "point_3_end": "Verbinden Sie Ihre Tools. Synchronisieren Sie Daten über Plattformen hinweg. Bauen Sie Workflows, die zusammenarbeiten.",
       "cta": "Kostenloses Erstgespräch buchen",
       "cta_primary": "Kostenloses Strategiegespräch",
-      "cta_reassurance": "30 Tage Fix-Garantie · Sie besitzen den Code · kein Lock-in"
+      "cta_reassurance": "30 Tage Fix-Garantie · Sie besitzen den Code · kein Lock-in",
+      "trust_label": "Hintergrund",
+      "trust_badges": [
+        "Forschungshintergrund Fraunhofer",
+        "Ethereum- & Cosmos-Infrastruktur",
+        "Hackathon-Gewinner",
+        "Startups mitgegründet",
+        "Betreibt selbst gehostete Infrastruktur in der EU"
+      ],
+      "apps_bridge": "Sie wollen sehen, wie ich liefere? Meine eigenen Apps auf leinss.xyz sind meine Arbeitsproben – laufende Produkte, die ich entworfen, gebaut und im Betrieb habe.",
+      "apps_bridge_cta": "Meine Apps ansehen →",
+      "apps_bridge_url": "https://leinss.xyz"
     },
     "problem_solution": {
       "problem_headline": "Kommt Ihnen das bekannt vor?",
@@ -585,7 +607,7 @@
       "offers": {
         "eyebrow": "Feste Pakete, klarer Umfang",
         "title": "Produktisierte Pakete",
-        "subtitle": "Klarer Umfang und klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Der Preis richtet sich nach dem konkreten Umfang und wird im Erstgespräch geklärt. Größere Vorhaben werden individuell angeboten.",
+        "subtitle": "Klarer Umfang und klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Jedes Paket ist ein Ausgangspunkt und wird dann auf Ihre Prozesse maßgeschneidert und dokumentiert übergeben – nichts bleibt an mich gebunden. Der Preis richtet sich nach dem konkreten Umfang und wird im Erstgespräch geklärt. Größere Vorhaben werden individuell angeboten.",
         "net_note": "Preise verstehen sich netto, zzgl. USt., für den definierten Umfang.",
         "cta_label": "Passt eines dieser Pakete? Lassen Sie es uns im Erstgespräch klären.",
         "timeline_label": "Dauer",

@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: KI-Support-Triage für E-Commerce"
-description: "Ein fiktives Szenario: Erstantwortzeit von 8 Stunden auf 15 Minuten reduzieren und 60% der Support-Tickets automatisch lösen – mit KI-gestützter Klassifizierung und Routing."
+description: "Beispiel-Implementierung: Wie sich Erstantwortzeit von Stunden auf Minuten bringen und ein Großteil repetitiver Support-Tickets automatisch lösen lässt – mit KI-gestützter Klassifizierung und Routing."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: de
 alternateSlug: "case-study-support-triage"
 ---
 
-> **Kurz gesagt:** Das 5-köpfige Support-Team eines E-Commerce-Händlers erstickte unter 8-Stunden-Erstantwortzeiten und einer Flut repetitiver "Wo ist meine Bestellung?"-Tickets. Eine KI-Triage-Schicht auf n8n und Claude klassifizierte, routete und beantwortete häufige Anfragen – die Erstantwort sank auf 15 Minuten, 60% der Tickets wurden ohne Agent gelöst, und die Kundenzufriedenheit stieg von 3,2 auf 4,6.
+> **Kurz gesagt:** Ein kleines Support-Team eines E-Commerce-Händlers, das unter stundenlangen Erstantwortzeiten und einer Flut repetitiver "Wo ist meine Bestellung?"-Tickets erstickt, kann eine KI-Triage-Schicht auf n8n und Claude einsetzen, um häufige Anfragen zu klassifizieren, zu routen und zu beantworten – die Erstantwort fällt auf Minuten, ein Großteil der Tickets wird ohne Agent gelöst, und die Kundenzufriedenheit steigt spürbar.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
+> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
 
-Das Support-Team eines Online-Händlers war überlastet. Anfragen häuften sich, dringende Probleme gingen zwischen Routinefällen unter, und die Antwortzeiten dehnten sich auf Tage aus. Hier ist die Triage-Schicht, die ich baue, um häufige Anfragen automatisch zu klassifizieren, zu routen und zu beantworten – und die Zahlen, die sie bewegt hat.
+Das Support-Team eines Online-Händlers war überlastet. Anfragen häuften sich, dringende Probleme gingen zwischen Routinefällen unter, und die Antwortzeiten dehnten sich auf Tage aus. Hier ist die Triage-Schicht, die ich baue, um häufige Anfragen automatisch zu klassifizieren, zu routen und zu beantworten – und die Zahlen, die sie bewegen kann.
 
 ## Auf einen Blick
 
@@ -177,9 +177,9 @@ Zur Kostenoptimierung nutzen wir Mistral 7B lokal für die initiale Klassifizier
 - Claude API nur bei Mehrdeutigkeit oder hoher Dringlichkeit aufgerufen
 - Reduziert API-Kosten um 70%
 
-## Ergebnisse
+## Erreichbare Ergebnisse
 
-Nach 6 Wochen in Produktion:
+Was eine solche Triage-Schicht für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
 
 | Metrik | Vorher | Nachher | Änderung |
 |--------|--------|---------|----------|
@@ -195,7 +195,7 @@ Nach 6 Wochen in Produktion:
 - Retourenrichtlinien-Fragen: 80% auto-gelöst
 - Kontoprobleme: 40% auto-gelöst (oft manuelle Verifizierung nötig)
 
-**Agent-Feedback**: "Ich bearbeite jetzt interessante Probleme statt Tracking-Nummern zu kopieren."
+**Effekt fürs Team**: Agents bearbeiten die interessanten Fälle, statt den Tag mit dem Kopieren von Tracking-Nummern zu verbringen.
 
 ## Implementierungsdetails
 
