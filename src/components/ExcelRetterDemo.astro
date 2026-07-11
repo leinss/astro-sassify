@@ -8,7 +8,7 @@ interface Props {
 const { lang = 'de' } = Astro.props;
 const isDE = lang === 'de';
 
-const WEBHOOK_URL = 'https://n8n.esprimo.leinss.xyz/webhook/excel-retter';
+const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/excel-retter';
 const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
 
 // Abort the request after this long; the displayed hint is ~15–30 s, so allow headroom.
