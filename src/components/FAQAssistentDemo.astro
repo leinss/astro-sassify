@@ -52,6 +52,9 @@ const t = {
     ? '⚙️ Kein Mock-up — Ihre Frage läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
     : '⚙️ Not a mock-up — your question runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
+  rateLimited: isDE
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
   errorEmpty: isDE ? 'Bitte stellen Sie eine Frage.' : 'Please enter a question.',
   offlineBadge: isDE
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
@@ -292,11 +295,19 @@ const t = {
       });
       const data = await res.json().catch(() => null);
 
+      // Rate-limited by the demo gateway (per-IP burst or global daily cap).
+      if (res.status === 429) {
+        loadingEl.classList.add('hidden');
+        inputArea.classList.remove('hidden');
+        showError((data && data.message) || t.rateLimited);
+        return;
+      }
+
       // Server responded but rejected the input — show the real reason, not a sample.
       if (data && data.success === false) {
         loadingEl.classList.add('hidden');
         inputArea.classList.remove('hidden');
-        showError(data.error || t.errorGeneric);
+        showError(data.message || data.error || t.errorGeneric);
         return;
       }
       // Require a successful, well-formed answer; otherwise (non-OK / garbage 200 / missing

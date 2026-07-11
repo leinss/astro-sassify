@@ -54,6 +54,9 @@ const t = {
     : 'This is a real AI-generated response — not pre-written. In your implementation, this email would be sent directly to the given address.',
   errorRequired: isDE ? 'Bitte Name, Unternehmen und Nachricht ausfüllen.' : 'Please fill in name, company, and message.',
   errorGeneric: isDE ? 'Anfrage fehlgeschlagen. Bitte erneut versuchen.' : 'Request failed. Please try again.',
+  rateLimited: isDE
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
   offlineBadge: isDE
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
     : '⚡ Live demo temporarily offline – this is sample output.',
@@ -218,6 +221,13 @@ const t = {
         signal: AbortSignal.timeout(TIMEOUT_MS),
       });
       const data = await resp.json().catch(() => null);
+      // Rate-limited by the demo gateway (per-IP burst or global daily cap).
+      if (resp.status === 429) {
+        loadingEl.classList.add('hidden');
+        form.classList.remove('hidden');
+        showError((data && data.message) || t.rateLimited);
+        return;
+      }
       // No success flag from this endpoint; require the generated body. An unexpected/empty
       // 200 → sample fallback rather than showing "(keine Antwort generiert)" as a real reply.
       if (!resp.ok || !data || !data.body) throw new Error(`HTTP ${resp.status}`);
