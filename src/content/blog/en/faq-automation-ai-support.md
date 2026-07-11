@@ -1,8 +1,7 @@
 ---
 title: "24/7 AI Support Without the Night Shift: FAQ Automation for Your Business"
 description: "How to automate repetitive support questions with n8n, OpenAI embeddings, and Claude — and focus your time on the requests that actually need you."
-pubDate: 2025-04-10
-updatedDate: 2026-07-04
+pubDate: 2026-05-14
 category: automation
 tags: ["faq", "support", "ai", "rag", "n8n", "vector-database"]
 heroImage: "/images/blog/faq-automation.png"

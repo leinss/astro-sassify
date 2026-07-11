@@ -1,8 +1,7 @@
 ---
 title: "Case Study: AI-Powered Invoice Processing for an Accounting Firm"
 description: "A fictional scenario showing how to cut invoice processing from 15 minutes to 90 seconds per document with 99.2% accuracy using n8n, Claude Vision, and intelligent validation."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]

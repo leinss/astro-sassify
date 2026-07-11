@@ -1,8 +1,7 @@
 ---
 title: "Nie wieder Meeting-Protokolle schreiben: KI-Automatisierung für Besprechungen"
 description: "Ein 1-stündiges Meeting produziert 20 Minuten Nacharbeit – Protokoll schreiben, verteilen, nachfassen. Mit n8n, Whisper und Claude erledigt ein Workflow das in 90 Sekunden."
-pubDate: 2025-03-10
-updatedDate: 2026-07-04
+pubDate: 2026-05-06
 category: automation
 tags: ["meeting", "protokoll", "transkription", "n8n", "ki", "whisper"]
 heroImage: "/images/blog/meeting-automation.png"

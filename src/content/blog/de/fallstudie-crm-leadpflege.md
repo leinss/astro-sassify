@@ -1,8 +1,7 @@
 ---
 title: "Fallstudie: Automatisierte Lead-Pflege für ein SaaS-Startup"
 description: "Ein fiktives Szenario: Lead-Reaktionszeit von 2 Tagen auf 4 Stunden reduzieren und qualifizierte Leads um 35% steigern – mit n8n, Notion und KI-gestütztem Lead-Scoring."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]

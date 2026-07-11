@@ -1,7 +1,7 @@
 ---
 title: "Automatisierung für E-Commerce: Bestand, Support und Bestellablauf"
 description: "Die E-Commerce-Prozesse, die sich zuerst lohnen — Bestandsabgleich über alle Kanäle, Support-Triage, Bestell-Updates und Warenkorb-Recovery — jeweils mit echtem Ergebnis und Startpunkt."
-pubDate: 2026-07-04
+pubDate: 2026-05-30
 category: automation
 tags: ["ecommerce", "bestandsabgleich", "kundensupport", "automatisierung"]
 heroImage: "/images/blog/case-study-ecommerce.png"

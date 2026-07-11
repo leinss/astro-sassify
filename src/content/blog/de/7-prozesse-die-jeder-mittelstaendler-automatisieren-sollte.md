@@ -1,7 +1,7 @@
 ---
 title: "7 Prozesse, die jeder Mittelständler zuerst automatisieren sollte"
 description: "Die sieben Geschäftsprozesse mit der schnellsten Amortisation — Dateneingabe, Lead-Antwort, Meeting-Protokolle, Reporting und mehr — jeweils mit echtem Vorher/Nachher und dem richtigen Startpunkt."
-pubDate: 2026-07-04
+pubDate: 2026-02-08
 category: automation
 tags: ["automatisierung", "mittelstand", "workflow", "produktivität"]
 heroImage: "/images/blog/from-manual-to-automated.png"

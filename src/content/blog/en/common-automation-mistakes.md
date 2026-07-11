@@ -1,8 +1,7 @@
 ---
 title: "Common Automation Mistakes and How to Avoid Them"
 description: "Learn from others' mistakes: the most common automation pitfalls and how to steer clear of them."
-pubDate: 2025-03-05
-updatedDate: 2026-07-04
+pubDate: 2026-03-06
 category: automation
 tags: ["best-practices", "pitfalls", "planning"]
 heroImage: "/images/blog/common-automation-mistakes.png"

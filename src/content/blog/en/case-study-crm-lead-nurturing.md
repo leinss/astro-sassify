@@ -1,8 +1,7 @@
 ---
 title: "Case Study: Automated Lead Nurturing for a SaaS Startup"
 description: "A fictional scenario showing how to reduce lead response time from 2 days to 4 hours and increase qualified leads by 35% using n8n, Notion, and AI-powered lead scoring."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]
