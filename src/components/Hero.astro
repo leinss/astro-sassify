@@ -106,36 +106,20 @@ const t = i18n[lang];
       </p>
     </div>
 
-    <!-- Trust / proof strip -->
-    <div class="mt-10 md:mt-14 max-w-3xl mx-auto text-center">
-      <p class="text-xs uppercase tracking-wider text-secondary-400 dark:text-secondary-500 mb-3">
-        {t.hero.trust_label}
-      </p>
-      <div class="flex flex-wrap justify-center gap-2">
-        {
-          t.hero.trust_badges.map((badge: string) => (
-            <span class="px-3 py-1 text-xs sm:text-sm font-medium bg-white/70 dark:bg-secondary-800/60 border border-primary-100 dark:border-primary-800 text-secondary-700 dark:text-secondary-200 rounded-full">
-              {badge}
-            </span>
-          ))
-        }
-      </div>
-    </div>
-
     <!-- Cross-positioning bridge: own apps as work samples -->
-    <div class="mt-8 max-w-2xl mx-auto text-center">
-      <p class="text-sm text-secondary-600 dark:text-secondary-300">
-        {t.hero.apps_bridge}{" "}
-        <a
-          href={t.hero.apps_bridge_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-medium text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
-        >
-          {t.hero.apps_bridge_cta}
-        </a>
-      </p>
-    </div>
+    <p
+      class="mt-6 max-w-2xl mx-auto text-center text-sm sm:text-base md:text-lg leading-relaxed text-secondary-600 dark:text-secondary-300"
+    >
+      {t.hero.apps_bridge}{" "}
+      <a
+        href={t.hero.apps_bridge_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-medium text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
+      >
+        {t.hero.apps_bridge_cta}
+      </a>
+    </p>
   </div>
 </section>
 
