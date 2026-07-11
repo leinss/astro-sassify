@@ -83,6 +83,9 @@ const t = {
     ? '⚙️ Kein Mock-up — Ihre Daten laufen durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
     : '⚙️ Not a mock-up — your data runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
+  rateLimited: isDE
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
   statTotal: isDE ? 'Zeilen gesamt' : 'Total rows',
   statModified: isDE ? 'Bereinigt' : 'Modified',
   statDuplicates: isDE ? 'Duplikate entfernt' : 'Duplicates removed',
@@ -264,11 +267,20 @@ const t = {
 
       const data = await resp.json().catch(() => null);
 
+      // Rate-limited by the demo gateway (per-IP burst or global daily cap).
+      // Show the friendly limit copy instead of the offline sample.
+      if (resp.status === 429) {
+        loadingEl.classList.add('hidden');
+        form.classList.remove('hidden');
+        showError((data && data.message) || t.rateLimited);
+        return;
+      }
+
       // Server responded but rejected the input — show the real reason, not a sample.
       if (data && data.success === false) {
         loadingEl.classList.add('hidden');
         form.classList.remove('hidden');
-        showError(data.error || t.errorGeneric);
+        showError(data.message || data.error || t.errorGeneric);
         return;
       }
       // Require a successful, well-formed result; otherwise (non-OK / garbage 200 / missing
