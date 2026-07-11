@@ -70,6 +70,9 @@ const t = {
     : '⚙️ Not a mock-up — your audio file runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   fileTooLarge: isDE ? 'Datei zu groß. Maximal 25 MB.' : 'File too large. Maximum 25 MB.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
+  rateLimited: isDE
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
   tryAnother: isDE ? 'Nochmal testen' : 'Try another',
   offlineBadge: isDE
     ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
@@ -234,6 +237,13 @@ const t = {
       const resp = await fetch(WEBHOOK_URL, { method: 'POST', body: fd, signal: AbortSignal.timeout(TIMEOUT_MS) });
       clearTimeout(stepTimer);
       const data = await resp.json().catch(() => null);
+      // Rate-limited by the demo gateway (per-IP burst or global daily cap).
+      if (resp.status === 429) {
+        loadingEl.classList.add('hidden');
+        form.classList.remove('hidden');
+        showError((data && data.message) || t.rateLimited);
+        return;
+      }
       // Treat an unexpected/empty 200 (no minutes shape) as a failure → sample fallback,
       // so a misconfigured backend never renders a blank "result" as if it succeeded.
       const valid = data && (Array.isArray(data.summary) || Array.isArray(data.action_items));
