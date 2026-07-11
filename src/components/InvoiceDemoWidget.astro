@@ -14,8 +14,10 @@ const t = {
   subtitle: isDE
     ? 'Laden Sie eine Rechnung hoch und sehen Sie, wie die KI die Daten in Sekunden extrahiert.'
     : 'Upload an invoice and watch the AI extract data in seconds.',
-  fileLabel: isDE ? 'Rechnungsbild auswählen' : 'Select invoice image',
-  fileHint: isDE ? 'PNG, JPG, JPEG, WEBP · max. 10 MB' : 'PNG, JPG, JPEG, WEBP · max. 10 MB',
+  fileLabel: isDE ? 'Rechnung auswählen' : 'Select invoice',
+  fileHint: isDE ? 'PDF, PNG, JPG, JPEG, WEBP · max. 10 MB' : 'PDF, PNG, JPG, JPEG, WEBP · max. 10 MB',
+  pdfConverting: isDE ? 'PDF wird vorbereitet…' : 'Preparing PDF…',
+  pdfError: isDE ? 'PDF konnte nicht gelesen werden. Bitte als Bild (PNG/JPG) hochladen.' : 'Could not read the PDF. Please upload it as an image (PNG/JPG).',
   submit: isDE ? 'Analysieren →' : 'Analyze →',
   loading: isDE ? 'KI analysiert Rechnung...' : 'AI analyzing invoice...',
   loadingHint: isDE ? '~15–30 Sekunden' : '~15–30 seconds',
@@ -62,7 +64,7 @@ const t = {
         {t.fileLabel}
       </label>
       <div class="relative border-2 border-dashed border-secondary-300 dark:border-secondary-600 rounded-xl p-6 text-center hover:border-primary-400 dark:hover:border-primary-500 transition-colors">
-        <input type="file" id="invoice-file" accept=".png,.jpg,.jpeg,.webp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+        <input type="file" id="invoice-file" accept=".pdf,.png,.jpg,.jpeg,.webp,application/pdf,image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto mb-2 text-secondary-400 dark:text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
         </svg>
@@ -140,25 +142,39 @@ const t = {
     const file = fileInput.files?.[0];
     if (!file) return;
 
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+
     form.classList.add('hidden');
     loadingEl.classList.remove('hidden');
     resultsEl.classList.add('hidden');
     document.getElementById('invoice-gate')?.classList.add('hidden');
 
     try {
-      const base64 = await fileToBase64(file);
+      let base64, mimeType, fileName;
+      if (isPdf) {
+        // The backend runs a vision model on an image. Rasterise page 1 of the
+        // PDF client-side (pdf.js) and send it as PNG — backend stays unchanged.
+        const png = await pdfFirstPageToPng(file);
+        base64 = png;
+        mimeType = 'image/png';
+        fileName = file.name.replace(/\.pdf$/i, '') + '.png';
+      } else {
+        base64 = await fileToBase64(file);
+        mimeType = file.type;
+        fileName = file.name;
+      }
       const resp = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageBase64: base64, mimeType: file.type, fileName: file.name }),
+        body: JSON.stringify({ imageBase64: base64, mimeType, fileName }),
       });
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
       renderResults(data);
-    } catch {
+    } catch (err) {
       loadingEl.classList.add('hidden');
       form.classList.remove('hidden');
-      showError(t.errorGeneric);
+      showError(err && err.__pdf ? t.pdfError : t.errorGeneric);
     }
   });
 
@@ -169,6 +185,49 @@ const t = {
       reader.onerror = reject;
       reader.readAsDataURL(file);
     });
+  }
+
+  // Lazily load pdf.js from CDN and render the first page to a PNG data string
+  // (base64 without the data-URL prefix). Keeps the widget image-only on the
+  // wire while accepting PDF uploads.
+  let pdfjsPromise = null;
+  function loadPdfjs() {
+    if (pdfjsPromise) return pdfjsPromise;
+    const V = '4.4.168';
+    pdfjsPromise = import(`https://cdn.jsdelivr.net/npm/pdfjs-dist@${V}/build/pdf.min.mjs`).then((mod) => {
+      const pdfjs = mod.default || mod;
+      pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${V}/build/pdf.worker.min.mjs`;
+      return pdfjs;
+    });
+    return pdfjsPromise;
+  }
+
+  async function pdfFirstPageToPng(file) {
+    try {
+      const loadingMsgEl = loadingEl.querySelector('span.font-medium');
+      if (loadingMsgEl) loadingMsgEl.textContent = t.pdfConverting;
+      const pdfjs = await loadPdfjs();
+      const buf = await file.arrayBuffer();
+      const pdf = await pdfjs.getDocument({ data: buf }).promise;
+      const page = await pdf.getPage(1);
+      // Render at ~2x for legibility, capped so the PNG stays reasonable.
+      const scale = Math.min(2, 1600 / page.getViewport({ scale: 1 }).width);
+      const viewport = page.getViewport({ scale: scale > 0 ? scale : 1.5 });
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      await page.render({ canvasContext: ctx, viewport }).promise;
+      const dataUrl = canvas.toDataURL('image/png');
+      if (loadingMsgEl) loadingMsgEl.textContent = t.loading;
+      return dataUrl.split(',')[1];
+    } catch (e) {
+      const wrapped = new Error('pdf-convert-failed');
+      wrapped.__pdf = true;
+      throw wrapped;
+    }
   }
 
   function makeField(label, value) {
