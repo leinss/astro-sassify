@@ -39,7 +39,7 @@ const callUrl =
             {pkg.tagline}
           </p>
           {pkg.example && (
-            <p class="text-sm italic text-secondary-500 dark:text-secondary-400 mb-6">
+            <p class="text-sm sm:text-base italic text-secondary-500 dark:text-secondary-400 mb-6">
               {pkg.example}
             </p>
           )}
@@ -48,10 +48,10 @@ const callUrl =
               {t.price_on_request}
             </span>
           </div>
-          <p class="text-sm text-secondary-500 dark:text-secondary-400 mb-6">
+          <p class="text-sm sm:text-base text-secondary-500 dark:text-secondary-400 mb-6">
             {t.timeline_label}: {pkg.timeline}
           </p>
-          <p class="text-sm font-semibold text-secondary-700 dark:text-secondary-300 mb-3">
+          <p class="text-sm sm:text-base font-semibold text-secondary-700 dark:text-secondary-300 mb-3">
             {t.includes_label}
           </p>
           <ul class="space-y-3 mb-8 grow">
@@ -60,7 +60,7 @@ const callUrl =
                 <span class="text-primary-600 dark:text-primary-400 mt-0.5 shrink-0">
                   <BsCheckCircleFill className="w-4 h-4" />
                 </span>
-                <span class="text-secondary-700 dark:text-secondary-300 text-sm">
+                <span class="text-secondary-700 dark:text-secondary-300 text-sm sm:text-base">
                   {item}
                 </span>
               </li>
