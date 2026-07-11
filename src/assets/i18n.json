@@ -170,17 +170,17 @@
         "link_text": "Read: where n8n stops and code starts"
       },
       "offers": {
-        "eyebrow": "Fixed packages, fixed prices",
-        "title": "Productized packages with public pricing",
-        "subtitle": "Clear scope, clear price, clear timeline — you know where you stand before the first call. Larger work is quoted individually after the intro call.",
-        "net_note": "All prices plus VAT, for the defined scope.",
+        "eyebrow": "Fixed packages, clear scope",
+        "title": "Productized packages",
+        "subtitle": "Clear scope and clear timeline — you know where you stand before the first call. Pricing depends on the concrete scope and is confirmed on the intro call. Larger work is quoted individually.",
+        "net_note": "Prices are net, plus VAT, for the defined scope.",
         "cta_label": "One of these a fit? Let's confirm it on the intro call.",
         "timeline_label": "Timeline",
         "includes_label": "Included",
+        "price_on_request": "Pricing on request",
         "packages": [
           {
             "name": "Infrastructure & Self-Hosting Audit",
-            "price": "€1,900",
             "timeline": "~1 week",
             "tagline": "Know where your infrastructure stands — and what to do next.",
             "includes": [
@@ -192,7 +192,6 @@
           },
           {
             "name": "AI Feature Integration Sprint",
-            "price": "€5,900",
             "timeline": "2 weeks",
             "tagline": "One AI feature shipped to production — not just a demo.",
             "includes": [
@@ -204,7 +203,6 @@
           },
           {
             "name": "MVP Build",
-            "price": "€14,900",
             "timeline": "4 weeks",
             "tagline": "From idea to a usable web app that's yours to own.",
             "includes": [
@@ -585,17 +583,17 @@
         "link_text": "Lesen: Wo n8n aufhört und Code anfängt"
       },
       "offers": {
-        "eyebrow": "Feste Pakete, feste Preise",
-        "title": "Produktisierte Pakete mit öffentlichem Preis",
-        "subtitle": "Klarer Umfang, klarer Preis, klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Größere Vorhaben werden nach dem Erstgespräch individuell angeboten.",
-        "net_note": "Alle Preise zzgl. USt., für den definierten Umfang.",
+        "eyebrow": "Feste Pakete, klarer Umfang",
+        "title": "Produktisierte Pakete",
+        "subtitle": "Klarer Umfang und klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Der Preis richtet sich nach dem konkreten Umfang und wird im Erstgespräch geklärt. Größere Vorhaben werden individuell angeboten.",
+        "net_note": "Preise verstehen sich netto, zzgl. USt., für den definierten Umfang.",
         "cta_label": "Passt eines dieser Pakete? Lassen Sie es uns im Erstgespräch klären.",
         "timeline_label": "Dauer",
         "includes_label": "Enthalten",
+        "price_on_request": "Preis auf Anfrage",
         "packages": [
           {
             "name": "Infrastruktur- & Self-Hosting-Audit",
-            "price": "1.900 €",
             "timeline": "ca. 1 Woche",
             "tagline": "Wissen, wo Ihre Infrastruktur steht – und was als Nächstes zu tun ist.",
             "includes": [
@@ -607,7 +605,6 @@
           },
           {
             "name": "AI-Feature-Integrations-Sprint",
-            "price": "5.900 €",
             "timeline": "2 Wochen",
             "tagline": "Ein KI-Feature, das in Produktion geht – nicht nur eine Demo.",
             "includes": [
@@ -619,7 +616,6 @@
           },
           {
             "name": "MVP-Entwicklung",
-            "price": "14.900 €",
             "timeline": "4 Wochen",
             "tagline": "Von der Idee zur nutzbaren Web-App, die Ihnen gehört.",
             "includes": [
