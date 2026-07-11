@@ -1,6 +1,6 @@
 ---
 title: "Case Study: Multi-Platform Inventory Sync for Retail"
-description: "A fictional scenario showing how to eliminate 95% of stock discrepancies and reduce listing time from 30 minutes to 3 minutes across Shopify, WooCommerce, and Amazon."
+description: "Example implementation: how to eliminate most stock discrepancies and cut listing time from minutes to a fraction across Shopify, WooCommerce, and Amazon."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: en
 alternateSlug: "fallstudie-ecommerce-sync"
 ---
 
-> **Short answer:** A multi-channel retailer with 2,000 SKUs kept overselling because stock lived in spreadsheets and synced by hand. One central n8n hub with real-time webhooks cut stock discrepancies by 95%, dropped new-product listing time from 30 minutes to 3, and delivered its first-ever zero-oversell Black Friday.
+> **Short answer:** A multi-channel retailer with thousands of SKUs that keeps overselling because stock lives in spreadsheets and syncs by hand can deploy one central n8n hub with real-time webhooks to eliminate most stock discrepancies, cut new-product listing time to a fraction, and get through peak days like Black Friday without oversells.
 
-> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
+> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
 
-A retailer sold across Shopify, WooCommerce, Amazon, and eBay. Each platform lived in isolation, so overselling was routine, listings drifted apart, and the team burned hours on manual updates. Here's the central sync hub I'd build, and the numbers it moved.
+A retailer sold across Shopify, WooCommerce, Amazon, and eBay. Each platform lived in isolation, so overselling was routine, listings drifted apart, and the team burned hours on manual updates. Here's the central sync hub I'd build, and the numbers it can move.
 
 ## At a glance
 
@@ -232,9 +232,9 @@ For Amazon's delay, we maintain a "pending" state:
 - Confirm when Amazon feed completes
 - Alert if feed fails
 
-## Results
+## Achievable Results
 
-After 2 months in production:
+What a sync hub like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
 
 | Metric | Before | After | Change |
 |--------|--------|-------|--------|
@@ -244,12 +244,12 @@ After 2 months in production:
 | Inventory sync frequency | Daily | Real-time | ∞ |
 | Time on inventory ops | 15 hrs/week | 3 hrs/week | -80% |
 
-**Additional Wins**:
-- Black Friday: Zero oversells (first time ever)
-- New marketplace (Kaufland): Added in 2 days, not 2 weeks
-- Inventory accuracy: 99.7% (up from 85%)
+**Other possible effects**:
+- Peak days like Black Friday without oversells
+- New marketplace connected in days rather than weeks
+- Inventory accuracy near 100% instead of the usual spreadsheet drift
 
-**ROI**: €4,500/month in labor savings + €2,000/month in avoided oversell costs.
+**ROI**: At this scale, savings on the order of several thousand euros a month from labor time plus avoided oversell costs are achievable — the exact numbers depend on SKU count, channels, and margin.
 
 ## Technical Details
 

@@ -1,6 +1,6 @@
 ---
 title: "Case Study: Automated Lead Nurturing for a SaaS Startup"
-description: "A fictional scenario showing how to reduce lead response time from 2 days to 4 hours and increase qualified leads by 35% using n8n, Notion, and AI-powered lead scoring."
+description: "Example implementation: how to bring lead response time from days to hours and lift the share of qualified leads meaningfully using n8n, Notion, and AI-powered lead scoring."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: en
 alternateSlug: "fallstudie-crm-leadpflege"
 ---
 
-> **Short answer:** A 15-person B2B SaaS startup automated its lead handling with n8n, Notion, and AI scoring. Lead response time dropped from 2 days to 4 hours, qualified leads rose from 12% to 35%, and each rep got 6 hours a week back. The build paid for itself in 6 weeks.
+> **Short answer:** A B2B SaaS startup can automate its lead handling with n8n, Notion, and AI scoring to drop response time from days to a few hours, meaningfully lift the share of qualified leads, and give each rep several hours a week back.
 
-> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
+> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
 
-A B2B SaaS company was losing deals because leads went cold. Follow-ups were inconsistent, and the sales team spent more time copying data between tools than selling. Here's the system I'd build to fix it, and the numbers it moved.
+A B2B SaaS company was losing deals because leads went cold. Follow-ups were inconsistent, and the sales team spent more time copying data between tools than selling. Here's the system I'd build to fix it, and the numbers it can move.
 
 ## At a glance
 
@@ -120,9 +120,9 @@ Based on the AI score, n8n triggers different workflows:
 - Day 3: Educational content based on their industry
 - Day 7: Soft ask for a call with specific value proposition
 
-## Results
+## Achievable Results
 
-After 3 months of running the automated system:
+What a system like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
 
 | Metric | Before | After | Change |
 |--------|--------|-------|--------|
@@ -132,7 +132,7 @@ After 3 months of running the automated system:
 | Leads lost to gaps | ~40% | <5% | -87% |
 | Pipeline velocity | 45 days | 28 days | -38% |
 
-**ROI**: Implementation cost paid back in 6 weeks through increased conversion.
+**ROI**: Through higher conversion, a build like this can pay back on the order of a few weeks — the exact figure depends on your lead volume and deal sizes.
 
 ## Implementation Details
 

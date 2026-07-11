@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei"
-description: "Ein fiktives Szenario: Rechnungsverarbeitung von 15 Minuten auf 90 Sekunden pro Dokument mit 99,2% Genauigkeit reduzieren – mit n8n, Claude Vision und intelligenter Validierung."
+description: "Beispiel-Implementierung: Wie sich Rechnungsverarbeitung von Minuten auf Sekunden pro Dokument bringen lässt – mit n8n, Claude Vision und intelligenter Validierung. Die Live-Demo verarbeitet echte Dokumente."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: de
 alternateSlug: "case-study-invoice-processing"
 ---
 
-> **Kurz gesagt:** Eine Steuerkanzlei mit 8 Mitarbeitern tippte täglich 80-120 Rechnungen von Hand ab, je 12-15 Minuten. Eine Vision-KI-Pipeline auf Basis von n8n und Claude Vision drückte das auf 90 Sekunden pro Dokument, verarbeitete 99,2% ohne menschliches Eingreifen und löste den 3-5-Tage-Rückstau auf denselben Tag auf. Amortisation nach 5 Wochen.
+> **Kurz gesagt:** Eine Steuerkanzlei, die täglich Dutzende Rechnungen von Hand abtippt (je 12-15 Minuten), kann eine Vision-KI-Pipeline auf Basis von n8n und Claude Vision einsetzen, um pro Dokument auf Sekunden zu kommen, den Großteil ohne manuelles Eingreifen zu verarbeiten und einen mehrtägigen Rückstau am selben Tag aufzulösen. Genau diese Pipeline steckt hinter der Live-Demo unten.
 
-> **Hinweis:** Dies ist ein fiktives Szenario, das zeigt, was diese Art von Automatisierung leisten kann. Unternehmensprofil und Metriken sind repräsentative Beispiele auf Basis gängiger Branchenmuster, nicht von einem bestimmten Kunden.
+> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis ist die funktionierende Demo: **[Selbst ausprobieren →](/de/blog/rechnungsverarbeitung-automatisieren/)**
 
-Eine Steuerkanzlei erstickte in Papier. Mandanten schickten monatlich Hunderte Rechnungen in jedem erdenklichen Format – PDFs, Scans, Handyfotos von Belegen. Hier ist die Extraktionspipeline, die ich baue, um sie automatisch zu lesen, zu validieren und abzulegen – und die Zahlen, die sie bewegt hat.
+Eine Steuerkanzlei erstickte in Papier. Mandanten schickten monatlich Hunderte Rechnungen in jedem erdenklichen Format – PDFs, Scans, Handyfotos von Belegen. Hier ist die Extraktionspipeline, die ich baue, um sie automatisch zu lesen, zu validieren und abzulegen – und die Zahlen, die sie bewegen kann.
 
 ## Auf einen Blick
 
@@ -139,9 +139,9 @@ Validierte Rechnungen exportieren zu:
 
 Fehlgeschlagene Validierungen gehen in eine Prüfwarteschlange mit angehängter KI-Begründung.
 
-## Ergebnisse
+## Erreichbare Ergebnisse
 
-Nach 2 Monaten in Produktion:
+Was eine solche Pipeline für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
 
 | Metrik | Vorher | Nachher | Änderung |
 |--------|--------|---------|----------|
@@ -156,7 +156,7 @@ Nach 2 Monaten in Produktion:
 - 0,6% zur Prüfung markiert (meist ungewöhnliche Formate)
 - 0,2% tatsächliche Fehler (komplexe mehrseitige Rechnungen)
 
-**ROI**: €3.200/Monat Personalkosten gespart. Implementierung nach 5 Wochen amortisiert.
+**ROI**: In der Größenordnung von rund €3.000/Monat eingesparten Personalkosten kann sich eine solche Implementierung binnen weniger Wochen amortisieren – die konkreten Zahlen hängen von Ihrem Volumen ab.
 
 ## Technischer Deep Dive
 
