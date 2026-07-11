@@ -1,8 +1,7 @@
 ---
 title: "Kundenkommunikation automatisieren ohne die menschliche Note zu verlieren"
 description: "Wie Sie mit KI-gestützter Lead-Response in 5 Minuten statt 5 Stunden antworten – und dabei persönlicher wirken als die meisten manuellen E-Mails."
-pubDate: 2025-02-12
-updatedDate: 2026-07-04
+pubDate: 2026-04-26
 heroImage: "/images/blog/communication-automation.png"
 category: communication
 tags: ["kundenerlebnis", "personalisierung", "email", "lead-response"]

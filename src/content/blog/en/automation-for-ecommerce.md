@@ -1,7 +1,7 @@
 ---
 title: "Automation for E-commerce: Inventory, Support, and Order Flow"
 description: "The e-commerce processes worth automating first — multi-platform inventory sync, support triage, order updates, and cart recovery — each with a real result and a starting point."
-pubDate: 2026-07-04
+pubDate: 2026-05-30
 category: automation
 tags: ["ecommerce", "inventory-sync", "customer-support", "automation"]
 heroImage: "/images/blog/case-study-ecommerce.png"

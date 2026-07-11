@@ -1,8 +1,7 @@
 ---
 title: "Von manuell zu automatisiert: Ein Leitfaden für kleine Unternehmen"
 description: "Ein praktischer Fahrplan für kleine Unternehmen, die ihre Automatisierungsreise ohne überwältigende Komplexität beginnen möchten."
-pubDate: 2025-01-22
-updatedDate: 2026-07-04
+pubDate: 2026-01-14
 category: automation
 tags: ["kleine-unternehmen", "einstieg", "digitale-transformation"]
 heroImage: "/images/blog/from-manual-to-automated.png"

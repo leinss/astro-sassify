@@ -1,8 +1,7 @@
 ---
 title: "5 Zeichen, dass Ihr Unternehmen Workflow-Automatisierung braucht"
 description: "Versinkt Ihr Team in repetitiven Aufgaben? Hier sind fünf klare Indikatoren, dass es Zeit ist, Ihre Geschäftsprozesse zu automatisieren."
-pubDate: 2025-01-15
-updatedDate: 2026-07-04
+pubDate: 2026-01-05
 category: automation
 tags: ["workflow", "effizienz", "unternehmenswachstum"]
 heroImage: "/images/blog/5-signs-automation.png"

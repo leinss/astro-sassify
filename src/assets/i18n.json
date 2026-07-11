@@ -83,11 +83,11 @@
       "title": "About Me",
       "tools_label": "Tools & Platforms",
       "tools": [
-        "Self-hosted n8n",
-        "Python & TypeScript",
-        "APIs & backends",
-        "Docker & DevOps",
-        "Claude & OpenAI APIs"
+        "TypeScript & Python",
+        "APIs & backends (Node.js, PostgreSQL/Supabase)",
+        "Docker, CI/CD & DevOps (self-hosted infrastructure, Ansible)",
+        "LLM integration — Claude & OpenAI APIs (RAG, agents)",
+        "Workflow automation — self-hosted n8n"
       ],
       "mission_title": "Mission",
       "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
@@ -496,11 +496,11 @@
       "title": "Über Mich",
       "tools_label": "Tools & Plattformen",
       "tools": [
-        "Selbst gehostetes n8n",
-        "Python & TypeScript",
-        "APIs & Backends",
-        "Docker & DevOps",
-        "Claude & OpenAI APIs"
+        "TypeScript & Python",
+        "APIs & Backends (Node.js, PostgreSQL/Supabase)",
+        "Docker, CI/CD & DevOps (selbst gehostete Infrastruktur, Ansible)",
+        "LLM-Integration — Claude & OpenAI APIs (RAG, Agents)",
+        "Workflow-Automatisierung — selbst gehostetes n8n"
       ],
       "mission_title": "Mission",
       "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",

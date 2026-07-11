@@ -1,7 +1,7 @@
 ---
 title: "7 Processes Every SMB Should Automate First"
 description: "The seven business processes with the fastest automation payback — data entry, lead response, meeting notes, reporting and more — each with a real before/after and where to start."
-pubDate: 2026-07-04
+pubDate: 2026-02-08
 category: automation
 tags: ["automation", "mittelstand", "workflow", "productivity"]
 heroImage: "/images/blog/from-manual-to-automated.png"

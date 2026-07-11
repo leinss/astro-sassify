@@ -1,8 +1,7 @@
 ---
 title: "From Manual to Automated: A Small Business Guide"
 description: "A practical roadmap for small businesses looking to start their automation journey without overwhelming complexity."
-pubDate: 2025-01-22
-updatedDate: 2026-07-04
+pubDate: 2026-01-14
 category: automation
 tags: ["small-business", "getting-started", "digital-transformation"]
 heroImage: "/images/blog/from-manual-to-automated.png"

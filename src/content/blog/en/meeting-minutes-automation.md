@@ -1,8 +1,7 @@
 ---
 title: "Never Write Meeting Notes Again: AI Automation for Meeting Documentation"
 description: "A 1-hour meeting generates 20 minutes of follow-up work — writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow handles this in 90 seconds."
-pubDate: 2025-03-10
-updatedDate: 2026-07-04
+pubDate: 2026-05-06
 category: automation
 tags: ["meeting", "minutes", "transcription", "n8n", "ai", "whisper"]
 heroImage: "/images/blog/meeting-automation.png"

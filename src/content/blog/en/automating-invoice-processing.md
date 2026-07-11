@@ -1,8 +1,7 @@
 ---
 title: "Automating Invoice Processing with AI"
 description: "How to reduce your invoice processing from hours to seconds using n8n and Claude Vision API. A practical example with ROI calculation."
-pubDate: 2025-01-22
-updatedDate: 2026-07-04
+pubDate: 2026-04-20
 heroImage: "/images/blog/invoice-automation.png"
 category: documents
 tags: ["invoices", "ai", "n8n", "automation", "case-study"]
