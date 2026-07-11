@@ -1,6 +1,6 @@
 ---
 title: "Case Study: AI-Powered Invoice Processing for an Accounting Firm"
-description: "A fictional scenario showing how to cut invoice processing from 15 minutes to 90 seconds per document with 99.2% accuracy using n8n, Claude Vision, and intelligent validation."
+description: "Example implementation: how to take invoice processing from minutes to seconds per document using n8n, Claude Vision, and intelligent validation. The live demo processes real documents."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: en
 alternateSlug: "fallstudie-rechnungsverarbeitung"
 ---
 
-> **Short answer:** An 8-person accounting firm was hand-keying 80-120 invoices a day at 12-15 minutes each. A vision-AI pipeline built on n8n and Claude Vision cut that to 90 seconds per document, processed 99.2% without human intervention, and cleared a 3-5 day backlog to same-day. Payback took 5 weeks.
+> **Short answer:** An accounting firm hand-keying dozens of invoices a day (12-15 minutes each) can deploy a vision-AI pipeline built on n8n and Claude Vision to get to seconds per document, process the bulk without manual intervention, and clear a multi-day backlog to same-day. This is the exact pipeline behind the live demo below.
 
-> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
+> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demo: **[Try it yourself →](/en/blog/automating-invoice-processing/)**
 
-An accounting firm was drowning in paper. Clients sent hundreds of invoices a month in every format imaginable — PDFs, scans, phone photos of receipts. Here's the extraction pipeline I'd build to read, validate, and file them automatically, and the numbers it moved.
+An accounting firm was drowning in paper. Clients sent hundreds of invoices a month in every format imaginable — PDFs, scans, phone photos of receipts. Here's the extraction pipeline I'd build to read, validate, and file them automatically, and the numbers it can move.
 
 ## At a glance
 
@@ -139,9 +139,9 @@ Validated invoices export to:
 
 Failed validations go to a review queue with the AI's reasoning attached.
 
-## Results
+## Achievable Results
 
-After 2 months in production:
+What a pipeline like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
 
 | Metric | Before | After | Change |
 |--------|--------|-------|--------|
@@ -156,7 +156,7 @@ After 2 months in production:
 - 0.6% flagged for review (usually unusual formats)
 - 0.2% actual errors (complex multi-page invoices)
 
-**ROI**: €3,200/month saved in labor costs. Implementation paid back in 5 weeks.
+**ROI**: On the order of €3,000/month in saved labor costs, an implementation like this can pay back within a few weeks — the exact numbers depend on your volume.
 
 ## Technical Deep Dive
 
