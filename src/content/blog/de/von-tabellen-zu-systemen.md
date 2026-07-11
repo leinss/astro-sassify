@@ -1,8 +1,7 @@
 ---
 title: "Excel-Hölle verlassen: Kontaktlisten automatisch bereinigen mit n8n und KI"
 description: "Wie Sie mit n8n und Claude messy Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen – statt Stunden manuell zu arbeiten."
-pubDate: 2025-03-12
-updatedDate: 2026-07-04
+pubDate: 2026-01-22
 category: automation
 tags: ["tabellen", "excel", "kontakte", "datenbereinigung", "n8n", "ki"]
 heroImage: "/images/blog/from-spreadsheets-to-systems.png"

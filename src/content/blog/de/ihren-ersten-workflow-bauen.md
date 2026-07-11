@@ -1,8 +1,7 @@
 ---
 title: "Ihren ersten automatisierten Workflow bauen: Eine Schritt-für-Schritt-Anleitung"
 description: "Ein praktischer Leitfaden zur Erstellung Ihres ersten Business-Automatisierungs-Workflows, von der Prozessauswahl bis zur Bereitstellung."
-pubDate: 2025-03-19
-updatedDate: 2026-07-04
+pubDate: 2026-02-17
 category: automation
 tags: ["einstieg", "workflow", "anleitung"]
 heroImage: "/images/blog/building-your-first-workflow.png"

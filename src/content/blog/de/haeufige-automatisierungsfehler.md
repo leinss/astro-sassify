@@ -1,8 +1,7 @@
 ---
 title: "Häufige Automatisierungsfehler und wie Sie sie vermeiden"
 description: "Aus den Fehlern anderer lernen: die häufigsten Automatisierungsfallen und wie Sie sie umgehen."
-pubDate: 2025-03-05
-updatedDate: 2026-07-04
+pubDate: 2026-03-06
 category: automation
 tags: ["best-practices", "fallstricke", "planung"]
 heroImage: "/images/blog/common-automation-mistakes.png"

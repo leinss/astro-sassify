@@ -1,8 +1,7 @@
 ---
 title: "Fallstudie: KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei"
 description: "Ein fiktives Szenario: Rechnungsverarbeitung von 15 Minuten auf 90 Sekunden pro Dokument mit 99,2% Genauigkeit reduzieren – mit n8n, Claude Vision und intelligenter Validierung."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: case-study
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]

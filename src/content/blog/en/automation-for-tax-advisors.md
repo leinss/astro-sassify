@@ -1,7 +1,7 @@
 ---
 title: "Automation for Tax and Accounting Firms: Where to Start"
 description: "How tax advisors and accounting firms cut document data entry, chase missing receipts automatically, and keep client data in-house — with a realistic first project."
-pubDate: 2026-07-04
+pubDate: 2026-05-23
 category: automation
 tags: ["steuerberater", "accounting", "document-automation", "dsgvo"]
 heroImage: "/images/blog/case-study-invoice.png"

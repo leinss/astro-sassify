@@ -1,8 +1,7 @@
 ---
 title: "Case Study: Multi-Platform Inventory Sync for Retail"
 description: "A fictional scenario showing how to eliminate 95% of stock discrepancies and reduce listing time from 30 minutes to 3 minutes across Shopify, WooCommerce, and Amazon."
-pubDate: 2025-01-27
-updatedDate: 2026-07-04
+pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: case-study
 tags: ["e-commerce", "inventory", "n8n", "shopify", "woocommerce", "amazon", "ai", "claude", "ollama"]

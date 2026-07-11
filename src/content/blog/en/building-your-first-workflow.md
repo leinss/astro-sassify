@@ -1,8 +1,7 @@
 ---
 title: "Building Your First Automated Workflow: A Step-by-Step Guide"
 description: "A practical guide to creating your first business automation workflow, from identifying the right process to deployment."
-pubDate: 2025-03-19
-updatedDate: 2026-07-04
+pubDate: 2026-02-17
 category: automation
 tags: ["getting-started", "workflow", "tutorial"]
 heroImage: "/images/blog/building-your-first-workflow.png"
