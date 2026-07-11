@@ -38,6 +38,11 @@ const callUrl =
           <p class="text-secondary-600 dark:text-secondary-300 mb-6">
             {pkg.tagline}
           </p>
+          {pkg.example && (
+            <p class="text-sm italic text-secondary-500 dark:text-secondary-400 mb-6">
+              {pkg.example}
+            </p>
+          )}
           <div class="flex items-baseline gap-2 mb-1">
             <span class="text-2xl font-bold text-primary-600 dark:text-primary-400">
               {t.price_on_request}
