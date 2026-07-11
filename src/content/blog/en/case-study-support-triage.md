@@ -1,6 +1,6 @@
 ---
 title: "Case Study: AI Support Triage for E-commerce"
-description: "A fictional scenario showing how to reduce first-response time from 8 hours to 15 minutes and auto-resolve 60% of support tickets using AI-powered classification and routing."
+description: "Example implementation: how to bring first-response time from hours to minutes and auto-resolve much of your repetitive support load using AI-powered classification and routing."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: case-study
@@ -10,11 +10,11 @@ lang: en
 alternateSlug: "fallstudie-support-triage"
 ---
 
-> **Short answer:** An e-commerce retailer's 5-person support team was buried under 8-hour first-response times and a wall of repetitive "where's my order?" tickets. An AI triage layer on n8n and Claude classified, routed, and auto-answered common queries — first response dropped to 15 minutes, 60% of tickets resolved without an agent, and CSAT rose from 3.2 to 4.6.
+> **Short answer:** A small e-commerce support team buried under hours-long first-response times and a wall of repetitive "where's my order?" tickets can deploy an AI triage layer on n8n and Claude to classify, route, and auto-answer common queries — first response drops to minutes, much of the ticket load resolves without an agent, and CSAT rises noticeably.
 
-> **Note:** This is a fictional scenario illustrating what this kind of automation can achieve. The company profile and metrics are representative examples based on common industry patterns, not a specific client.
+> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
 
-An online retailer's support team was overwhelmed. Messages piled up, urgent issues got buried under routine ones, and response times stretched to days. Here's the triage layer I'd build to classify, route, and answer common queries automatically, and the numbers it moved.
+An online retailer's support team was overwhelmed. Messages piled up, urgent issues got buried under routine ones, and response times stretched to days. Here's the triage layer I'd build to classify, route, and answer common queries automatically, and the numbers it can move.
 
 ## At a glance
 
@@ -177,9 +177,9 @@ For cost optimization, we run Mistral 7B locally for initial classification:
 - Claude API only called for ambiguous or high-urgency
 - Reduces API costs by 70%
 
-## Results
+## Achievable Results
 
-After 6 weeks in production:
+What a triage layer like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
 
 | Metric | Before | After | Change |
 |--------|--------|-------|--------|
@@ -195,7 +195,7 @@ After 6 weeks in production:
 - Return policy questions: 80% auto-resolved
 - Account issues: 40% auto-resolved (often need manual verification)
 
-**Agent Feedback**: "I now handle interesting problems instead of copy-pasting tracking numbers."
+**Effect on the team**: Agents spend their day on the interesting problems instead of copy-pasting tracking numbers.
 
 ## Implementation Details
 
