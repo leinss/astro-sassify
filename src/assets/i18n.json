@@ -205,6 +205,7 @@
             "name": "AI Feature Integration Sprint",
             "timeline": "2 weeks",
             "tagline": "One AI feature shipped to production — not just a demo.",
+            "example": "For example: a chatbot or knowledge base built from your own documents, automated invoice extraction, data cleaning, or an automated reception line.",
             "includes": [
               "One AI/LLM feature integrated into your existing app",
               "Shipped to production, not parked as a prototype",
@@ -629,6 +630,7 @@
             "name": "AI-Feature-Integrations-Sprint",
             "timeline": "2 Wochen",
             "tagline": "Ein KI-Feature, das in Produktion geht – nicht nur eine Demo.",
+            "example": "Zum Beispiel: ein Chatbot oder eine Wissensdatenbank aus Ihren eigenen Dokumenten, automatisierte Rechnungs-Extraktion, Daten-Bereinigung oder eine automatisierte Rezeption.",
             "includes": [
               "Ein KI-/LLM-Feature in Ihre bestehende Anwendung integriert",
               "In Produktion ausgeliefert, nicht als Prototyp geparkt",
