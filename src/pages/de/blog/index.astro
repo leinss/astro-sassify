@@ -22,7 +22,8 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.
 
 // Count posts by type
 const referenceBuildCount = posts.filter(p => p.data.category === 'reference-build').length
-const articleCount = posts.length - referenceBuildCount
+const caseStudyCount = posts.filter(p => p.data.category === 'case-study').length
+const articleCount = posts.length - referenceBuildCount - caseStudyCount
 
 const alternateHref = "/en/blog/"
 ---
@@ -78,6 +79,14 @@ const alternateHref = "/en/blog/"
           >
             Referenz-Builds ({referenceBuildCount})
           </button>
+          <button
+            data-filter="case-study"
+            class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-all"
+            role="tab"
+            aria-selected="false"
+          >
+            Fallstudien ({caseStudyCount})
+          </button>
         </div>
       </div>
     </section>
@@ -88,7 +97,9 @@ const alternateHref = "/en/blog/"
         {posts.length > 0 ? (
           <div id="blog-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <div data-category={post.data.category === 'reference-build' ? 'reference-build' : 'article'}>
+              <div data-category={post.data.category === 'reference-build' || post.data.category === 'case-study'
+                ? post.data.category
+                : 'article'}>
                 <BlogCard post={post} lang={lang} />
               </div>
             ))}
