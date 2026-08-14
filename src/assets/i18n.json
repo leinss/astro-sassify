@@ -37,7 +37,10 @@
       "cta_reassurance": "30-day fix guarantee · you own the code · no lock-in",
       "apps_bridge": "Want to see how I ship? My own apps at leinss.xyz are my work samples — live products I designed, built, and run.",
       "apps_bridge_cta": "See my apps →",
-      "apps_bridge_url": "https://leinss.xyz"
+      "apps_bridge_url": "https://leinss.xyz",
+      "uptime_proof": "And that it keeps running: I operate the production infrastructure behind a public payment protocol — seven services, 99.99% uptime, reported publicly, not by me.",
+      "uptime_proof_cta": "Check the status page →",
+      "uptime_proof_url": "https://status.aboutcircles.com"
     },
     "problem_solution": {
       "problem_headline": "Sound familiar?",
@@ -95,9 +98,9 @@
       "mission_title": "Mission",
       "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
       "career_title": "Experience",
-      "career": "I'm a full-stack software engineer with a background in AI, blockchain, and DevOps.\n\nI've worked at research institutions like Fraunhofer, built blockchain infrastructure in the Ethereum and Cosmos ecosystems, and shipped AI-powered software. I've co-founded startups and won a stack of hackathons, so I've seen automation from both the technical and the business side.\n\nThese days I put that full-stack background to work for mid-sized companies: automation engineered to scale, owned by you, and wired cleanly into how your business actually runs.",
+      "career": "I build software and then run it. That second half is the part most automation never survives.\n\nToday I run the backend and the full production infrastructure behind a public payment protocol: databases with automated failover, monitoring, and deploys across staging and production. Seven services, 99.99% uptime, published on a public status page.\n\nBefore that: full-stack product work, event-driven data architecture at Fraunhofer, and AI features shipped into production rather than parked as demos. That is the same skill your automation needs — it has to hold up on a Tuesday morning when nobody is watching it.",
       "background_title": "Approach",
-      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nLow-code tools are a fast way to start, and I use them where they fit. But durable, adaptable automation that grows with you takes real engineering — the full-stack kind, not a freelancer wiring up someone else's SaaS. That's what I bring to businesses ready to grow without a dedicated IT team."
+      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nLow-code tools are a fast way to start, and I use them where they fit. But durable, adaptable automation that grows with you takes real engineering — the full-stack kind, not a freelancer wiring up someone else's SaaS. That's what I bring to businesses ready to grow without a dedicated IT team.\n\nIn practice engagements start narrow and grow. One current client came for a single integration between two systems that would not talk to each other. It now runs a production storefront, the back-office application the team manages products in, an events site, and the integration into a supply-chain system I do not own. Same person across all of it, so nothing falls between the contractors."
     },
     "faq": {
       "tag": "FAQ",
@@ -184,8 +187,9 @@
         "packages": [
           {
             "name": "Infrastructure & Self-Hosting Audit",
+            "badge": "Start here",
             "timeline": "~1 week",
-            "tagline": "Know where your infrastructure stands — and what to do next.",
+            "tagline": "Not ready to commit to a build? Start by finding out exactly where your infrastructure stands.",
             "includes": [
               "Review of your current setup (self-hosted or cloud)",
               "Written findings: risks, cost, lock-in, security",
@@ -454,7 +458,10 @@
       "cta_reassurance": "30 Tage Fix-Garantie · Sie besitzen den Code · kein Lock-in",
       "apps_bridge": "Sie wollen sehen, wie ich liefere? Meine eigenen Apps auf leinss.xyz sind meine Arbeitsproben – laufende Produkte, die ich entworfen, gebaut und im Betrieb habe.",
       "apps_bridge_cta": "Meine Apps ansehen →",
-      "apps_bridge_url": "https://leinss.xyz"
+      "apps_bridge_url": "https://leinss.xyz",
+      "uptime_proof": "Und dass es läuft: Ich betreibe die produktive Infrastruktur hinter einem öffentlichen Zahlungsprotokoll — sieben Dienste, 99,99 % Verfügbarkeit, öffentlich ausgewiesen, nicht von mir.",
+      "uptime_proof_cta": "Statusseite ansehen →",
+      "uptime_proof_url": "https://status.aboutcircles.com"
     },
     "problem_solution": {
       "problem_headline": "Kommt Ihnen das bekannt vor?",
@@ -512,9 +519,9 @@
       "mission_title": "Mission",
       "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",
       "career_title": "Erfahrung",
-      "career": "Ich bin Fullstack-Softwareentwickler mit Hintergrund in KI, Blockchain und DevOps.\n\nIch habe an Forschungsinstituten wie dem Fraunhofer gearbeitet, Blockchain-Infrastruktur in den Ökosystemen von Ethereum und Cosmos gebaut und KI-gestützte Software ausgeliefert. Ich habe Startups mitgegründet und eine ganze Reihe Hackathons gewonnen – Automatisierung kenne ich also von der technischen wie von der geschäftlichen Seite.\n\nHeute bringe ich diesen Fullstack-Hintergrund für den Mittelstand ein: Automatisierung, die auf Skalierung ausgelegt ist, die Ihnen gehört und sauber in den echten Geschäftsalltag eingebunden ist.",
+      "career": "Ich entwickle Software und betreibe sie danach. Diese zweite Hälfte überlebt die meiste Automatisierung nicht.\n\nHeute verantworte ich das Backend und die gesamte produktive Infrastruktur hinter einem öffentlichen Zahlungsprotokoll: Datenbanken mit automatischem Failover, Überwachung und Deployments für Staging und Produktion. Sieben Dienste, 99,99 % Verfügbarkeit, öffentlich ausgewiesen.\n\nDavor: Full-Stack-Produktarbeit, ereignisgesteuerte Datenarchitektur am Fraunhofer-Institut und KI-Funktionen, die in den Betrieb gegangen sind statt als Demo zu enden. Genau das braucht Ihre Automatisierung: Sie muss auch am Dienstagmorgen halten, wenn niemand hinsieht.",
       "background_title": "Ansatz",
-      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nLow-Code-Tools sind ein schneller Start, und ich nutze sie, wo sie passen. Aber belastbare, anpassbare Automatisierung, die mit Ihnen wächst, braucht echtes Engineering – die Fullstack-Art, nicht einen Freelancer, der fremde SaaS zusammensteckt. Genau das bringe ich zu Unternehmen, die wachsen wollen, ohne für jedes Projekt ein eigenes IT-Team zu haben."
+      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nLow-Code-Tools sind ein schneller Start, und ich nutze sie, wo sie passen. Aber belastbare, anpassbare Automatisierung, die mit Ihnen wächst, braucht echtes Engineering – die Fullstack-Art, nicht einen Freelancer, der fremde SaaS zusammensteckt. Genau das bringe ich zu Unternehmen, die wachsen wollen, ohne für jedes Projekt ein eigenes IT-Team zu haben.\n\nIn der Praxis fangen Mandate klein an und wachsen. Ein laufender Kunde kam wegen einer einzigen Schnittstelle zwischen zwei Systemen, die nicht miteinander sprachen. Heute laufen darüber ein produktiver Online-Shop, die Backoffice-Anwendung, in der das Team seine Produkte pflegt, eine Veranstaltungsseite und die Anbindung an ein fremdes Lieferkettensystem. Alles aus einer Hand, damit nichts zwischen mehreren Dienstleistern liegen bleibt."
     },
     "faq": {
       "tag": "FAQ",
@@ -601,8 +608,9 @@
         "packages": [
           {
             "name": "Infrastruktur- & Self-Hosting-Audit",
+            "badge": "Einstiegspunkt",
             "timeline": "ca. 1 Woche",
-            "tagline": "Wissen, wo Ihre Infrastruktur steht – und was als Nächstes zu tun ist.",
+            "tagline": "Noch nicht bereit für ein Projekt? Finden Sie zuerst heraus, wo Ihre Infrastruktur wirklich steht.",
             "includes": [
               "Prüfung Ihres bestehenden Setups (Self-Hosted oder Cloud)",
               "Schriftlicher Befund: Risiken, Kosten, Lock-in, Sicherheit",
