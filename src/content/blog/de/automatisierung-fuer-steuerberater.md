@@ -27,7 +27,7 @@ Steuerkanzleien sitzen auf zwei Dingen, die Automatisierung liebt: Bergen repeti
 
 Das ist das Flaggschiff. Ein Mitarbeiter öffnet jeden Beleg oder jede Rechnung, liest Lieferant, Datum, Betrag und USt. und tippt sie in die Buchhaltung. Das ist langsam, hier schleichen sich Fehler ein, und in der Hochsaison skaliert es nicht.
 
-Ein Workflow liest jedes Dokument mit einem Vision-Modell, extrahiert die Felder, validiert sie (geht die USt. auf? ist das Datum plausibel?) und leitet saubere Daten weiter — Unsicheres landet zur Prüfung bei einem Menschen. In der [Rechnungsleser-Demo](/de/projekte/) sinkt der Aufwand von rund **4 Stunden pro Woche auf etwa 15 Minuten**. Die [ausführliche Fallstudie](/de/blog/fallstudie-rechnungsverarbeitung/) zeigt das am Belegberg einer Kanzlei.
+Ein Workflow liest jedes Dokument mit einem Vision-Modell, extrahiert die Felder, validiert sie (geht die USt. auf? ist das Datum plausibel?) und leitet saubere Daten weiter — Unsicheres landet zur Prüfung bei einem Menschen. Die [Rechnungsleser-Demo](/de/projekte/) führt das an einem Dokument vor, das Sie selbst hochladen. Der [ausführliche Referenz-Build](/de/blog/fallstudie-rechnungsverarbeitung/) zeigt das Extraktionsschema und jede Validierungsregel.
 
 ## Dann: hören Sie auf, Mandanten von Hand hinterherzulaufen
 

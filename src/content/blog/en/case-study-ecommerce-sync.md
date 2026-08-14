@@ -1,55 +1,39 @@
 ---
-title: "Case Study: Multi-Platform Inventory Sync for Retail"
-description: "Example implementation: how to eliminate most stock discrepancies and cut listing time from minutes to a fraction across Shopify, WooCommerce, and Amazon."
+title: "Reference Build: Multi-Platform Inventory Sync for Retail"
+description: "The full architecture for a central inventory hub that keeps Shopify, WooCommerce, Amazon and eBay in step — one source of truth, real-time webhooks, and the workflow available to download and inspect."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
-category: case-study
+category: reference-build
 tags: ["e-commerce", "inventory", "n8n", "shopify", "woocommerce", "amazon", "ai", "claude", "ollama"]
 draft: false
 lang: en
 alternateSlug: "fallstudie-ecommerce-sync"
 ---
 
-> **Short answer:** A multi-channel retailer with thousands of SKUs that keeps overselling because stock lives in spreadsheets and syncs by hand can deploy one central n8n hub with real-time webhooks to eliminate most stock discrepancies, cut new-product listing time to a fraction, and get through peak days like Black Friday without oversells.
+> **Short answer:** One system holds the real stock number and every sales channel reads from it. A sale on any platform fires a webhook, the hub decrements the central count, and pushes the new figure to the other three within seconds. Product content is written once and adapted per marketplace. Built on n8n with Airtable as the source of truth.
 
-> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
+> **What this is:** a reference build — the architecture, the conflict-resolution rules, and the failure handling, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
-A retailer sold across Shopify, WooCommerce, Amazon, and eBay. Each platform lived in isolation, so overselling was routine, listings drifted apart, and the team burned hours on manual updates. Here's the central sync hub I'd build, and the numbers it can move.
+## The problem it solves
+
+Selling on Shopify, WooCommerce, Amazon and eBay means four systems that each believe they know your stock level, and none of them talk. Sync happens when somebody remembers to do it, so the true number lives in a spreadsheet that is already out of date. The result is overselling, worst on the days that matter most, and a product description that has quietly drifted apart across four listings.
+
+The fix is not faster syncing. It is deciding that exactly one system holds the truth and that every other system reads from it. Everything below is the consequence of that one decision, including the awkward parts: what happens when two platforms sell the last unit in the same second, and what happens when a marketplace API is down.
 
 ## At a glance
 
 | | |
 |---|---|
-| **Client / Industry** | Multi-channel retailer, 2,000 SKUs, 4 sales platforms |
-| **Problem** | Stock in spreadsheets, manual sync, overselling, 30+ min per listing |
-| **Solution** | Central n8n hub + Airtable source of truth + real-time webhooks + AI listing content |
-| **Result** | Stock discrepancies -95%, oversells 8-12/mo → 0-1, listing time 30 → 3 min, inventory accuracy 85% → 99.7% |
+| **Stack** | Central n8n hub + Airtable source of truth + real-time webhooks + AI listing content |
+| **Sync direction** | Platforms report sales in; the hub pushes authoritative stock out |
+| **Guardrails** | Optimistic locking on the central count, per-platform retry queue, buffer stock during peaks, reconciliation sweep |
+| **You can inspect** | The full n8n JSON, exported from the running instance |
 
 This is the kind of build I do under [integrations & APIs](/en/services/integrations-apis/) — connecting tools so data moves on its own. See the [live demos](/en/projects/) for working examples.
 
-## The challenge
-
-**Example Company**: Multi-channel retailer, 2,000 SKUs, 4 sales platforms
-
-**Pain Points**:
-- Inventory managed in spreadsheets, synced manually to each platform
-- Overselling during high-traffic periods (Black Friday nightmare)
-- Same product had different descriptions per marketplace
-- New product listings took 30+ minutes each (duplicate work)
-- No visibility into true stock levels
-
-**Before Automation**:
-| Metric | Value |
-|--------|-------|
-| Stock discrepancies per week | 15-20 incidents |
-| Oversells per month | 8-12 orders |
-| Time to list new product | 30+ minutes |
-| Inventory sync frequency | Daily (manual) |
-| Time spent on inventory ops | 15 hrs/week |
-
 ## The Solution
 
-We built a central inventory hub with real-time sync and AI-powered product management.
+A central inventory hub with real-time sync and AI-assisted product management.
 
 ### Tool Stack
 
@@ -232,24 +216,19 @@ For Amazon's delay, we maintain a "pending" state:
 - Confirm when Amazon feed completes
 - Alert if feed fails
 
-## Achievable Results
+## What changes, and what does not
 
-What a sync hub like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
+I am not going to give you a before-and-after table. I have not run this hub on your catalogue, and numbers invented for a fictional retailer would tell you nothing.
 
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Stock discrepancies/week | 15-20 | <1 | -95% |
-| Oversells/month | 8-12 | 0-1 | -92% |
-| Time to list new product | 30 min | 3 min | -90% |
-| Inventory sync frequency | Daily | Real-time | ∞ |
-| Time on inventory ops | 15 hrs/week | 3 hrs/week | -80% |
+What the architecture changes is structural:
 
-**Other possible effects**:
-- Peak days like Black Friday without oversells
-- New marketplace connected in days rather than weeks
-- Inventory accuracy near 100% instead of the usual spreadsheet drift
+- **There is one stock number.** Four systems stop each holding an opinion, and drift stops being possible by construction rather than by discipline.
+- **Sync stops waiting for a person.** A sale propagates on a webhook in seconds, so the exposure window shrinks from a day to the length of an API call.
+- **A new channel is a connector, not a rewrite.** Adding a fifth marketplace means teaching the hub one more output, not another spreadsheet column.
 
-**ROI**: At this scale, savings on the order of several thousand euros a month from labor time plus avoided oversell costs are achievable — the exact numbers depend on SKU count, channels, and margin.
+What it does not do is make overselling impossible. Two platforms can still sell the last unit in the same second, and a marketplace API can still be down when you need to push. That is what the buffer strategy and the retry queue below are for, and they reduce the window rather than close it. Anyone who tells you a sync hub gets you to zero oversells has not run one on Black Friday.
+
+The number worth measuring is your current discrepancy rate: count how far the spreadsheet is from reality on a random Tuesday, then again on your busiest day. The gap between those two is the size of the problem you are actually buying a fix for.
 
 ## Technical Details
 

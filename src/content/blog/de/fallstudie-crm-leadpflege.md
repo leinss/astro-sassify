@@ -1,53 +1,39 @@
 ---
-title: "Fallstudie: Automatisierte Lead-Pflege für ein SaaS-Startup"
-description: "Beispiel-Implementierung: Wie sich Lead-Reaktionszeit von Tagen auf Stunden bringen und der Anteil qualifizierter Leads deutlich steigern lässt – mit n8n, Notion und KI-gestütztem Lead-Scoring."
+title: "Referenz-Build: Automatisiertes Lead-Scoring und Nurturing"
+description: "Die vollständige Architektur für Erfassung, Bewertung und Pflege von Leads auf n8n, Notion und einem KI-Scorer – der Scoring-Prompt, die Sequenzlogik und der Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
-category: case-study
+category: reference-build
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]
 draft: false
 lang: de
 alternateSlug: "case-study-crm-lead-nurturing"
 ---
 
-> **Kurz gesagt:** Ein B2B-SaaS-Startup kann seine Lead-Bearbeitung mit n8n, Notion und KI-Scoring automatisieren, um die Reaktionszeit von Tagen auf wenige Stunden zu senken, den Anteil qualifizierter Leads deutlich zu heben und jedem Vertriebsmitarbeiter mehrere Stunden pro Woche zurückzugeben.
+> **Kurz gesagt:** Jeder eingehende Lead – Website-Formular, LinkedIn, Eventliste – landet an einer Stelle, wird von einem Modell, das Freitext lesen kann, gegen Ihre echten Qualifizierungskriterien bewertet und löst eine zum Score passende Follow-up-Sequenz aus. Der Vertrieb sieht eine sortierte Warteschlange samt Begründung statt eines Postfachs. Gebaut auf n8n mit Notion als CRM, das Scoring übernimmt Claude oder ein lokales Ollama-Modell.
 
-> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
+> **Was das hier ist:** ein Referenz-Build – die Architektur, der Scoring-Prompt und die Sequenzlogik, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Lead-Response-Demo ansehen →](/de/projekte/)**.
 
-Ein B2B-SaaS-Unternehmen verlor Deals, weil Leads kalt wurden. Follow-ups waren inkonsistent, und das Sales-Team verbrachte mehr Zeit damit, Daten zwischen Tools zu kopieren, als zu verkaufen. Hier ist das System, mit dem ich das löse – und die Zahlen, die es bewegen kann.
+## Das Problem dahinter
+
+Leads kommen durch mehrere Türen und landen in einem Postfach, und ein Postfach ist keine Warteschlange. Niemand erkennt auf einen Blick, welche von vierzig ungelesenen Nachrichten zuerst eine Antwort verdient, also wird nach Eingang beantwortet – oder gar nicht. Nebenher tippt der Vertrieb dieselben Kontaktdaten in drei Tools.
+
+Darin stecken zwei verschiedene Probleme. Sortieren braucht Urteilsvermögen über Text, den eine Regel nicht parst: eine Position, eine Firmenbeschreibung, das, was die Person tatsächlich gefragt hat. Sequenzieren braucht kein Urteilsvermögen, sondern Verlässlichkeit: die richtige Nachricht, im richtigen Abstand, jedes Mal, ohne dass sich jemand erinnern muss. Dieser Build gibt das Erste an ein Modell und das Zweite an schlichte Workflow-Logik.
 
 ## Auf einen Blick
 
 | | |
 |---|---|
-| **Kunde / Branche** | B2B-SaaS-Startup, 15 Mitarbeiter, €2M ARR |
-| **Problem** | Leads versanken in Postfächern, kein systematisches Follow-up, Vertrieb in Admin-Arbeit vergraben |
-| **Lösung** | n8n-Orchestrierung + Notion-CRM + KI-Lead-Scoring (Claude / Ollama) |
-| **Ergebnis** | Reaktionszeit 2 Tage → 4 Stunden, qualifizierte Leads 12% → 35%, Admin 8 → 2 Std./Woche/Mitarbeiter, Amortisation in 6 Wochen |
+| **Stack** | n8n-Orchestrierung + Notion-CRM + KI-Lead-Scoring (Claude / Ollama) |
+| **Was entschieden wird** | Fit-Score, Kaufabsicht, Segment, nächste beste Aktion – jeweils mit Begründung |
+| **Sicherungen** | Scores sind beratend und für den Vertrieb sichtbar, Sequenzen stoppen bei jeder menschlichen Antwort, Versand nur zu Geschäftszeiten |
+| **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert |
 
 Genau diese Art von Aufbau mache ich unter [CRM- & Vertriebsautomatisierung](/de/services/crm-vertriebsautomatisierung/). Die [Lead-Response-Demo](/de/projekte/) läuft live zum Ausprobieren.
 
-## Die Herausforderung
-
-**Beispielunternehmen**: B2B-SaaS-Startup, 15 Mitarbeiter, €2M ARR
-
-**Schmerzpunkte**:
-- Leads von Website, LinkedIn und Events versanken in E-Mail-Postfächern
-- Kein systematischer Follow-up-Prozess
-- Sales-Mitarbeiter kopierten Daten manuell zwischen Tools
-- Lead-Qualität variierte stark—Zeit wurde mit unqualifizierten Interessenten verschwendet
-
-**Vor der Automatisierung**:
-| Metrik | Wert |
-|--------|------|
-| Durchschnittliche Lead-Reaktionszeit | 2 Tage |
-| Lead-Qualifizierungsrate | 12% |
-| Admin-Zeit pro Vertriebsmitarbeiter | 8 Std./Woche |
-| Verlorene Leads | ~40% |
-
 ## Die Lösung
 
-Wir haben ein dreistufiges Automatisierungssystem mit **n8n** als Orchestrierungsschicht entwickelt.
+Ein dreistufiges Automatisierungssystem mit **n8n** als Orchestrierungsschicht.
 
 ### Tool-Stack
 
@@ -120,19 +106,19 @@ Basierend auf dem KI-Score triggert n8n unterschiedliche Workflows:
 - Tag 3: Bildungsinhalte basierend auf ihrer Branche
 - Tag 7: Soft-Ask für ein Gespräch mit spezifischem Wertversprechen
 
-## Erreichbare Ergebnisse
+## Was sich ändert – und was nicht
 
-Was ein solches System für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
+Hier steht keine Vorher-Nachher-Tabelle. Ich habe dieses System nicht auf Ihrer Pipeline betrieben, und für ein erfundenes Unternehmen erfundene Zahlen sagen Ihnen nichts.
 
-| Metrik | Vorher | Nachher | Änderung |
-|--------|--------|---------|----------|
-| Lead-Reaktionszeit | 2 Tage | 4 Stunden | -83% |
-| Qualifizierte Leads | 12% | 35% | +192% |
-| Admin-Zeit pro Mitarbeiter | 8 Std./Woche | 2 Std./Woche | -75% |
-| Verlorene Leads | ~40% | <5% | -87% |
-| Pipeline-Geschwindigkeit | 45 Tage | 28 Tage | -38% |
+Was die Architektur ändert, ist strukturell:
 
-**ROI**: Durch die höhere Conversion kann sich der Aufbau in der Größenordnung weniger Wochen amortisieren – der konkrete Wert hängt von Ihrem Lead-Volumen und Deal-Größen ab.
+- **Die Warteschlange ist sortiert, nicht chronologisch.** Wer das CRM öffnet, sieht zuerst den Lead mit der besten Passung – samt Begründung, warum er so bewertet wurde, statt nur den zuletzt eingegangenen.
+- **Follow-up hängt nicht mehr am Gedächtnis.** Sequenzen laufen nach Plan und stoppen in dem Moment, in dem ein Mensch antwortet. Nichts fällt hinten runter, nichts geht doppelt raus.
+- **Niemand tippt einen Kontakt zweimal.** Erfasst wird einmal, alle nachgelagerten Tools lesen aus diesem Datensatz.
+
+Was sich nicht ändert, ist Ihre Abschlussquote bei einem guten Lead. Das Modell sortiert und entwirft; verkaufen tut es nicht. Wenn Ihr eigentliches Problem darin besteht, dass qualifizierte Interessenten mit Ihnen sprechen und dann nicht kaufen, macht dieser Build das schneller sichtbar – lösen wird er es nicht.
+
+Die erste Zahl, die es zu messen lohnt, ist die Übereinstimmungsrate des Scorings: Lassen Sie den Scorer über die gewonnenen und verlorenen Leads des letzten Quartals laufen und prüfen Sie, ob seine Rangfolge zum tatsächlichen Ausgang passt. Wenn nicht, gehören Ihre Kriterien in den Prompt – nicht mehr Automatisierung drumherum.
 
 ## Implementierungsdetails
 
@@ -156,7 +142,7 @@ Vergleich: 1 SDR bei €4.000/Monat für die gleiche manuelle Arbeit.
 1. **Mit klarem ICP starten**: KI-Scoring ist nur so gut wie die Kriterien
 2. **Human-in-the-Loop**: Hot Leads bekommen KI-Entwürfe, keine Auto-Sends
 3. **Reaktionszeit messen**: Der #1-Faktor bei der Lead-Conversion
-4. **Prompts iterieren**: Wir haben die Scoring-Prompts 8 Mal basierend auf Sales-Feedback verfeinert
+4. **Prompts iterieren**: Rechnen Sie damit, den Scoring-Prompt mehrfach gegen echte abgeschlossene Deals umzuschreiben – die erste Fassung ist nie die, die bleibt
 
 ## Selbst bauen
 

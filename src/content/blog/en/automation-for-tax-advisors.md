@@ -27,7 +27,7 @@ Tax and accounting firms sit on two things automation loves: mountains of repeti
 
 This is the flagship. A member of staff opens each receipt or invoice, reads the vendor, date, amount, and VAT, and types it into your bookkeeping tool. It's slow, it's where errors creep in, and it doesn't scale during busy season.
 
-A workflow reads each document with a vision model, extracts the fields, validates them (does the VAT add up? is the date plausible?), and routes clean data onward — flagging anything uncertain for a human. In the [invoice-reader demo](/en/projects/), handling drops from about **4 hours a week to roughly 15 minutes**. The [full case study](/en/blog/case-study-invoice-processing/) walks through this on an accounting firm's document pile.
+A workflow reads each document with a vision model, extracts the fields, validates them (does the VAT add up? is the date plausible?), and routes clean data onward — flagging anything uncertain for a human. The [invoice-reader demo](/en/projects/) runs the whole thing on a document you supply. The [full reference build](/en/blog/case-study-invoice-processing/) walks through the extraction schema and every validation rule.
 
 ## Then: stop chasing clients by hand
 

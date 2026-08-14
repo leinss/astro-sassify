@@ -1,54 +1,39 @@
 ---
-title: "Fallstudie: KI-Support-Triage für E-Commerce"
-description: "Beispiel-Implementierung: Wie sich Erstantwortzeit von Stunden auf Minuten bringen und ein Großteil repetitiver Support-Tickets automatisch lösen lässt – mit KI-gestützter Klassifizierung und Routing."
+title: "Referenz-Build: KI-Support-Triage für E-Commerce"
+description: "Die vollständige Architektur einer KI-Triage-Schicht, die Support-Tickets klassifiziert, routet und beantwortet – jeder Node erklärt, mit n8n-Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
-category: case-study
+category: reference-build
 tags: ["support", "triage", "n8n", "slack", "ai", "claude", "ollama", "e-commerce"]
 draft: false
 lang: de
 alternateSlug: "case-study-support-triage"
 ---
 
-> **Kurz gesagt:** Ein kleines Support-Team eines E-Commerce-Händlers, das unter stundenlangen Erstantwortzeiten und einer Flut repetitiver "Wo ist meine Bestellung?"-Tickets erstickt, kann eine KI-Triage-Schicht auf n8n und Claude einsetzen, um häufige Anfragen zu klassifizieren, zu routen und zu beantworten – die Erstantwort fällt auf Minuten, ein Großteil der Tickets wird ohne Agent gelöst, und die Kundenzufriedenheit steigt spürbar.
+> **Kurz gesagt:** Eine KI-Triage-Schicht sitzt zwischen Ihren Kunden und Ihrem Support-Team. Sie liest jede eingehende Nachricht, bewertet die Dringlichkeit, vergibt eine Kategorie, leitet in den richtigen Slack-Kanal weiter und beantwortet die Routinefälle selbst – mit Konfidenzschwellen und Sentiment-Prüfung, damit alles Zweifelhafte bei einem Menschen landet. Gebaut auf n8n und Claude, mit lokalem Ollama-Vorfilter, um die API-Rechnung klein zu halten.
 
-> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
+> **Was das hier ist:** ein Referenz-Build – die Architektur, die Prompts und die exakte n8n-Datei, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
-Das Support-Team eines Online-Händlers war überlastet. Anfragen häuften sich, dringende Probleme gingen zwischen Routinefällen unter, und die Antwortzeiten dehnten sich auf Tage aus. Hier ist die Triage-Schicht, die ich baue, um häufige Anfragen automatisch zu klassifizieren, zu routen und zu beantworten – und die Zahlen, die sie bewegen kann.
+## Das Problem dahinter
+
+Support-Anfragen kommen per E-Mail, Kontaktformular und Social Media, und sie werden in der Reihenfolge ihres Eintreffens bearbeitet. Das heißt: "Wo ist meine Bestellung?" und "Meine Zahlung ist fehlgeschlagen" stehen in derselben Schlange, sortiert nach Uhrzeit. Routinefragen fressen den Tag, dringende Fälle warten dahinter, und ein Wochenende erzeugt einen Rückstau, der Tage zum Abarbeiten braucht.
+
+Die Lösung heißt Priorisierung, und Priorisierung setzt voraus, dass jemand die Nachricht liest. Genau diese Aufgabe gibt dieser Build an ein Modell.
 
 ## Auf einen Blick
 
 | | |
 |---|---|
-| **Kunde / Branche** | E-Commerce-Händler, 50.000 Bestellungen/Monat, 5-köpfiges Support-Team |
-| **Problem** | Keine Priorisierung, 8 Std. Erstantwort, 70% der Tickets repetitiv, CSAT 3,2/5 |
-| **Lösung** | n8n-Triage + Claude-Klassifizierung (Ollama-Vorfilter) + Slack-Routing + KI-Auto-Antworten |
-| **Ergebnis** | Erstantwort 8 Std. → 15 Min, 60% auto-gelöst, Lösungszeit -83%, CSAT 3,2 → 4,6 |
+| **Stack** | n8n-Triage + Claude-Klassifizierung (Ollama-Vorfilter) + Slack-Routing + KI-Auto-Antworten |
+| **Was entschieden wird** | Dringlichkeit 1-5, Kategorie, automatisch lösbar ja/nein, Sentiment, Konfidenz |
+| **Sicherungen** | 90 % Konfidenzuntergrenze, Sentiment-Sperre, Eskalations-Schlüsselwörter, 5 % Stichprobenprüfung durch Menschen |
+| **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert ([Download unten](#selbst-bauen)) |
 
 Genau diese Art von Aufbau mache ich unter [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/). Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
 
-## Die Herausforderung
-
-**Beispielunternehmen**: E-Commerce-Händler, 50.000 monatliche Bestellungen, 5-köpfiges Support-Team
-
-**Schmerzpunkte**:
-- Support-Anfragen per E-Mail, Kontaktformular und Social Media
-- Keine Priorisierung—wer zuerst schreibt, wird zuerst bearbeitet (auch wenn es "Wo ist meine Bestellung?" vs. "Zahlung fehlgeschlagen" ist)
-- Repetitive Fragen verbrauchten 70% der Agent-Zeit
-- Rückstau am Wochenende/Feiertagen brauchte Tage zum Abarbeiten
-
-**Vor der Automatisierung**:
-| Metrik | Wert |
-|--------|------|
-| Erstantwortzeit | 8 Stunden (Durchschnitt) |
-| Lösungszeit | 24-48 Stunden |
-| Tickets pro Agent/Tag | 40-50 |
-| Repetitive Anfragen | 70% |
-| Kundenzufriedenheit | 3,2/5 |
-
 ## Die Lösung
 
-Wir haben eine KI-gestützte Triage-Schicht deployed, die zwischen Kunden und Support-Team sitzt.
+Eine KI-gestützte Triage-Schicht sitzt zwischen Kunden und Support-Team.
 
 ### Tool-Stack
 
@@ -172,28 +157,22 @@ Auto-Antworten werden sofort gesendet, aber zur Agent-Überprüfung protokollier
 
 ### Ollama für hohes Volumen
 
-Zur Kostenoptimierung nutzen wir Mistral 7B lokal für die initiale Klassifizierung:
-- Verarbeitet 80% der Nachrichten (klare Fälle)
-- Claude API nur bei Mehrdeutigkeit oder hoher Dringlichkeit aufgerufen
-- Reduziert API-Kosten um 70%
+Zur Kostenoptimierung läuft Mistral 7B lokal als erster Klassifizierungsdurchgang:
+- Er übernimmt die klaren Fälle, bei den meisten Ticket-Mischungen also die große Mehrheit
+- Claude wird nur bei Mehrdeutigkeit oder hoher Dringlichkeit aufgerufen
+- Wie viel Sie sparen, hängt davon ab, wie einseitig Ihre Ticket-Mischung ist – messen Sie es im Schattenbetrieb, bevor Sie eine Zahl annehmen
 
-## Erreichbare Ergebnisse
+## Was sich ändert – und was nicht
 
-Was eine solche Triage-Schicht für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
+Hier steht keine Vorher-Nachher-Tabelle. Ich habe dieses System nicht in Ihrem Unternehmen betrieben, und für ein erfundenes Unternehmen erfundene Zahlen sagen Ihnen nichts.
 
-| Metrik | Vorher | Nachher | Änderung |
-|--------|--------|---------|----------|
-| Erstantwortzeit | 8 Stunden | 15 Minuten | -97% |
-| Lösungszeit | 24-48 Stunden | 4 Stunden | -83% |
-| Tickets pro Agent/Tag | 40-50 | 25-30 (nur komplexe) | -40% |
-| Auto-gelöst | 0% | 60% | +60% |
-| Kundenzufriedenheit | 3,2/5 | 4,6/5 | +44% |
+Was die Architektur ändert, ist strukturell, und Sie können es direkt nachvollziehen:
 
-**Aufschlüsselung Auto-Lösung**:
-- Bestellstatus-Anfragen: 95% auto-gelöst
-- Versandfragen: 85% auto-gelöst
-- Retourenrichtlinien-Fragen: 80% auto-gelöst
-- Kontoprobleme: 40% auto-gelöst (oft manuelle Verifizierung nötig)
+- **Die Eingangsreihenfolge bestimmt nicht mehr die Priorität.** Eine fehlgeschlagene Zahlung erreicht einen Menschen vor einer Frage nach der Sendungsnummer – unabhängig davon, was zuerst eintraf.
+- **Beantwortbare Fragen warten nicht mehr auf einen Agent.** Alles, was das System aus Bestelldaten und FAQ beantworten kann, wird sofort beantwortet, zu jeder Uhrzeit.
+- **Agents kopieren keine Sendungsnummern mehr.** Die Warteschlange, die sie sehen, ist die Warteschlange, die einen Menschen braucht.
+
+Was das wert ist, hängt von Ihrer Ticket-Mischung ab. Der ehrliche Weg, das herauszufinden: Lassen Sie den Klassifizierer im Schattenbetrieb über Ihre Tickets des letzten Monats laufen und zählen Sie, was er automatisch gelöst hätte – bevor Sie eine einzige Auto-Antwort scharf schalten. Das ist Woche drei im Zeitplan unten, und diesen Schritt würde ich nicht überspringen.
 
 **Effekt fürs Team**: Agents bearbeiten die interessanten Fälle, statt den Tag mit dem Kopieren von Tracking-Nummern zu verbringen.
 
