@@ -120,6 +120,23 @@ const t = i18n[lang];
         {t.hero.apps_bridge_cta}
       </a>
     </p>
+
+    <!-- Uptime proof. The rest of the page asserts that this is engineered
+         properly; this is the only claim on the site a stranger can verify
+         without talking to me, which is why it sits this high. -->
+    <p
+      class="mt-3 max-w-2xl mx-auto text-center text-sm sm:text-base leading-relaxed text-secondary-600 dark:text-secondary-300"
+    >
+      {t.hero.uptime_proof}{" "}
+      <a
+        href={t.hero.uptime_proof_url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="font-medium text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
+      >
+        {t.hero.uptime_proof_cta}
+      </a>
+    </p>
   </div>
 </section>
 

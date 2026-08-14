@@ -32,6 +32,16 @@ const callUrl =
     <div class="grid lg:grid-cols-3 gap-8 reveal-stagger">
       {t.packages.map((pkg: any) => (
         <div class="flex flex-col h-full bg-white dark:bg-secondary-900 rounded-xl border border-secondary-200 dark:border-secondary-800 shadow-md p-8">
+          {/* Optional. Marks the lowest-commitment package as the way in for
+              someone who is not ready to buy a build yet. The row is reserved
+              on every card, badge or not, so the three headings stay aligned. */}
+          <div class="h-6 mb-3">
+            {pkg.badge && (
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300">
+                {pkg.badge}
+              </span>
+            )}
+          </div>
           <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-2">
             {pkg.name}
           </h3>
