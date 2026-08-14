@@ -11,7 +11,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = i18n[lang]
 
-// FAQPage JSON-LD — built from the same keys rendered below, so structured
+// FAQPage JSON-LD: built from the same keys rendered below, so structured
 // data always matches the visible accordion (Google requirement) and stays
 // extractable for AI answer engines.
 const faqSchema = faqPageSchema(t.faq as Record<string, string>)

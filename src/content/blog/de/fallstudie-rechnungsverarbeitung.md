@@ -1,6 +1,6 @@
 ---
 title: "Referenz-Build: KI-gestützte Rechnungsverarbeitung"
-description: "Die vollständige Architektur einer Vision-KI-Pipeline für Rechnungen auf n8n und Claude Vision – Eingang, Extraktion, Validierung, DATEV-Export – mit Workflow zum Herunterladen und einer Live-Demo für Ihre eigenen Dokumente."
+description: "Die vollständige Architektur einer Vision-KI-Pipeline für Rechnungen auf n8n und Claude Vision (Eingang, Extraktion, Validierung, DATEV-Export) mit Workflow zum Herunterladen und einer Live-Demo für Ihre eigenen Dokumente."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: reference-build
@@ -10,15 +10,15 @@ lang: de
 alternateSlug: "case-study-invoice-processing"
 ---
 
-> **Kurz gesagt:** Ein Vision-Modell liest jede Rechnung – PDF, Scan oder Handyfoto – und gibt strukturierte Daten zurück: Lieferant, Steuernummer, Netto, USt., Positionen. Geschäftsregeln prüfen Rechenwerk und Steuersatz, bevor irgendetwas exportiert wird, und alles, bei dem das Modell unsicher ist, geht in eine Prüfliste statt in Ihre Buchhaltung. Gebaut auf n8n mit Claude Vision – oder vollständig on-premise mit Ollama und DeepSeek-OCR, wenn die Daten das Haus nicht verlassen dürfen.
+> **Kurz gesagt:** Ein Vision-Modell liest jede Rechnung (PDF, Scan oder Handyfoto) und gibt strukturierte Daten zurück: Lieferant, Steuernummer, Netto, USt., Positionen. Geschäftsregeln prüfen Rechenwerk und Steuersatz, bevor irgendetwas exportiert wird, und alles, bei dem das Modell unsicher ist, geht in eine Prüfliste statt in Ihre Buchhaltung. Gebaut auf n8n mit Claude Vision: oder vollständig on-premise mit Ollama und DeepSeek-OCR, wenn die Daten das Haus nicht verlassen dürfen.
 
-> **Was das hier ist:** ein Referenz-Build – die Architektur, das Extraktionsschema und die Validierungsregeln, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Geben Sie der Demo eine eigene Rechnung →](/de/blog/rechnungsverarbeitung-automatisieren/)**.
+> **Was das hier ist:** ein Referenz-Build: die Architektur, das Extraktionsschema und die Validierungsregeln, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Geben Sie der Demo eine eigene Rechnung →](/de/blog/rechnungsverarbeitung-automatisieren/)**.
 
 ## Das Problem dahinter
 
 Rechnungen kommen per E-Mail, über Cloud-Ordner und Mandantenportale, in jedem Format, das es gibt. Jemand öffnet jede einzelne und tippt sie in DATEV oder Lexware ab. Diese Arbeit ist langsam, sie ist stumpf, und sie ist am schlimmsten genau dann, wenn das Volumen am höchsten ist: zum Monatsende und in der Steuersaison. Das ist auch der Zeitpunkt, an dem ein Zahlendreher am wahrscheinlichsten passiert und am unwahrscheinlichsten auffällt.
 
-Die Aufgabe zerfällt sauber in zwei Teile: das Dokument lesen, was ein Vision-Modell inzwischen gut kann, und entscheiden, ob man dem Gelesenen trauen darf – das ist Rechenwerk und Geschäftslogik. Dieser Build gibt die erste Hälfte an ein Modell und behält die zweite in Code.
+Die Aufgabe zerfällt sauber in zwei Teile: das Dokument lesen, was ein Vision-Modell inzwischen gut kann, und entscheiden, ob man dem Gelesenen trauen darf. Das ist Rechenwerk und Geschäftslogik. Dieser Build gibt die erste Hälfte an ein Modell und behält die zweite in Code.
 
 ## Auf einen Blick
 
@@ -124,19 +124,19 @@ Validierte Rechnungen exportieren zu:
 
 Fehlgeschlagene Validierungen gehen in eine Prüfwarteschlange mit angehängter KI-Begründung.
 
-## Was sich ändert – und was nicht
+## Was sich ändert, und was nicht
 
 Hier steht keine Vorher-Nachher-Tabelle. Ich habe diese Pipeline nicht in Ihrer Kanzlei betrieben, und für eine erfundene Kanzlei erfundene Zahlen sagen Ihnen nichts.
 
 Was die Architektur ändert, ist strukturell:
 
 - **Das Lesen ist nicht mehr der Engpass.** Die Extraktion braucht Sekunden pro Dokument und läuft so parallel, wie Sie es zulassen. Eine Spitze zum Monatsende wird damit nicht mehr zur Warteschlange.
-- **Fehler treten vor dem Export auf, nicht nach der Buchung.** Rechenwerk- und Steuersatzprüfung laufen bei jeder Rechnung, jedes Mal – genau das, was ein müder Mensch um 18 Uhr nicht mehr tut.
+- **Fehler treten vor dem Export auf, nicht nach der Buchung.** Rechenwerk- und Steuersatzprüfung laufen bei jeder Rechnung, jedes Mal. Genau das, was ein müder Mensch um 18 Uhr nicht mehr tut.
 - **Unsicherheit bekommt einen Ort.** Alles, bei dem das Modell zweifelt, landet mit seiner Begründung in einer Prüfliste, statt still als falsche Zahl in Ihrer Buchhaltung zu enden.
 
 Die Kennzahl, die entscheidet, ob sich das für Sie lohnt, ist Ihre Durchlaufquote: der Anteil der Rechnungen, die die Validierung ohne menschliches Zutun bestehen. Sie hängt fast vollständig davon ab, wie einheitlich die Belege Ihrer Lieferanten sind, und lässt sich deshalb nicht vorab beziffern. Lassen Sie einen Monat echter Rechnungen im Prüfmodus durchlaufen und zählen Sie nach. Diese Messung kostet einen Nachmittag und ist mehr wert als jede Tabelle, die ich hier hinschreiben könnte.
 
-## Technischer Deep Dive
+## Technische Details
 
 ### Umgang mit Sonderfällen
 
@@ -205,7 +205,7 @@ Sie möchten diesen Workflow implementieren? Hier sehen Sie, wie die einzelnen T
 
 Der Workflow startet, wenn ein neues Dokument eintrifft. Sie haben zwei Optionen:
 - **E-Mail-Trigger**: Überwacht ein dediziertes Postfach via IMAP. Wenn eine Rechnung eingeht, startet der Workflow innerhalb von 30 Sekunden.
-- **Ordner-Überwachung**: Für lokale/self-hosted Setups – überwacht ein Verzeichnis auf neue PDFs.
+- **Ordner-Überwachung**: Für lokale/self-hosted Setups, überwacht ein Verzeichnis auf neue PDFs.
 
 ```
 Trigger → Anhang extrahieren → An KI übergeben
@@ -213,7 +213,7 @@ Trigger → Anhang extrahieren → An KI übergeben
 
 **2. Claude Vision Analyse**
 
-Hier findet die Kernextraktion statt. Claude erhält das Dokumentenbild und einen strukturierten Prompt, der nach spezifischen Feldern fragt. Der Prompt ist entscheidend – er definiert die exakte JSON-Struktur, die Ihre Buchhaltungssoftware benötigt.
+Hier findet die Kernextraktion statt. Claude erhält das Dokumentenbild und einen strukturierten Prompt, der nach spezifischen Feldern fragt. Der Prompt ist entscheidend: er definiert die exakte JSON-Struktur, die Ihre Buchhaltungssoftware benötigt.
 
 Wichtige Prompt-Elemente:
 - Explizites JSON-Schema mit allen erforderlichen Feldern
@@ -241,7 +241,7 @@ Schließlich exportieren validierte Daten in Ihr Buchhaltungssystem-Format (DATE
 
 ### Starter-Workflow herunterladen
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
 >
 > **Cloud-Version (Claude API):** [Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
 > **Lokale Version (Ollama):** [Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
@@ -252,7 +252,7 @@ Schließlich exportieren validierte Daten in Ihr Buchhaltungssystem-Format (DATE
 3. Prompt an Ihr Rechnungsformat anpassen
 4. Mit 5-10 Beispielrechnungen testen
 
-Dieser Starter behandelt den Kern-Extraktionsfluss. Eine maßgeschneiderte Implementierung würde Ihre spezifischen Validierungsregeln, Buchhaltungssoftware-Exportformat, Fehler-Alerting und Multi-Source-Eingang hinzufügen – die Komponenten, die es produktionsreif für Ihr Setup machen.
+Dieser Starter behandelt den Kern-Extraktionsfluss. Eine maßgeschneiderte Implementierung würde Ihre spezifischen Validierungsregeln, Buchhaltungssoftware-Exportformat, Fehler-Alerting und Multi-Source-Eingang hinzufügen: die Komponenten, die es produktionsreif für Ihr Setup machen.
 
 ## Mehr erfahren
 
@@ -266,4 +266,4 @@ Verarbeiten Sie manuell Stapel von Dokumenten?
 2. **Sammeln**: 20 typische Dokumente in ihren chaotischsten Formaten
 3. **Testen**: Wir können einen Proof-of-Concept mit Ihren Beispielen durchführen
 
-[Kostenlose Erstberatung buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, welche Genauigkeit Sie mit Ihren Dokumenttypen erwarten können.
+[Kostenlose Erstberatung buchen](https://cal.com/tobias-leinss/strategiegespraech): Ich zeige Ihnen, welche Genauigkeit Sie mit Ihren Dokumenttypen erwarten können.

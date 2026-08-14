@@ -19,12 +19,12 @@ const SAMPLE = {
   transcript_words: 1240,
   summary: isDE
     ? [
-        'Q3-Roadmap besprochen – Priorität auf Rechnungsautomatisierung und CRM-Anbindung.',
+        'Q3-Roadmap besprochen: Priorität auf Rechnungsautomatisierung und CRM-Anbindung.',
         'Budget für das neue Automatisierungstool wurde freigegeben.',
         'Feature X wird auf Q4 verschoben, um Kapazität für die Integration zu schaffen.',
       ]
     : [
-        'Discussed the Q3 roadmap — priority on invoice automation and CRM integration.',
+        'Discussed the Q3 roadmap: priority on invoice automation and CRM integration.',
         'Budget approved for the new automation tool.',
         'Feature X postponed to Q4 to free up capacity for the integration.',
       ],
@@ -56,7 +56,7 @@ const t = {
   loading: isDE ? 'Transkribiere und analysiere...' : 'Transcribing and analyzing...',
   loadingStep1: isDE ? 'Schritt 1/2: Spracherkennung (Whisper)' : 'Step 1/2: Speech recognition (Whisper)',
   loadingStep2: isDE ? 'Schritt 2/2: Protokoll-Erstellung (KI)' : 'Step 2/2: Minutes generation (AI)',
-  loadingHint: isDE ? '~30–60 Sekunden' : '~30–60 seconds',
+  loadingHint: isDE ? '~30-60 Sekunden' : '~30-60 seconds',
   resultTitle: isDE ? 'Meeting-Protokoll' : 'Meeting Minutes',
   summaryTitle: isDE ? 'Zusammenfassung' : 'Summary',
   actionsTitle: isDE ? 'Aufgaben' : 'Action Items',
@@ -66,26 +66,26 @@ const t = {
     ? '🔒 Ihre Audiodatei wird für die Transkription verarbeitet und danach nicht gespeichert.'
     : '🔒 Your audio file is processed for transcription and not stored afterward.',
   selfHosted: isDE
-    ? '⚙️ Kein Mock-up — Ihre Audiodatei läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
-    : '⚙️ Not a mock-up — your audio file runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
+    ? '⚙️ Kein Mock-up: Ihre Audiodatei läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up: your audio file runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   fileTooLarge: isDE ? 'Datei zu groß. Maximal 25 MB.' : 'File too large. Maximum 25 MB.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
   rateLimited: isDE
-    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
-    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen, oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow: or get in touch directly.',
   tryAnother: isDE ? 'Nochmal testen' : 'Try another',
   offlineBadge: isDE
-    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
-    : '⚡ Live demo temporarily offline – this is sample output.',
-  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+    ? '⚡ Live-Demo gerade offline, dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline. This is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live: book a call →',
   artifactLabel: isDE ? 'das vollständige Protokoll (.md)' : 'the full minutes (.md)',
   // File header for the downloadable take-home minutes.
   fileTitle: isDE ? 'Meeting-Protokoll' : 'Meeting Minutes',
   fileSummary: isDE ? 'Zusammenfassung' : 'Summary',
   fileActions: isDE ? 'Aufgaben' : 'Action Items',
   fileFooter: isDE
-    ? 'Erstellt mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + Whisper + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
-    : 'Generated with the live demo on leinss-consulting.de — self-hosted n8n + Whisper + LLM. Workflow blueprint: on request during the intro call.',
+    ? 'Erstellt mit der Live-Demo auf leinss-consulting.de, selbst gehostetes n8n + Whisper + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Generated with the live demo on leinss-consulting.de, self-hosted n8n + Whisper + LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 

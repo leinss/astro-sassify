@@ -20,7 +20,7 @@ const t = {
   pdfError: isDE ? 'PDF konnte nicht gelesen werden. Bitte als Bild (PNG/JPG) hochladen.' : 'Could not read the PDF. Please upload it as an image (PNG/JPG).',
   submit: isDE ? 'Analysieren →' : 'Analyze →',
   loading: isDE ? 'KI analysiert Rechnung...' : 'AI analyzing invoice...',
-  loadingHint: isDE ? '~15–30 Sekunden' : '~15–30 seconds',
+  loadingHint: isDE ? '~15-30 Sekunden' : '~15-30 seconds',
   resultTitle: isDE ? 'Extrahierte Daten' : 'Extracted Data',
   vendor: isDE ? 'Lieferant' : 'Vendor',
   invoiceNr: isDE ? 'Rechnungs-Nr.' : 'Invoice No.',
@@ -34,21 +34,21 @@ const t = {
     ? '🔒 Ihre Datei wird nur für diese Analyse verarbeitet und danach nicht gespeichert.'
     : '🔒 Your file is only processed for this analysis and not stored afterward.',
   selfHosted: isDE
-    ? '⚙️ Kein Mock-up — Ihre Datei läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
-    : '⚙️ Not a mock-up — your file runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
+    ? '⚙️ Kein Mock-up: Ihre Datei läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up: your file runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   fileTooLarge: isDE ? 'Datei zu groß. Maximal 10 MB.' : 'File too large. Maximum 10 MB.',
   errorGeneric: isDE ? 'Analyse fehlgeschlagen. Bitte erneut versuchen.' : 'Analysis failed. Please try again.',
   rateLimited: isDE
-    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
-    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen, oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow: or get in touch directly.',
   description: isDE ? 'Menge × Einzelpreis' : 'Qty × Unit Price',
   artifactLabel: isDE ? 'die extrahierten Daten (.md)' : 'the extracted data (.md)',
   // Headers for the downloadable take-home extraction report.
   fileTitle: isDE ? 'Extrahierte Rechnungsdaten' : 'Extracted Invoice Data',
   fileFields: isDE ? 'Kopfdaten' : 'Header Data',
   fileFooter: isDE
-    ? 'Extrahiert mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + Vision-LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
-    : 'Extracted with the live demo on leinss-consulting.de — self-hosted n8n + vision LLM. Workflow blueprint: on request during the intro call.',
+    ? 'Extrahiert mit der Live-Demo auf leinss-consulting.de, selbst gehostetes n8n + Vision-LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Extracted with the live demo on leinss-consulting.de, self-hosted n8n + vision LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -156,7 +156,7 @@ const t = {
       let base64, mimeType, fileName;
       if (isPdf) {
         // The backend runs a vision model on an image. Rasterise page 1 of the
-        // PDF client-side (pdf.js) and send it as PNG — backend stays unchanged.
+        // PDF client-side (pdf.js) and send it as PNG, backend stays unchanged.
         const png = await pdfFirstPageToPng(file);
         base64 = png;
         mimeType = 'image/png';
@@ -260,7 +260,7 @@ const t = {
     tr.className = 'bg-white dark:bg-secondary-800/50';
     const desc = document.createElement('td');
     desc.className = 'px-3 py-2 text-secondary-700 dark:text-secondary-300';
-    desc.textContent = item.description || '—';
+    desc.textContent = item.description || '-';
     const qty = document.createElement('td');
     qty.className = 'px-3 py-2 text-right text-secondary-500 dark:text-secondary-400 whitespace-nowrap';
     qty.textContent = item.quantity != null ? `${item.quantity} × ${formatCurrency(item.unit_price)}` : formatCurrency(item.unit_price);
@@ -284,12 +284,12 @@ const t = {
     const lineItems = inv.line_items || [];
 
     fieldsEl.replaceChildren(
-      makeField(t.vendor, vendor.name || '—'),
-      makeField(t.invoiceNr, invoice.number || '—'),
-      makeField(t.date, invoice.date || '—'),
-      makeField(t.dueDate, invoice.due_date || '—'),
+      makeField(t.vendor, vendor.name || '-'),
+      makeField(t.invoiceNr, invoice.number || '-'),
+      makeField(t.date, invoice.date || '-'),
+      makeField(t.dueDate, invoice.due_date || '-'),
       makeField(t.net, formatCurrency(totals.net)),
-      makeField(t.tax, totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '—'),
+      makeField(t.tax, totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '-'),
       makeField(t.gross, formatCurrency(totals.gross)),
     );
 
@@ -306,18 +306,18 @@ const t = {
     const gateEl = document.getElementById('invoice-gate');
     if (!gateEl || !window.__demoGate) return;
     const lines = [`# ${t.fileTitle}`, '', `## ${t.fileFields}`, ''];
-    lines.push(`- **${t.vendor}:** ${vendor.name || '—'}`);
-    lines.push(`- **${t.invoiceNr}:** ${invoice.number || '—'}`);
-    lines.push(`- **${t.date}:** ${invoice.date || '—'}`);
-    lines.push(`- **${t.dueDate}:** ${invoice.due_date || '—'}`);
+    lines.push(`- **${t.vendor}:** ${vendor.name || '-'}`);
+    lines.push(`- **${t.invoiceNr}:** ${invoice.number || '-'}`);
+    lines.push(`- **${t.date}:** ${invoice.date || '-'}`);
+    lines.push(`- **${t.dueDate}:** ${invoice.due_date || '-'}`);
     lines.push(`- **${t.net}:** ${formatCurrency(totals.net)}`);
-    lines.push(`- **${t.tax}:** ${totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '—'}`);
+    lines.push(`- **${t.tax}:** ${totals.tax_rate ? `${totals.tax_rate}% (${formatCurrency(totals.tax_amount)})` : '-'}`);
     lines.push(`- **${t.gross}:** ${formatCurrency(totals.gross)}`);
     if (lineItems.length > 0) {
       lines.push('', `## ${t.lineItems}`, '', `| ${t.description} | ${t.gross} |`, '| --- | ---: |');
       lineItems.forEach((it) => {
-        const desc = (it.description || '—').replace(/\|/g, '\\|');
-        const qty = it.quantity != null ? `${it.quantity} × ${formatCurrency(it.unit_price)} — ` : '';
+        const desc = (it.description || '-').replace(/\|/g, '\\|');
+        const qty = it.quantity != null ? `${it.quantity} × ${formatCurrency(it.unit_price)}, ` : '';
         lines.push(`| ${desc} | ${qty}${formatCurrency(it.total)} |`);
       });
     }
@@ -331,7 +331,7 @@ const t = {
   }
 
   function formatCurrency(val) {
-    if (val == null || val === '') return '—';
+    if (val == null || val === '') return '-';
     const num = parseFloat(val);
     if (isNaN(num)) return String(val);
     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(num);

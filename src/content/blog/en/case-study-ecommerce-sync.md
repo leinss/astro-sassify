@@ -1,6 +1,6 @@
 ---
 title: "Reference Build: Multi-Platform Inventory Sync for Retail"
-description: "The full architecture for a central inventory hub that keeps Shopify, WooCommerce, Amazon and eBay in step — one source of truth, real-time webhooks, and the workflow available to download and inspect."
+description: "The full architecture for a central inventory hub that keeps Shopify, WooCommerce, Amazon and eBay in step: one source of truth, real-time webhooks, and the workflow available to download and inspect."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: reference-build
@@ -12,7 +12,7 @@ alternateSlug: "fallstudie-ecommerce-sync"
 
 > **Short answer:** One system holds the real stock number and every sales channel reads from it. A sale on any platform fires a webhook, the hub decrements the central count, and pushes the new figure to the other three within seconds. Product content is written once and adapted per marketplace. Built on n8n with Airtable as the source of truth.
 
-> **What this is:** a reference build — the architecture, the conflict-resolution rules, and the failure handling, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
+> **What this is:** a reference build: the architecture, the conflict-resolution rules, and the failure handling, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
 ## The problem it solves
 
@@ -29,7 +29,7 @@ The fix is not faster syncing. It is deciding that exactly one system holds the 
 | **Guardrails** | Optimistic locking on the central count, per-platform retry queue, buffer stock during peaks, reconciliation sweep |
 | **You can inspect** | The full n8n JSON, exported from the running instance |
 
-This is the kind of build I do under [integrations & APIs](/en/services/integrations-apis/) — connecting tools so data moves on its own. See the [live demos](/en/projects/) for working examples.
+This is the kind of build I do under [integrations & APIs](/en/services/integrations-apis/), connecting tools so data moves on its own. See the [live demos](/en/projects/) for working examples.
 
 ## The Solution
 
@@ -341,11 +341,11 @@ When listing new products, Claude can auto-categorize:
 - Shopify product type and tags
 - Attribute extraction from product name
 
-This node is disabled by default in the starter—enable it for new product workflows.
+This node is disabled by default in the starter, enable it for new product workflows.
 
 ### Get the Starter Workflow
 
-> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
 >
 > [Download n8n-ecommerce-sync.json](/workflows/n8n-ecommerce-sync.json)
 
@@ -356,7 +356,7 @@ This node is disabled by default in the starter—enable it for new product work
 4. Configure webhooks in each platform to point to your n8n endpoint
 5. Test with manual stock adjustments
 
-This starter handles the core sync loop. A production system would add stock buffers for slow platforms, conflict resolution for simultaneous orders, anomaly detection (Ollama), multi-location support, and retry logic for API failures—the resilience layer that handles Black Friday traffic without breaking a sweat.
+This starter handles the core sync loop. A production system would add stock buffers for slow platforms, conflict resolution for simultaneous orders, anomaly detection (Ollama), multi-location support, and retry logic for API failures, the resilience layer that handles Black Friday traffic without breaking a sweat.
 
 ## Your turn
 
@@ -368,4 +368,4 @@ Selling across multiple platforms?
 
 If keeping systems in step is a recurring headache, that is [integrations & APIs](/en/services/integrations-apis/) work.
 
-[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll assess your multi-platform setup and recommend a sync strategy.
+[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting), I'll assess your multi-platform setup and recommend a sync strategy.

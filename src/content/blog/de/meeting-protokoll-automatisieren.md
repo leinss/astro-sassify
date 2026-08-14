@@ -1,6 +1,6 @@
 ---
 title: "Nie wieder Meeting-Protokolle schreiben: KI-Automatisierung für Besprechungen"
-description: "Ein 1-stündiges Meeting produziert 20 Minuten Nacharbeit – Protokoll schreiben, verteilen, nachfassen. Mit n8n, Whisper und Claude erledigt ein Workflow das in 90 Sekunden."
+description: "Ein 1-stündiges Meeting produziert 20 Minuten Nacharbeit: Protokoll schreiben, verteilen, nachfassen. Mit n8n, Whisper und Claude erledigt ein Workflow das in 90 Sekunden."
 pubDate: 2026-05-06
 category: automation
 tags: ["meeting", "protokoll", "transkription", "n8n", "ki", "whisper"]
@@ -10,17 +10,17 @@ lang: de
 alternateSlug: "meeting-minutes-automation"
 ---
 
-> **Kurz gesagt:** Ein Protokoll-Workflow nimmt Ihre Audioaufnahme, transkribiert sie mit Whisper und lässt Claude daraus eine strukturierte Zusammenfassung mit Entscheidungen und Aufgaben machen. Anschließend geht sie automatisch per E-Mail an alle. Das Ganze läuft in 60–90 Sekunden und ersetzt rund 35 Minuten Handarbeit pro Meeting.
+> **Kurz gesagt:** Ein Protokoll-Workflow nimmt Ihre Audioaufnahme, transkribiert sie mit Whisper und lässt Claude daraus eine strukturierte Zusammenfassung mit Entscheidungen und Aufgaben machen. Anschließend geht sie automatisch per E-Mail an alle. Das Ganze läuft in 60-90 Sekunden und ersetzt rund 35 Minuten Handarbeit pro Meeting.
 
-Ein 1-stündiges Meeting produziert 20–30 Minuten Nacharbeit: Protokoll schreiben, formatieren, an alle Teilnehmer schicken, Aufgaben in den Projektmanager eintragen. Wer macht das? Meistens die Person, die sowieso schon zu viel zu tun hat.
+Ein 1-stündiges Meeting produziert 20-30 Minuten Nacharbeit: Protokoll schreiben, formatieren, an alle Teilnehmer schicken, Aufgaben in den Projektmanager eintragen. Wer macht das? Meistens die Person, die sowieso schon zu viel zu tun hat.
 
 Und was passiert 48 Stunden später? Keiner hat das Protokoll gelesen. Die Aufgaben liegen unbearbeitet. Beim nächsten Meeting wiederholt sich alles.
 
-Das Problem ist nicht das Meeting selbst — es ist die manuelle Dokumentation danach.
+Das Problem ist nicht das Meeting selbst. Es ist die manuelle Dokumentation danach.
 
 ## Was gutes Meeting-Tracking wirklich kostet
 
-Stellen Sie sich vor: 10 Meetings pro Woche, à 20 Minuten Nacharbeit. Das sind **200 Minuten** — über **3 Arbeitsstunden** — die wöchentlich für Protokolle verloren gehen. Hochgerechnet aufs Jahr: fast **2 Arbeitswochen** nur für Meeting-Dokumentation.
+Stellen Sie sich vor: 10 Meetings pro Woche, à 20 Minuten Nacharbeit. Das sind **200 Minuten**, über **3 Arbeitsstunden**, die wöchentlich für Protokolle verloren gehen. Hochgerechnet aufs Jahr: fast **2 Arbeitswochen** nur für Meeting-Dokumentation.
 
 Dabei sind die Qualitätsprobleme noch nicht eingerechnet:
 - Notizen sind unvollständig, weil man gleichzeitig zuhören und mitschreiben muss
@@ -30,7 +30,7 @@ Dabei sind die Qualitätsprobleme noch nicht eingerechnet:
 
 ## Wie funktioniert der Meeting-Protokoll-Bot?
 
-Ich habe einen n8n-Workflow entwickelt, der eine Audioaufnahme in ein strukturiertes Meeting-Protokoll verwandelt — vollautomatisch.
+Ich habe einen n8n-Workflow entwickelt, der eine Audioaufnahme in ein strukturiertes Meeting-Protokoll verwandelt, vollautomatisch.
 
 ### Schritt 1: Transkription mit Whisper
 
@@ -40,14 +40,14 @@ OpenAIs Whisper-Modell ist auf Sprache spezialisiert und erkennt zuverlässig:
 - Gespräche mit mehreren Personen
 - Schlechte Audioqualität (Videokonferenz-Hintergrundgeräusche)
 
-Die Transkription einer 60-Minuten-Aufnahme dauert **20–30 Sekunden**.
+Die Transkription einer 60-Minuten-Aufnahme dauert **20-30 Sekunden**.
 
 ### Schritt 2: Strukturierung mit Claude
 
 Das rohe Transkript geht an Claude Sonnet, der daraus ein strukturiertes Protokoll extrahiert:
 
 ```markdown
-# Meeting: Q2-Planung — 10.03.2025
+# Meeting: Q2-Planung, 10.03.2025
 
 **Teilnehmer:** Anna, Stefan, Maria
 
@@ -72,13 +72,13 @@ Das rohe Transkript geht an Claude Sonnet, der daraus ein strukturiertes Protoko
 24.03.2025, 14:00 Uhr
 ```
 
-Claude verwendet dabei **strukturierte Ausgabe** (Tool Use), sodass das Protokoll immer dasselbe Format hat — unabhängig davon, wie chaotisch die Diskussion war.
+Claude verwendet dabei **strukturierte Ausgabe** (Tool Use), sodass das Protokoll immer dasselbe Format hat: unabhängig davon, wie chaotisch die Diskussion war.
 
 ### Schritt 3: Verteilung
 
 Das fertige Protokoll geht **automatisch** per E-Mail an alle Teilnehmer. Optional: Archivierung in Google Docs, Confluence oder Notion.
 
-Gesamtdauer vom Hochladen der Aufnahme bis zur versendeten E-Mail: **60–90 Sekunden**.
+Gesamtdauer vom Hochladen der Aufnahme bis zur versendeten E-Mail: **60-90 Sekunden**.
 
 ## Datenschutz: Was Sie wissen müssen (DSGVO)
 
@@ -95,12 +95,12 @@ Die Standard-Version sendet Audio an OpenAIs Whisper API. Für Unternehmen mit s
 | Option | Latenz | Datenschutz | Kosten |
 |--------|--------|-------------|--------|
 | OpenAI Whisper API | ~30 Sek. | Daten verlassen Infrastruktur | ~€0,10/Stunde |
-| whisper.cpp (lokal) | ~2–5 Min. | On-Premise | Serverkosten |
+| whisper.cpp (lokal) | ~2-5 Min. | On-Premise | Serverkosten |
 | faster-whisper (lokal) | ~45 Sek. | On-Premise | Serverkosten |
 
 **3. Automatisches Löschen**
 
-Der Workflow löscht die Audiodatei nach erfolgreicher Transkription. Nur das Textprotokoll bleibt erhalten — und das enthält keine personenbezogenen Audiodaten.
+Der Workflow löscht die Audiodatei nach erfolgreicher Transkription. Nur das Textprotokoll bleibt erhalten, und das enthält keine personenbezogenen Audiodaten.
 
 ## ROI: Was Sie konkret sparen
 
@@ -137,7 +137,7 @@ Entwicklungsgespräche, Feedback-Sessions. Protokolle werden privat gespeichert,
 
 **Vertrauliche Vertragsverhandlungen**: Wenn externe Parteien beteiligt sind und keine Aufnahmeeinwilligung vorliegt.
 
-Das System erkennt keine automatisch "verbotenen" Themen — Verantwortung liegt beim Menschen.
+Das System erkennt keine automatisch "verbotenen" Themen, Verantwortung liegt beim Menschen.
 
 ## Technischer Stack: n8n + Whisper + Claude
 
@@ -160,7 +160,7 @@ vs. hunderte Euro Zeitkosten.
 
 ## Laden Sie den Workflow herunter
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
 >
 > [→ Meeting-Protokoll Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
 
@@ -175,15 +175,15 @@ vs. hunderte Euro Zeitkosten.
 2. API-Keys in den Zugangsdaten hinterlegen
 3. Webhook-URL notieren und in Ihr Meeting-Upload-Tool eintragen
 
-## Technischer Deep Dive
+## Technische Details
 
-Wenn Sie die Details hinter dem Workflow interessieren — wie Whisper mit deutschen Akzenten umgeht, warum Claude Tool Use statt Text-Ausgabe verwendet wird, und wie Sie das System für >25MB-Dateien erweitern:
+Wenn Sie die Details hinter dem Workflow interessieren: wie Whisper mit deutschen Akzenten umgeht, warum Claude Tool Use statt Text-Ausgabe verwendet wird, und wie Sie das System für >25MB-Dateien erweitern:
 
 → **[KI-Meeting-Assistent bauen mit Whisper, Claude und n8n](https://leinss.xyz/blog/de/meeting-assistant-technical/)** *(leinss.xyz)*
 
 ## Ihr nächster Schritt
 
-Wie viele Meetings haben Sie pro Woche? Multiplizieren Sie mit 35 Minuten — das ist Ihre monatliche Zeitverschwendung für Protokolle.
+Wie viele Meetings haben Sie pro Woche? Multiplizieren Sie mit 35 Minuten. Das ist Ihre monatliche Zeitverschwendung für Protokolle.
 
 Wenn die Zahl größer als 2 Stunden ist, lohnt sich die Automatisierung deutlich.
 

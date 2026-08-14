@@ -3,7 +3,7 @@
 User-agent: *
 Allow: /
 
-# AI search/answer crawlers explicitly allowed — we want to be citable in
+# AI search/answer crawlers explicitly allowed: we want to be citable in
 # AI Overviews, ChatGPT, Perplexity, Claude and Copilot answers.
 User-agent: GPTBot
 Allow: /

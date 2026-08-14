@@ -1,6 +1,6 @@
 ---
 title: "Reference Build: AI-Powered Invoice Processing"
-description: "The full architecture for a vision-AI invoice pipeline on n8n and Claude Vision — intake, extraction, validation, DATEV export — with the workflow available to download and the live demo running on your own documents."
+description: "The full architecture for a vision-AI invoice pipeline on n8n and Claude Vision (intake, extraction, validation, DATEV export) with the workflow available to download and the live demo running on your own documents."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
 category: reference-build
@@ -10,13 +10,13 @@ lang: en
 alternateSlug: "fallstudie-rechnungsverarbeitung"
 ---
 
-> **Short answer:** A vision model reads each invoice — PDF, scan, or a photo taken on a phone — and returns structured data: supplier, tax ID, net, VAT, line items. Business rules check the arithmetic and the VAT before anything is exported, and anything the model is unsure about goes to a human queue instead of into your books. Built on n8n with Claude Vision, or entirely on-premise with Ollama and DeepSeek-OCR when the data cannot leave the building.
+> **Short answer:** A vision model reads each invoice (PDF, scan, or a photo taken on a phone) and returns structured data: supplier, tax ID, net, VAT, line items. Business rules check the arithmetic and the VAT before anything is exported, and anything the model is unsure about goes to a human queue instead of into your books. Built on n8n with Claude Vision, or entirely on-premise with Ollama and DeepSeek-OCR when the data cannot leave the building.
 
-> **What this is:** a reference build — the architecture, the extraction schema, and the validation rules, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[feed the demo one of your own invoices →](/en/blog/automating-invoice-processing/)**.
+> **What this is:** a reference build: the architecture, the extraction schema, and the validation rules, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[feed the demo one of your own invoices →](/en/blog/automating-invoice-processing/)**.
 
 ## The problem it solves
 
-Invoices arrive by email, in cloud folders, and through client portals, in every format there is. Someone opens each one and retypes it into DATEV or Lexware. That work is slow, it is dull, and it is at its worst exactly when volume peaks, at month-end and in tax season — which is also when a transposed digit is most likely and least likely to be caught.
+Invoices arrive by email, in cloud folders, and through client portals, in every format there is. Someone opens each one and retypes it into DATEV or Lexware. That work is slow, it is dull, and it is at its worst exactly when volume peaks, at month-end and in tax season, which is also when a transposed digit is most likely and least likely to be caught.
 
 The task splits cleanly in two: reading the document, which a vision model now does well, and deciding whether the reading can be trusted, which is arithmetic and business rules. This build gives the first half to a model and keeps the second half in code.
 
@@ -41,7 +41,7 @@ A vision AI pipeline reads, understands, and validates each invoice.
 |-----------|------|-----|
 | Document Intake | Google Drive / Email | Clients already used these |
 | Workflow Engine | n8n | Self-hosted for data privacy |
-| Document AI (Cloud) | Claude Vision API | Best-in-class document understanding |
+| Document AI (Cloud) | Claude Vision API | Handles rotated, skewed and low-resolution scans |
 | Document AI (Local) | Ollama + DeepSeek-OCR | For clients requiring on-premise |
 | Validation | Custom n8n logic | Business rule enforcement |
 | Export | DATEV XML / CSV | Native accounting software format |
@@ -136,7 +136,7 @@ What the architecture changes is structural:
 
 The figure that decides whether this is worth building for you is your touchless rate: the share of invoices that pass validation with no human involvement. It depends almost entirely on how uniform your suppliers' documents are, so it is not something I can quote at you in advance. Run a month of real invoices through the pipeline in review-everything mode and count. That measurement costs one afternoon and is worth more than any table I could put here.
 
-## Technical Deep Dive
+## Technical detail
 
 ### Handling Edge Cases
 
@@ -213,7 +213,7 @@ Trigger → Extract attachment → Pass to AI
 
 **2. Claude Vision Analysis**
 
-The core extraction happens here. Claude receives the document image and a structured prompt asking for specific fields. The prompt is critical—it defines the exact JSON structure you need for your accounting software.
+The core extraction happens here. Claude receives the document image and a structured prompt asking for specific fields. The prompt is critical, it defines the exact JSON structure you need for your accounting software.
 
 Key prompt elements:
 - Explicit JSON schema with all required fields
@@ -241,7 +241,7 @@ Finally, validated data exports to your accounting system format (DATEV XML, CSV
 
 ### Get the Starter Workflow
 
-> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
 >
 > **Cloud version (Claude API):** [Download n8n-invoice-cloud.json](/workflows/n8n-invoice-cloud.json)
 > **Local version (Ollama):** [Download n8n-invoice-local.json](/workflows/n8n-invoice-local.json)
@@ -252,7 +252,7 @@ Finally, validated data exports to your accounting system format (DATEV XML, CSV
 3. Adjust the prompt for your invoice format
 4. Test with 5-10 sample invoices
 
-This starter handles the core extraction flow. A tailored implementation would add your specific validation rules, accounting software export format, error alerting, and multi-source intake—the pieces that make it production-ready for your setup.
+This starter handles the core extraction flow. A tailored implementation would add your specific validation rules, accounting software export format, error alerting, and multi-source intake, the pieces that make it production-ready for your setup.
 
 ## Learn More
 
@@ -266,4 +266,4 @@ Processing stacks of documents manually?
 2. **Sample**: Collect 20 typical documents in their messiest formats
 3. **Test**: We can run a proof-of-concept on your samples
 
-[Book a free assessment](https://cal.com/tobias-leinss/strategymeeting) — I'll show you what accuracy you could expect with your document types.
+[Book a free assessment](https://cal.com/tobias-leinss/strategymeeting), I'll show you what accuracy you could expect with your document types.
