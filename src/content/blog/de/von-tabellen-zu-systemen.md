@@ -1,6 +1,6 @@
 ---
 title: "Excel-Hölle verlassen: Kontaktlisten automatisch bereinigen mit n8n und KI"
-description: "Wie Sie mit n8n und Claude messy Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen – statt Stunden manuell zu arbeiten."
+description: "Wie Sie mit n8n und Claude messy Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen, statt Stunden manuell zu arbeiten."
 pubDate: 2026-01-22
 category: automation
 tags: ["tabellen", "excel", "kontakte", "datenbereinigung", "n8n", "ki"]
@@ -10,9 +10,9 @@ lang: de
 alternateSlug: "from-spreadsheets-to-systems"
 ---
 
-> **Kurz gesagt:** Um eine unordentliche Kontaktliste automatisch zu bereinigen, geben Sie die CSV an einen Workflow, der jede Zeile an Claude schickt und strukturiertes JSON zurückliefert: bereinigte Leerzeichen, klein geschriebene E-Mails, Telefonnummern in einem Format, korrekt kapitalisierte Namen, zusammengeführte Firmennamen und entfernte Duplikate – auch Fuzzy-Matches. 100 Kontakte zu bereinigen sinkt von Stunden auf rund 20 Sekunden.
+> **Kurz gesagt:** Um eine unordentliche Kontaktliste automatisch zu bereinigen, geben Sie die CSV an einen Workflow, der jede Zeile an Claude schickt und strukturiertes JSON zurückliefert: bereinigte Leerzeichen, klein geschriebene E-Mails, Telefonnummern in einem Format, korrekt kapitalisierte Namen, zusammengeführte Firmennamen und entfernte Duplikate, auch Fuzzy-Matches. 100 Kontakte zu bereinigen sinkt von Stunden auf rund 20 Sekunden.
 
-Jedes Unternehmen hat sie: die Kontaktliste, die über Jahre gewachsen ist. Namen mit unterschiedlicher Schreibweise, E-Mail-Adressen in Großbuchstaben, Telefonnummern in vier verschiedenen Formaten, Firmennamen die mal "GmbH" und mal "gmbh" heißen – und irgendwo stecken doppelte Einträge drin.
+Jedes Unternehmen hat sie: die Kontaktliste, die über Jahre gewachsen ist. Namen mit unterschiedlicher Schreibweise, E-Mail-Adressen in Großbuchstaben, Telefonnummern in vier verschiedenen Formaten, Firmennamen die mal "GmbH" und mal "gmbh" heißen, und irgendwo stecken doppelte Einträge drin.
 
 Das manuelle Bereinigen kostet je nach Größe Stunden bis Tage. Und kaum ist man fertig, kommen neue Einträge rein, die alles wieder durcheinanderbringen.
 
@@ -29,14 +29,14 @@ Das Ergebnis: das CRM-System, das das Problem lösen sollte, wird selbst zum Pro
 
 ## Der Excel-Retter: Automatische Datenbereinigung mit KI
 
-Der Workflow löst genau dieses Problem. Sie laden Ihre CSV-Daten hoch (oder fügen sie direkt ein), und n8n schickt sie an Claude – der:
+Der Workflow löst genau dieses Problem. Sie laden Ihre CSV-Daten hoch (oder fügen sie direkt ein), und n8n schickt sie an Claude, der:
 
 1. **Leerzeichen** am Anfang und Ende entfernt
 2. **E-Mail-Adressen** normalisiert (Kleinbuchstaben) und auf syntaktische Gültigkeit prüft
 3. **Telefonnummern** in ein einheitliches Format bringt (z. B. `+49 176 12345678`)
 4. **Namen** korrekt kapitalisiert
 5. **Firmennamen** konsistiert (erkennt "bäckerei schmidt gmbh" und "Bäckerei Schmidt GmbH" als identisch)
-6. **Duplikate** findet und entfernt – auch Fuzzy-Matches (gleiche Person, leicht unterschiedliche Schreibweise)
+6. **Duplikate** findet und entfernt: auch Fuzzy-Matches (gleiche Person, leicht unterschiedliche Schreibweise)
 7. **Ungültige Felder** markiert
 
 Am Ende gibt es eine bereinigte CSV-Datei zum Download plus eine Zusammenfassung aller vorgenommenen Änderungen.
@@ -65,18 +65,18 @@ Testen Sie es mit Beispieldaten oder Ihren eigenen. Das ist einer von mehreren [
   - headers, cleaned_rows, changes, stats
 ```
 
-Der Clou: Claude gibt das Ergebnis als strukturiertes JSON über Tool-Use zurück – nicht als Text. Das macht die Ausgabe zuverlässig parsebar, egal wie viele Sonderzeichen in den Daten stecken.
+Der Clou: Claude gibt das Ergebnis als strukturiertes JSON über Tool-Use zurück, nicht als Text. Das macht die Ausgabe zuverlässig parsebar, egal wie viele Sonderzeichen in den Daten stecken.
 
 ## Zeitersparnis in Zahlen
 
 | Aufgabe | Manuell | Mit Workflow |
 |---------|---------|--------------|
-| 100 Kontakte bereinigen | 2–4 Stunden | ~20 Sekunden |
-| 1.000 Kontakte | 1–2 Tage | ~3 Minuten |
+| 100 Kontakte bereinigen | 2-4 Stunden | ~20 Sekunden |
+| 1.000 Kontakte | 1-2 Tage | ~3 Minuten |
 | Duplikate finden | Halbstunde pro 100 | Automatisch |
 | Telefonnummern normalisieren | 1 Min. pro Nummer | Im Batch |
 
-Bei monatlich gepflegten Listen: **Jahresersparnis 10–30 Stunden** für eine Person.
+Bei monatlich gepflegten Listen: **Jahresersparnis 10-30 Stunden** für eine Person.
 
 ## Anpassungsmöglichkeiten
 
@@ -93,19 +93,19 @@ Die Daten werden ausschließlich für die KI-Verarbeitung genutzt und danach nic
 
 ## Workflow herunterladen
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
 >
 > [n8n-Workflow herunterladen (JSON)](/workflows/excel-retter.json)
 
 Importieren: n8n → Workflows → Import from File → JSON hochladen → Credentials setzen (Anthropic API Key)
 
-## Technischer Deep Dive
+## Technische Details
 
-Wenn Sie die Implementierungsdetails interessieren — warum Kimi k2.5 statt Claude Tool-Use, wie RFC 4180-konformes CSV-Quoting in JavaScript funktioniert und welche Prompt-Engineering-Techniken für zuverlässige JSON-Ausgabe sorgen:
+Wenn Sie die Implementierungsdetails interessieren: warum Kimi k2.5 statt Claude Tool-Use, wie RFC 4180-konformes CSV-Quoting in JavaScript funktioniert und welche Prompt-Engineering-Techniken für zuverlässige JSON-Ausgabe sorgen:
 
 → **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/blog/de/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
-Zum Weiterlesen: der [Referenz-Build zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/) — dasselbe Problem im Maßstab von vier Systemen.
+Zum Weiterlesen: der [Referenz-Build zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/), dasselbe Problem im Maßstab von vier Systemen.
 
 ---
 

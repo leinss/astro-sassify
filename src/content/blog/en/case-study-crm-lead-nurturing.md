@@ -1,6 +1,6 @@
 ---
 title: "Reference Build: Automated Lead Scoring and Nurturing"
-description: "The full architecture for capturing, scoring and nurturing leads on n8n, Notion and an AI scorer — the scoring prompt, the sequence logic, and the workflow available to download and inspect."
+description: "The full architecture for capturing, scoring and nurturing leads on n8n, Notion and an AI scorer: the scoring prompt, the sequence logic, and the workflow available to download and inspect."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: reference-build
@@ -10,15 +10,15 @@ lang: en
 alternateSlug: "fallstudie-crm-leadpflege"
 ---
 
-> **Short answer:** Every lead that arrives — website form, LinkedIn, event list — lands in one place, gets scored against your actual qualification criteria by a model that can read free text, and triggers a follow-up sequence matched to that score. The rep sees a ranked queue with the reasoning attached, instead of an inbox. Built on n8n with Notion as the CRM, and Claude or a local Ollama model doing the scoring.
+> **Short answer:** Every lead that arrives (website form, LinkedIn, event list) lands in one place, gets scored against your actual qualification criteria by a model that can read free text, and triggers a follow-up sequence matched to that score. The rep sees a ranked queue with the reasoning attached, instead of an inbox. Built on n8n with Notion as the CRM, and Claude or a local Ollama model doing the scoring.
 
-> **What this is:** a reference build — the architecture, the scoring prompt, and the sequence logic, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[watch the lead-response demo →](/en/projects/)**.
+> **What this is:** a reference build: the architecture, the scoring prompt, and the sequence logic, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[watch the lead-response demo →](/en/projects/)**.
 
 ## The problem it solves
 
 Leads arrive through several doors and land in an inbox, which is not a queue. Nobody can tell at a glance which of forty unread messages is worth answering first, so they get answered in arrival order or not at all. Meanwhile the rep retypes the same contact details into three tools.
 
-Two separate problems hide in there. Ranking needs judgement about text a rule cannot parse — a job title, a company description, what the person actually asked for. Sequencing needs reliability, not judgement: the right message, at the right interval, every time, without anyone remembering. This build gives the first to a model and the second to plain workflow logic.
+Two separate problems hide in there. Ranking needs judgement about text a rule cannot parse: a job title, a company description, what the person actually asked for. Sequencing needs reliability, not judgement: the right message, at the right interval, every time, without anyone remembering. This build gives the first to a model and the second to plain workflow logic.
 
 ## At a glance
 
@@ -142,7 +142,7 @@ Compare to: 1 SDR at €4,000/month doing the same manual work.
 1. **Start with clear ICP**: AI scoring is only as good as your criteria
 2. **Human-in-the-loop**: Hot leads get AI drafts, not auto-sends
 3. **Measure response time**: The #1 factor in lead conversion
-4. **Iterate prompts**: Expect to rewrite the scoring prompt several times against real closed deals — the first version is never the one you keep
+4. **Iterate prompts**: Expect to rewrite the scoring prompt several times against real closed deals, the first version is never the one you keep
 
 ## Build This Yourself
 
@@ -172,7 +172,7 @@ The AI evaluates each lead against your Ideal Customer Profile. The prompt inclu
 - Clear tier definitions (hot/warm/cold/disqualified)
 - Output format with score, tier, reasoning, and personalization hook
 
-Key insight: Include a `personalization_hook` field—it gives your sales team a specific detail to reference in outreach, making responses feel personal at scale.
+Key insight: Include a `personalization_hook` field, it gives your sales team a specific detail to reference in outreach, making responses feel personal at scale.
 
 **4. Score Parsing**
 
@@ -199,7 +199,7 @@ Each tier triggers appropriate actions:
 
 ### Get the Starter Workflow
 
-> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
 >
 > [Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
 
@@ -210,16 +210,16 @@ Each tier triggers appropriate actions:
 4. Create matching Slack channels (#sales-hot-leads)
 5. Test with sample form submissions
 
-This starter implements the core scoring and routing logic. A production implementation would include lead enrichment via Clearbit/Apollo, CRM sync (HubSpot, Pipedrive), multi-step email sequences with delay nodes, and escalation logic for uncontacted hot leads—refinements that come from understanding your specific sales process.
+This starter implements the core scoring and routing logic. A production implementation would include lead enrichment via Clearbit/Apollo, CRM sync (HubSpot, Pipedrive), multi-step email sequences with delay nodes, and escalation logic for uncontacted hot leads, refinements that come from understanding your specific sales process.
 
 ## Your turn
 
 Running a similar lead management challenge?
 
-1. **Audit**: Map your current lead flow — where are the gaps?
+1. **Audit**: Map your current lead flow, where are the gaps?
 2. **Prioritize**: Start with one source, e.g. website forms.
 3. **Measure**: Track response time before and after.
 
 If slow follow-up is the real culprit, the [lead-response demo](/en/projects/) shows what a minutes-not-hours reply looks like.
 
-[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll walk through what this would look like for your setup.
+[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting), I'll walk through what this would look like for your setup.

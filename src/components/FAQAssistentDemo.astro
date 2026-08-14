@@ -11,14 +11,14 @@ const isDE = lang === 'de';
 const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/faq-assistent';
 const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
 
-// Abort the request after this long; the displayed hint is ~30–60 s, so allow headroom.
+// Abort the request after this long; the displayed hint is ~30-60 s, so allow headroom.
 const TIMEOUT_MS = 90000;
 
 // Canned fallback shown when the live endpoint is unreachable (timeout/network/offline).
 const SAMPLE = {
   success: true,
   answer: isDE
-    ? 'Eine Automatisierungsberatung startet mit einem kostenlosen Strategiegespräch (ca. 30 Min.). Danach erhalten Sie ein Festpreisangebot oder eine projektbasierte Kalkulation – je nach Umfang. Typische Einstiegsprojekte liegen im niedrigen vierstelligen Bereich.'
+    ? 'Eine Automatisierungsberatung startet mit einem kostenlosen Strategiegespräch (ca. 30 Min.). Danach erhalten Sie ein Festpreisangebot oder eine projektbasierte Kalkulation, je nach Umfang. Typische Einstiegsprojekte liegen im niedrigen vierstelligen Bereich.'
     : 'Automation consulting starts with a free 30-minute strategy call. You then get a fixed-price quote or a project-based estimate, depending on scope. Typical entry projects start in the low four-figure range.',
   confidence: 0.88,
   sources: isDE ? ['Leistungen', 'FAQ', 'Preise'] : ['Services', 'FAQ', 'Pricing'],
@@ -28,8 +28,8 @@ const SAMPLE = {
 const t = {
   title: isDE ? 'Live-Demo: FAQ-Assistent' : 'Live Demo: FAQ Assistant',
   subtitle: isDE
-    ? 'Stellen Sie eine Frage – die KI sucht in der Wissensbasis und antwortet mit Quellenangabe.'
-    : 'Ask a question — the AI searches the knowledge base and answers with source references.',
+    ? 'Stellen Sie eine Frage, die KI sucht in der Wissensbasis und antwortet mit Quellenangabe.'
+    : 'Ask a question: the AI searches the knowledge base and answers with source references.',
   sampleLabel: isDE ? 'Beispielfragen:' : 'Sample questions:',
   samples: isDE
     ? ['Was kostet eine Automatisierungsberatung?', 'Welche Tools setzen Sie ein?', 'Wie lange dauert ein Projekt?', 'Ist n8n DSGVO-konform?']
@@ -37,7 +37,7 @@ const t = {
   placeholder: isDE ? 'Ihre Frage eingeben…' : 'Enter your question…',
   submit: isDE ? 'Fragen →' : 'Ask →',
   loading: isDE ? 'Suche in Wissensbasis…' : 'Searching knowledge base…',
-  loadingHint: isDE ? '~30–60 Sekunden' : '~30–60 seconds',
+  loadingHint: isDE ? '~30-60 Sekunden' : '~30-60 seconds',
   answerTitle: isDE ? 'Antwort' : 'Answer',
   sourcesLabel: isDE ? 'Quellen' : 'Sources',
   confidenceLabel: isDE ? 'Konfidenz' : 'Confidence',
@@ -49,24 +49,24 @@ const t = {
     ? '🔒 Ihre Frage wird verarbeitet und danach nicht gespeichert.'
     : '🔒 Your question is processed and not stored afterward.',
   selfHosted: isDE
-    ? '⚙️ Kein Mock-up — Ihre Frage läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
-    : '⚙️ Not a mock-up — your question runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
+    ? '⚙️ Kein Mock-up: Ihre Frage läuft durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up: your question runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
   rateLimited: isDE
-    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
-    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen, oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow: or get in touch directly.',
   errorEmpty: isDE ? 'Bitte stellen Sie eine Frage.' : 'Please enter a question.',
   offlineBadge: isDE
-    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
-    : '⚡ Live demo temporarily offline – this is sample output.',
-  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+    ? '⚡ Live-Demo gerade offline, dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline. This is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live: book a call →',
   artifactLabel: isDE ? 'das vollständige Antwort-Paket (.md)' : 'the full answer pack (.md)',
   // Headers for the downloadable take-home answer pack.
   fileTitle: isDE ? 'FAQ-Antwort-Paket' : 'FAQ Answer Pack',
   fileQuestion: isDE ? 'Frage' : 'Question',
   fileFooter: isDE
-    ? 'Beantwortet mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + RAG-LLM über die Wissensbasis. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
-    : 'Answered with the live demo on leinss-consulting.de — self-hosted n8n + RAG LLM over the knowledge base. Workflow blueprint: on request during the intro call.',
+    ? 'Beantwortet mit der Live-Demo auf leinss-consulting.de, selbst gehostetes n8n + RAG-LLM über die Wissensbasis. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Answered with the live demo on leinss-consulting.de, self-hosted n8n + RAG LLM over the knowledge base. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -247,8 +247,8 @@ const t = {
     const gateEl = document.getElementById('faq-gate');
     if (!gateEl || !window.__demoGate) return;
     const lines = [`# ${t.fileTitle}`, ''];
-    lines.push(`## ${t.fileQuestion}`, '', lastQuestion || '—', '');
-    lines.push(`## ${t.answerTitle}`, '', data.answer || '—', '');
+    lines.push(`## ${t.fileQuestion}`, '', lastQuestion || '-', '');
+    lines.push(`## ${t.answerTitle}`, '', data.answer || '-', '');
     lines.push(`_${t.confidenceLabel}: ${pct}%_`, '');
     const sources = Array.isArray(data.sources) ? data.sources : [];
     if (sources.length > 0) {
@@ -303,7 +303,7 @@ const t = {
         return;
       }
 
-      // Server responded but rejected the input — show the real reason, not a sample.
+      // Server responded but rejected the input: show the real reason, not a sample.
       if (data && data.success === false) {
         loadingEl.classList.add('hidden');
         inputArea.classList.remove('hidden');

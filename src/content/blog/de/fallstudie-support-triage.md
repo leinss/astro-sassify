@@ -1,6 +1,6 @@
 ---
 title: "Referenz-Build: KI-Support-Triage für E-Commerce"
-description: "Die vollständige Architektur einer KI-Triage-Schicht, die Support-Tickets klassifiziert, routet und beantwortet – jeder Node erklärt, mit n8n-Workflow zum Herunterladen und Nachprüfen."
+description: "Die vollständige Architektur einer KI-Triage-Schicht, die Support-Tickets klassifiziert, routet und beantwortet: jeder Node erklärt, mit n8n-Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: reference-build
@@ -10,9 +10,9 @@ lang: de
 alternateSlug: "case-study-support-triage"
 ---
 
-> **Kurz gesagt:** Eine KI-Triage-Schicht sitzt zwischen Ihren Kunden und Ihrem Support-Team. Sie liest jede eingehende Nachricht, bewertet die Dringlichkeit, vergibt eine Kategorie, leitet in den richtigen Slack-Kanal weiter und beantwortet die Routinefälle selbst – mit Konfidenzschwellen und Sentiment-Prüfung, damit alles Zweifelhafte bei einem Menschen landet. Gebaut auf n8n und Claude, mit lokalem Ollama-Vorfilter, um die API-Rechnung klein zu halten.
+> **Kurz gesagt:** Eine KI-Triage-Schicht sitzt zwischen Ihren Kunden und Ihrem Support-Team. Sie liest jede eingehende Nachricht, bewertet die Dringlichkeit, vergibt eine Kategorie, leitet in den richtigen Slack-Kanal weiter und beantwortet die Routinefälle selbst: mit Konfidenzschwellen und Sentiment-Prüfung, damit alles Zweifelhafte bei einem Menschen landet. Gebaut auf n8n und Claude, mit lokalem Ollama-Vorfilter, um die API-Rechnung klein zu halten.
 
-> **Was das hier ist:** ein Referenz-Build – die Architektur, die Prompts und die exakte n8n-Datei, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build: die Architektur, die Prompts und die exakte n8n-Datei, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
 ## Das Problem dahinter
 
@@ -160,19 +160,19 @@ Auto-Antworten werden sofort gesendet, aber zur Agent-Überprüfung protokollier
 Zur Kostenoptimierung läuft Mistral 7B lokal als erster Klassifizierungsdurchgang:
 - Er übernimmt die klaren Fälle, bei den meisten Ticket-Mischungen also die große Mehrheit
 - Claude wird nur bei Mehrdeutigkeit oder hoher Dringlichkeit aufgerufen
-- Wie viel Sie sparen, hängt davon ab, wie einseitig Ihre Ticket-Mischung ist – messen Sie es im Schattenbetrieb, bevor Sie eine Zahl annehmen
+- Wie viel Sie sparen, hängt davon ab, wie einseitig Ihre Ticket-Mischung ist: messen Sie es im Schattenbetrieb, bevor Sie eine Zahl annehmen
 
-## Was sich ändert – und was nicht
+## Was sich ändert, und was nicht
 
 Hier steht keine Vorher-Nachher-Tabelle. Ich habe dieses System nicht in Ihrem Unternehmen betrieben, und für ein erfundenes Unternehmen erfundene Zahlen sagen Ihnen nichts.
 
 Was die Architektur ändert, ist strukturell, und Sie können es direkt nachvollziehen:
 
-- **Die Eingangsreihenfolge bestimmt nicht mehr die Priorität.** Eine fehlgeschlagene Zahlung erreicht einen Menschen vor einer Frage nach der Sendungsnummer – unabhängig davon, was zuerst eintraf.
+- **Die Eingangsreihenfolge bestimmt nicht mehr die Priorität.** Eine fehlgeschlagene Zahlung erreicht einen Menschen vor einer Frage nach der Sendungsnummer: unabhängig davon, was zuerst eintraf.
 - **Beantwortbare Fragen warten nicht mehr auf einen Agent.** Alles, was das System aus Bestelldaten und FAQ beantworten kann, wird sofort beantwortet, zu jeder Uhrzeit.
 - **Agents kopieren keine Sendungsnummern mehr.** Die Warteschlange, die sie sehen, ist die Warteschlange, die einen Menschen braucht.
 
-Was das wert ist, hängt von Ihrer Ticket-Mischung ab. Der ehrliche Weg, das herauszufinden: Lassen Sie den Klassifizierer im Schattenbetrieb über Ihre Tickets des letzten Monats laufen und zählen Sie, was er automatisch gelöst hätte – bevor Sie eine einzige Auto-Antwort scharf schalten. Das ist Woche drei im Zeitplan unten, und diesen Schritt würde ich nicht überspringen.
+Was das wert ist, hängt von Ihrer Ticket-Mischung ab. Der ehrliche Weg, das herauszufinden: Lassen Sie den Klassifizierer im Schattenbetrieb über Ihre Tickets des letzten Monats laufen und zählen Sie, was er automatisch gelöst hätte, bevor Sie eine einzige Auto-Antwort scharf schalten. Das ist Woche drei im Zeitplan unten, und diesen Schritt würde ich nicht überspringen.
 
 **Effekt fürs Team**: Agents bearbeiten die interessanten Fälle, statt den Tag mit dem Kopieren von Tracking-Nummern zu verbringen.
 
@@ -293,7 +293,7 @@ Für Tickets mit `auto_resolvable: true`, hoher Konfidenz und nicht-verärgtem S
 
 ### Starter-Workflow herunterladen
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
 >
 > [Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
 
@@ -304,11 +304,11 @@ Für Tickets mit `auto_resolvable: true`, hoher Konfidenz und nicht-verärgtem S
 4. Slack-Channels erstellen (#support-urgent, #support-billing, etc.)
 5. Dringlichkeitsstufen und Kategorien für Ihr Business anpassen
 
-Dieser Starter implementiert Klassifizierung und Routing. Eine vollständige Implementierung würde Auto-Antwort-Templates, Bestellstatus-API-Integration, Konfidenz-Schwellen, CSAT-Tracking und Agent-Zuweisungslogik hinzufügen – die operativen Details, die den Unterschied zwischen einer Demo und einem System ausmachen, auf das Ihr Team sich verlässt.
+Dieser Starter implementiert Klassifizierung und Routing. Eine vollständige Implementierung würde Auto-Antwort-Templates, Bestellstatus-API-Integration, Konfidenz-Schwellen, CSAT-Tracking und Agent-Zuweisungslogik hinzufügen: die operativen Details, die den Unterschied zwischen einer Demo und einem System ausmachen, auf das Ihr Team sich verlässt.
 
-## Technischer Deep Dive
+## Technische Details
 
-Für eine detaillierte technische Anleitung zum Aufbau von Kundenservice-Bots mit n8n, siehe meinen persönlichen Blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** (EN) — behandelt Intent-Klassifizierung, Kontext-Retrieval und Antwortgenerierung.
+Für eine detaillierte technische Anleitung zum Aufbau von Kundenservice-Bots mit n8n, siehe meinen persönlichen Blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** (EN): behandelt Intent-Klassifizierung, Kontext-Retrieval und Antwortgenerierung.
 
 ## Ihr nächster Schritt
 
@@ -320,4 +320,4 @@ Ertrinkt Ihr Support-Team in repetitiven Anfragen?
 
 Für das größere Bild, wo KI in den Kundensupport passt, siehe [Kommunikation automatisieren und trotzdem menschlich bleiben](/de/blog/kommunikation-automatisieren-menschlich-bleiben/).
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich analysiere Ihre Support-Muster und zeige was automatisierbar ist.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech). Ich analysiere Ihre Support-Muster und zeige was automatisierbar ist.

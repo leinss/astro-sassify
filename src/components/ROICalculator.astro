@@ -16,7 +16,7 @@ const calUrl =
     : config.external_links.strategy_call_de
 const locale = lang === "de" ? "de-DE" : "en-US"
 
-// Per-pillar starting points for the sliders — the visitor adjusts them to match
+// Per-pillar starting points for the sliders, the visitor adjusts them to match
 // their own team. `automationPct` is the share of the task that can be automated
 // (a percentage), NOT an hourly rate. Conservative defaults keep the headline credible.
 const defaults: Record<Props["pillar"], { hours: number; automationPct: number }> = {

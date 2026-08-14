@@ -1,6 +1,6 @@
 ---
 title: "Referenz-Build: Multi-Plattform Inventar-Sync für Retail"
-description: "Die vollständige Architektur eines zentralen Bestands-Hubs, der Shopify, WooCommerce, Amazon und eBay im Gleichtakt hält – eine Quelle der Wahrheit, Echtzeit-Webhooks und der Workflow zum Herunterladen und Nachprüfen."
+description: "Die vollständige Architektur eines zentralen Bestands-Hubs, der Shopify, WooCommerce, Amazon und eBay im Gleichtakt hält: eine Quelle der Wahrheit, Echtzeit-Webhooks und der Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
 category: reference-build
@@ -12,7 +12,7 @@ alternateSlug: "case-study-ecommerce-sync"
 
 > **Kurz gesagt:** Ein System hält den echten Bestand, alle Verkaufskanäle lesen daraus. Ein Verkauf auf irgendeiner Plattform löst einen Webhook aus, der Hub zieht den zentralen Bestand ab und schiebt den neuen Wert binnen Sekunden an die übrigen drei. Produktinhalte werden einmal geschrieben und pro Marktplatz angepasst. Gebaut auf n8n mit Airtable als Quelle der Wahrheit.
 
-> **Was das hier ist:** ein Referenz-Build – die Architektur, die Konfliktauflösung und das Verhalten im Fehlerfall, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build: die Architektur, die Konfliktauflösung und das Verhalten im Fehlerfall, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
 ## Das Problem dahinter
 
@@ -29,7 +29,7 @@ Die Lösung ist nicht schnelleres Synchronisieren. Sie ist die Entscheidung, das
 | **Sicherungen** | Optimistisches Sperren auf dem zentralen Bestand, Retry-Queue pro Plattform, Pufferbestand in Spitzenzeiten, Abgleichlauf |
 | **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert |
 
-Genau diese Art von Aufbau mache ich unter [Integrationen & APIs](/de/services/integrationen-apis/) – Tools so verbinden, dass Daten von selbst fließen. Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
+Genau diese Art von Aufbau mache ich unter [Integrationen & APIs](/de/services/integrationen-apis/): Tools so verbinden, dass Daten von selbst fließen. Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
 
 ## Die Lösung
 
@@ -216,7 +216,7 @@ Für Amazons Verzögerung halten wir einen "pending"-Status:
 - Bestätigen wenn Amazon-Feed abgeschlossen
 - Alert wenn Feed fehlschlägt
 
-## Was sich ändert – und was nicht
+## Was sich ändert, und was nicht
 
 Hier steht keine Vorher-Nachher-Tabelle. Ich habe diesen Hub nicht auf Ihrem Sortiment betrieben, und für einen erfundenen Händler erfundene Zahlen sagen Ihnen nichts.
 
@@ -226,7 +226,7 @@ Was die Architektur ändert, ist strukturell:
 - **Der Sync wartet nicht mehr auf einen Menschen.** Ein Verkauf läuft per Webhook in Sekunden durch, das Risikofenster schrumpft von einem Tag auf die Dauer eines API-Aufrufs.
 - **Ein neuer Kanal ist ein Konnektor, kein Umbau.** Ein fünfter Marktplatz heißt: dem Hub einen weiteren Ausgang beibringen, nicht eine weitere Tabellenspalte pflegen.
 
-Was der Hub nicht leistet: Überverkäufe unmöglich machen. Zwei Plattformen können weiterhin im selben Moment das letzte Stück verkaufen, und eine Marktplatz-API kann weiterhin ausfallen, wenn Sie sie brauchen. Genau dafür sind Pufferstrategie und Retry-Queue weiter unten da – sie verkleinern das Fenster, sie schließen es nicht. Wer Ihnen null Überverkäufe verspricht, hat noch keinen Sync-Hub am Black Friday betrieben.
+Was der Hub nicht leistet: Überverkäufe unmöglich machen. Zwei Plattformen können weiterhin im selben Moment das letzte Stück verkaufen, und eine Marktplatz-API kann weiterhin ausfallen, wenn Sie sie brauchen. Genau dafür sind Pufferstrategie und Retry-Queue weiter unten da: sie verkleinern das Fenster, sie schließen es nicht. Wer Ihnen null Überverkäufe verspricht, hat noch keinen Sync-Hub am Black Friday betrieben.
 
 Die Zahl, die zu messen lohnt, ist Ihre aktuelle Abweichungsquote: Messen Sie an einem beliebigen Dienstag, wie weit die Tabelle von der Realität entfernt ist, und dann noch einmal an Ihrem stärksten Tag. Der Abstand zwischen beiden ist die Größe des Problems, für das Sie hier eine Lösung kaufen.
 
@@ -341,11 +341,11 @@ Beim Anlegen neuer Produkte kann Claude auto-kategorisieren:
 - Shopify Produkttyp und Tags
 - Attribut-Extraktion aus Produktnamen
 
-Dieser Node ist im Starter standardmäßig deaktiviert – für Neuprodukt-Workflows aktivieren.
+Dieser Node ist im Starter standardmäßig deaktiviert, für Neuprodukt-Workflows aktivieren.
 
 ### Starter-Workflow herunterladen
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
 >
 > [Download n8n-ecommerce-sync.json](/workflows/n8n-ecommerce-sync.json)
 
@@ -356,7 +356,7 @@ Dieser Node ist im Starter standardmäßig deaktiviert – für Neuprodukt-Workf
 4. Webhooks in jeder Plattform auf Ihren n8n-Endpoint konfigurieren
 5. Mit manuellen Bestandsanpassungen testen
 
-Dieser Starter behandelt die Kern-Sync-Schleife. Ein Produktionssystem würde Bestandspuffer für langsame Plattformen, Konfliktlösung für simultane Bestellungen, Anomalie-Erkennung (Ollama), Multi-Location-Support und Retry-Logik für API-Fehler hinzufügen – die Resilienz-Schicht, die Black-Friday-Traffic aushält ohne ins Schwitzen zu kommen.
+Dieser Starter behandelt die Kern-Sync-Schleife. Ein Produktionssystem würde Bestandspuffer für langsame Plattformen, Konfliktlösung für simultane Bestellungen, Anomalie-Erkennung (Ollama), Multi-Location-Support und Retry-Logik für API-Fehler hinzufügen: die Resilienz-Schicht, die Black-Friday-Traffic aushält ohne ins Schwitzen zu kommen.
 
 ## Ihr nächster Schritt
 
@@ -368,4 +368,4 @@ Verkaufen Sie über mehrere Plattformen?
 
 Wenn Systeme ständig auseinanderlaufen, ist das [Integrationen & APIs](/de/services/integrationen-apis/)-Arbeit.
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech), Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.

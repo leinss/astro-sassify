@@ -1,6 +1,6 @@
 ---
 title: "Referenz-Build: Automatisiertes Lead-Scoring und Nurturing"
-description: "Die vollständige Architektur für Erfassung, Bewertung und Pflege von Leads auf n8n, Notion und einem KI-Scorer – der Scoring-Prompt, die Sequenzlogik und der Workflow zum Herunterladen und Nachprüfen."
+description: "Die vollständige Architektur für Erfassung, Bewertung und Pflege von Leads auf n8n, Notion und einem KI-Scorer: der Scoring-Prompt, die Sequenzlogik und der Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
 category: reference-build
@@ -10,13 +10,13 @@ lang: de
 alternateSlug: "case-study-crm-lead-nurturing"
 ---
 
-> **Kurz gesagt:** Jeder eingehende Lead – Website-Formular, LinkedIn, Eventliste – landet an einer Stelle, wird von einem Modell, das Freitext lesen kann, gegen Ihre echten Qualifizierungskriterien bewertet und löst eine zum Score passende Follow-up-Sequenz aus. Der Vertrieb sieht eine sortierte Warteschlange samt Begründung statt eines Postfachs. Gebaut auf n8n mit Notion als CRM, das Scoring übernimmt Claude oder ein lokales Ollama-Modell.
+> **Kurz gesagt:** Jeder eingehende Lead (Website-Formular, LinkedIn, Eventliste) landet an einer Stelle, wird von einem Modell, das Freitext lesen kann, gegen Ihre echten Qualifizierungskriterien bewertet und löst eine zum Score passende Follow-up-Sequenz aus. Der Vertrieb sieht eine sortierte Warteschlange samt Begründung statt eines Postfachs. Gebaut auf n8n mit Notion als CRM, das Scoring übernimmt Claude oder ein lokales Ollama-Modell.
 
-> **Was das hier ist:** ein Referenz-Build – die Architektur, der Scoring-Prompt und die Sequenzlogik, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Lead-Response-Demo ansehen →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build: die Architektur, der Scoring-Prompt und die Sequenzlogik, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Lead-Response-Demo ansehen →](/de/projekte/)**.
 
 ## Das Problem dahinter
 
-Leads kommen durch mehrere Türen und landen in einem Postfach, und ein Postfach ist keine Warteschlange. Niemand erkennt auf einen Blick, welche von vierzig ungelesenen Nachrichten zuerst eine Antwort verdient, also wird nach Eingang beantwortet – oder gar nicht. Nebenher tippt der Vertrieb dieselben Kontaktdaten in drei Tools.
+Leads kommen durch mehrere Türen und landen in einem Postfach, und ein Postfach ist keine Warteschlange. Niemand erkennt auf einen Blick, welche von vierzig ungelesenen Nachrichten zuerst eine Antwort verdient, also wird nach Eingang beantwortet, oder gar nicht. Nebenher tippt der Vertrieb dieselben Kontaktdaten in drei Tools.
 
 Darin stecken zwei verschiedene Probleme. Sortieren braucht Urteilsvermögen über Text, den eine Regel nicht parst: eine Position, eine Firmenbeschreibung, das, was die Person tatsächlich gefragt hat. Sequenzieren braucht kein Urteilsvermögen, sondern Verlässlichkeit: die richtige Nachricht, im richtigen Abstand, jedes Mal, ohne dass sich jemand erinnern muss. Dieser Build gibt das Erste an ein Modell und das Zweite an schlichte Workflow-Logik.
 
@@ -25,7 +25,7 @@ Darin stecken zwei verschiedene Probleme. Sortieren braucht Urteilsvermögen üb
 | | |
 |---|---|
 | **Stack** | n8n-Orchestrierung + Notion-CRM + KI-Lead-Scoring (Claude / Ollama) |
-| **Was entschieden wird** | Fit-Score, Kaufabsicht, Segment, nächste beste Aktion – jeweils mit Begründung |
+| **Was entschieden wird** | Fit-Score, Kaufabsicht, Segment, nächste beste Aktion, jeweils mit Begründung |
 | **Sicherungen** | Scores sind beratend und für den Vertrieb sichtbar, Sequenzen stoppen bei jeder menschlichen Antwort, Versand nur zu Geschäftszeiten |
 | **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert |
 
@@ -106,19 +106,19 @@ Basierend auf dem KI-Score triggert n8n unterschiedliche Workflows:
 - Tag 3: Bildungsinhalte basierend auf ihrer Branche
 - Tag 7: Soft-Ask für ein Gespräch mit spezifischem Wertversprechen
 
-## Was sich ändert – und was nicht
+## Was sich ändert, und was nicht
 
 Hier steht keine Vorher-Nachher-Tabelle. Ich habe dieses System nicht auf Ihrer Pipeline betrieben, und für ein erfundenes Unternehmen erfundene Zahlen sagen Ihnen nichts.
 
 Was die Architektur ändert, ist strukturell:
 
-- **Die Warteschlange ist sortiert, nicht chronologisch.** Wer das CRM öffnet, sieht zuerst den Lead mit der besten Passung – samt Begründung, warum er so bewertet wurde, statt nur den zuletzt eingegangenen.
+- **Die Warteschlange ist sortiert, nicht chronologisch.** Wer das CRM öffnet, sieht zuerst den Lead mit der besten Passung: samt Begründung, warum er so bewertet wurde, statt nur den zuletzt eingegangenen.
 - **Follow-up hängt nicht mehr am Gedächtnis.** Sequenzen laufen nach Plan und stoppen in dem Moment, in dem ein Mensch antwortet. Nichts fällt hinten runter, nichts geht doppelt raus.
 - **Niemand tippt einen Kontakt zweimal.** Erfasst wird einmal, alle nachgelagerten Tools lesen aus diesem Datensatz.
 
-Was sich nicht ändert, ist Ihre Abschlussquote bei einem guten Lead. Das Modell sortiert und entwirft; verkaufen tut es nicht. Wenn Ihr eigentliches Problem darin besteht, dass qualifizierte Interessenten mit Ihnen sprechen und dann nicht kaufen, macht dieser Build das schneller sichtbar – lösen wird er es nicht.
+Was sich nicht ändert, ist Ihre Abschlussquote bei einem guten Lead. Das Modell sortiert und entwirft; verkaufen tut es nicht. Wenn Ihr eigentliches Problem darin besteht, dass qualifizierte Interessenten mit Ihnen sprechen und dann nicht kaufen, macht dieser Build das schneller sichtbar, lösen wird er es nicht.
 
-Die erste Zahl, die es zu messen lohnt, ist die Übereinstimmungsrate des Scorings: Lassen Sie den Scorer über die gewonnenen und verlorenen Leads des letzten Quartals laufen und prüfen Sie, ob seine Rangfolge zum tatsächlichen Ausgang passt. Wenn nicht, gehören Ihre Kriterien in den Prompt – nicht mehr Automatisierung drumherum.
+Die erste Zahl, die es zu messen lohnt, ist die Übereinstimmungsrate des Scorings: Lassen Sie den Scorer über die gewonnenen und verlorenen Leads des letzten Quartals laufen und prüfen Sie, ob seine Rangfolge zum tatsächlichen Ausgang passt. Wenn nicht, gehören Ihre Kriterien in den Prompt, nicht mehr Automatisierung drumherum.
 
 ## Implementierungsdetails
 
@@ -142,7 +142,7 @@ Vergleich: 1 SDR bei €4.000/Monat für die gleiche manuelle Arbeit.
 1. **Mit klarem ICP starten**: KI-Scoring ist nur so gut wie die Kriterien
 2. **Human-in-the-Loop**: Hot Leads bekommen KI-Entwürfe, keine Auto-Sends
 3. **Reaktionszeit messen**: Der #1-Faktor bei der Lead-Conversion
-4. **Prompts iterieren**: Rechnen Sie damit, den Scoring-Prompt mehrfach gegen echte abgeschlossene Deals umzuschreiben – die erste Fassung ist nie die, die bleibt
+4. **Prompts iterieren**: Rechnen Sie damit, den Scoring-Prompt mehrfach gegen echte abgeschlossene Deals umzuschreiben. Die erste Fassung ist nie die, die bleibt
 
 ## Selbst bauen
 
@@ -172,7 +172,7 @@ Die KI bewertet jeden Lead gegen Ihr Ideal Customer Profile. Der Prompt enthält
 - Klare Tier-Definitionen (hot/warm/cold/disqualified)
 - Ausgabeformat mit Score, Tier, Begründung und Personalisierungs-Hook
 
-Wichtige Erkenntnis: Ein `personalization_hook`-Feld einbauen – es gibt Ihrem Sales-Team ein spezifisches Detail zum Referenzieren in der Ansprache, sodass Antworten persönlich wirken, auch bei Skalierung.
+Wichtige Erkenntnis: Ein `personalization_hook`-Feld einbauen: es gibt Ihrem Sales-Team ein spezifisches Detail zum Referenzieren in der Ansprache, sodass Antworten persönlich wirken, auch bei Skalierung.
 
 **4. Score-Parsing**
 
@@ -199,7 +199,7 @@ Jedes Tier triggert entsprechende Aktionen:
 
 ### Starter-Workflow herunterladen
 
-> **📥 Kein Screenshot — der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie und prüfen Sie jeden Node selbst.
 >
 > [Download n8n-crm-lead.json](/workflows/n8n-crm-lead.json)
 
@@ -210,16 +210,16 @@ Jedes Tier triggert entsprechende Aktionen:
 4. Passende Slack-Channels erstellen (#sales-hot-leads)
 5. Mit Beispiel-Formular-Submissions testen
 
-Dieser Starter implementiert die Kern-Scoring- und Routing-Logik. Eine Produktionsimplementierung würde Lead-Anreicherung via Clearbit/Apollo, CRM-Sync (HubSpot, Pipedrive), mehrstufige E-Mail-Sequenzen mit Delay-Nodes und Eskalationslogik für nicht kontaktierte Hot-Leads hinzufügen – Verfeinerungen, die aus dem Verständnis Ihres spezifischen Sales-Prozesses entstehen.
+Dieser Starter implementiert die Kern-Scoring- und Routing-Logik. Eine Produktionsimplementierung würde Lead-Anreicherung via Clearbit/Apollo, CRM-Sync (HubSpot, Pipedrive), mehrstufige E-Mail-Sequenzen mit Delay-Nodes und Eskalationslogik für nicht kontaktierte Hot-Leads hinzufügen: Verfeinerungen, die aus dem Verständnis Ihres spezifischen Sales-Prozesses entstehen.
 
 ## Ihr nächster Schritt
 
 Haben Sie eine ähnliche Lead-Management-Herausforderung?
 
-1. **Audit**: Bilden Sie Ihren aktuellen Lead-Flow ab — wo sind die Lücken?
+1. **Audit**: Bilden Sie Ihren aktuellen Lead-Flow ab, wo sind die Lücken?
 2. **Priorisieren**: Starten Sie mit einer Quelle, z.B. Website-Formulare.
 3. **Messen**: Tracken Sie die Reaktionszeit vor und nach der Änderung.
 
 Wenn langsame Follow-ups der eigentliche Übeltäter sind, zeigt die [Lead-Response-Demo](/de/projekte/), wie eine Antwort in Minuten statt Stunden aussieht.
 
-[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.
+[Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech): Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.
