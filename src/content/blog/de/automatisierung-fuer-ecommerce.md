@@ -27,13 +27,13 @@ E-Commerce lebt von Volumen, und beim Volumen bricht manuelle Arbeit. Das sind d
 
 Verkaufen Sie denselben Bestand im eigenen Shop, auf einem Marktplatz und vielleicht in einem Ladengeschäft, gleicht jemand den Bestand von Hand ab — und Sie verkaufen über, sobald er hinterherhinkt.
 
-Verbinden Sie die Kanäle so, dass ein Verkauf irgendwo den Bestand überall in Echtzeit aktualisiert. Die [Fallstudie zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/) zeigt das für einen Händler, und es ist Kernarbeit von [Integrationen & APIs](/de/services/integrationen-apis/).
+Verbinden Sie die Kanäle so, dass ein Verkauf irgendwo den Bestand überall in Echtzeit aktualisiert. Der [Referenz-Build zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/) zeigt die Architektur, und es ist Kernarbeit von [Integrationen & APIs](/de/services/integrationen-apis/).
 
 ## Dann: den Support triagieren
 
 Die meisten Support-Tickets sind dieselbe Handvoll Fragen — wo ist meine Bestellung, wie schicke ich das zurück, liefern Sie nach X. Ihr Team beantwortet sie den ganzen Tag, während die wirklich kniffligen Fälle warten.
 
-Ein Retrieval-Workflow beantwortet die gängigen sofort mit belegten Antworten und Konfidenzwert und eskaliert alles Unsichere an einen Menschen. Die [Support-Assistent-Demo](/de/projekte/) zeigt es live, und die [Fallstudie zur KI-Support-Triage](/de/blog/fallstudie-support-triage/) behandelt einen Shop mit 50.000 Bestellungen im Monat.
+Ein Retrieval-Workflow beantwortet die gängigen sofort mit belegten Antworten und Konfidenzwert und eskaliert alles Unsichere an einen Menschen. Die [Support-Assistent-Demo](/de/projekte/) zeigt es live, und der [Referenz-Build zur KI-Support-Triage](/de/blog/fallstudie-support-triage/) zeigt die Klassifizierungs- und Routing-Schicht Node für Node.
 
 ## Bestell-Updates und Warenkorb-Recovery
 

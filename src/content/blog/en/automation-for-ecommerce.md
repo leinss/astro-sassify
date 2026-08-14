@@ -27,13 +27,13 @@ E-commerce runs on volume, and volume is where manual work breaks. These are the
 
 Selling the same stock on your own shop, a marketplace, and maybe a physical location means someone reconciles inventory by hand — and you oversell the moment they're behind.
 
-Connect the channels so a sale anywhere updates stock everywhere in real time. The [multi-platform inventory sync case study](/en/blog/case-study-ecommerce-sync/) walks through this for a retailer, and it's core [integrations & APIs](/en/services/integrations-apis/) work.
+Connect the channels so a sale anywhere updates stock everywhere in real time. The [multi-platform inventory sync reference build](/en/blog/case-study-ecommerce-sync/) walks through the architecture, and it's core [integrations & APIs](/en/services/integrations-apis/) work.
 
 ## Then: triage support
 
 Most support tickets are the same handful of questions — where's my order, how do I return this, do you ship to X. Your team answers them all day while the genuinely tricky cases wait.
 
-A retrieval workflow answers the common ones instantly with sourced replies and a confidence score, and escalates anything uncertain to a person. The [support-assistant demo](/en/projects/) shows it live, and the [AI support triage case study](/en/blog/case-study-support-triage/) covers a shop processing 50k monthly orders.
+A retrieval workflow answers the common ones instantly with sourced replies and a confidence score, and escalates anything uncertain to a person. The [support-assistant demo](/en/projects/) shows it live, and the [AI support triage reference build](/en/blog/case-study-support-triage/) covers the classification and routing layer node by node.
 
 ## Order updates and cart recovery
 

@@ -1,54 +1,39 @@
 ---
-title: "Case Study: AI-Powered Invoice Processing for an Accounting Firm"
-description: "Example implementation: how to take invoice processing from minutes to seconds per document using n8n, Claude Vision, and intelligent validation. The live demo processes real documents."
+title: "Reference Build: AI-Powered Invoice Processing"
+description: "The full architecture for a vision-AI invoice pipeline on n8n and Claude Vision — intake, extraction, validation, DATEV export — with the workflow available to download and the live demo running on your own documents."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
-category: case-study
+category: reference-build
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]
 draft: false
 lang: en
 alternateSlug: "fallstudie-rechnungsverarbeitung"
 ---
 
-> **Short answer:** An accounting firm hand-keying dozens of invoices a day (12-15 minutes each) can deploy a vision-AI pipeline built on n8n and Claude Vision to get to seconds per document, process the bulk without manual intervention, and clear a multi-day backlog to same-day. This is the exact pipeline behind the live demo below.
+> **Short answer:** A vision model reads each invoice — PDF, scan, or a photo taken on a phone — and returns structured data: supplier, tax ID, net, VAT, line items. Business rules check the arithmetic and the VAT before anything is exported, and anything the model is unsure about goes to a human queue instead of into your books. Built on n8n with Claude Vision, or entirely on-premise with Ollama and DeepSeek-OCR when the data cannot leave the building.
 
-> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demo: **[Try it yourself →](/en/blog/automating-invoice-processing/)**
+> **What this is:** a reference build — the architecture, the extraction schema, and the validation rules, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[feed the demo one of your own invoices →](/en/blog/automating-invoice-processing/)**.
 
-An accounting firm was drowning in paper. Clients sent hundreds of invoices a month in every format imaginable — PDFs, scans, phone photos of receipts. Here's the extraction pipeline I'd build to read, validate, and file them automatically, and the numbers it can move.
+## The problem it solves
+
+Invoices arrive by email, in cloud folders, and through client portals, in every format there is. Someone opens each one and retypes it into DATEV or Lexware. That work is slow, it is dull, and it is at its worst exactly when volume peaks, at month-end and in tax season — which is also when a transposed digit is most likely and least likely to be caught.
+
+The task splits cleanly in two: reading the document, which a vision model now does well, and deciding whether the reading can be trusted, which is arithmetic and business rules. This build gives the first half to a model and keeps the second half in code.
 
 ## At a glance
 
 | | |
 |---|---|
-| **Client / Industry** | Accounting firm, 8 staff, 120+ business clients |
-| **Problem** | 80-120 invoices/day hand-keyed at 12-15 min each, 3-5% error rate, 3-5 day backlog |
-| **Solution** | n8n intake + Claude Vision extraction (or local Ollama + DeepSeek-OCR) + validation + DATEV/CSV export |
-| **Result** | 15 min → 90 sec per invoice, 99.2% touchless, error rate 3-5% → 0.8%, backlog eliminated, payback in 5 weeks |
+| **Stack** | n8n intake + Claude Vision extraction (or local Ollama + DeepSeek-OCR) + validation + DATEV/CSV export |
+| **What it extracts** | Supplier, address, tax ID, invoice number, dates, net, VAT, gross, line items |
+| **Guardrails** | Line items must sum to net, VAT rate must be valid, duplicate invoice numbers rejected, low-confidence fields queued for review |
+| **You can inspect** | The full n8n JSON, exported from the running instance, in both cloud and on-premise variants |
 
 This is the kind of build I do under [document & data workflows](/en/services/document-workflows/). You can try the [invoice-reader demo](/en/projects/) on real documents.
 
-## The challenge
-
-**Example Company**: Accounting firm, 8 staff, 120+ business clients
-
-**Pain Points**:
-- Invoices arrived via email, cloud folders, and client portals
-- Manual data entry into accounting software (DATEV, Lexware)
-- High error rates during busy periods (month-end, tax season)
-- Staff burned out on repetitive work instead of advisory services
-
-**Before Automation**:
-| Metric | Value |
-|--------|-------|
-| Time per invoice | 12-15 minutes |
-| Daily invoice volume | 80-120 documents |
-| Error rate | 3-5% |
-| Staff hours on data entry | 25 hrs/week |
-| Client complaints about delays | Weekly |
-
 ## The Solution
 
-We designed a vision AI pipeline that reads, understands, and validates invoices automatically.
+A vision AI pipeline reads, understands, and validates each invoice.
 
 ### Tool Stack
 
@@ -139,30 +124,23 @@ Validated invoices export to:
 
 Failed validations go to a review queue with the AI's reasoning attached.
 
-## Achievable Results
+## What changes, and what does not
 
-What a pipeline like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
+I am not going to give you a before-and-after table. I have not run this pipeline inside your firm, and numbers invented for a fictional one would tell you nothing.
 
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Time per invoice | 15 min | 90 sec | -90% |
-| Daily throughput | 80-120 | 300+ | +200% |
-| Error rate | 3-5% | 0.8% | -84% |
-| Staff hours on entry | 25 hrs/week | 4 hrs/week | -84% |
-| Processing backlog | 3-5 days | Same day | Eliminated |
+What the architecture changes is structural:
 
-**Accuracy Breakdown**:
-- 99.2% of invoices processed without human intervention
-- 0.6% flagged for review (usually unusual formats)
-- 0.2% actual errors (complex multi-page invoices)
+- **Reading stops being the bottleneck.** Extraction takes seconds per document and runs as many in parallel as you let it, so a month-end spike no longer becomes a queue.
+- **Errors surface before the export, not after the booking.** The arithmetic and VAT checks run on every invoice, every time, which is the part a tired human at 6pm does not.
+- **Uncertainty gets a place to go.** Anything the model is unsure about lands in a review queue with its reasoning attached, instead of quietly becoming a wrong number in your books.
 
-**ROI**: On the order of €3,000/month in saved labor costs, an implementation like this can pay back within a few weeks — the exact numbers depend on your volume.
+The figure that decides whether this is worth building for you is your touchless rate: the share of invoices that pass validation with no human involvement. It depends almost entirely on how uniform your suppliers' documents are, so it is not something I can quote at you in advance. Run a month of real invoices through the pipeline in review-everything mode and count. That measurement costs one afternoon and is worth more than any table I could put here.
 
 ## Technical Deep Dive
 
 ### Handling Edge Cases
 
-Real-world invoices are messy. Here's how we handle them:
+Real invoices are messy. Here is how the pipeline handles them:
 
 **Multi-page invoices**: Claude Vision processes each page, n8n merges the extracted data.
 
@@ -174,9 +152,9 @@ Real-world invoices are messy. Here's how we handle them:
 
 ### Privacy & Compliance
 
-For an accounting firm, data handling is critical:
+In accounting, data handling decides whether a build is usable at all:
 
-- **Self-hosted n8n**: Workflow engine runs on client infrastructure
+- **Self-hosted n8n**: Workflow engine runs on your own infrastructure
 - **API data handling**: Claude API doesn't store data after processing
 - **Audit trail**: Every document logged with timestamp, hash, and processing result
 - **Retention policy**: Processed data auto-deleted from pipeline after 30 days
