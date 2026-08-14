@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
   return rss({
-    title: "Leinss Consulting — Blog",
+    title: "Leinss Consulting: Blog",
     description: "Automatisierung, KI und Workflow-Optimierung für den Mittelstand",
     site: context.site ?? "https://leinss-consulting.de",
     items: posts.map((p) => ({

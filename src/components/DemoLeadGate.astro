@@ -3,7 +3,7 @@
 //
 // The basic demo result stays free (1-try-free UX). This component gates only
 // the *take-home artifact* (downloadable transcript / minutes / n8n workflow)
-// behind a double-opt-in email capture wired to Listmonk — same public API,
+// behind a double-opt-in email capture wired to Listmonk: same public API,
 // honeypot and timing check as Newsletter.astro.
 //
 // Integration (per demo):
@@ -27,7 +27,7 @@ interface Props {
 const { lang = "de", id, artifactLabel } = Astro.props;
 const isDE = lang === "de";
 
-// Listmonk public subscription config — dedicated "Demo Leads" list
+// Listmonk public subscription config, dedicated "Demo Leads" list
 // (public, double opt-in). All demo lead-magnet captures land here.
 const LISTMONK_URL = "https://newsletter.funnel.leinss.xyz";
 const LIST_UUID = "bb2ec9fe-821e-419b-83a2-fb72c3fe3fe1";
@@ -40,8 +40,8 @@ const t = {
     ? "Das komplette Ergebnis zum Mitnehmen"
     : "Get the complete take-home result",
   sub: isDE
-    ? `Sie haben die Live-Demo getestet. Tragen Sie Ihre E-Mail ein und laden Sie ${label} herunter — inklusive der n8n-Workflow-Vorlage dahinter.`
-    : `You have tried the live demo. Enter your email to download ${label} — including the n8n workflow blueprint behind it.`,
+    ? `Sie haben die Live-Demo getestet. Tragen Sie Ihre E-Mail ein und laden Sie ${label} herunter, inklusive der n8n-Workflow-Vorlage dahinter.`
+    : `You have tried the live demo. Enter your email to download ${label}: including the n8n workflow blueprint behind it.`,
   placeholder: isDE ? "Ihre E-Mail-Adresse" : "Your email address",
   button: isDE ? "Ergebnis freischalten" : "Unlock result",
   confirmTitle: isDE ? "Fast geschafft!" : "Almost there!",

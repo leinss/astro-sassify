@@ -49,7 +49,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("de-DE", {
   day: "numeric",
 })
 
-// "Zuletzt aktualisiert" — Frische-Signal für Such- und KI-Systeme.
+// "Zuletzt aktualisiert", Frische-Signal für Such- und KI-Systeme.
 const formattedUpdated = post.data.updatedDate
   ? post.data.updatedDate.toLocaleDateString("de-DE", {
       year: "numeric",
@@ -151,7 +151,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
           </p>
         </header>
 
-        <!-- Live Demo Widgets — surfaced above the article so the interactive
+        <!-- Live Demo Widgets, surfaced above the article so the interactive
              proof sits under the intro, not buried at the bottom. -->
         {showInvoiceDemo && <InvoiceDemoWidget lang="de" />}
         {showBlitzDemo && <BlitzAntwortDemo lang="de" />}

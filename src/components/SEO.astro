@@ -31,7 +31,7 @@ const siteUrl = SITE_URL;
 const currentUrl = canonicalUrl || `${siteUrl}${Astro.url.pathname}`;
 const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
 
-// hreflang alternates — only emit a pair when an actual counterpart exists.
+// hreflang alternates, only emit a pair when an actual counterpart exists.
 // `alternateUrl` (relative or absolute) is the verified opposite-language URL;
 // when omitted the page has no translated twin and we emit self only.
 const altUrlAbsolute = alternateUrl

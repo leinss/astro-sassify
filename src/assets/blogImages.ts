@@ -35,7 +35,7 @@ const ogImageCache = new Map<string, string>()
 /**
  * Resolve a post's `heroImage` string into an emitted, social-card-sized OG image URL.
  * Returns a root-relative `/_astro/…png` path (SEO.astro absolutizes it), or `undefined`
- * when there is no hero or no mapping — callers then fall back to the site default OG image.
+ * when there is no hero or no mapping, callers then fall back to the site default OG image.
  */
 export async function getBlogOgImage(
   heroImage?: string,
