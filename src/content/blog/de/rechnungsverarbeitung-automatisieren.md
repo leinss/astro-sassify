@@ -81,7 +81,7 @@ Daten werden in Ihr System übertragen – sei es DATEV, Lexware, oder eine Goog
 
 **Amortisation**: Bei 50 Rechnungen/Monat ist die Automatisierung nach 2-3 Monaten rentabel.
 
-Für eine detaillierte ROI-Berechnung siehe: [Der ROI von Geschäftsprozess-Automatisierung](/de/blog/roi-von-automatisierung/)
+Ob es sich rechnet, hängt an Ihrer Durchlaufquote — einer Messung, nicht einer Schätzung. Der [Referenz-Build](/de/blog/fallstudie-rechnungsverarbeitung/) erklärt, wie Sie sie nehmen.
 
 ## DSGVO-Konformität
 

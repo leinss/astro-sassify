@@ -220,6 +220,6 @@ Running a similar lead management challenge?
 2. **Prioritize**: Start with one source, e.g. website forms.
 3. **Measure**: Track response time before and after.
 
-If slow follow-up is the real culprit, the [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check on where the ROI sits.
+If slow follow-up is the real culprit, the [lead-response demo](/en/projects/) shows what a minutes-not-hours reply looks like.
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll walk through what this would look like for your setup.

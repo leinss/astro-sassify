@@ -81,7 +81,7 @@ Data is transferred to your system – whether that's QuickBooks, Xero, or a Goo
 
 **Payback**: With 50 invoices/month, automation pays for itself in 2-3 months.
 
-For a detailed ROI calculation framework, see: [The ROI of Business Process Automation](/en/blog/roi-of-automation/)
+Whether it pays depends on your touchless rate, which is a measurement rather than an estimate — the [reference build](/en/blog/case-study-invoice-processing/) explains how to take it.
 
 ## Data Privacy & Compliance
 

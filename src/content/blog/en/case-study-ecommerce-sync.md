@@ -366,6 +366,6 @@ Selling across multiple platforms?
 2. **Find the pain**: Oversells, listing time, discrepancies?
 3. **Start with sync**: Fix inventory first, then add AI features.
 
-If keeping systems in step is a recurring headache, [solving data-sync nightmares](/en/blog/data-sync-nightmares/) covers the patterns that stop them recurring.
+If keeping systems in step is a recurring headache, that is [integrations & APIs](/en/services/integrations-apis/) work.
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll assess your multi-platform setup and recommend a sync strategy.

@@ -187,7 +187,7 @@ How many meetings do you have per week? Multiply by 35 minutes — that's your m
 
 If the number is more than 2 hours, automation is a clear win.
 
-This sits alongside my other [communication automation](/en/services/communication-automation/) work, and you can see related workflows on the [live demos page](/en/projects/). For a broader picture of what to automate first, read [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/).
+This sits alongside my other [communication automation](/en/services/communication-automation/) work, and you can see related workflows on the [live demos page](/en/projects/).
 
 ---
 
