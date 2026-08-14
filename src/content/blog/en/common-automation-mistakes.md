@@ -29,7 +29,7 @@ I've watched plenty of automation projects stall or quietly rot. The pattern is 
 
 If your process is broken, automation just makes it fail faster — and at scale.
 
-**The fix:** Map and improve the process before you automate it. Ask "why do we do it this way?" before "how do we automate this?" The [step-by-step guide to your first workflow](/en/blog/building-your-first-workflow/) starts exactly here, with mapping.
+**The fix:** Map and improve the process before you automate it. Ask "why do we do it this way?" before "how do we automate this?" Mapping is the step people skip, and it is the one that decides whether the rest is worth doing.
 
 ## 2. Starting too big
 
@@ -65,4 +65,4 @@ Building for hypothetical future needs that may never arrive, at the cost of shi
 
 ## The bottom line
 
-Most automation failures are planning failures, not technical ones. Design properly, start small, and iterate. If you'd rather not learn these the hard way, [book a free call](https://cal.com/tobias-leinss/strategymeeting) and I'll help you pick a first process that avoids all six. Not sure where to start? The [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check.
+Most automation failures are planning failures, not technical ones. Design properly, start small, and iterate. If you'd rather not learn these the hard way, [book a free call](https://cal.com/tobias-leinss/strategymeeting) and I'll help you pick a first process that avoids all six.

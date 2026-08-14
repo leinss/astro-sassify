@@ -105,7 +105,7 @@ Wenn Sie die Implementierungsdetails interessieren — warum Kimi k2.5 statt Cla
 
 → **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/blog/de/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
-Zum Weiterlesen: [Datensync-Albträume lösen](/de/blog/datensync-albtraeume-loesen/).
+Zum Weiterlesen: der [Referenz-Build zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/) — dasselbe Problem im Maßstab von vier Systemen.
 
 ---
 

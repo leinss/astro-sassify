@@ -29,7 +29,7 @@ Ich habe genug Automatisierungsprojekte stocken oder still verrotten sehen. Das 
 
 Wenn Ihr Prozess kaputt ist, lässt Automatisierung ihn nur schneller scheitern – und im großen Stil.
 
-**Die Lösung:** Bilden Sie den Prozess ab und verbessern Sie ihn, bevor Sie automatisieren. Fragen Sie "Warum machen wir das so?", bevor Sie fragen "Wie automatisieren wir das?" Der [Schritt-für-Schritt-Leitfaden für Ihren ersten Workflow](/de/blog/ihren-ersten-workflow-bauen/) beginnt genau hier, beim Abbilden.
+**Die Lösung:** Bilden Sie den Prozess ab und verbessern Sie ihn, bevor Sie automatisieren. Fragen Sie "Warum machen wir das so?", bevor Sie fragen "Wie automatisieren wir das?" Das Abbilden ist der Schritt, den die meisten überspringen, und genau er entscheidet, ob der Rest sich lohnt.
 
 ## 2. Zu groß anfangen
 
@@ -65,4 +65,4 @@ Für hypothetische zukünftige Anforderungen bauen, die vielleicht nie eintreten
 
 ## Das Fazit
 
-Die meisten Automatisierungsfehler sind Planungsfehler, keine technischen. Sauber designen, klein anfangen, iterieren. Wenn Sie das nicht auf die harte Tour lernen wollen, [buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und ich helfe Ihnen, einen ersten Prozess zu wählen, der alle sechs vermeidet. Unsicher, wo Sie anfangen sollen? [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) ist ein schneller Selbsttest.
+Die meisten Automatisierungsfehler sind Planungsfehler, keine technischen. Sauber designen, klein anfangen, iterieren. Wenn Sie das nicht auf die harte Tour lernen wollen, [buchen Sie ein kostenloses Gespräch](https://cal.com/tobias-leinss/strategiegespraech), und ich helfe Ihnen, einen ersten Prozess zu wählen, der alle sechs vermeidet.

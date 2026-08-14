@@ -220,6 +220,6 @@ Haben Sie eine ähnliche Lead-Management-Herausforderung?
 2. **Priorisieren**: Starten Sie mit einer Quelle, z.B. Website-Formulare.
 3. **Messen**: Tracken Sie die Reaktionszeit vor und nach der Änderung.
 
-Wenn langsame Follow-ups der eigentliche Übeltäter sind, ist [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) ein schneller Selbsttest, wo der ROI liegt.
+Wenn langsame Follow-ups der eigentliche Übeltäter sind, zeigt die [Lead-Response-Demo](/de/projekte/), wie eine Antwort in Minuten statt Stunden aussieht.
 
 [Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich zeige Ihnen, wie das für Ihr Setup aussehen würde.

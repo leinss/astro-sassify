@@ -148,7 +148,7 @@ Automation doesn't kill the human touch. Bad automation does. With the right set
 
 The first 5 minutes after a lead submits a form decide whether they convert or go cold. Use them.
 
-For related reading, see [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) or the [lead-response demo](/en/projects/) in action.
+See the [lead-response demo](/en/projects/) in action.
 
 ---
 
