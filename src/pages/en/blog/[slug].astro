@@ -49,7 +49,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString("en-US", {
   day: "numeric",
 })
 
-// "Last updated" freshness signal — AI engines and search weight recency.
+// "Last updated" freshness signal, AI engines and search weight recency.
 const formattedUpdated = post.data.updatedDate
   ? post.data.updatedDate.toLocaleDateString("en-US", {
       year: "numeric",
@@ -151,7 +151,7 @@ const showFAQDemo = slug === "faq-automation-ai-support"
           </p>
         </header>
 
-        <!-- Live Demo Widgets — surfaced above the article so the interactive
+        <!-- Live Demo Widgets, surfaced above the article so the interactive
              proof sits under the intro, not buried at the bottom. -->
         {showInvoiceDemo && <InvoiceDemoWidget lang="en" />}
         {showBlitzDemo && <BlitzAntwortDemo lang="en" />}

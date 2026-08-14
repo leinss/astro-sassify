@@ -27,7 +27,7 @@ I've watched plenty of automation projects stall or quietly rot. The pattern is 
 
 ## 1. Automating a bad process
 
-If your process is broken, automation just makes it fail faster — and at scale.
+If your process is broken, automation just makes it fail faster, and at scale.
 
 **The fix:** Map and improve the process before you automate it. Ask "why do we do it this way?" before "how do we automate this?" Mapping is the step people skip, and it is the one that decides whether the rest is worth doing.
 
@@ -45,7 +45,7 @@ Automation needs someone responsible for maintaining it, updating it, and fixing
 
 ## 4. Ignoring edge cases
 
-The workflow runs perfectly — until it hits a scenario you didn't plan for, and fails silently or does the wrong thing.
+The workflow runs perfectly: until it hits a scenario you didn't plan for, and fails silently or does the wrong thing.
 
 **The fix:** Map out edge cases during design. Build in error handling and notifications for anything unexpected.
 

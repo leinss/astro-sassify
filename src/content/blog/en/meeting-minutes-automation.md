@@ -1,6 +1,6 @@
 ---
 title: "Never Write Meeting Notes Again: AI Automation for Meeting Documentation"
-description: "A 1-hour meeting generates 20 minutes of follow-up work — writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow handles this in 90 seconds."
+description: "A 1-hour meeting generates 20 minutes of follow-up work: writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow handles this in 90 seconds."
 pubDate: 2026-05-06
 category: automation
 tags: ["meeting", "minutes", "transcription", "n8n", "ai", "whisper"]
@@ -10,17 +10,17 @@ lang: en
 alternateSlug: "meeting-protokoll-automatisieren"
 ---
 
-> **Short answer:** A meeting-minutes workflow takes your audio recording, transcribes it with Whisper, and has Claude turn the transcript into a structured summary with decisions and action items. It then emails everyone automatically. The whole thing runs in 60–90 seconds and replaces roughly 35 minutes of manual work per meeting.
+> **Short answer:** A meeting-minutes workflow takes your audio recording, transcribes it with Whisper, and has Claude turn the transcript into a structured summary with decisions and action items. It then emails everyone automatically. The whole thing runs in 60-90 seconds and replaces roughly 35 minutes of manual work per meeting.
 
-A 1-hour meeting generates 20–30 minutes of follow-up work: writing the notes, formatting them, sending them to all attendees, logging action items in the project manager. Who does all that? Usually the person who already has too much on their plate.
+A 1-hour meeting generates 20-30 minutes of follow-up work: writing the notes, formatting them, sending them to all attendees, logging action items in the project manager. Who does all that? Usually the person who already has too much on their plate.
 
 And what happens 48 hours later? Nobody read the notes. Action items sit untouched. In the next meeting, everything repeats.
 
-The problem isn't the meeting itself — it's the manual documentation afterward.
+The problem isn't the meeting itself, it's the manual documentation afterward.
 
 ## What Meeting Documentation Actually Costs
 
-Consider this: 10 meetings per week, 20 minutes of follow-up each. That's **200 minutes** — over **3 working hours** — lost weekly to meeting notes. Annualized: nearly **2 full work weeks** spent on documentation alone.
+Consider this: 10 meetings per week, 20 minutes of follow-up each. That's **200 minutes**, over **3 working hours**, lost weekly to meeting notes. Annualized: nearly **2 full work weeks** spent on documentation alone.
 
 And that's before accounting for quality problems:
 - Notes are incomplete because you can't listen and write simultaneously
@@ -30,7 +30,7 @@ And that's before accounting for quality problems:
 
 ## How does the meeting minutes bot work?
 
-I built an n8n workflow that turns an audio recording into a structured meeting summary — completely automated.
+I built an n8n workflow that turns an audio recording into a structured meeting summary, completely automated.
 
 ### Step 1: Transcription with Whisper
 
@@ -40,14 +40,14 @@ OpenAI's Whisper model is purpose-built for speech and reliably handles:
 - Multi-speaker conversations
 - Poor audio quality (video call background noise)
 
-Transcribing a 60-minute recording takes **20–30 seconds**.
+Transcribing a 60-minute recording takes **20-30 seconds**.
 
 ### Step 2: Structuring with Claude
 
 The raw transcript goes to Claude Sonnet, which extracts a structured protocol:
 
 ```markdown
-# Meeting: Q2 Planning — March 10, 2025
+# Meeting: Q2 Planning: March 10, 2025
 
 **Attendees:** Anna, Stefan, Maria
 
@@ -72,13 +72,13 @@ The raw transcript goes to Claude Sonnet, which extracts a structured protocol:
 March 24, 2025 at 2:00 PM
 ```
 
-Claude uses **structured output** (Tool Use) so the protocol always follows the same format — regardless of how chaotic the discussion was.
+Claude uses **structured output** (Tool Use) so the protocol always follows the same format, regardless of how chaotic the discussion was.
 
 ### Step 3: Distribution
 
 The finished summary is **automatically emailed** to all attendees. Optionally: archived to Google Docs, Confluence, or Notion.
 
-Total time from uploading the recording to sent email: **60–90 seconds**.
+Total time from uploading the recording to sent email: **60-90 seconds**.
 
 ## Privacy: What You Need to Know (GDPR)
 
@@ -95,12 +95,12 @@ The standard version sends audio to OpenAI's Whisper API. For companies with str
 | Option | Latency | Privacy | Cost |
 |--------|---------|---------|------|
 | OpenAI Whisper API | ~30 sec | Data leaves infrastructure | ~€0.10/hour |
-| whisper.cpp (local) | ~2–5 min | On-premise | Server costs |
+| whisper.cpp (local) | ~2-5 min | On-premise | Server costs |
 | faster-whisper (local) | ~45 sec | On-premise | Server costs |
 
 **3. Auto-delete after processing**
 
-The workflow deletes the audio file after successful transcription. Only the text summary is retained — no personal audio data persists.
+The workflow deletes the audio file after successful transcription. Only the text summary is retained, no personal audio data persists.
 
 ## ROI: What You Actually Save
 
@@ -137,7 +137,7 @@ Development conversations, feedback sessions. Notes are stored privately, not di
 
 **Confidential contract negotiations**: when external parties are involved without recording consent.
 
-The system doesn't automatically detect "off-limits" topics — that responsibility stays with you.
+The system doesn't automatically detect "off-limits" topics, that responsibility stays with you.
 
 ## Technical Stack: n8n + Whisper + Claude
 
@@ -160,7 +160,7 @@ vs. hundreds of euros in time costs.
 
 ## Download the Workflow
 
-> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
 >
 > [→ Meeting Minutes Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
 
@@ -175,15 +175,15 @@ vs. hundreds of euros in time costs.
 2. Add API keys to credentials
 3. Note the webhook URL and connect it to your upload interface
 
-## Technical Deep Dive
+## Technical detail
 
-If you're interested in the details behind the workflow — how Whisper handles accents, why Claude Tool Use is used instead of text output, and how to extend the system for >25MB files:
+If you're interested in the details behind the workflow: how Whisper handles accents, why Claude Tool Use is used instead of text output, and how to extend the system for >25MB files:
 
 → **[Building an AI Meeting Assistant with Whisper, Claude, and n8n](https://leinss.xyz/blog/en/meeting-assistant-technical/)** *(leinss.xyz)*
 
 ## Your Next Step
 
-How many meetings do you have per week? Multiply by 35 minutes — that's your monthly waste on documentation.
+How many meetings do you have per week? Multiply by 35 minutes, that's your monthly waste on documentation.
 
 If the number is more than 2 hours, automation is a clear win.
 

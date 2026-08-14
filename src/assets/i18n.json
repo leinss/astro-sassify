@@ -2,7 +2,7 @@
   "en": {
     "meta": {
       "title": "Business Automation Solutions - Turn Manual Work Into Digital Efficiency",
-      "description": "Custom-tailored automation, AI integration, and self-hosted infrastructure for mid-sized companies. CRM automation, document workflows, and clean system integrations — built, documented, and handed to your team. You own the code, no lock-in.",
+      "description": "Custom-tailored automation, AI integration, and self-hosted infrastructure for mid-sized companies. CRM automation, document workflows, and clean system integrations: built, documented, and handed to your team. You own the code, no lock-in.",
       "privacy_policy": "Privacy Policy",
       "imprint": "Imprint"
     },
@@ -25,7 +25,7 @@
       "subline": "Less manual work. More time for what matters.",
       "headline_start": "Automation your business owns",
       "headline_end": "engineered, documented, handed to your team.",
-      "intro_text": "The fast start is proven tools — n8n, AI, clean integrations. The lasting result is a custom-tailored system built around your processes, owned by you and run on your own infrastructure, engineered by someone who knows every layer of the stack.\n\nNot off-the-shelf low-code you rent and can't change: durable, bespoke automation with a clear payback, documented and handed to your team. No black boxes, no vendor lock-in.",
+      "intro_text": "The fast start is proven tools: n8n, AI, clean integrations. The lasting result is a custom-tailored system built around your processes, owned by you and run on your own infrastructure, engineered by someone who knows every layer of the stack.\n\nNot off-the-shelf low-code you rent and can't change: durable, bespoke automation with a clear payback, documented and handed to your team. No black boxes, no vendor lock-in.",
       "point_1_start": "CRM & Sales",
       "point_1_end": "Automate lead management, follow-ups, and deal progression. Never miss an opportunity again.",
       "point_2_start": "Document Workflows",
@@ -35,10 +35,10 @@
       "cta": "Book your free consultation",
       "cta_primary": "Free strategy call",
       "cta_reassurance": "30-day fix guarantee · you own the code · no lock-in",
-      "apps_bridge": "Want to see how I ship? My own apps at leinss.xyz are my work samples — live products I designed, built, and run.",
+      "apps_bridge": "Want to see how I ship? My own apps at leinss.xyz are my work samples: live products I designed, built, and run.",
       "apps_bridge_cta": "See my apps →",
       "apps_bridge_url": "https://leinss.xyz",
-      "uptime_proof": "And that it keeps running: I operate the production infrastructure behind a public payment protocol — seven services, 99.99% uptime, reported publicly, not by me."
+      "uptime_proof": "And that it keeps running: I operate the production infrastructure behind a public payment protocol: seven services, 99.99% uptime, reported publicly, not by me."
     },
     "problem_solution": {
       "problem_headline": "Sound familiar?",
@@ -64,8 +64,8 @@
       "solution_4_text": "Build real-time data sync between your CRM, ERP, shop system, and spreadsheets. One source of truth. No more manual exports."
     },
     "solution_details": {
-      "intro_1": "You have the vision – we build the automation.",
-      "intro_2": "I help businesses design and build automation systems they own and control — from CRM workflows to custom multi-tool integrations. Systems that actually work, and keep working.",
+      "intro_1": "You have the vision: we build the automation.",
+      "intro_2": "I help businesses design and build automation systems they own and control, from CRM workflows to custom multi-tool integrations. Systems that actually work, and keep working.",
       "solution_1_headline": "CRM & Sales Automation",
       "solution_1_text": "Automate lead scoring, assignment, and nurturing. Build sequences that follow up automatically. Track deals without manual data entry. Your sales team sells more, reports less.",
       "solution_2_headline": "Document & Data Workflows",
@@ -76,10 +76,10 @@
       "solution_4_text": "Connect your tools into one ecosystem. Real-time sync between platforms. Custom integrations when off-the-shelf solutions don't fit. Your data flows where it needs to go.",
       "outro_question": "Why work with me?",
       "outro_bullets": [
-        "I focus on ROI – every automation should pay for itself in saved time or reduced errors.",
-        "Solutions that grow with you – built to handle 10x your current volume.",
-        "You stay in control – I train your team and document everything.",
-        "No vendor lock-in – I use open standards and tools you can manage yourself."
+        "I focus on ROI: every automation should pay for itself in saved time or reduced errors.",
+        "Solutions that grow with you: built to handle 10x your current volume.",
+        "You stay in control: I train your team and document everything.",
+        "No vendor lock-in. I use open standards and tools you can manage yourself."
       ],
       "outro_claim": "Let's build automation that actually works."
     },
@@ -90,15 +90,15 @@
         "TypeScript & Python",
         "APIs & backends (Node.js, PostgreSQL/Supabase)",
         "Docker, CI/CD & DevOps (self-hosted infrastructure, Ansible)",
-        "LLM integration — Claude & OpenAI APIs (RAG, agents)",
-        "Workflow automation — self-hosted n8n"
+        "LLM integration: Claude & OpenAI APIs (RAG, agents)",
+        "Workflow automation, self-hosted n8n"
       ],
       "mission_title": "Mission",
-      "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building — then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
+      "mission_statement": "I don't think a business should spend its week on work a computer does better.\n\nSo I help mid-sized companies find the automations worth building, then build them properly. Not clicked together in a low-code tool, but engineered to be owned: they run on your infrastructure and stay maintainable by your own people.\n\nEvery automation has a clear payback. No black boxes, no dependency on me.",
       "career_title": "Experience",
-      "career": "I build software and then run it. That second half is the part most automation never survives.\n\nToday I run the backend and the full production infrastructure behind a public payment protocol: databases with automated failover, monitoring, and deploys across staging and production. Seven services, 99.99% uptime, published on a public status page.\n\nBefore that: full-stack product work, event-driven data architecture at Fraunhofer, and AI features shipped into production rather than parked as demos. That is the same skill your automation needs — it has to hold up on a Tuesday morning when nobody is watching it.",
+      "career": "I build software and then run it. That second half is the part most automation never survives.\n\nToday I run the backend and the full production infrastructure behind a public payment protocol: databases with automated failover, monitoring, and deploys across staging and production. Seven services, 99.99% uptime, published on a public status page.\n\nBefore that: full-stack product work, event-driven data architecture at Fraunhofer, and AI features shipped into production rather than parked as demos. That is the same skill your automation needs. It has to hold up on a Tuesday morning when nobody is watching it.",
       "background_title": "Approach",
-      "background": "I grew up in the Stuttgart region — the heart of German manufacturing and the Mittelstand — so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nLow-code tools are a fast way to start, and I use them where they fit. But durable, adaptable automation that grows with you takes real engineering — the full-stack kind, not a freelancer wiring up someone else's SaaS. That's what I bring to businesses ready to grow without a dedicated IT team.\n\nIn practice engagements start narrow and grow. One current client came for a single integration between two systems that would not talk to each other. It now runs a production storefront, the back-office application the team manages products in, an events site, and the integration into a supply-chain system I do not own. Same person across all of it, so nothing falls between the contractors."
+      "background": "I grew up in the Stuttgart region, the heart of German manufacturing and the Mittelstand, so I know the pressure these companies are under.\n\nThey need to digitize and automate, but can't justify enterprise consultants or year-long rollouts.\n\nLow-code tools are a fast way to start, and I use them where they fit. But durable, adaptable automation that grows with you takes real engineering: the full-stack kind, not a freelancer wiring up someone else's SaaS. That's what I bring to businesses ready to grow without a dedicated IT team.\n\nIn practice engagements start narrow and grow. One current client came for a single integration between two systems that would not talk to each other. It now runs a production storefront, the back-office application the team manages products in, an events site, and the integration into a supply-chain system I do not own. Same person across all of it, so nothing falls between the contractors."
     },
     "faq": {
       "tag": "FAQ",
@@ -109,7 +109,7 @@
       "q_2": "What exactly do you offer?",
       "a_2": "I offer consulting and implementation for business automation. This includes:\n\n* Process analysis and automation roadmapping\n* Workflow automation (CRM, sales, operations)\n* Document processing and data pipeline setup\n* System integration and API development",
       "q_3": "What tools do you work with?",
-      "a_3": "I start with whatever gets you value fastest — often a low-code platform like n8n for simpler workflows. But I'm a full-stack engineer, not a low-code-only freelancer, so when a workflow needs to be durable, adaptable, or owned outright, I build it in real code:\n\n* Low-code (n8n) for a fast, simple start\n* Custom development for anything complex or long-lived\n* Usually a hybrid — the easy parts fast, the important parts engineered to last",
+      "a_3": "I start with whatever gets you value fastest, often a low-code platform like n8n for simpler workflows. But I'm a full-stack engineer, not a low-code-only freelancer, so when a workflow needs to be durable, adaptable, or owned outright, I build it in real code:\n\n* Low-code (n8n) for a fast, simple start\n* Custom development for anything complex or long-lived\n* Usually a hybrid: the easy parts fast, the important parts engineered to last",
       "q_4": "How long does implementation take?",
       "a_4": "It depends on complexity:\n\n* Simple automations: 1-2 weeks\n* CRM workflow overhauls: 4-8 weeks\n* Multi-system integrations: 2-3 months\n\nWe start with quick wins and build from there.",
       "q_5": "Do we need technical expertise in-house?",
@@ -117,17 +117,17 @@
       "q_6": "What ROI can we expect?",
       "a_6": "Real examples from recent projects:\n\n* Invoice processing: 4 hours/week → 15 minutes (automated extraction + routing)\n* Lead follow-up: Response time from 6 hours → under 5 minutes\n* Monthly reporting: 2 days manual work → auto-generated overnight\n* Data sync errors: From ~20/month → zero\n\nMost automations pay for themselves within 3-6 months. We calculate your specific ROI before starting.",
       "q_7": "What about data security?",
-      "a_7": "All implementations follow GDPR requirements. Data stays in your systems or approved EU/German providers. I don't require access to production data for development – we work with test data and strict access controls.",
+      "a_7": "All implementations follow GDPR requirements. Data stays in your systems or approved EU/German providers. I don't require access to production data for development: we work with test data and strict access controls.",
       "q_8": "What does it cost?",
-      "a_8": "I work three ways, and you know the price before any work starts:\n\n* Automation audit + roadmap — a fixed price; you keep the prioritized plan even if we stop there\n* Implementation — quoted per project, scoped so it pays for itself in saved time or fewer errors\n* Ongoing support — a monthly retainer, only if you want one\n\nEvery engagement opens with a free call and a written quote. No hourly surprises.",
+      "a_8": "I work three ways, and you know the price before any work starts:\n\n* Automation audit + roadmap, a fixed price; you keep the prioritized plan even if we stop there\n* Implementation, quoted per project, scoped so it pays for itself in saved time or fewer errors\n* Ongoing support: a monthly retainer, only if you want one\n\nEvery engagement opens with a free call and a written quote. No hourly surprises.",
       "q_9": "Can you integrate with our existing systems?",
-      "a_9": "Yes — in almost every case. As a fullstack developer, I can work with any system that has an API, and that covers most modern business tools.\n\nIf I haven't worked with your specific software before, I'll say so. Learning a new API usually takes days, not weeks. We go through your exact stack on the first call.",
+      "a_9": "Yes, in almost every case. As a fullstack developer, I can work with any system that has an API, and that covers most modern business tools.\n\nIf I haven't worked with your specific software before, I'll say so. Learning a new API usually takes days, not weeks. We go through your exact stack on the first call.",
       "q_10": "What happens after implementation?",
-      "a_10": "You own everything. Code, documentation, credentials – all yours. I provide training so your team can manage day-to-day operations. For ongoing optimization or support, I offer maintenance packages.",
+      "a_10": "You own everything. Code, documentation, credentials, all yours. I provide training so your team can manage day-to-day operations. For ongoing optimization or support, I offer maintenance packages.",
       "q_11": "How do we get started?",
       "a_11": "Book a free 20-minute call. Here's what happens:\n\n1. You describe one process that's eating up time\n2. I'll tell you if it's automatable and roughly how\n3. If there's a fit, I'll send a concrete proposal within 48h\n\nNo pitch deck, no sales pressure. Just a direct conversation about whether automation makes sense for you.",
       "q_12": "Why work with a solo consultant instead of an agency?",
-      "a_12": "Agencies have overhead, account managers, and juniors doing the actual work. With me:\n\n* You talk directly to the person building your automation\n* No handoffs, no miscommunication layers\n* Faster iteration – changes happen in hours, not weeks\n* Lower cost – no agency markup\n\nFor complex enterprise projects, agencies make sense. For focused automation work, a senior builder is faster and more cost-effective.",
+      "a_12": "Agencies have overhead, account managers, and juniors doing the actual work. With me:\n\n* You talk directly to the person building your automation\n* No handoffs, no miscommunication layers\n* Faster iteration (changes happen in hours, not weeks\n* Lower cost) no agency markup\n\nFor complex enterprise projects, agencies make sense. For focused automation work, a senior builder is faster and more cost-effective.",
       "q_13": "What if the automation doesn't work as expected?",
       "a_13": "Every project includes a testing phase before go-live. But if something breaks after deployment:\n\n* First 30 days: I fix it at no extra cost\n* All projects come with documentation so your team can troubleshoot basics\n* I offer support packages for ongoing maintenance\n\nAutomation isn't set-and-forget. Systems change, APIs update, requirements evolve. I build with maintainability in mind and stay available when you need adjustments."
     },
@@ -140,8 +140,8 @@
       "savings_label": "Estimated annual savings",
       "hours_saved_label": "Hours freed up per year",
       "per_year": "per year",
-      "disclaimer": "A rough estimate based on your inputs — not a quote. Most automation projects pay for themselves within 3–6 months.",
-      "cta": "Run the numbers for your case — free call"
+      "disclaimer": "A rough estimate based on your inputs, not a quote. Most automation projects pay for themselves within 3-6 months.",
+      "cta": "Run the numbers for your case, free call"
     },
     "newsletter": {
       "title": "Stay Updated",
@@ -165,18 +165,18 @@
         "meta_title": "Automation Services - Cut the Manual Work in Your Business",
         "meta_description": "Explore our automation services: CRM & Sales, Document Workflows, Communication Automation, and System Integrations. Find the right solution for your business.",
         "title": "Our Automation Services",
-        "subtitle": "Four areas where the right automation gives your team its week back — built to be owned, not rented.",
+        "subtitle": "Four areas where the right automation gives your team its week back: built to be owned, not rented.",
         "cta": "Book a free consultation"
       },
       "depth": {
         "title": "How we actually build it",
-        "text": "No-code tools are where we start, not where we stop. When a workflow needs real code — batching, retries, state, custom logic — we write and own it, so it holds up in production.",
+        "text": "No-code tools are where we start, not where we stop. When a workflow needs real code (batching, retries, state, custom logic) we write and own it, so it holds up in production.",
         "link_text": "Read: where n8n stops and code starts"
       },
       "offers": {
         "eyebrow": "Fixed packages, clear scope",
         "title": "Productized packages",
-        "subtitle": "Clear scope and clear timeline — you know where you stand before the first call. Each package is a starting point, then tailored to your processes and handed over documented, so nothing is locked to me. Pricing depends on the concrete scope and is confirmed on the intro call. Larger work is quoted individually.",
+        "subtitle": "Clear scope and clear timeline, you know where you stand before the first call. Each package is a starting point, then tailored to your processes and handed over documented, so nothing is locked to me. Pricing depends on the concrete scope and is confirmed on the intro call. Larger work is quoted individually.",
         "net_note": "Prices are net, plus VAT, for the defined scope.",
         "cta_label": "One of these a fit? Let's confirm it on the intro call.",
         "timeline_label": "Timeline",
@@ -198,13 +198,13 @@
           {
             "name": "AI Feature Integration Sprint",
             "timeline": "2 weeks",
-            "tagline": "One AI feature shipped to production — not just a demo.",
+            "tagline": "One AI feature shipped to production: not just a demo.",
             "example": "For example: a chatbot or knowledge base built from your own documents, automated invoice extraction, data cleaning, or an automated reception line.",
             "includes": [
               "One AI/LLM feature integrated into your existing app",
               "Shipped to production, not parked as a prototype",
               "Documented and handed over to your team",
-              "Runs on your infrastructure — no vendor lock-in"
+              "Runs on your infrastructure, no vendor lock-in"
             ]
           },
           {
@@ -215,7 +215,7 @@
               "Web app from zero to a usable first version",
               "Core flows built, deployed and running",
               "Clean code plus documentation and handover",
-              "You own the code and the infrastructure — no black box"
+              "You own the code and the infrastructure, no black box"
             ]
           }
         ]
@@ -335,15 +335,15 @@
     },
     "portfolio": {
       "meta_title": "Projects & Live Demos - Business Automation in Action",
-      "meta_description": "Try real automation systems right in your browser: AI invoice reading, instant lead response, meeting minutes, spreadsheet migration, and an AI support assistant — plus the reference builds behind them.",
+      "meta_description": "Try real automation systems right in your browser: AI invoice reading, instant lead response, meeting minutes, spreadsheet migration, and an AI support assistant: plus the reference builds behind them.",
       "title": "Projects & Live Demos",
-      "subtitle": "Don't take my word for it — try the automation yourself. Every demo below is a working system you can run in your browser, built with the same tools I use on client projects.",
+      "subtitle": "Don't take my word for it, try the automation yourself. Every demo below is a working system you can run in your browser, built with the same tools I use on client projects.",
       "demos_title": "Try the demos",
-      "demos_subtitle": "Five working automations. Each one runs live — give it your own input and watch it work.",
+      "demos_subtitle": "Five working automations. Each one runs live: give it your own input and watch it work.",
       "case_studies_title": "Reference builds",
       "case_studies_subtitle": "How these building blocks come together into a full system, node by node.",
       "workflows_title": "Download the actual workflows",
-      "workflows_subtitle": "The demos above aren't mock-ups or screenshots. Each one runs on a real n8n workflow — this is the exact JSON I run, exported straight from n8n. Import it, open every node, and see precisely how it works.",
+      "workflows_subtitle": "The demos above aren't mock-ups or screenshots. Each one runs on a real n8n workflow. This is the exact JSON I run, exported straight from n8n. Import it, open every node, and see precisely how it works.",
       "workflows_cta": "Download workflow",
       "workflows_note": "Every reference build below ships its workflow the same way.",
       "live_badge": "Live demo",
@@ -352,15 +352,15 @@
       "result_label": "Result",
       "demo_cta": "Try the demo",
       "cta_title": "See what this could do for your business",
-      "cta_subtitle": "Book a free 20-minute call. Describe one process that eats your time, and I'll tell you whether it's automatable — and roughly how.",
+      "cta_subtitle": "Book a free 20-minute call. Describe one process that eats your time, and I'll tell you whether it's automatable: and roughly how.",
       "cta_button": "Book your free call",
       "projects": {
         "invoice": {
           "title": "AI Invoice Reader",
           "tagline": "From PDF to booked data in seconds",
-          "problem": "Teams retype invoice data into accounting software by hand — slow, error-prone, and impossible to audit.",
-          "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward — with a human-review path for anything uncertain.",
-          "result": "A scanned invoice becomes validated, structured data in seconds — try it on your own document above.",
+          "problem": "Teams retype invoice data into accounting software by hand: slow, error-prone, and impossible to audit.",
+          "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward: with a human-review path for anything uncertain.",
+          "result": "A scanned invoice becomes validated, structured data in seconds: try it on your own document above.",
           "tags": [
             "Vision AI",
             "Document workflow",
@@ -394,7 +394,7 @@
         "excel": {
           "title": "Spreadsheet Rescue",
           "tagline": "From spreadsheet chaos to a clean system",
-          "problem": "Critical processes run on fragile spreadsheets — manual entry, version chaos, silent formula breaks, and no validation.",
+          "problem": "Critical processes run on fragile spreadsheets: manual entry, version chaos, silent formula breaks, and no validation.",
           "solution": "The workflow analyses your sheet, proposes a clean schema, then deduplicates, standardises and validates the data on its way into a proper system.",
           "result": "Messy, copy-pasted tables become a structured, validated dataset you can trust.",
           "tags": [
@@ -407,7 +407,7 @@
           "title": "AI Support Assistant",
           "tagline": "Instant, sourced answers from your knowledge base",
           "problem": "Support teams answer the same questions over and over while customers wait for a reply.",
-          "solution": "A retrieval workflow searches your knowledge base and an LLM returns a concise, sourced answer with a confidence score — escalating to a human when it isn't sure.",
+          "solution": "A retrieval workflow searches your knowledge base and an LLM returns a concise, sourced answer with a confidence score: escalating to a human when it isn't sure.",
           "result": "Common questions are answered instantly, with sources, around the clock.",
           "tags": [
             "Retrieval",
@@ -421,7 +421,7 @@
   "de": {
     "meta": {
       "title": "Geschäftsautomatisierung - Manuelle Arbeit in digitale Effizienz verwandeln",
-      "description": "Maßgeschneiderte Automatisierung, KI-Integration und selbst gehostete Infrastruktur für den Mittelstand. CRM-Automatisierung, Dokumenten-Workflows und saubere Systemintegrationen — entwickelt, dokumentiert und an Ihr Team übergeben. Der Code gehört Ihnen, kein Lock-in.",
+      "description": "Maßgeschneiderte Automatisierung, KI-Integration und selbst gehostete Infrastruktur für den Mittelstand. CRM-Automatisierung, Dokumenten-Workflows und saubere Systemintegrationen: entwickelt, dokumentiert und an Ihr Team übergeben. Der Code gehört Ihnen, kein Lock-in.",
       "privacy_policy": "Datenschutzerklärung",
       "imprint": "Impressum"
     },
@@ -444,7 +444,7 @@
       "subline": "Weniger manuelle Arbeit. Mehr Zeit fürs Wesentliche.",
       "headline_start": "Automatisierung, die Ihnen gehört",
       "headline_end": "entwickelt, dokumentiert, an Ihr Team übergeben.",
-      "intro_text": "Der schnelle Start sind bewährte Tools – n8n, KI, saubere Integrationen. Das bleibende Ergebnis ist ein maßgeschneidertes System, das auf Ihre Prozesse zugeschnitten ist, Ihnen gehört und auf Ihrer eigenen Infrastruktur läuft, entwickelt von jemandem, der jede Ebene des Stacks kennt.\n\nKein Low-Code von der Stange zum Mieten, das Sie nicht ändern können: belastbare, maßgeschneiderte Automatisierung mit klarem Return, dokumentiert und an Ihr Team übergeben. Keine Blackbox, kein Vendor-Lock-in.",
+      "intro_text": "Der schnelle Start sind bewährte Tools: n8n, KI, saubere Integrationen. Das bleibende Ergebnis ist ein maßgeschneidertes System, das auf Ihre Prozesse zugeschnitten ist, Ihnen gehört und auf Ihrer eigenen Infrastruktur läuft, entwickelt von jemandem, der jede Ebene des Stacks kennt.\n\nKein Low-Code von der Stange zum Mieten, das Sie nicht ändern können: belastbare, maßgeschneiderte Automatisierung mit klarem Return, dokumentiert und an Ihr Team übergeben. Keine Blackbox, kein Vendor-Lock-in.",
       "point_1_start": "CRM & Vertrieb",
       "point_1_end": "Automatisieren Sie Lead-Management, Follow-ups und Deal-Fortschritt. Verpassen Sie keine Chance mehr.",
       "point_2_start": "Dokumenten-Workflows",
@@ -454,10 +454,10 @@
       "cta": "Kostenloses Erstgespräch buchen",
       "cta_primary": "Kostenloses Strategiegespräch",
       "cta_reassurance": "30 Tage Fix-Garantie · Sie besitzen den Code · kein Lock-in",
-      "apps_bridge": "Sie wollen sehen, wie ich liefere? Meine eigenen Apps auf leinss.xyz sind meine Arbeitsproben – laufende Produkte, die ich entworfen, gebaut und im Betrieb habe.",
+      "apps_bridge": "Sie wollen sehen, wie ich liefere? Meine eigenen Apps auf leinss.xyz sind meine Arbeitsproben: laufende Produkte, die ich entworfen, gebaut und im Betrieb habe.",
       "apps_bridge_cta": "Meine Apps ansehen →",
       "apps_bridge_url": "https://leinss.xyz",
-      "uptime_proof": "Und dass es läuft: Ich betreibe die produktive Infrastruktur hinter einem öffentlichen Zahlungsprotokoll — sieben Dienste, 99,99 % Verfügbarkeit, öffentlich ausgewiesen, nicht von mir."
+      "uptime_proof": "Und dass es läuft: Ich betreibe die produktive Infrastruktur hinter einem öffentlichen Zahlungsprotokoll: sieben Dienste, 99,99 % Verfügbarkeit, öffentlich ausgewiesen, nicht von mir."
     },
     "problem_solution": {
       "problem_headline": "Kommt Ihnen das bekannt vor?",
@@ -483,8 +483,8 @@
       "solution_4_text": "Bauen Sie Echtzeit-Datensynchronisation zwischen CRM, ERP, Shop-System und Tabellen. Eine Quelle der Wahrheit. Keine manuellen Exporte mehr."
     },
     "solution_details": {
-      "intro_1": "Sie haben die Vision – ich baue die Automatisierung.",
-      "intro_2": "Ich helfe Unternehmen, Automatisierungssysteme zu entwerfen und zu bauen, die ihnen gehören und die sie kontrollieren – von CRM-Workflows bis zu individuellen Multi-Tool-Integrationen. Systeme, die funktionieren und funktionieren bleiben.",
+      "intro_1": "Sie haben die Vision: ich baue die Automatisierung.",
+      "intro_2": "Ich helfe Unternehmen, Automatisierungssysteme zu entwerfen und zu bauen, die ihnen gehören und die sie kontrollieren, von CRM-Workflows bis zu individuellen Multi-Tool-Integrationen. Systeme, die funktionieren und funktionieren bleiben.",
       "solution_1_headline": "CRM & Vertriebsautomatisierung",
       "solution_1_text": "Automatisieren Sie Lead-Scoring, Zuweisung und Nurturing. Bauen Sie Sequenzen, die automatisch nachfassen. Verfolgen Sie Deals ohne manuelle Dateneingabe. Ihr Vertriebsteam verkauft mehr, reportet weniger.",
       "solution_2_headline": "Dokumenten- & Daten-Workflows",
@@ -495,10 +495,10 @@
       "solution_4_text": "Verbinden Sie Ihre Tools zu einem Ökosystem. Echtzeit-Synchronisation zwischen Plattformen. Individuelle Integrationen, wenn Standardlösungen nicht passen. Ihre Daten fließen dorthin, wo sie gebraucht werden.",
       "outro_question": "Warum mit mir arbeiten?",
       "outro_bullets": [
-        "Fokus auf ROI – jede Automatisierung sollte sich in gesparter Zeit oder reduzierten Fehlern auszahlen.",
-        "Lösungen, die mitwachsen – gebaut für das 10-fache Ihres aktuellen Volumens.",
-        "Sie behalten die Kontrolle – ich schule Ihr Team und dokumentiere alles.",
-        "Kein Vendor Lock-in – ich nutze offene Standards und Tools, die Sie selbst verwalten können."
+        "Fokus auf ROI: jede Automatisierung sollte sich in gesparter Zeit oder reduzierten Fehlern auszahlen.",
+        "Lösungen, die mitwachsen: gebaut für das 10-fache Ihres aktuellen Volumens.",
+        "Sie behalten die Kontrolle: ich schule Ihr Team und dokumentiere alles.",
+        "Kein Vendor Lock-in: ich nutze offene Standards und Tools, die Sie selbst verwalten können."
       ],
       "outro_claim": "Lassen Sie uns Automatisierung bauen, die wirklich funktioniert."
     },
@@ -509,15 +509,15 @@
         "TypeScript & Python",
         "APIs & Backends (Node.js, PostgreSQL/Supabase)",
         "Docker, CI/CD & DevOps (selbst gehostete Infrastruktur, Ansible)",
-        "LLM-Integration — Claude & OpenAI APIs (RAG, Agents)",
-        "Workflow-Automatisierung — selbst gehostetes n8n"
+        "LLM-Integration: Claude & OpenAI APIs (RAG, Agents)",
+        "Workflow-Automatisierung, selbst gehostetes n8n"
       ],
       "mission_title": "Mission",
-      "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen – und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",
+      "mission_statement": "Ich finde nicht, dass ein Unternehmen seine Woche mit Arbeit verbringen sollte, die ein Computer besser erledigt.\n\nAlso helfe ich mittelständischen Unternehmen, die Automatisierungen zu finden, die sich lohnen, und baue sie richtig. Nicht in einem Low-Code-Tool zusammengeklickt, sondern so entwickelt, dass sie Ihnen gehören: Sie laufen auf Ihrer Infrastruktur und bleiben von Ihren eigenen Leuten wartbar.\n\nJede Automatisierung hat einen klaren Return. Keine Blackbox, keine Abhängigkeit von mir.",
       "career_title": "Erfahrung",
       "career": "Ich entwickle Software und betreibe sie danach. Diese zweite Hälfte überlebt die meiste Automatisierung nicht.\n\nHeute verantworte ich das Backend und die gesamte produktive Infrastruktur hinter einem öffentlichen Zahlungsprotokoll: Datenbanken mit automatischem Failover, Überwachung und Deployments für Staging und Produktion. Sieben Dienste, 99,99 % Verfügbarkeit, öffentlich ausgewiesen.\n\nDavor: Full-Stack-Produktarbeit, ereignisgesteuerte Datenarchitektur am Fraunhofer-Institut und KI-Funktionen, die in den Betrieb gegangen sind statt als Demo zu enden. Genau das braucht Ihre Automatisierung: Sie muss auch am Dienstagmorgen halten, wenn niemand hinsieht.",
       "background_title": "Ansatz",
-      "background": "Ich bin in der Region Stuttgart aufgewachsen – im Herzen der deutschen Industrie und des Mittelstands – und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nLow-Code-Tools sind ein schneller Start, und ich nutze sie, wo sie passen. Aber belastbare, anpassbare Automatisierung, die mit Ihnen wächst, braucht echtes Engineering – die Fullstack-Art, nicht einen Freelancer, der fremde SaaS zusammensteckt. Genau das bringe ich zu Unternehmen, die wachsen wollen, ohne für jedes Projekt ein eigenes IT-Team zu haben.\n\nIn der Praxis fangen Mandate klein an und wachsen. Ein laufender Kunde kam wegen einer einzigen Schnittstelle zwischen zwei Systemen, die nicht miteinander sprachen. Heute laufen darüber ein produktiver Online-Shop, die Backoffice-Anwendung, in der das Team seine Produkte pflegt, eine Veranstaltungsseite und die Anbindung an ein fremdes Lieferkettensystem. Alles aus einer Hand, damit nichts zwischen mehreren Dienstleistern liegen bleibt."
+      "background": "Ich bin in der Region Stuttgart aufgewachsen, im Herzen der deutschen Industrie und des Mittelstands, und kenne den Druck, unter dem diese Unternehmen stehen.\n\nSie müssen digitalisieren und automatisieren, können sich aber keine Enterprise-Berater oder jahrelangen Rollouts leisten.\n\nLow-Code-Tools sind ein schneller Start, und ich nutze sie, wo sie passen. Aber belastbare, anpassbare Automatisierung, die mit Ihnen wächst, braucht echtes Engineering: die Fullstack-Art, nicht einen Freelancer, der fremde SaaS zusammensteckt. Genau das bringe ich zu Unternehmen, die wachsen wollen, ohne für jedes Projekt ein eigenes IT-Team zu haben.\n\nIn der Praxis fangen Mandate klein an und wachsen. Ein laufender Kunde kam wegen einer einzigen Schnittstelle zwischen zwei Systemen, die nicht miteinander sprachen. Heute laufen darüber ein produktiver Online-Shop, die Backoffice-Anwendung, in der das Team seine Produkte pflegt, eine Veranstaltungsseite und die Anbindung an ein fremdes Lieferkettensystem. Alles aus einer Hand, damit nichts zwischen mehreren Dienstleistern liegen bleibt."
     },
     "faq": {
       "tag": "FAQ",
@@ -528,7 +528,7 @@
       "q_2": "Was genau bieten Sie an?",
       "a_2": "Ich biete Beratung und Implementierung für Geschäftsautomatisierung. Dazu gehören:\n\n* Prozessanalyse und Automatisierungs-Roadmapping\n* Workflow-Automatisierung (CRM, Vertrieb, Operations)\n* Dokumentenverarbeitung und Datenpipeline-Einrichtung\n* Systemintegration und API-Entwicklung",
       "q_3": "Mit welchen Tools arbeiten Sie?",
-      "a_3": "Ich starte mit dem, was am schnellsten Nutzen bringt – oft einer Low-Code-Plattform wie n8n für einfachere Workflows. Aber ich bin Fullstack-Engineer, kein reiner Low-Code-Freelancer: Wenn ein Workflow belastbar, anpassbar oder wirklich Ihr Eigentum sein muss, baue ich ihn in echtem Code:\n\n* Low-Code (n8n) für den schnellen, einfachen Start\n* Custom-Entwicklung für alles Komplexe oder Langlebige\n* Meist ein Hybrid – die einfachen Teile schnell, die wichtigen Teile auf Dauer entwickelt",
+      "a_3": "Ich starte mit dem, was am schnellsten Nutzen bringt, oft einer Low-Code-Plattform wie n8n für einfachere Workflows. Aber ich bin Fullstack-Engineer, kein reiner Low-Code-Freelancer: Wenn ein Workflow belastbar, anpassbar oder wirklich Ihr Eigentum sein muss, baue ich ihn in echtem Code:\n\n* Low-Code (n8n) für den schnellen, einfachen Start\n* Custom-Entwicklung für alles Komplexe oder Langlebige\n* Meist ein Hybrid: die einfachen Teile schnell, die wichtigen Teile auf Dauer entwickelt",
       "q_4": "Wie lange dauert die Implementierung?",
       "a_4": "Das hängt von der Komplexität ab:\n\n* Einfache Automatisierungen: 1-2 Wochen\n* CRM-Workflow-Umbauten: 4-8 Wochen\n* Multi-System-Integrationen: 2-3 Monate\n\nWir beginnen mit Quick Wins und bauen darauf auf.",
       "q_5": "Brauchen wir interne technische Expertise?",
@@ -536,17 +536,17 @@
       "q_6": "Welchen ROI können wir erwarten?",
       "a_6": "Echte Beispiele aus aktuellen Projekten:\n\n* Rechnungsverarbeitung: 4 Stunden/Woche → 15 Minuten (automatische Extraktion + Weiterleitung)\n* Lead-Follow-up: Reaktionszeit von 6 Stunden → unter 5 Minuten\n* Monatsreporting: 2 Tage manuelle Arbeit → automatisch über Nacht generiert\n* Daten-Sync-Fehler: Von ~20/Monat → null\n\nDie meisten Automatisierungen amortisieren sich innerhalb von 3-6 Monaten. Wir berechnen Ihren spezifischen ROI vor Projektstart.",
       "q_7": "Was ist mit Datensicherheit?",
-      "a_7": "Alle Implementierungen entsprechen DSGVO-Anforderungen. Daten bleiben in Ihren Systemen oder bei zugelassenen EU/deutschen Anbietern. Ich benötige keinen Zugriff auf Produktionsdaten für die Entwicklung – wir arbeiten mit Testdaten und strengen Zugriffskontrollen.",
+      "a_7": "Alle Implementierungen entsprechen DSGVO-Anforderungen. Daten bleiben in Ihren Systemen oder bei zugelassenen EU/deutschen Anbietern. Ich benötige keinen Zugriff auf Produktionsdaten für die Entwicklung: wir arbeiten mit Testdaten und strengen Zugriffskontrollen.",
       "q_8": "Was kostet das?",
-      "a_8": "Ich arbeite auf drei Arten, und Sie kennen den Preis, bevor die Arbeit beginnt:\n\n* Automatisierungs-Audit + Roadmap – zum Festpreis; den priorisierten Plan behalten Sie, selbst wenn wir danach aufhören\n* Umsetzung – pro Projekt kalkuliert, so zugeschnitten, dass sie sich durch gesparte Zeit oder weniger Fehler trägt\n* Laufender Support – eine monatliche Pauschale, nur wenn Sie eine wollen\n\nJede Zusammenarbeit startet mit einem kostenlosen Gespräch und einem schriftlichen Angebot. Keine Überraschungen nach Stunden.",
+      "a_8": "Ich arbeite auf drei Arten, und Sie kennen den Preis, bevor die Arbeit beginnt:\n\n* Automatisierungs-Audit + Roadmap: zum Festpreis; den priorisierten Plan behalten Sie, selbst wenn wir danach aufhören\n* Umsetzung: pro Projekt kalkuliert, so zugeschnitten, dass sie sich durch gesparte Zeit oder weniger Fehler trägt\n* Laufender Support: eine monatliche Pauschale, nur wenn Sie eine wollen\n\nJede Zusammenarbeit startet mit einem kostenlosen Gespräch und einem schriftlichen Angebot. Keine Überraschungen nach Stunden.",
       "q_9": "Können Sie sich in unsere bestehenden Systeme integrieren?",
-      "a_9": "Ja – in nahezu jedem Fall. Als Fullstack-Entwickler kann ich mit jedem System arbeiten, das eine API hat, und das trifft auf die meisten modernen Business-Tools zu.\n\nWenn ich mit Ihrer konkreten Software noch nicht gearbeitet habe, sage ich das offen. Eine neue API einzuarbeiten dauert in der Regel Tage, nicht Wochen. Ihren genauen Stack gehen wir im Erstgespräch durch.",
+      "a_9": "Ja, in nahezu jedem Fall. Als Fullstack-Entwickler kann ich mit jedem System arbeiten, das eine API hat, und das trifft auf die meisten modernen Business-Tools zu.\n\nWenn ich mit Ihrer konkreten Software noch nicht gearbeitet habe, sage ich das offen. Eine neue API einzuarbeiten dauert in der Regel Tage, nicht Wochen. Ihren genauen Stack gehen wir im Erstgespräch durch.",
       "q_10": "Was passiert nach der Implementierung?",
-      "a_10": "Alles gehört Ihnen. Code, Dokumentation, Zugangsdaten – alles. Ich biete Schulungen an, damit Ihr Team den täglichen Betrieb selbst managen kann. Für laufende Optimierung oder Support biete ich Wartungspakete.",
+      "a_10": "Alles gehört Ihnen. Code, Dokumentation, Zugangsdaten, alles. Ich biete Schulungen an, damit Ihr Team den täglichen Betrieb selbst managen kann. Für laufende Optimierung oder Support biete ich Wartungspakete.",
       "q_11": "Wie starten wir?",
       "a_11": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. So läuft es ab:\n\n1. Sie beschreiben einen Prozess, der Zeit frisst\n2. Ich sage Ihnen, ob er automatisierbar ist und grob wie\n3. Wenn es passt, erhalten Sie innerhalb von 48h ein konkretes Angebot\n\nKein Pitch-Deck, kein Verkaufsdruck. Nur ein direktes Gespräch darüber, ob Automatisierung für Sie Sinn macht.",
       "q_12": "Warum mit einem Solo-Berater statt einer Agentur arbeiten?",
-      "a_12": "Agenturen haben Overhead, Account Manager und Junioren, die die eigentliche Arbeit machen. Bei mir:\n\n* Sie sprechen direkt mit der Person, die Ihre Automatisierung baut\n* Keine Übergaben, keine Kommunikationsebenen\n* Schnellere Iteration – Änderungen passieren in Stunden, nicht Wochen\n* Geringere Kosten – kein Agenturaufschlag\n\nFür komplexe Enterprise-Projekte machen Agenturen Sinn. Für fokussierte Automatisierungsarbeit ist ein erfahrener Builder schneller und kosteneffizienter.",
+      "a_12": "Agenturen haben Overhead, Account Manager und Junioren, die die eigentliche Arbeit machen. Bei mir:\n\n* Sie sprechen direkt mit der Person, die Ihre Automatisierung baut\n* Keine Übergaben, keine Kommunikationsebenen\n* Schnellere Iteration (Änderungen passieren in Stunden, nicht Wochen\n* Geringere Kosten) kein Agenturaufschlag\n\nFür komplexe Enterprise-Projekte machen Agenturen Sinn. Für fokussierte Automatisierungsarbeit ist ein erfahrener Builder schneller und kosteneffizienter.",
       "q_13": "Was, wenn die Automatisierung nicht wie erwartet funktioniert?",
       "a_13": "Jedes Projekt enthält eine Testphase vor dem Go-Live. Aber falls nach dem Deployment etwas nicht läuft:\n\n* Erste 30 Tage: Ich behebe es ohne Zusatzkosten\n* Alle Projekte kommen mit Dokumentation, damit Ihr Team Basics selbst lösen kann\n* Ich biete Support-Pakete für laufende Wartung\n\nAutomatisierung ist nicht \"einrichten und vergessen\". Systeme ändern sich, APIs werden aktualisiert, Anforderungen entwickeln sich. Ich baue mit Wartbarkeit im Blick und bleibe verfügbar, wenn Sie Anpassungen brauchen."
     },
@@ -559,8 +559,8 @@
       "savings_label": "Geschätzte jährliche Ersparnis",
       "hours_saved_label": "Freigesetzte Stunden pro Jahr",
       "per_year": "pro Jahr",
-      "disclaimer": "Eine grobe Schätzung auf Basis Ihrer Eingaben – kein Angebot. Die meisten Automatisierungsprojekte amortisieren sich innerhalb von 3–6 Monaten.",
-      "cta": "Für Ihren Fall durchrechnen — kostenloses Gespräch"
+      "disclaimer": "Eine grobe Schätzung auf Basis Ihrer Eingaben, kein Angebot. Die meisten Automatisierungsprojekte amortisieren sich innerhalb von 3-6 Monaten.",
+      "cta": "Für Ihren Fall durchrechnen, kostenloses Gespräch"
     },
     "newsletter": {
       "title": "Bleiben Sie auf dem Laufenden",
@@ -584,18 +584,18 @@
         "meta_title": "Automatisierungslösungen - Optimieren Sie Ihr Unternehmen",
         "meta_description": "Entdecken Sie unsere Automatisierungslösungen: CRM & Vertrieb, Dokumenten-Workflows, Kommunikationsautomatisierung und Systemintegrationen.",
         "title": "Unsere Automatisierungslösungen",
-        "subtitle": "Vier Bereiche, in denen die richtige Automatisierung Ihrem Team die Woche zurückgibt – gebaut, um zu besitzen, nicht zu mieten.",
+        "subtitle": "Vier Bereiche, in denen die richtige Automatisierung Ihrem Team die Woche zurückgibt: gebaut, um zu besitzen, nicht zu mieten.",
         "cta": "Kostenloses Erstgespräch buchen"
       },
       "depth": {
         "title": "Wie wir es tatsächlich bauen",
-        "text": "No-Code-Tools sind unser Start, nicht unser Ende. Wenn ein Workflow echten Code braucht – Batching, Retries, Zustand, eigene Logik – schreiben und besitzen wir ihn, damit er im Produktivbetrieb hält.",
+        "text": "No-Code-Tools sind unser Start, nicht unser Ende. Wenn ein Workflow echten Code braucht (Batching, Retries, Zustand, eigene Logik) schreiben und besitzen wir ihn, damit er im Produktivbetrieb hält.",
         "link_text": "Lesen: Wo n8n aufhört und Code anfängt"
       },
       "offers": {
         "eyebrow": "Feste Pakete, klarer Umfang",
         "title": "Produktisierte Pakete",
-        "subtitle": "Klarer Umfang und klarer Zeitrahmen – Sie wissen vor dem ersten Gespräch, woran Sie sind. Jedes Paket ist ein Ausgangspunkt und wird dann auf Ihre Prozesse maßgeschneidert und dokumentiert übergeben – nichts bleibt an mich gebunden. Der Preis richtet sich nach dem konkreten Umfang und wird im Erstgespräch geklärt. Größere Vorhaben werden individuell angeboten.",
+        "subtitle": "Klarer Umfang und klarer Zeitrahmen. Sie wissen vor dem ersten Gespräch, woran Sie sind. Jedes Paket ist ein Ausgangspunkt und wird dann auf Ihre Prozesse maßgeschneidert und dokumentiert übergeben, nichts bleibt an mich gebunden. Der Preis richtet sich nach dem konkreten Umfang und wird im Erstgespräch geklärt. Größere Vorhaben werden individuell angeboten.",
         "net_note": "Preise verstehen sich netto, zzgl. USt., für den definierten Umfang.",
         "cta_label": "Passt eines dieser Pakete? Lassen Sie es uns im Erstgespräch klären.",
         "timeline_label": "Dauer",
@@ -617,13 +617,13 @@
           {
             "name": "AI-Feature-Integrations-Sprint",
             "timeline": "2 Wochen",
-            "tagline": "Ein KI-Feature, das in Produktion geht – nicht nur eine Demo.",
+            "tagline": "Ein KI-Feature, das in Produktion geht: nicht nur eine Demo.",
             "example": "Zum Beispiel: ein Chatbot oder eine Wissensdatenbank aus Ihren eigenen Dokumenten, automatisierte Rechnungs-Extraktion, Daten-Bereinigung oder eine automatisierte Rezeption.",
             "includes": [
               "Ein KI-/LLM-Feature in Ihre bestehende Anwendung integriert",
               "In Produktion ausgeliefert, nicht als Prototyp geparkt",
               "Dokumentiert und an Ihr Team übergeben",
-              "Läuft auf Ihrer Infrastruktur – kein Vendor-Lock-in"
+              "Läuft auf Ihrer Infrastruktur, kein Vendor-Lock-in"
             ]
           },
           {
@@ -634,7 +634,7 @@
               "Web-App von Null auf eine benutzbare erste Version",
               "Kernabläufe entwickelt, deployt und lauffähig",
               "Sauberer Code plus Dokumentation und Übergabe",
-              "Sie besitzen Code und Infrastruktur – keine Blackbox"
+              "Sie besitzen Code und Infrastruktur, keine Blackbox"
             ]
           }
         ]
@@ -702,7 +702,7 @@
         "title": "Kommunikationsautomatisierung",
         "subtitle": "Konsistente, zeitnahe Kommunikation ohne manuellen Aufwand.",
         "problem_title": "Die Herausforderung",
-        "problem_text": "Neue Kunden erhalten nicht das Onboarding, das sie brauchen. Support-Tickets wandern zwischen Teams hin und her. Terminerinnerungen werden manuell verschickt – oder vergessen. Ihre Kommunikation ist reaktiv statt proaktiv.",
+        "problem_text": "Neue Kunden erhalten nicht das Onboarding, das sie brauchen. Support-Tickets wandern zwischen Teams hin und her. Terminerinnerungen werden manuell verschickt, oder vergessen. Ihre Kommunikation ist reaktiv statt proaktiv.",
         "solution_title": "Die Lösung",
         "solution_text": "Wir bauen Kommunikations-Workflows, die automatisch laufen. Jeder Kunde erhält dieselbe großartige Erfahrung. Support-Tickets landen sofort beim richtigen Team. Erinnerungen und Updates versenden sich selbst.",
         "use_cases_title": "Anwendungsfälle",
@@ -754,15 +754,15 @@
     },
     "portfolio": {
       "meta_title": "Projekte & Live-Demos - Geschäftsautomatisierung in Aktion",
-      "meta_description": "Echte Automatisierungssysteme direkt im Browser ausprobieren: KI-Rechnungslesung, Blitz-Lead-Antwort, Meeting-Protokolle, Tabellen-Migration und ein KI-Support-Assistent — plus die Referenz-Builds dahinter.",
+      "meta_description": "Echte Automatisierungssysteme direkt im Browser ausprobieren: KI-Rechnungslesung, Blitz-Lead-Antwort, Meeting-Protokolle, Tabellen-Migration und ein KI-Support-Assistent: plus die Referenz-Builds dahinter.",
       "title": "Projekte & Live-Demos",
-      "subtitle": "Verlassen Sie sich nicht auf Versprechen — testen Sie die Automatisierung selbst. Jede Demo unten ist ein funktionierendes System, das direkt in Ihrem Browser läuft, gebaut mit denselben Tools wie für Kundenprojekte.",
+      "subtitle": "Verlassen Sie sich nicht auf Versprechen, testen Sie die Automatisierung selbst. Jede Demo unten ist ein funktionierendes System, das direkt in Ihrem Browser läuft, gebaut mit denselben Tools wie für Kundenprojekte.",
       "demos_title": "Demos ausprobieren",
-      "demos_subtitle": "Fünf funktionierende Automatisierungen. Jede läuft live — geben Sie eigene Daten ein und sehen Sie zu.",
+      "demos_subtitle": "Fünf funktionierende Automatisierungen. Jede läuft live: geben Sie eigene Daten ein und sehen Sie zu.",
       "case_studies_title": "Referenz-Builds",
       "case_studies_subtitle": "Wie diese Bausteine Node für Node zu einem vollständigen System zusammenkommen.",
       "workflows_title": "Die echten Workflows herunterladen",
-      "workflows_subtitle": "Die Demos oben sind keine Mock-ups und keine Screenshots. Jede läuft auf einem echten n8n-Workflow — das ist exakt die JSON-Datei, die ich betreibe, direkt aus n8n exportiert. Importieren Sie sie, öffnen Sie jeden Node und sehen Sie genau, wie es funktioniert.",
+      "workflows_subtitle": "Die Demos oben sind keine Mock-ups und keine Screenshots. Jede läuft auf einem echten n8n-Workflow. Das ist exakt die JSON-Datei, die ich betreibe, direkt aus n8n exportiert. Importieren Sie sie, öffnen Sie jeden Node und sehen Sie genau, wie es funktioniert.",
       "workflows_cta": "Workflow herunterladen",
       "workflows_note": "Jeder Referenz-Build unten liefert seinen Workflow auf dieselbe Weise.",
       "live_badge": "Live-Demo",
@@ -771,15 +771,15 @@
       "result_label": "Ergebnis",
       "demo_cta": "Demo ausprobieren",
       "cta_title": "Sehen Sie, was das für Ihr Unternehmen leisten kann",
-      "cta_subtitle": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. Beschreiben Sie einen Prozess, der Zeit frisst, und ich sage Ihnen, ob er automatisierbar ist — und grob wie.",
+      "cta_subtitle": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. Beschreiben Sie einen Prozess, der Zeit frisst, und ich sage Ihnen, ob er automatisierbar ist: und grob wie.",
       "cta_button": "Kostenloses Gespräch buchen",
       "projects": {
         "invoice": {
           "title": "KI-Rechnungsleser",
           "tagline": "Vom PDF zu verbuchten Daten in Sekunden",
-          "problem": "Teams tippen Rechnungsdaten manuell in die Buchhaltung — langsam, fehleranfällig und ohne Prüfspur.",
-          "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter — mit Prüfpfad für alles Unklare.",
-          "result": "Aus einer gescannten Rechnung werden in Sekunden validierte, strukturierte Daten — testen Sie es oben mit einem eigenen Dokument.",
+          "problem": "Teams tippen Rechnungsdaten manuell in die Buchhaltung: langsam, fehleranfällig und ohne Prüfspur.",
+          "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter: mit Prüfpfad für alles Unklare.",
+          "result": "Aus einer gescannten Rechnung werden in Sekunden validierte, strukturierte Daten: testen Sie es oben mit einem eigenen Dokument.",
           "tags": [
             "Vision-KI",
             "Dokumenten-Workflow",
@@ -789,9 +789,9 @@
         "lead": {
           "title": "Blitz-Antwort für Leads",
           "tagline": "Jeden Lead in Minuten beantworten, nicht in Stunden",
-          "problem": "Leads, die Stunden auf Antwort warten, werden kalt — und Anfragen nach Feierabend gehen über Nacht verloren.",
+          "problem": "Leads, die Stunden auf Antwort warten, werden kalt: und Anfragen nach Feierabend gehen über Nacht verloren.",
           "solution": "Jeder eingehende Lead wird bewertet und innerhalb von Minuten mit einer persönlichen, markengerechten Antwort beantwortet, auf Geschäftszeiten geplant und mit Folgeaufgabe im CRM protokolliert.",
-          "result": "Ein eingehender Lead erhält in unter einer Minute eine bewertete, personalisierte Antwort — zu jeder Uhrzeit.",
+          "result": "Ein eingehender Lead erhält in unter einer Minute eine bewertete, personalisierte Antwort: zu jeder Uhrzeit.",
           "tags": [
             "Lead-Automation",
             "Persönliche KI",
@@ -813,7 +813,7 @@
         "excel": {
           "title": "Excel-Retter",
           "tagline": "Vom Tabellen-Chaos zum sauberen System",
-          "problem": "Kritische Prozesse laufen auf fragilen Tabellen — manuelle Eingabe, Versions-Chaos, stille Formelfehler und keine Validierung.",
+          "problem": "Kritische Prozesse laufen auf fragilen Tabellen: manuelle Eingabe, Versions-Chaos, stille Formelfehler und keine Validierung.",
           "solution": "Der Workflow analysiert Ihre Tabelle, schlägt ein sauberes Schema vor und bereinigt, standardisiert und validiert die Daten auf dem Weg in ein echtes System.",
           "result": "Aus unsauberen, zusammenkopierten Tabellen wird ein strukturierter, validierter Datensatz, dem Sie vertrauen können.",
           "tags": [
@@ -826,7 +826,7 @@
           "title": "KI-Support-Assistent",
           "tagline": "Sofortige, belegte Antworten aus Ihrer Wissensbasis",
           "problem": "Support-Teams beantworten dieselben Fragen immer wieder, während Kunden auf Antwort warten.",
-          "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert — und eskaliert an einen Menschen, wenn es unsicher ist.",
+          "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert: und eskaliert an einen Menschen, wenn es unsicher ist.",
           "result": "Häufige Fragen werden sofort beantwortet, mit Quellen, rund um die Uhr.",
           "tags": [
             "Retrieval",

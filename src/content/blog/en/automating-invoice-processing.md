@@ -10,7 +10,7 @@ lang: en
 alternateSlug: "rechnungsverarbeitung-automatisieren"
 ---
 
-> **Short answer:** Invoice automation reads a PDF invoice, extracts the supplier, number, dates, line items, and totals with an AI vision model, checks the numbers add up, and pushes the data into your accounting system. It cuts handling from 8–10 minutes to under a minute per invoice and pays for itself in 2–3 months.
+> **Short answer:** Invoice automation reads a PDF invoice, extracts the supplier, number, dates, line items, and totals with an AI vision model, checks the numbers add up, and pushes the data into your accounting system. It cuts handling from 8-10 minutes to under a minute per invoice and pays for itself in 2-3 months.
 
 Processing invoices by hand costs time and money, and it's the kind of work that never gets faster. Here's how I automate it with n8n and an AI model that actually reads documents instead of guessing at them.
 
@@ -68,7 +68,7 @@ Automatic plausibility checks:
 - Is the supplier known?
 
 **Step 4: Export**
-Data is transferred to your system – whether that's QuickBooks, Xero, or a Google Sheet.
+Data is transferred to your system: whether that's QuickBooks, Xero, or a Google Sheet.
 
 ## ROI Calculation
 
@@ -81,7 +81,7 @@ Data is transferred to your system – whether that's QuickBooks, Xero, or a Goo
 
 **Payback**: With 50 invoices/month, automation pays for itself in 2-3 months.
 
-Whether it pays depends on your touchless rate, which is a measurement rather than an estimate — the [reference build](/en/blog/case-study-invoice-processing/) explains how to take it.
+Whether it pays depends on your touchless rate, which is a measurement rather than an estimate, the [reference build](/en/blog/case-study-invoice-processing/) explains how to take it.
 
 ## Data Privacy & Compliance
 
@@ -110,13 +110,13 @@ For implementation, I use:
 - **Claude Vision API**: Document analysis with high accuracy
 - **Webhook/IMAP**: Trigger for incoming invoices
 
-The complete workflow is available as open-source – contact me for access.
+The complete workflow is available as open-source, contact me for access.
 
 ## Real-World Example
 
 Want to see this in action? Read how we implemented this exact workflow for an accounting firm processing 2,500+ invoices monthly:
 
-**[Reference Build: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)** — the full pipeline: intake, extraction, validation rules, DATEV export, and the n8n workflow to download.
+**[Reference Build: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)**: the full pipeline: intake, extraction, validation rules, DATEV export, and the n8n workflow to download.
 
 ## Next Steps
 
@@ -126,10 +126,10 @@ Want to automate your invoice processing?
 2. **Define goal**: Which systems should receive the data?
 3. **Pilot project**: Start with one supplier type
 
-Try the [invoice-reader demo](/en/projects/) on your own PDF first, or read more on [document & data workflows](/en/services/document-workflows/). When you're ready, [book a free consultation](https://cal.com/tobias-leinss/strategymeeting) – I'll show you what the workflow would look like for your situation.
+Try the [invoice-reader demo](/en/projects/) on your own PDF first, or read more on [document & data workflows](/en/services/document-workflows/). When you're ready, [book a free consultation](https://cal.com/tobias-leinss/strategymeeting), I'll show you what the workflow would look like for your situation.
 
-## Technical Deep Dive
+## Technical detail
 
-Interested in the technical details — PDF-to-image conversion, Claude tool_use for structured extraction, validation logic, and DATEV export?
+Interested in the technical details: PDF-to-image conversion, Claude tool_use for structured extraction, validation logic, and DATEV export?
 
 → **[Claude Vision API for Invoice Extraction: Technical Implementation with n8n](https://leinss.xyz/blog/en/invoice-extractor-technical/)** *(leinss.xyz)*

@@ -10,13 +10,13 @@ lang: en
 alternateSlug: "fallstudie-multi-filial-handelsplattform"
 ---
 
-> **Short answer:** A regulated consumer-goods retailer running several branches and a warehouse had a point-of-sale system with limited data entry, a website disconnected from both the POS and the storefront, no reliable sync, and no way to tell when the two disagreed. Over nine months I built three applications on top of it — a back-office product manager, the customer storefront, and an events site — plus the integration into a supply-chain platform owned by someone else. The hard part was never the applications. It was being correct on data I could not control.
+> **Short answer:** A regulated consumer-goods retailer running several branches and a warehouse had a point-of-sale system with limited data entry, a website disconnected from both the POS and the storefront, no reliable sync, and no way to tell when the two disagreed. Over nine months I built three applications on top of it (a back-office product manager, the customer storefront, and an events site) plus the integration into a supply-chain platform owned by someone else. The hard part was never the applications. It was being correct on data I could not control.
 
 > **On specifics:** the client is not named and neither are their vendors. Everything technical below is real and comes from the work; the figures are counted from the repositories, not estimated.
 
 ## Where it started
 
-The point-of-sale system held the truth about stock and prices, and it was the only place staff could enter anything — with limited fields and no validation worth the name. A WordPress site sat alongside it, connected to neither the POS nor the storefront. Product data was uploaded by hand in batches, so the moment anyone edited a price in one place, the other two were wrong and nobody could tell.
+The point-of-sale system held the truth about stock and prices, and it was the only place staff could enter anything, with limited fields and no validation worth the name. A WordPress site sat alongside it, connected to neither the POS nor the storefront. Product data was uploaded by hand in batches, so the moment anyone edited a price in one place, the other two were wrong and nobody could tell.
 
 There was no drift detection. That is the part people underestimate. Two systems disagreeing is a normal Tuesday; two systems disagreeing *silently* for three weeks is what costs you money.
 
@@ -30,7 +30,7 @@ Three applications, all in production:
 | **Customer storefront** | The public shop, reading the curated layer and the live POS figures together |
 | **Events site** | A separate public site for the location's events and visitor information |
 
-Plus the integration with a **separately owned supply-chain system** — inventory movements, FIFO lot tracking, per-branch and warehouse stock. I contribute to that one through a staging branch; its maintainer promotes to production. That constraint shaped more of the design than anything else, and the next two sections are why.
+Plus the integration with a **separately owned supply-chain system**: inventory movements, FIFO lot tracking, per-branch and warehouse stock. I contribute to that one through a staging branch; its maintainer promotes to production. That constraint shaped more of the design than anything else, and the next two sections are why.
 
 Postgres throughout, with row-level security, object storage for product media, and continuous deployment. Roughly **1,067 commits** across the three applications I own, over nine months. All three are live.
 
@@ -48,14 +48,14 @@ The cost is a slightly more expensive read. That was a good trade, and the two f
 
 The POS lets an operator take an existing product code and give it to a **different product**. Same code, new item, no signal.
 
-The sync upserted the curated overlay with `ON CONFLICT (sku) DO NOTHING`. Read that with the above in mind: when a code was reused, the overlay kept its original snapshot and all its curation — description, wholesale price, visibility — permanently attached to a product that no longer existed under that code. The storefront showed one thing, the POS meant another, and the row looked healthy from every angle.
+The sync upserted the curated overlay with `ON CONFLICT (sku) DO NOTHING`. Read that with the above in mind: when a code was reused, the overlay kept its original snapshot and all its curation (description, wholesale price, visibility) permanently attached to a product that no longer existed under that code. The storefront showed one thing, the POS meant another, and the row looked healthy from every angle.
 
 The tempting fix is a policy: tell staff to stop reusing codes. That fails twice. It relies on operator discipline in a system I do not control, and it does nothing for the rows already broken.
 
 So the sync had to *tolerate* reuse:
 
 1. **Readers resolve the canonical row.** Both the back-office and the storefront pick the live product per code, preferring active rows, so names, prices and stock are right regardless of which twin they land on.
-2. **Staff see the conflict.** Where the live title differs from the frozen snapshot, the back-office surfaces "code reassigned — re-pull", so a human can fix the curation deliberately instead of discovering it through a customer.
+2. **Staff see the conflict.** Where the live title differs from the frozen snapshot, the back-office surfaces "code reassigned: re-pull", so a human can fix the curation deliberately instead of discovering it through a customer.
 3. **The root-cause fix went upstream.** The durable answer is to stop keying on the code at all and track the POS's *internal* product id, which nobody can reassign. That sync belongs to the supply-chain maintainer, so I wrote the migration and the diff and handed it over rather than editing someone else's function.
 
 The general lesson is worth more than the incident: **never key your data on an identifier another system can reassign.** If you must, keep the foreign identity alongside it so a swap is detectable rather than invisible.
@@ -64,11 +64,11 @@ The general lesson is worth more than the incident: **never key your data on an 
 
 Six product images stopped being editable in the back-office. The classification field they are gated on had gone null.
 
-I backfilled them in a single transaction, verified zero remaining, and wrote down the exact statement to reverse it. Then I checked whether the fix would survive — and it would not. Every sync run re-derives that field from a **hardcoded category map**, and the map was missing one of the POS's categories. The next run would null all six again.
+I backfilled them in a single transaction, verified zero remaining, and wrote down the exact statement to reverse it. Then I checked whether the fix would survive, and it would not. Every sync run re-derives that field from a **hardcoded category map**, and the map was missing one of the POS's categories. The next run would null all six again.
 
 One row was worse. Its category was blank in every upstream record, so there was nothing to derive from at all. A manual backfill there would be wiped on every single run, forever. I deliberately left it broken and documented why, because a fix you have to reapply weekly is not a fix, it is a chore you have volunteered for.
 
-The durable change was one line in that category map — again, in a function owned by someone else, so again a diff handed upstream rather than applied.
+The durable change was one line in that category map: again, in a function owned by someone else, so again a diff handed upstream rather than applied.
 
 If there is one habit worth stealing from this project, it is that one: **after you fix data, work out what will undo it.** In a pipeline you do not fully own, that question has an answer surprisingly often.
 

@@ -11,7 +11,7 @@ const isDE = lang === 'de';
 const WEBHOOK_URL = 'https://n8n.funnel.leinss.xyz/webhook/excel-retter';
 const calUrl = isDE ? config.external_links.strategy_call_de : config.external_links.strategy_call_en;
 
-// Abort the request after this long; the displayed hint is ~15–30 s, so allow headroom.
+// Abort the request after this long; the displayed hint is ~15-30 s, so allow headroom.
 const TIMEOUT_MS = 60000;
 
 const SAMPLE_CSV = isDE
@@ -70,7 +70,7 @@ const t = {
     : 'e.g. Keep only US phone numbers',
   submit: isDE ? 'Daten bereinigen →' : 'Clean Data →',
   loading: isDE ? 'Analysiere und bereinige Daten...' : 'Analyzing and cleaning data...',
-  loadingHint: isDE ? '~15–30 Sekunden' : '~15–30 seconds',
+  loadingHint: isDE ? '~15-30 Sekunden' : '~15-30 seconds',
   resultTitle: isDE ? 'Bereinigte Daten' : 'Cleaned Data',
   changesTitle: isDE ? 'Vorgenommene Änderungen' : 'Changes Made',
   downloadBtn: isDE ? 'CSV herunterladen' : 'Download CSV',
@@ -80,28 +80,28 @@ const t = {
     ? '🔒 Ihre Daten werden für die Bereinigung verarbeitet und danach nicht gespeichert.'
     : '🔒 Your data is processed for cleaning and not stored afterward.',
   selfHosted: isDE
-    ? '⚙️ Kein Mock-up — Ihre Daten laufen durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
-    : '⚙️ Not a mock-up — your data runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
+    ? '⚙️ Kein Mock-up: Ihre Daten laufen durch selbst gehostetes n8n auf Infrastruktur in der EU, die ich selbst betreibe, nicht durch einen gemieteten Cloud-Dienst.'
+    : '⚙️ Not a mock-up: your data runs through self-hosted n8n on infrastructure I host and control in the EU, not a rented cloud service.',
   errorGeneric: isDE ? 'Verarbeitung fehlgeschlagen. Bitte erneut versuchen.' : 'Processing failed. Please try again.',
   rateLimited: isDE
-    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen — oder direkt Kontakt aufnehmen.'
-    : 'Live-demo daily limit reached. Please try again tomorrow — or get in touch directly.',
+    ? 'Tageslimit der Live-Demo erreicht. Bitte morgen wieder versuchen, oder direkt Kontakt aufnehmen.'
+    : 'Live-demo daily limit reached. Please try again tomorrow: or get in touch directly.',
   statTotal: isDE ? 'Zeilen gesamt' : 'Total rows',
   statModified: isDE ? 'Bereinigt' : 'Modified',
   statDuplicates: isDE ? 'Duplikate entfernt' : 'Duplicates removed',
   statIssues: isDE ? 'Probleme gefunden' : 'Issues found',
   offlineBadge: isDE
-    ? '⚡ Live-Demo gerade offline – dies ist eine Beispielausgabe.'
-    : '⚡ Live demo temporarily offline – this is sample output.',
-  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live — book a call →',
+    ? '⚡ Live-Demo gerade offline, dies ist eine Beispielausgabe.'
+    : '⚡ Live demo temporarily offline. This is sample output.',
+  offlineCta: isDE ? 'Live-Demo im Gespräch ansehen →' : 'See it live: book a call →',
   artifactLabel: isDE ? 'den vollständigen Bereinigungs-Report (.md)' : 'the full cleaning report (.md)',
   // Headers for the downloadable take-home cleaning report.
   fileTitle: isDE ? 'Datenbereinigungs-Report' : 'Data Cleaning Report',
   fileStats: isDE ? 'Kennzahlen' : 'Summary',
   fileData: isDE ? 'Bereinigte Daten (CSV)' : 'Cleaned Data (CSV)',
   fileFooter: isDE
-    ? 'Bereinigt mit der Live-Demo auf leinss-consulting.de — selbst gehostetes n8n + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
-    : 'Cleaned with the live demo on leinss-consulting.de — self-hosted n8n + LLM. Workflow blueprint: on request during the intro call.',
+    ? 'Bereinigt mit der Live-Demo auf leinss-consulting.de, selbst gehostetes n8n + LLM. Workflow-Vorlage: auf Anfrage im Erstgespräch.'
+    : 'Cleaned with the live demo on leinss-consulting.de, self-hosted n8n + LLM. Workflow blueprint: on request during the intro call.',
 };
 ---
 
@@ -276,7 +276,7 @@ const t = {
         return;
       }
 
-      // Server responded but rejected the input — show the real reason, not a sample.
+      // Server responded but rejected the input: show the real reason, not a sample.
       if (data && data.success === false) {
         loadingEl.classList.add('hidden');
         form.classList.remove('hidden');

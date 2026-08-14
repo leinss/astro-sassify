@@ -1,6 +1,6 @@
 ---
 title: "Reference Build: AI Support Triage for E-commerce"
-description: "The full architecture for an AI triage layer that classifies, routes and auto-answers support tickets — every node explained, with the n8n workflow available to download and inspect."
+description: "The full architecture for an AI triage layer that classifies, routes and auto-answers support tickets: every node explained, with the n8n workflow available to download and inspect."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
 category: reference-build
@@ -10,9 +10,9 @@ lang: en
 alternateSlug: "fallstudie-support-triage"
 ---
 
-> **Short answer:** An AI triage layer sits between your customers and your support team. It reads every incoming message, scores urgency, assigns a category, routes it to the right Slack channel, and answers the routine ones itself — with confidence thresholds and sentiment checks so anything doubtful reaches a human. Built on n8n and Claude, with a local Ollama pre-filter to keep the API bill down.
+> **Short answer:** An AI triage layer sits between your customers and your support team. It reads every incoming message, scores urgency, assigns a category, routes it to the right Slack channel, and answers the routine ones itself, with confidence thresholds and sentiment checks so anything doubtful reaches a human. Built on n8n and Claude, with a local Ollama pre-filter to keep the API bill down.
 
-> **What this is:** a reference build — the architecture, the prompts, and the exact n8n workflow, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
+> **What this is:** a reference build: the architecture, the prompts, and the exact n8n workflow, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
 ## The problem it solves
 
@@ -160,7 +160,7 @@ Auto-responses are sent immediately but logged for agent review.
 For cost optimisation, Mistral 7B runs locally for the first classification pass:
 - It takes the clear-cut cases, which on most ticket mixes is the large majority
 - Claude is called only for ambiguous or high-urgency messages
-- Your saving scales with how lopsided your ticket mix is — measure it in shadow mode before you assume a number
+- Your saving scales with how lopsided your ticket mix is, measure it in shadow mode before you assume a number
 
 ## What changes, and what does not
 
@@ -172,7 +172,7 @@ What the architecture does change is structural, and you can reason about it dir
 - **Answerable questions stop waiting for an agent.** Anything the system can answer from order data plus the FAQ is answered at once, at any hour.
 - **Agents stop copy-pasting tracking numbers.** The queue they see is the queue that needs a person.
 
-How much that is worth depends on your ticket mix. The honest way to find out is to run the classifier over your last month of tickets in shadow mode and count what it would have auto-resolved — before you switch a single auto-response on. That is week three in the timeline below, and it is the step I would not skip.
+How much that is worth depends on your ticket mix. The honest way to find out is to run the classifier over your last month of tickets in shadow mode and count what it would have auto-resolved, before you switch a single auto-response on. That is week three in the timeline below, and it is the step I would not skip.
 
 ## Implementation Details
 
@@ -291,7 +291,7 @@ For tickets marked `auto_resolvable: true` with high confidence and non-angry se
 
 ### Get the Starter Workflow
 
-> **📥 Not a screenshot — the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
 >
 > [Download n8n-support-triage.json](/workflows/n8n-support-triage.json)
 
@@ -302,11 +302,11 @@ For tickets marked `auto_resolvable: true` with high confidence and non-angry se
 4. Create Slack channels (#support-urgent, #support-billing, etc.)
 5. Customize urgency levels and categories for your business
 
-This starter implements classification and routing. A full implementation would add auto-response templates, order status API integration, confidence thresholds, CSAT tracking, and agent assignment logic—the operational details that make the difference between a demo and a system your team relies on.
+This starter implements classification and routing. A full implementation would add auto-response templates, order status API integration, confidence thresholds, CSAT tracking, and agent assignment logic, the operational details that make the difference between a demo and a system your team relies on.
 
-## Technical Deep Dive
+## Technical detail
 
-For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** — covers intent classification, context retrieval, and response generation.
+For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)**: covers intent classification, context retrieval, and response generation.
 
 ## Your turn
 
@@ -318,4 +318,4 @@ Support team drowning in repetitive queries?
 
 For the wider picture on where AI fits into customer support, see [automating communication without losing the human touch](/en/blog/automating-communication/).
 
-[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll analyze your support patterns and show what's automatable.
+[Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting), I'll analyze your support patterns and show what's automatable.
