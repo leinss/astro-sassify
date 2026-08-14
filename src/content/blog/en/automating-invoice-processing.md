@@ -4,7 +4,7 @@ description: "How to reduce your invoice processing from hours to seconds using 
 pubDate: 2026-04-20
 heroImage: "/images/blog/invoice-automation.png"
 category: documents
-tags: ["invoices", "ai", "n8n", "automation", "case-study"]
+tags: ["invoices", "ai", "n8n", "automation", "reference-build"]
 draft: false
 lang: en
 alternateSlug: "rechnungsverarbeitung-automatisieren"
@@ -81,7 +81,7 @@ Data is transferred to your system – whether that's QuickBooks, Xero, or a Goo
 
 **Payback**: With 50 invoices/month, automation pays for itself in 2-3 months.
 
-For a detailed ROI calculation framework, see: [The ROI of Business Process Automation](/en/blog/roi-of-automation/)
+Whether it pays depends on your touchless rate, which is a measurement rather than an estimate — the [reference build](/en/blog/case-study-invoice-processing/) explains how to take it.
 
 ## Data Privacy & Compliance
 
@@ -116,7 +116,7 @@ The complete workflow is available as open-source – contact me for access.
 
 Want to see this in action? Read how we implemented this exact workflow for an accounting firm processing 2,500+ invoices monthly:
 
-**[Case Study: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)** — 90% time reduction, 99.2% accuracy, €3,200/month saved.
+**[Reference Build: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)** — the full pipeline: intake, extraction, validation rules, DATEV export, and the n8n workflow to download.
 
 ## Next Steps
 

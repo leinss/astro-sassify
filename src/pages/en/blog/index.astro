@@ -21,8 +21,8 @@ const allPosts = await getCollection("blog", ({ data }) => {
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 
 // Count posts by type
-const caseStudyCount = posts.filter(p => p.data.category === 'case-study').length
-const articleCount = posts.length - caseStudyCount
+const referenceBuildCount = posts.filter(p => p.data.category === 'reference-build').length
+const articleCount = posts.length - referenceBuildCount
 
 const alternateHref = "/de/blog/"
 ---
@@ -71,12 +71,12 @@ const alternateHref = "/de/blog/"
             Articles ({articleCount})
           </button>
           <button
-            data-filter="case-study"
+            data-filter="reference-build"
             class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-all"
             role="tab"
             aria-selected="false"
           >
-            Case Studies ({caseStudyCount})
+            Reference Builds ({referenceBuildCount})
           </button>
         </div>
       </div>
@@ -88,7 +88,7 @@ const alternateHref = "/de/blog/"
         {posts.length > 0 ? (
           <div id="blog-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
-              <div data-category={post.data.category === 'case-study' ? 'case-study' : 'article'}>
+              <div data-category={post.data.category === 'reference-build' ? 'reference-build' : 'article'}>
                 <BlogCard post={post} lang={lang} />
               </div>
             ))}

@@ -105,7 +105,7 @@ If you're interested in the implementation details — why Kimi k2.5 instead of 
 
 → **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/blog/en/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
-Related reading: [solving data-sync nightmares](/en/blog/data-sync-nightmares/).
+Related reading: the [multi-platform inventory sync reference build](/en/blog/case-study-ecommerce-sync/), which is the same problem at four-system scale.
 
 ---
 

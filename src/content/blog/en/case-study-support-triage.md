@@ -1,54 +1,39 @@
 ---
-title: "Case Study: AI Support Triage for E-commerce"
-description: "Example implementation: how to bring first-response time from hours to minutes and auto-resolve much of your repetitive support load using AI-powered classification and routing."
+title: "Reference Build: AI Support Triage for E-commerce"
+description: "The full architecture for an AI triage layer that classifies, routes and auto-answers support tickets — every node explained, with the n8n workflow available to download and inspect."
 pubDate: 2026-07-04
 heroImage: "/images/blog/case-study-support.png"
-category: case-study
+category: reference-build
 tags: ["support", "triage", "n8n", "slack", "ai", "claude", "ollama", "e-commerce"]
 draft: false
 lang: en
 alternateSlug: "fallstudie-support-triage"
 ---
 
-> **Short answer:** A small e-commerce support team buried under hours-long first-response times and a wall of repetitive "where's my order?" tickets can deploy an AI triage layer on n8n and Claude to classify, route, and auto-answer common queries — first response drops to minutes, much of the ticket load resolves without an agent, and CSAT rises noticeably.
+> **Short answer:** An AI triage layer sits between your customers and your support team. It reads every incoming message, scores urgency, assigns a category, routes it to the right Slack channel, and answers the routine ones itself — with confidence thresholds and sentiment checks so anything doubtful reaches a human. Built on n8n and Claude, with a local Ollama pre-filter to keep the API bill down.
 
-> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
+> **What this is:** a reference build — the architecture, the prompts, and the exact n8n workflow, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
-An online retailer's support team was overwhelmed. Messages piled up, urgent issues got buried under routine ones, and response times stretched to days. Here's the triage layer I'd build to classify, route, and answer common queries automatically, and the numbers it can move.
+## The problem it solves
+
+Support requests arrive by email, contact form, and social media, and they get handled first-come-first-served. That means "where is my order?" and "my payment failed" sit in the same queue in arrival order. Routine questions absorb the day, urgent ones wait behind them, and a weekend builds a backlog that takes days to clear.
+
+Prioritisation is the fix, and prioritisation needs to read the message. That is the job this build gives to a model.
 
 ## At a glance
 
 | | |
 |---|---|
-| **Client / Industry** | E-commerce retailer, 50k monthly orders, 5-person support team |
-| **Problem** | No prioritization, 8-hour first response, 70% of tickets repetitive, CSAT 3.2/5 |
-| **Solution** | n8n triage + Claude classification (Ollama pre-filter) + Slack routing + AI auto-responses |
-| **Result** | First response 8 hrs → 15 min, 60% auto-resolved, resolution time -83%, CSAT 3.2 → 4.6 |
+| **Stack** | n8n triage + Claude classification (Ollama pre-filter) + Slack routing + AI auto-responses |
+| **What it decides** | Urgency 1-5, category, auto-resolvable yes/no, sentiment, confidence |
+| **Guardrails** | 90% confidence floor, sentiment gate, escalation keywords, 5% human spot-check |
+| **You can inspect** | The full n8n JSON, exported from the running instance ([download below](#get-the-starter-workflow)) |
 
 This is the kind of build I do under [communication automation](/en/services/communication-automation/). See the [live demos](/en/projects/) for working examples.
 
-## The challenge
-
-**Example Company**: E-commerce retailer, 50k monthly orders, 5-person support team
-
-**Pain Points**:
-- Support requests via email, contact form, and social media
-- No prioritization—first come, first served (even if it's "where's my order?" vs. "payment failed")
-- Repetitive questions consumed 70% of agent time
-- Weekend/holiday backlog took days to clear
-
-**Before Automation**:
-| Metric | Value |
-|--------|-------|
-| First response time | 8 hours (average) |
-| Resolution time | 24-48 hours |
-| Tickets per agent/day | 40-50 |
-| Repetitive queries | 70% |
-| Customer satisfaction | 3.2/5 |
-
 ## The Solution
 
-We deployed an AI-powered triage layer that sits between customers and the support team.
+An AI-powered triage layer sits between customers and the support team.
 
 ### Tool Stack
 
@@ -172,30 +157,22 @@ Auto-responses are sent immediately but logged for agent review.
 
 ### Ollama for High Volume
 
-For cost optimization, we run Mistral 7B locally for initial classification:
-- Handles 80% of messages (clear-cut cases)
-- Claude API only called for ambiguous or high-urgency
-- Reduces API costs by 70%
+For cost optimisation, Mistral 7B runs locally for the first classification pass:
+- It takes the clear-cut cases, which on most ticket mixes is the large majority
+- Claude is called only for ambiguous or high-urgency messages
+- Your saving scales with how lopsided your ticket mix is — measure it in shadow mode before you assume a number
 
-## Achievable Results
+## What changes, and what does not
 
-What a triage layer like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
+I am not going to give you a before-and-after table. I have not run this system inside your business, and any numbers I invented for one would tell you nothing.
 
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| First response time | 8 hours | 15 minutes | -97% |
-| Resolution time | 24-48 hours | 4 hours | -83% |
-| Tickets per agent/day | 40-50 | 25-30 (complex only) | -40% |
-| Auto-resolved | 0% | 60% | +60% |
-| Customer satisfaction | 3.2/5 | 4.6/5 | +44% |
+What the architecture does change is structural, and you can reason about it directly:
 
-**Breakdown of Auto-Resolution**:
-- Order status inquiries: 95% auto-resolved
-- Shipping questions: 85% auto-resolved
-- Return policy questions: 80% auto-resolved
-- Account issues: 40% auto-resolved (often need manual verification)
+- **Arrival order stops deciding priority.** A failed payment reaches a human before a tracking-number question, regardless of which landed first.
+- **Answerable questions stop waiting for an agent.** Anything the system can answer from order data plus the FAQ is answered at once, at any hour.
+- **Agents stop copy-pasting tracking numbers.** The queue they see is the queue that needs a person.
 
-**Effect on the team**: Agents spend their day on the interesting problems instead of copy-pasting tracking numbers.
+How much that is worth depends on your ticket mix. The honest way to find out is to run the classifier over your last month of tickets in shadow mode and count what it would have auto-resolved — before you switch a single auto-response on. That is week three in the timeline below, and it is the step I would not skip.
 
 ## Implementation Details
 

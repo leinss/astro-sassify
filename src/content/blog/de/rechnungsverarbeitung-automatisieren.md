@@ -4,7 +4,7 @@ description: "Wie Sie mit n8n und Claude Vision API Ihre Rechnungsverarbeitung v
 pubDate: 2026-04-20
 heroImage: "/images/blog/invoice-automation.png"
 category: documents
-tags: ["rechnungen", "ki", "n8n", "automatisierung", "fallstudie"]
+tags: ["rechnungen", "ki", "n8n", "automatisierung", "referenz-build"]
 draft: false
 lang: de
 alternateSlug: "automating-invoice-processing"
@@ -81,7 +81,7 @@ Daten werden in Ihr System übertragen – sei es DATEV, Lexware, oder eine Goog
 
 **Amortisation**: Bei 50 Rechnungen/Monat ist die Automatisierung nach 2-3 Monaten rentabel.
 
-Für eine detaillierte ROI-Berechnung siehe: [Der ROI von Geschäftsprozess-Automatisierung](/de/blog/roi-von-automatisierung/)
+Ob es sich rechnet, hängt an Ihrer Durchlaufquote — einer Messung, nicht einer Schätzung. Der [Referenz-Build](/de/blog/fallstudie-rechnungsverarbeitung/) erklärt, wie Sie sie nehmen.
 
 ## DSGVO-Konformität
 
@@ -116,7 +116,7 @@ Der vollständige Workflow ist als Open-Source verfügbar – Kontaktieren Sie m
 
 Möchten Sie sehen, wie das in der Praxis funktioniert? Lesen Sie, wie wir diesen Workflow für eine Steuerkanzlei mit 2.500+ Rechnungen monatlich implementiert haben:
 
-**[Fallstudie: KI-gestützte Rechnungsverarbeitung](/de/blog/fallstudie-rechnungsverarbeitung/)** — 90% Zeitersparnis, 99,2% Genauigkeit, €3.200/Monat eingespart.
+**[Referenz-Build: KI-gestützte Rechnungsverarbeitung](/de/blog/fallstudie-rechnungsverarbeitung/)** — die vollständige Pipeline: Eingang, Extraktion, Validierungsregeln, DATEV-Export und der n8n-Workflow zum Herunterladen.
 
 ## Nächste Schritte
 
