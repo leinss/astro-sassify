@@ -187,7 +187,7 @@ Wie viele Meetings haben Sie pro Woche? Multiplizieren Sie mit 35 Minuten — da
 
 Wenn die Zahl größer als 2 Stunden ist, lohnt sich die Automatisierung deutlich.
 
-Das ergänzt meine übrige Arbeit rund um [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/), und verwandte Workflows sehen Sie auf der [Demo-Seite](/de/projekte/). Einen Überblick, was zuerst automatisiert gehört, gibt [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/).
+Das ergänzt meine übrige Arbeit rund um [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/), und verwandte Workflows sehen Sie auf der [Demo-Seite](/de/projekte/).
 
 ---
 

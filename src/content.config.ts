@@ -10,7 +10,7 @@ const blogCollection = defineCollection({
     pubDate: z.date(),
     updatedDate: z.date().optional(),
     heroImage: z.string().optional(),
-    category: z.enum(["automation", "integration", "crm", "documents", "communication", "case-study"]),
+    category: z.enum(["automation", "integration", "crm", "documents", "communication", "reference-build"]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(true),
     author: z.string().default("Tobias Leinss"),

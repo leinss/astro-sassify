@@ -78,7 +78,7 @@ const projects = [
 const caseStudies = (
   await getCollection(
     "blog",
-    ({ data }) => data.lang === lang && !data.draft && data.category === "case-study",
+    ({ data }) => data.lang === lang && !data.draft && data.category === "reference-build",
   )
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
@@ -174,7 +174,7 @@ const caseStudies = (
       </div>
     </section>
 
-    <!-- Case studies -->
+    <!-- Reference builds -->
     {caseStudies.length > 0 && (
       <section class="pb-16">
         <div class="container-custom">

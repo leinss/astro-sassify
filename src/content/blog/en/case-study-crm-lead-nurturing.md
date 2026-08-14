@@ -1,53 +1,39 @@
 ---
-title: "Case Study: Automated Lead Nurturing for a SaaS Startup"
-description: "Example implementation: how to bring lead response time from days to hours and lift the share of qualified leads meaningfully using n8n, Notion, and AI-powered lead scoring."
+title: "Reference Build: Automated Lead Scoring and Nurturing"
+description: "The full architecture for capturing, scoring and nurturing leads on n8n, Notion and an AI scorer — the scoring prompt, the sequence logic, and the workflow available to download and inspect."
 pubDate: 2026-06-18
 heroImage: "/images/blog/case-study-crm.png"
-category: case-study
+category: reference-build
 tags: ["crm", "lead-nurturing", "n8n", "notion", "ai", "claude", "ollama"]
 draft: false
 lang: en
 alternateSlug: "fallstudie-crm-leadpflege"
 ---
 
-> **Short answer:** A B2B SaaS startup can automate its lead handling with n8n, Notion, and AI scoring to drop response time from days to a few hours, meaningfully lift the share of qualified leads, and give each rep several hours a week back.
+> **Short answer:** Every lead that arrives — website form, LinkedIn, event list — lands in one place, gets scored against your actual qualification criteria by a model that can read free text, and triggers a follow-up sequence matched to that score. The rep sees a ranked queue with the reasoning attached, instead of an inbox. Built on n8n with Notion as the CRM, and Claude or a local Ollama model doing the scoring.
 
-> **Note:** This is an example implementation showing how this kind of automation is built and what it can achieve. The company profile and figures are illustrative targets based on common industry patterns — not measured results from a specific client. The real proof is the working demos: **[Try them yourself →](/en/projects/)**
+> **What this is:** a reference build — the architecture, the scoring prompt, and the sequence logic, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[watch the lead-response demo →](/en/projects/)**.
 
-A B2B SaaS company was losing deals because leads went cold. Follow-ups were inconsistent, and the sales team spent more time copying data between tools than selling. Here's the system I'd build to fix it, and the numbers it can move.
+## The problem it solves
+
+Leads arrive through several doors and land in an inbox, which is not a queue. Nobody can tell at a glance which of forty unread messages is worth answering first, so they get answered in arrival order or not at all. Meanwhile the rep retypes the same contact details into three tools.
+
+Two separate problems hide in there. Ranking needs judgement about text a rule cannot parse — a job title, a company description, what the person actually asked for. Sequencing needs reliability, not judgement: the right message, at the right interval, every time, without anyone remembering. This build gives the first to a model and the second to plain workflow logic.
 
 ## At a glance
 
 | | |
 |---|---|
-| **Client / Industry** | B2B SaaS startup, 15 employees, €2M ARR |
-| **Problem** | Leads sat in inboxes, no systematic follow-up, reps buried in admin |
-| **Solution** | n8n orchestration + Notion CRM + AI lead scoring (Claude / Ollama) |
-| **Result** | Response time 2 days → 4 hours, qualified leads 12% → 35%, admin 8 → 2 hrs/week/rep, payback in 6 weeks |
+| **Stack** | n8n orchestration + Notion CRM + AI lead scoring (Claude / Ollama) |
+| **What it decides** | Fit score, intent, segment, next best action, and the reasoning behind each |
+| **Guardrails** | Scores are advisory and visible to the rep, sequences pause on any human reply, business-hours scheduling |
+| **You can inspect** | The full n8n JSON, exported from the running instance |
 
 This is the kind of build I do under [CRM & sales automation](/en/services/crm-sales-automation/). You can watch the [lead-response demo](/en/projects/) run live.
 
-## The challenge
-
-**Example Company**: B2B SaaS startup, 15 employees, €2M ARR
-
-**Pain Points**:
-- Leads from website, LinkedIn, and events sat in email inboxes
-- No systematic follow-up process
-- Sales reps manually copied data between tools
-- Lead quality varied wildly—time wasted on unqualified prospects
-
-**Before Automation**:
-| Metric | Value |
-|--------|-------|
-| Average lead response time | 2 days |
-| Lead qualification rate | 12% |
-| Time spent on admin per rep | 8 hrs/week |
-| Leads falling through cracks | ~40% |
-
 ## The Solution
 
-We designed a three-stage automation system using **n8n** as the orchestration layer.
+A three-stage automation system with **n8n** as the orchestration layer.
 
 ### Tool Stack
 
@@ -120,19 +106,19 @@ Based on the AI score, n8n triggers different workflows:
 - Day 3: Educational content based on their industry
 - Day 7: Soft ask for a call with specific value proposition
 
-## Achievable Results
+## What changes, and what does not
 
-What a system like this can typically achieve for a profile this size (illustrative targets, not measured client figures):
+I am not going to give you a before-and-after table. I have not run this system on your pipeline, and numbers invented for a fictional company would tell you nothing.
 
-| Metric | Before | After | Change |
-|--------|--------|-------|--------|
-| Lead response time | 2 days | 4 hours | -83% |
-| Qualified leads | 12% | 35% | +192% |
-| Admin time per rep | 8 hrs/week | 2 hrs/week | -75% |
-| Leads lost to gaps | ~40% | <5% | -87% |
-| Pipeline velocity | 45 days | 28 days | -38% |
+What the architecture changes is structural:
 
-**ROI**: Through higher conversion, a build like this can pay back on the order of a few weeks — the exact figure depends on your lead volume and deal sizes.
+- **The queue is ranked, not chronological.** A rep opening the CRM sees the best-fit lead first, with the reason it scored that way, rather than whatever arrived most recently.
+- **Follow-up stops depending on memory.** Sequences fire on schedule and pause the moment a human replies, so nothing is dropped and nothing is sent twice.
+- **Nobody retypes a contact.** Capture writes once, and every tool downstream reads from that record.
+
+What it does not change is your close rate on a good lead. The model ranks and drafts; it does not sell. If the honest problem is that qualified prospects talk to you and then do not buy, this build will make that visible faster and will not fix it.
+
+The number worth measuring first is your scoring agreement rate: run the scorer over last quarter's closed-won and closed-lost leads and check whether its ranking matches what actually happened. If it does not, the prompt needs your criteria in it, not more automation around it.
 
 ## Implementation Details
 
@@ -156,7 +142,7 @@ Compare to: 1 SDR at €4,000/month doing the same manual work.
 1. **Start with clear ICP**: AI scoring is only as good as your criteria
 2. **Human-in-the-loop**: Hot leads get AI drafts, not auto-sends
 3. **Measure response time**: The #1 factor in lead conversion
-4. **Iterate prompts**: We refined scoring prompts 8 times based on sales feedback
+4. **Iterate prompts**: Expect to rewrite the scoring prompt several times against real closed deals — the first version is never the one you keep
 
 ## Build This Yourself
 
@@ -234,6 +220,6 @@ Running a similar lead management challenge?
 2. **Prioritize**: Start with one source, e.g. website forms.
 3. **Measure**: Track response time before and after.
 
-If slow follow-up is the real culprit, the [5 signs your business needs automation](/en/blog/5-signs-your-business-needs-automation/) is a quick gut-check on where the ROI sits.
+If slow follow-up is the real culprit, the [lead-response demo](/en/projects/) shows what a minutes-not-hours reply looks like.
 
 [Book a free strategy call](https://cal.com/tobias-leinss/strategymeeting) — I'll walk through what this would look like for your setup.

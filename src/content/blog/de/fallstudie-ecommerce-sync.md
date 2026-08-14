@@ -1,55 +1,39 @@
 ---
-title: "Fallstudie: Multi-Plattform Inventar-Sync für Retail"
-description: "Beispiel-Implementierung: Wie sich der Großteil der Bestandsabweichungen eliminieren und die Listing-Zeit von Minuten auf einen Bruchteil bringen lässt – über Shopify, WooCommerce und Amazon."
+title: "Referenz-Build: Multi-Plattform Inventar-Sync für Retail"
+description: "Die vollständige Architektur eines zentralen Bestands-Hubs, der Shopify, WooCommerce, Amazon und eBay im Gleichtakt hält – eine Quelle der Wahrheit, Echtzeit-Webhooks und der Workflow zum Herunterladen und Nachprüfen."
 pubDate: 2026-06-28
 heroImage: "/images/blog/case-study-ecommerce.png"
-category: case-study
+category: reference-build
 tags: ["e-commerce", "inventory", "n8n", "shopify", "woocommerce", "amazon", "ai", "claude", "ollama"]
 draft: false
 lang: de
 alternateSlug: "case-study-ecommerce-sync"
 ---
 
-> **Kurz gesagt:** Ein Multi-Channel-Händler mit Tausenden SKUs, der ständig zu viel verkauft, weil der Bestand in Spreadsheets liegt und von Hand synchronisiert wird, kann einen zentralen n8n-Hub mit Echtzeit-Webhooks einsetzen, um den Großteil der Bestandsabweichungen zu eliminieren, die Listing-Zeit auf einen Bruchteil zu senken und Peak-Tage wie Black Friday ohne Überverkäufe zu überstehen.
+> **Kurz gesagt:** Ein System hält den echten Bestand, alle Verkaufskanäle lesen daraus. Ein Verkauf auf irgendeiner Plattform löst einen Webhook aus, der Hub zieht den zentralen Bestand ab und schiebt den neuen Wert binnen Sekunden an die übrigen drei. Produktinhalte werden einmal geschrieben und pro Marktplatz angepasst. Gebaut auf n8n mit Airtable als Quelle der Wahrheit.
 
-> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis sind die funktionierenden Demos: **[Selbst ausprobieren →](/de/projekte/)**
+> **Was das hier ist:** ein Referenz-Build – die Architektur, die Konfliktauflösung und das Verhalten im Fehlerfall, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
-Ein Händler verkaufte über Shopify, WooCommerce, Amazon und eBay. Jede Plattform lief isoliert, also waren Überverkäufe Routine, Listings drifteten auseinander, und das Team verbrannte Stunden mit manuellen Updates. Hier ist der zentrale Sync-Hub, den ich baue – und die Zahlen, die er bewegen kann.
+## Das Problem dahinter
+
+Wer über Shopify, WooCommerce, Amazon und eBay verkauft, hat vier Systeme, die alle glauben, den Bestand zu kennen, und keines spricht mit den anderen. Synchronisiert wird, wenn jemand daran denkt, also lebt die Wahrheit in einer Tabelle, die bereits veraltet ist. Das Ergebnis: Überverkäufe, am schlimmsten an den Tagen, die am meisten zählen, und eine Produktbeschreibung, die über vier Listings hinweg still auseinandergedriftet ist.
+
+Die Lösung ist nicht schnelleres Synchronisieren. Sie ist die Entscheidung, dass genau ein System die Wahrheit hält und alle anderen daraus lesen. Alles Weitere folgt aus dieser einen Entscheidung, auch die unangenehmen Teile: was passiert, wenn zwei Plattformen im selben Moment das letzte Stück verkaufen, und was passiert, wenn eine Marktplatz-API gerade nicht erreichbar ist.
 
 ## Auf einen Blick
 
 | | |
 |---|---|
-| **Kunde / Branche** | Multi-Channel-Händler, 2.000 SKUs, 4 Verkaufsplattformen |
-| **Problem** | Bestand in Spreadsheets, manueller Sync, Überverkäufe, 30+ Min pro Listing |
-| **Lösung** | Zentraler n8n-Hub + Airtable als Single Source of Truth + Echtzeit-Webhooks + KI-Listing-Content |
-| **Ergebnis** | Bestandsabweichungen -95%, Überverkäufe 8-12/Mon → 0-1, Listing-Zeit 30 → 3 Min, Bestandsgenauigkeit 85% → 99,7% |
+| **Stack** | Zentraler n8n-Hub + Airtable als Single Source of Truth + Echtzeit-Webhooks + KI-Listing-Content |
+| **Sync-Richtung** | Plattformen melden Verkäufe hinein, der Hub schiebt den verbindlichen Bestand hinaus |
+| **Sicherungen** | Optimistisches Sperren auf dem zentralen Bestand, Retry-Queue pro Plattform, Pufferbestand in Spitzenzeiten, Abgleichlauf |
+| **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert |
 
 Genau diese Art von Aufbau mache ich unter [Integrationen & APIs](/de/services/integrationen-apis/) – Tools so verbinden, dass Daten von selbst fließen. Die [Live-Demos](/de/projekte/) zeigen funktionierende Beispiele.
 
-## Die Herausforderung
-
-**Beispielunternehmen**: Multi-Channel-Händler, 2.000 SKUs, 4 Verkaufsplattformen
-
-**Schmerzpunkte**:
-- Inventar in Spreadsheets verwaltet, manuell zu jeder Plattform synchronisiert
-- Überverkäufe während Hochverkehrszeiten (Black-Friday-Albtraum)
-- Gleiches Produkt hatte unterschiedliche Beschreibungen pro Marktplatz
-- Neue Produkt-Listings dauerten 30+ Minuten (doppelte Arbeit)
-- Keine Sicht auf echte Lagerbestände
-
-**Vor der Automatisierung**:
-| Metrik | Wert |
-|--------|------|
-| Bestandsabweichungen pro Woche | 15-20 Vorfälle |
-| Überverkäufe pro Monat | 8-12 Bestellungen |
-| Zeit für neues Produkt-Listing | 30+ Minuten |
-| Inventar-Sync-Frequenz | Täglich (manuell) |
-| Zeit für Inventar-Operationen | 15 Std./Woche |
-
 ## Die Lösung
 
-Wir haben einen zentralen Inventar-Hub mit Echtzeit-Sync und KI-gestütztem Produktmanagement gebaut.
+Ein zentraler Inventar-Hub mit Echtzeit-Sync und KI-gestütztem Produktmanagement.
 
 ### Tool-Stack
 
@@ -232,24 +216,19 @@ Für Amazons Verzögerung halten wir einen "pending"-Status:
 - Bestätigen wenn Amazon-Feed abgeschlossen
 - Alert wenn Feed fehlschlägt
 
-## Erreichbare Ergebnisse
+## Was sich ändert – und was nicht
 
-Was ein solcher Sync-Hub für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
+Hier steht keine Vorher-Nachher-Tabelle. Ich habe diesen Hub nicht auf Ihrem Sortiment betrieben, und für einen erfundenen Händler erfundene Zahlen sagen Ihnen nichts.
 
-| Metrik | Vorher | Nachher | Änderung |
-|--------|--------|---------|----------|
-| Bestandsabweichungen/Woche | 15-20 | <1 | -95% |
-| Überverkäufe/Monat | 8-12 | 0-1 | -92% |
-| Zeit für neues Produkt-Listing | 30 Min | 3 Min | -90% |
-| Inventar-Sync-Frequenz | Täglich | Echtzeit | ∞ |
-| Zeit für Inventar-Ops | 15 Std./Woche | 3 Std./Woche | -80% |
+Was die Architektur ändert, ist strukturell:
 
-**Weitere mögliche Effekte**:
-- Peak-Tage wie Black Friday ohne Überverkäufe
-- Neuer Marktplatz in Tagen statt Wochen angebunden
-- Bestandsgenauigkeit nahe 100 % statt der üblichen Spreadsheet-Drift
+- **Es gibt genau einen Bestandswert.** Vier Systeme haben nicht länger je eine eigene Meinung, und Drift wird durch den Aufbau unmöglich statt durch Disziplin.
+- **Der Sync wartet nicht mehr auf einen Menschen.** Ein Verkauf läuft per Webhook in Sekunden durch, das Risikofenster schrumpft von einem Tag auf die Dauer eines API-Aufrufs.
+- **Ein neuer Kanal ist ein Konnektor, kein Umbau.** Ein fünfter Marktplatz heißt: dem Hub einen weiteren Ausgang beibringen, nicht eine weitere Tabellenspalte pflegen.
 
-**ROI**: In dieser Größenordnung sind Einsparungen von mehreren tausend Euro pro Monat aus Personalzeit plus vermiedenen Überverkaufskosten erreichbar – die konkreten Zahlen hängen von SKU-Anzahl, Kanälen und Marge ab.
+Was der Hub nicht leistet: Überverkäufe unmöglich machen. Zwei Plattformen können weiterhin im selben Moment das letzte Stück verkaufen, und eine Marktplatz-API kann weiterhin ausfallen, wenn Sie sie brauchen. Genau dafür sind Pufferstrategie und Retry-Queue weiter unten da – sie verkleinern das Fenster, sie schließen es nicht. Wer Ihnen null Überverkäufe verspricht, hat noch keinen Sync-Hub am Black Friday betrieben.
+
+Die Zahl, die zu messen lohnt, ist Ihre aktuelle Abweichungsquote: Messen Sie an einem beliebigen Dienstag, wie weit die Tabelle von der Realität entfernt ist, und dann noch einmal an Ihrem stärksten Tag. Der Abstand zwischen beiden ist die Größe des Problems, für das Sie hier eine Lösung kaufen.
 
 ## Technische Details
 
@@ -387,6 +366,6 @@ Verkaufen Sie über mehrere Plattformen?
 2. **Schmerzpunkte finden**: Überverkäufe, Listing-Zeit, Abweichungen?
 3. **Mit Sync starten**: Zuerst Inventar fixen, dann KI-Features hinzufügen.
 
-Wenn Systeme ständig auseinanderlaufen, zeigt [Datensync-Albträume lösen](/de/blog/datensync-albtraeume-loesen/) die Muster, die das dauerhaft stoppen.
+Wenn Systeme ständig auseinanderlaufen, ist das [Integrationen & APIs](/de/services/integrationen-apis/)-Arbeit.
 
 [Kostenloses Strategiegespräch buchen](https://cal.com/tobias-leinss/strategiegespraech) — Ich bewerte Ihr Multi-Plattform-Setup und empfehle eine Sync-Strategie.

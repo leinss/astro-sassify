@@ -148,7 +148,7 @@ Automatisierung tötet nicht die menschliche Note. Schlechte Automatisierung tut
 
 Die ersten 5 Minuten nach einem Lead-Submit entscheiden über Conversion oder Kälte. Nutzen Sie sie.
 
-Zum Weiterlesen: [5 Zeichen, dass Ihr Unternehmen Automatisierung braucht](/de/blog/5-zeichen-dass-ihr-unternehmen-automatisierung-braucht/) oder die [Lead-Response-Demo](/de/projekte/) in Aktion.
+Sehen Sie die [Lead-Response-Demo](/de/projekte/) in Aktion.
 
 ---
 

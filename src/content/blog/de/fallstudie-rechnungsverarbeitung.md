@@ -1,54 +1,39 @@
 ---
-title: "Fallstudie: KI-gestützte Rechnungsverarbeitung für eine Steuerkanzlei"
-description: "Beispiel-Implementierung: Wie sich Rechnungsverarbeitung von Minuten auf Sekunden pro Dokument bringen lässt – mit n8n, Claude Vision und intelligenter Validierung. Die Live-Demo verarbeitet echte Dokumente."
+title: "Referenz-Build: KI-gestützte Rechnungsverarbeitung"
+description: "Die vollständige Architektur einer Vision-KI-Pipeline für Rechnungen auf n8n und Claude Vision – Eingang, Extraktion, Validierung, DATEV-Export – mit Workflow zum Herunterladen und einer Live-Demo für Ihre eigenen Dokumente."
 pubDate: 2026-06-10
 heroImage: "/images/blog/case-study-invoice.png"
-category: case-study
+category: reference-build
 tags: ["invoices", "ocr", "n8n", "claude-vision", "ollama", "accounting", "ai"]
 draft: false
 lang: de
 alternateSlug: "case-study-invoice-processing"
 ---
 
-> **Kurz gesagt:** Eine Steuerkanzlei, die täglich Dutzende Rechnungen von Hand abtippt (je 12-15 Minuten), kann eine Vision-KI-Pipeline auf Basis von n8n und Claude Vision einsetzen, um pro Dokument auf Sekunden zu kommen, den Großteil ohne manuelles Eingreifen zu verarbeiten und einen mehrtägigen Rückstau am selben Tag aufzulösen. Genau diese Pipeline steckt hinter der Live-Demo unten.
+> **Kurz gesagt:** Ein Vision-Modell liest jede Rechnung – PDF, Scan oder Handyfoto – und gibt strukturierte Daten zurück: Lieferant, Steuernummer, Netto, USt., Positionen. Geschäftsregeln prüfen Rechenwerk und Steuersatz, bevor irgendetwas exportiert wird, und alles, bei dem das Modell unsicher ist, geht in eine Prüfliste statt in Ihre Buchhaltung. Gebaut auf n8n mit Claude Vision – oder vollständig on-premise mit Ollama und DeepSeek-OCR, wenn die Daten das Haus nicht verlassen dürfen.
 
-> **Hinweis:** Dies ist eine Beispiel-Implementierung, die zeigt, wie diese Art von Automatisierung aufgebaut ist und was sie leisten kann. Unternehmensprofil und Zahlen sind illustrative Zielwerte auf Basis gängiger Branchenmuster – keine gemessenen Ergebnisse eines bestimmten Kunden. Der eigentliche Beweis ist die funktionierende Demo: **[Selbst ausprobieren →](/de/blog/rechnungsverarbeitung-automatisieren/)**
+> **Was das hier ist:** ein Referenz-Build – die Architektur, das Extraktionsschema und die Validierungsregeln, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Geben Sie der Demo eine eigene Rechnung →](/de/blog/rechnungsverarbeitung-automatisieren/)**.
 
-Eine Steuerkanzlei erstickte in Papier. Mandanten schickten monatlich Hunderte Rechnungen in jedem erdenklichen Format – PDFs, Scans, Handyfotos von Belegen. Hier ist die Extraktionspipeline, die ich baue, um sie automatisch zu lesen, zu validieren und abzulegen – und die Zahlen, die sie bewegen kann.
+## Das Problem dahinter
+
+Rechnungen kommen per E-Mail, über Cloud-Ordner und Mandantenportale, in jedem Format, das es gibt. Jemand öffnet jede einzelne und tippt sie in DATEV oder Lexware ab. Diese Arbeit ist langsam, sie ist stumpf, und sie ist am schlimmsten genau dann, wenn das Volumen am höchsten ist: zum Monatsende und in der Steuersaison. Das ist auch der Zeitpunkt, an dem ein Zahlendreher am wahrscheinlichsten passiert und am unwahrscheinlichsten auffällt.
+
+Die Aufgabe zerfällt sauber in zwei Teile: das Dokument lesen, was ein Vision-Modell inzwischen gut kann, und entscheiden, ob man dem Gelesenen trauen darf – das ist Rechenwerk und Geschäftslogik. Dieser Build gibt die erste Hälfte an ein Modell und behält die zweite in Code.
 
 ## Auf einen Blick
 
 | | |
 |---|---|
-| **Kunde / Branche** | Steuerkanzlei, 8 Mitarbeiter, 120+ Geschäftsmandanten |
-| **Problem** | 80-120 Rechnungen/Tag von Hand getippt, je 12-15 Min, 3-5% Fehlerquote, 3-5 Tage Rückstau |
-| **Lösung** | n8n-Eingang + Claude-Vision-Extraktion (oder lokal Ollama + DeepSeek-OCR) + Validierung + DATEV-/CSV-Export |
-| **Ergebnis** | 15 Min → 90 Sek pro Rechnung, 99,2% ohne Eingriff, Fehlerquote 3-5% → 0,8%, Rückstau eliminiert, Amortisation in 5 Wochen |
+| **Stack** | n8n-Eingang + Claude-Vision-Extraktion (oder lokal Ollama + DeepSeek-OCR) + Validierung + DATEV-/CSV-Export |
+| **Was extrahiert wird** | Lieferant, Adresse, Steuernummer, Rechnungsnummer, Daten, Netto, USt., Brutto, Positionen |
+| **Sicherungen** | Positionen müssen den Nettobetrag ergeben, Steuersatz muss gültig sein, doppelte Rechnungsnummern werden abgewiesen, unsichere Felder gehen in die Prüfliste |
+| **Nachprüfbar** | Die vollständige n8n-JSON, aus der laufenden Instanz exportiert, in der Cloud- und der On-premise-Variante |
 
 Genau diese Art von Aufbau mache ich unter [Dokumenten-Workflows](/de/services/dokumenten-workflows/). Die [Rechnungsleser-Demo](/de/projekte/) können Sie an echten Dokumenten ausprobieren.
 
-## Die Herausforderung
-
-**Beispielunternehmen**: Steuerkanzlei, 8 Mitarbeiter, 120+ Geschäftsmandanten
-
-**Schmerzpunkte**:
-- Rechnungen kamen per E-Mail, Cloud-Ordner und Mandantenportale
-- Manuelle Dateneingabe in Buchhaltungssoftware (DATEV, Lexware)
-- Hohe Fehlerquoten in Stoßzeiten (Monatsende, Steuersaison)
-- Mitarbeiter ausgebrannt durch repetitive Arbeit statt Beratung
-
-**Vor der Automatisierung**:
-| Metrik | Wert |
-|--------|------|
-| Zeit pro Rechnung | 12-15 Minuten |
-| Tägliches Rechnungsvolumen | 80-120 Dokumente |
-| Fehlerquote | 3-5% |
-| Mitarbeiterstunden für Dateneingabe | 25 Std./Woche |
-| Mandantenbeschwerden über Verzögerungen | Wöchentlich |
-
 ## Die Lösung
 
-Wir haben eine Vision-KI-Pipeline entwickelt, die Rechnungen automatisch liest, versteht und validiert.
+Eine Vision-KI-Pipeline liest, versteht und validiert jede Rechnung.
 
 ### Tool-Stack
 
@@ -139,30 +124,23 @@ Validierte Rechnungen exportieren zu:
 
 Fehlgeschlagene Validierungen gehen in eine Prüfwarteschlange mit angehängter KI-Begründung.
 
-## Erreichbare Ergebnisse
+## Was sich ändert – und was nicht
 
-Was eine solche Pipeline für ein Profil dieser Größe typischerweise erreichen kann (illustrative Zielwerte, keine gemessenen Kundenzahlen):
+Hier steht keine Vorher-Nachher-Tabelle. Ich habe diese Pipeline nicht in Ihrer Kanzlei betrieben, und für eine erfundene Kanzlei erfundene Zahlen sagen Ihnen nichts.
 
-| Metrik | Vorher | Nachher | Änderung |
-|--------|--------|---------|----------|
-| Zeit pro Rechnung | 15 Min | 90 Sek | -90% |
-| Täglicher Durchsatz | 80-120 | 300+ | +200% |
-| Fehlerquote | 3-5% | 0,8% | -84% |
-| Mitarbeiterstunden für Eingabe | 25 Std./Woche | 4 Std./Woche | -84% |
-| Verarbeitungsrückstand | 3-5 Tage | Gleicher Tag | Eliminiert |
+Was die Architektur ändert, ist strukturell:
 
-**Genauigkeitsaufschlüsselung**:
-- 99,2% der Rechnungen ohne menschliches Eingreifen verarbeitet
-- 0,6% zur Prüfung markiert (meist ungewöhnliche Formate)
-- 0,2% tatsächliche Fehler (komplexe mehrseitige Rechnungen)
+- **Das Lesen ist nicht mehr der Engpass.** Die Extraktion braucht Sekunden pro Dokument und läuft so parallel, wie Sie es zulassen. Eine Spitze zum Monatsende wird damit nicht mehr zur Warteschlange.
+- **Fehler treten vor dem Export auf, nicht nach der Buchung.** Rechenwerk- und Steuersatzprüfung laufen bei jeder Rechnung, jedes Mal – genau das, was ein müder Mensch um 18 Uhr nicht mehr tut.
+- **Unsicherheit bekommt einen Ort.** Alles, bei dem das Modell zweifelt, landet mit seiner Begründung in einer Prüfliste, statt still als falsche Zahl in Ihrer Buchhaltung zu enden.
 
-**ROI**: In der Größenordnung von rund €3.000/Monat eingesparten Personalkosten kann sich eine solche Implementierung binnen weniger Wochen amortisieren – die konkreten Zahlen hängen von Ihrem Volumen ab.
+Die Kennzahl, die entscheidet, ob sich das für Sie lohnt, ist Ihre Durchlaufquote: der Anteil der Rechnungen, die die Validierung ohne menschliches Zutun bestehen. Sie hängt fast vollständig davon ab, wie einheitlich die Belege Ihrer Lieferanten sind, und lässt sich deshalb nicht vorab beziffern. Lassen Sie einen Monat echter Rechnungen im Prüfmodus durchlaufen und zählen Sie nach. Diese Messung kostet einen Nachmittag und ist mehr wert als jede Tabelle, die ich hier hinschreiben könnte.
 
 ## Technischer Deep Dive
 
 ### Umgang mit Sonderfällen
 
-Echte Rechnungen sind chaotisch. So gehen wir damit um:
+Echte Rechnungen sind chaotisch. So geht die Pipeline damit um:
 
 **Mehrseitige Rechnungen**: Claude Vision verarbeitet jede Seite, n8n führt die extrahierten Daten zusammen.
 
@@ -174,9 +152,9 @@ Echte Rechnungen sind chaotisch. So gehen wir damit um:
 
 ### Datenschutz & Compliance
 
-Für eine Steuerkanzlei ist Datenhandling kritisch:
+Im Steuerwesen entscheidet der Umgang mit Daten, ob ein Build überhaupt einsetzbar ist:
 
-- **Self-hosted n8n**: Workflow-Engine läuft auf Mandanteninfrastruktur
+- **Self-hosted n8n**: Workflow-Engine läuft auf Ihrer eigenen Infrastruktur
 - **API-Datenhandling**: Claude API speichert keine Daten nach Verarbeitung
 - **Audit-Trail**: Jedes Dokument protokolliert mit Zeitstempel, Hash und Verarbeitungsergebnis
 - **Aufbewahrungsrichtlinie**: Verarbeitete Daten nach 30 Tagen automatisch aus Pipeline gelöscht
