@@ -121,21 +121,15 @@ const t = i18n[lang];
       </a>
     </p>
 
-    <!-- Uptime proof. The rest of the page asserts that this is engineered
-         properly; this is the only claim on the site a stranger can verify
-         without talking to me, which is why it sits this high. -->
+    <!-- Operations claim. The rest of the page asserts that this is engineered
+         properly; this says it is also run, which is the half most automation
+         never survives. Deliberately unlinked: the status page it refers to
+         belongs to an employer, and pointing consulting traffic at their
+         infrastructure is not a claim this site should make. -->
     <p
       class="mt-3 max-w-2xl mx-auto text-center text-sm sm:text-base leading-relaxed text-secondary-600 dark:text-secondary-300"
     >
-      {t.hero.uptime_proof}{" "}
-      <a
-        href={t.hero.uptime_proof_url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-medium text-primary-600 dark:text-primary-400 hover:underline whitespace-nowrap"
-      >
-        {t.hero.uptime_proof_cta}
-      </a>
+      {t.hero.uptime_proof}
     </p>
   </div>
 </section>
