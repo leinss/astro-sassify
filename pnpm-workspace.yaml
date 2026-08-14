@@ -1,0 +1,18 @@
+# Supply-chain hardening. Keys and units per https://pnpm.io/settings/dependency-resolution
+#
+# NOTE: the setting is `minimumReleaseAge`, in MINUTES, and it belongs here.
+# `min-release-age` in .npmrc is not a pnpm key: pnpm ignores it silently, so it
+# reads as protection that does not exist.
+#
+# A release-age floor is the cheap defence against the compromised-publish
+# pattern, where a malicious version is caught and unpublished within hours. It
+# costs nothing except not being first to a new release.
+minimumReleaseAge: 10080 # 7 days
+
+# Lifecycle scripts do not run unless a package is listed here. Populate this
+# from what pnpm reports as ignored on the next install rather than guessing;
+# an entry that is wrong is worse than one that is missing, because it grants a
+# build script permission nobody checked.
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
