@@ -5,11 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/blog-parity-lint.mjs && node scripts/check-inline-spacing.mjs && astro build",
+    "build": "node scripts/blog-parity-lint.mjs && node scripts/check-inline-spacing.mjs && astro build && node scripts/check-internal-links.mjs",
     "preview": "astro build && astro preview",
     "astro": "astro",
     "lint:blog-parity": "node scripts/blog-parity-lint.mjs",
     "lint:spacing": "node scripts/check-inline-spacing.mjs",
+    "lint:links": "node scripts/check-internal-links.mjs",
     "translate:post": "node scripts/translate-post.mjs"
   },
   "dependencies": {
