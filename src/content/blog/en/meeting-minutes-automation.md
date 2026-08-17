@@ -1,6 +1,6 @@
 ---
 title: "Never Write Meeting Notes Again: AI Automation for Meeting Documentation"
-description: "A 1-hour meeting generates 20 minutes of follow-up work: writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow handles this in 90 seconds."
+description: "A 1-hour meeting generates 20 minutes of follow-up work: writing notes, distributing them, logging tasks. With n8n, Whisper, and Claude, a workflow does it while the meeting is still fresh."
 pubDate: 2026-05-06
 category: automation
 tags: ["meeting", "minutes", "transcription", "n8n", "ai", "whisper"]
@@ -10,7 +10,9 @@ lang: en
 alternateSlug: "meeting-protokoll-automatisieren"
 ---
 
-> **Short answer:** A meeting-minutes workflow takes your audio recording, transcribes it with Whisper, and has Claude turn the transcript into a structured summary with decisions and action items. It then emails everyone automatically. The whole thing runs in 60-90 seconds and replaces roughly 35 minutes of manual work per meeting.
+> **Short answer:** A meeting-minutes workflow takes your audio recording, transcribes it with Whisper, and has Claude turn the transcript into a structured summary with decisions and action items. It then emails everyone automatically. It replaces the note-writing, formatting and distribution that follows a meeting, which is where the time goes.
+
+> **What this is:** the workflow, written up so you can judge the engineering, with the n8n JSON to download and import. The widget on the [demos page](/en/projects/) does **not** currently transcribe: it needs a transcription service that is not deployed on the machine hosting the demos, so it returns a sample summary instead. The other demos are live. I would rather tell you that than have you find out by uploading a file.
 
 A 1-hour meeting generates 20-30 minutes of follow-up work: writing the notes, formatting them, sending them to all attendees, logging action items in the project manager. Who does all that? Usually the person who already has too much on their plate.
 
@@ -20,7 +22,7 @@ The problem isn't the meeting itself, it's the manual documentation afterward.
 
 ## What Meeting Documentation Actually Costs
 
-Consider this: 10 meetings per week, 20 minutes of follow-up each. That's **200 minutes**, over **3 working hours**, lost weekly to meeting notes. Annualized: nearly **2 full work weeks** spent on documentation alone.
+Consider this: 10 meetings per week, 20 minutes of follow-up each. That's **200 minutes**, over **3 working hours**, lost weekly to meeting notes. Over a year that is around **170 hours**, or about four working weeks spent on documentation alone.
 
 And that's before accounting for quality problems:
 - Notes are incomplete because you can't listen and write simultaneously
@@ -34,13 +36,13 @@ I built an n8n workflow that turns an audio recording into a structured meeting 
 
 ### Step 1: Transcription with Whisper
 
-OpenAI's Whisper model is purpose-built for speech and reliably handles:
+OpenAI's Whisper model is purpose-built for speech and handles the things that break naive speech-to-text:
 - Accents and dialects
 - Technical jargon and company names
 - Multi-speaker conversations
 - Poor audio quality (video call background noise)
 
-Transcribing a 60-minute recording takes **20-30 seconds**.
+How long a transcription takes depends on the length of the recording and on whether you call a hosted API or run the model yourself, so measure it on your own audio rather than trusting a number from someone else's setup. The local options below are meaningfully slower than the hosted one, which is the trade you make for keeping the audio in-house.
 
 ### Step 2: Structuring with Claude
 
@@ -78,7 +80,7 @@ Claude uses **structured output** (Tool Use) so the protocol always follows the 
 
 The finished summary is **automatically emailed** to all attendees. Optionally: archived to Google Docs, Confluence, or Notion.
 
-Total time from uploading the recording to sent email: **60-90 seconds**.
+End to end, the run is dominated by the transcription step. Everything after it is one model call and an email.
 
 ## Privacy: What You Need to Know (GDPR)
 
@@ -90,30 +92,34 @@ You may only record meetings when all participants have consented. Easiest appro
 
 **2. Cloud vs. local processing**
 
-The standard version sends audio to OpenAI's Whisper API. For companies with strict data requirements, there's a local alternative:
+The workflow as downloaded sends audio to OpenAI's Whisper API. For companies with strict data requirements, the same node can point at a local model instead:
 
-| Option | Latency | Privacy | Cost |
-|--------|---------|---------|------|
-| OpenAI Whisper API | ~30 sec | Data leaves infrastructure | ~€0.10/hour |
-| whisper.cpp (local) | ~2-5 min | On-premise | Server costs |
-| faster-whisper (local) | ~45 sec | On-premise | Server costs |
+| Option | Where the audio goes | Speed | Cost |
+|--------|----------------------|-------|------|
+| OpenAI Whisper API | Leaves your infrastructure | Fastest | Per minute of audio, billed by the provider |
+| whisper.cpp (local) | Stays on-premise | Slowest, CPU-bound | Server costs only |
+| faster-whisper (local) | Stays on-premise | Between the two, faster with a GPU | Server costs only |
 
-**3. Auto-delete after processing**
+Check the provider's current per-minute rate rather than a figure in a blog post, and benchmark the local options on your own hardware. Both change.
 
-The workflow deletes the audio file after successful transcription. Only the text summary is retained, no personal audio data persists.
+**3. Retention is something you configure, not something you get**
 
-## ROI: What You Actually Save
+The workflow does not write the audio to disk, but that is not the same as deleting it. n8n keeps execution data, including binary payloads, according to its own pruning settings, so an audio file can sit in the execution history long after the summary has gone out. Set the retention policy on your n8n instance deliberately, and treat "the workflow doesn't store it" as insufficient for a GDPR record.
+
+## ROI: do the arithmetic with your own numbers
+
+The saving is whatever your follow-up work actually costs, so the only useful version of this table is the one you fill in:
 
 | Scenario | Without Automation | With Bot |
 |----------|--------------------|----------|
-| Writing notes | 20 min/meeting | 0 min |
-| Logging action items | 10 min/meeting | 0 min |
-| Email to attendees | 5 min/meeting | 0 min |
-| **Total** | **35 min/meeting** | **2 min (upload)** |
+| Writing notes | ~20 min/meeting | 0 min |
+| Logging action items | ~10 min/meeting | 0 min |
+| Email to attendees | ~5 min/meeting | 0 min |
+| **Total** | **~35 min/meeting** | **~2 min (upload)** |
 
-At 10 meetings/week, €50/hour: roughly **€2,900/month** in equivalent labor time saved.
+Worked through: 10 meetings a week at 33 minutes saved is about 5.5 hours a week, near 24 hours a month. At €50 an hour that is roughly €1,200 a month in time, against a bill in the low tens of euros for the API calls.
 
-At realistic numbers, this pays for itself in the first week.
+Two honest caveats. The minutes still need reading, and someone has to chase the action items, so treat this as time moved rather than time erased. And if your meetings currently produce no notes at all, automation does not save you 35 minutes: it gives you documentation you did not have, which may be worth more, but it is not the same claim.
 
 ## Use Cases
 
@@ -147,22 +153,23 @@ The workflow runs on **n8n** (self-hosted or cloud) and uses:
 - **SMTP** for email delivery
 - Optional: **Google Docs API** for archiving
 
-Monthly costs at 10 hours of meeting audio/week:
+At 10 hours of meeting audio a week, the running cost is two line items and a server you are probably already paying for:
 
-| Item | Monthly |
-|------|---------|
-| Whisper API (~40h audio) | ~€4 |
-| Claude API (~160 summaries) | ~€8 |
-| n8n (self-hosted) | €0 |
-| **Total** | **~€12/month** |
+| Item | How it is billed |
+|------|------------------|
+| Whisper API | Per minute of audio: 40 hours a month is 2,400 minutes, times the provider's current rate |
+| Claude API | Per summary, driven by transcript length: a 60-minute meeting is a few thousand tokens in, a few hundred out |
+| n8n (self-hosted) | €0 beyond the server |
 
-vs. hundreds of euros in time costs.
+I have deliberately not put euro figures in that table. Both providers have changed their prices more than once since this workflow was built, and a stale number that flatters the case is worse than no number.
 
 ## Download the Workflow
 
-> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the n8n JSON: import it and inspect every node yourself.
 >
 > [→ Meeting Minutes Bot Workflow (JSON)](/workflows/meeting-protokoll.json)
+>
+> It is the portable version, wired to OpenAI Whisper and Claude, so it works on your instance with your keys. My own instance runs a variant of it pointed at different providers. Where they differ is documented in the [technical teardown](https://leinss.xyz/blog/en/meeting-assistant-technical/).
 
 **Requirements:**
 - n8n (self-hosted or cloud)
@@ -177,15 +184,15 @@ vs. hundreds of euros in time costs.
 
 ## Technical detail
 
-If you're interested in the details behind the workflow: how Whisper handles accents, why Claude Tool Use is used instead of text output, and how to extend the system for >25MB files:
+If you're interested in the details behind the workflow: why a forced schema beats asking for prose, the difference between tool-use and JSON mode, and which node does the shaping:
 
 → **[Building an AI Meeting Assistant with Whisper, Claude, and n8n](https://leinss.xyz/blog/en/meeting-assistant-technical/)** *(leinss.xyz)*
 
 ## Your Next Step
 
-How many meetings do you have per week? Multiply by 35 minutes, that's your monthly waste on documentation.
+How many meetings do you have per week, and how long does the follow-up actually take? Multiply the two. That is what you are deciding about.
 
-If the number is more than 2 hours, automation is a clear win.
+If it is more than a couple of hours a month, this is worth building.
 
 This sits alongside my other [communication automation](/en/services/communication-automation/) work, and you can see related workflows on the [live demos page](/en/projects/).
 
