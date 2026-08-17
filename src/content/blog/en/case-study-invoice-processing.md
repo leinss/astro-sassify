@@ -12,7 +12,7 @@ alternateSlug: "fallstudie-rechnungsverarbeitung"
 
 > **Short answer:** A vision model reads each invoice (PDF, scan, or a photo taken on a phone) and returns structured data: supplier, tax ID, net, VAT, line items. Business rules check the arithmetic and the VAT before anything is exported, and anything the model is unsure about goes to a human queue instead of into your books. Built on n8n with Claude Vision, or entirely on-premise with Ollama and DeepSeek-OCR when the data cannot leave the building.
 
-> **What this is:** a reference build: the architecture, the extraction schema, and the validation rules, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[feed the demo one of your own invoices →](/en/blog/automating-invoice-processing/)**.
+> **What this is:** a reference build. The architecture, the extraction schema and the validation rules, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[feed the demo one of your own invoices →](/en/blog/automating-invoice-processing/)**.
 
 ## The problem it solves
 

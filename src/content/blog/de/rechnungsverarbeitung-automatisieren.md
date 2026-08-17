@@ -114,7 +114,7 @@ Den Workflow gibt es beim [Referenz-Build](/de/blog/fallstudie-rechnungsverarbei
 
 ## Der ganze Aufbau
 
-**[Referenz-Build: KI-gestützte Rechnungsverarbeitung](/de/blog/fallstudie-rechnungsverarbeitung/)**: die vollständige Pipeline: Eingang, Extraktion, Validierungsregeln, DATEV-Export und der n8n-Workflow zum Herunterladen. Er ist als nachprüfbare Architektur geschrieben und enthält keine Kundenzahlen.
+**[Referenz-Build: KI-gestützte Rechnungsverarbeitung](/de/blog/fallstudie-rechnungsverarbeitung/)** deckt die vollständige Pipeline ab: Eingang, Extraktion, Validierungsregeln, DATEV-Export und der n8n-Workflow zum Herunterladen. Er ist als nachprüfbare Architektur geschrieben und enthält keine Kundenzahlen.
 
 ## Nächste Schritte
 

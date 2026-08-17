@@ -26,7 +26,7 @@ Drei Anwendungen, alle produktiv:
 
 | | Aufgabe |
 |---|---|
-| **Produktverwaltung fürs Backoffice** | Wo kuratiert wird: Beschreibungen, Einkaufspreise, Sichtbarkeit, Bilder: und eine Prüfliste für alles, was von der Kasse abgewichen ist |
+| **Produktverwaltung fürs Backoffice** | Wo kuratiert wird: Beschreibungen, Einkaufspreise, Sichtbarkeit, Bilder, und eine Prüfliste für alles, was von der Kasse abgewichen ist |
 | **Kundenshop** | Der öffentliche Shop, der die kuratierte Ebene und die Live-Werte der Kasse zusammen liest |
 | **Eventseite** | Eine eigene öffentliche Seite für Veranstaltungen und Besucherinfos des Standorts |
 

@@ -12,7 +12,7 @@ alternateSlug: "von-tabellen-zu-systemen"
 
 > **Short answer:** To clean a messy contact list automatically, feed the CSV to a workflow that sends it to a language model under a strict prompt and returns structured JSON: trimmed whitespace, lowercased emails, phone numbers in one format, properly capitalised names, matched company names, and duplicates removed, including fuzzy matches. The work drops from an afternoon to about the time it takes to read the change log.
 
-Every business has one: the contact list that grew over years. Names with inconsistent capitalization, email addresses in ALL CAPS, phone numbers in four different formats, company names sometimes "LLC" and sometimes "llc": and somewhere in there, duplicate entries hiding.
+Every business has one: the contact list that grew over years. Names with inconsistent capitalization, email addresses in ALL CAPS, phone numbers in four different formats, company names sometimes "LLC" and sometimes "llc", and somewhere in there, duplicate entries hiding.
 
 Cleaning it manually costs hours, sometimes days. And just when you're done, new entries come in and break everything again.
 

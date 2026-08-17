@@ -12,7 +12,7 @@ alternateSlug: "case-study-ecommerce-sync"
 
 > **Kurz gesagt:** Ein System hält den echten Bestand, alle Verkaufskanäle lesen daraus. Ein Verkauf auf irgendeiner Plattform löst einen Webhook aus, der Hub zieht den zentralen Bestand ab und schiebt den neuen Wert binnen Sekunden an die übrigen drei. Produktinhalte werden einmal geschrieben und pro Marktplatz angepasst. Gebaut auf n8n mit Airtable als Quelle der Wahrheit.
 
-> **Was das hier ist:** ein Referenz-Build: die Architektur, die Konfliktauflösung und das Verhalten im Fehlerfall, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build. Die Architektur, die Konfliktauflösung und das Verhalten im Fehlerfall, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
 ## Das Problem dahinter
 
