@@ -12,7 +12,7 @@ alternateSlug: "automating-communication"
 
 > **Kurz gesagt:** Kundenkommunikation lässt sich automatisieren, ohne roboterhaft zu klingen: Die KI liest jede Anfrage, ordnet sie ein und schreibt in unter zwei Minuten eine echte, persönliche Erstantwort, während Beschwerden und heikle Fälle direkt an einen Menschen gehen. Richtig gemacht antworten Sie schneller und persönlicher als die meisten manuellen E-Mails.
 
-Die erste E-Mail entscheidet. Wer innerhalb von 5 Minuten auf eine Anfrage antwortet, hat eine **21-mal höhere Chance auf Kontaktaufnahme** als wer nach einer Stunde reagiert. Die meisten Unternehmen antworten in Stunden oder Tagen.
+Die erste E-Mail entscheidet. Die viel zitierte Zahl ist eine **21-mal höhere Qualifizierungsrate**, wenn Sie innerhalb von fünf Minuten statt nach einer halben Stunde antworten, aus der Harvard-Business-Review-Auswertung der Lead-Response-Management-Studie. Nehmen Sie den Faktor als Richtung und die Richtung als belastbar: Die Chancen fallen steil, solange die Anfrage noch warm ist. Die meisten Unternehmen antworten in Stunden oder Tagen.
 
 Das Problem ist nicht fehlender Wille, sondern fehlende Zeit. Genau hier zahlt sich gute Automatisierung aus. Meine Arbeit rund um [Kommunikationsautomatisierung](/de/services/kommunikationsautomatisierung/) baut darauf auf, und die [Lead-Response-Demo](/de/projekte/) können Sie live ausprobieren.
 
@@ -53,6 +53,8 @@ Die KI schreibt eine Antwort, die:
 - Einen spezifischen nächsten Schritt vorschlägt (Beratungsgespräch, Demo, Infomaterial)
 - In der Sprache des Absenders verfasst ist (DE/EN automatisch erkannt)
 
+So sieht das aus. Die Anfrage unten ist erfunden, die Antwort ist das, was der Workflow daraus macht, und auf der [Demo-Seite](/de/projekte/) können Sie dasselbe mit einer eigenen Anfrage ausprobieren.
+
 **Beispiel-Input:**
 ```
 Name: Maria Schneider
@@ -81,7 +83,7 @@ Mit freundlichen Grüßen,
 Tobias Leinss
 ```
 
-Diese Antwort wurde in unter 90 Sekunden generiert, und wirkt persönlicher als viele manuelle E-Mails.
+Zwei Modellaufrufe haben das erzeugt: einer zum Einordnen, einer zum Schreiben. Der Punkt ist nicht das Tempo, sondern dass die Antwort die tatsächliche Frage beantwortet, statt den Eingang zu bestätigen.
 
 ## Was sollten Sie niemals automatisieren?
 
@@ -118,7 +120,7 @@ Der Workflow läuft auf [n8n](https://n8n.io) und verwendet die Moonshot Kimi K2
 4. **KI-Response-Generation** schreibt die personalisierte E-Mail
 5. **E-Mail-Versand** via SMTP oder SendGrid
 
-Die durchschnittliche Verarbeitungszeit liegt bei 60-90 Sekunden vom Formular-Submit bis zur versendeten E-Mail.
+Den Lauf dominieren zwei aufeinanderfolgende Modellaufrufe, es sind also Sekunden statt Minuten. Schicken Sie das Demo-Formular ab und stoppen Sie selbst.
 
 ## ROI auf einen Blick
 
@@ -129,7 +131,7 @@ Die durchschnittliche Verarbeitungszeit liegt bei 60-90 Sekunden vom Formular-Su
 | Außerhalb Bürozeiten: keine Reaktion | 24/7 Erstreaktion |
 | Conversion bei &gt; 1h: sehr niedrig | Conversion-Fenster genutzt |
 
-Bei 10 qualifizierten Anfragen pro Woche spart das System **2-3 Stunden** und erhöht die Kontaktrate messbar.
+Bei 10 qualifizierten Anfragen pro Woche sinkt die Schreibzeit von ein paar Stunden auf die wenigen Minuten, die das Gegenlesen jedes Entwurfs braucht. Ob sich Ihre Kontaktrate verbessert, messen Sie an Ihrem eigenen Vorher-Nachher, statt es aus einer Tabelle zu übernehmen.
 
 ## Laden Sie den Workflow herunter
 
