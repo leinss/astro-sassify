@@ -110,7 +110,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
         <!-- Back Link -->
         <a
           href="/de/blog/"
-          class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"
+          class="inline-flex items-center text-primary-700 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -124,18 +124,18 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
             <span class="px-3 py-1 text-sm font-medium rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
               {categoryLabels[post.data.category] || post.data.category}
             </span>
-            <time datetime={post.data.pubDate.toISOString()} class="text-secondary-500 dark:text-secondary-400">
+            <time datetime={post.data.pubDate.toISOString()} class="text-secondary-700 dark:text-secondary-400">
               {formattedDate}
             </time>
             {formattedUpdated && (
-              <span class="text-sm text-secondary-500 dark:text-secondary-400">
+              <span class="text-sm text-secondary-700 dark:text-secondary-400">
                 · Aktualisiert {formattedUpdated}
               </span>
             )}
             {alternateUrl && (
               <a
                 href={alternateUrl}
-                class="text-sm text-secondary-500 hover:text-primary-600 dark:text-secondary-400 dark:hover:text-primary-400 transition-colors"
+                class="text-sm text-secondary-700 hover:text-primary-700 dark:text-secondary-400 dark:hover:text-primary-400 transition-colors"
               >
                 Read in English
               </a>
@@ -146,7 +146,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
             {post.data.title}
           </h1>
 
-          <p class="text-xl text-secondary-600 dark:text-secondary-400">
+          <p class="text-xl text-secondary-700 dark:text-secondary-400">
             {post.data.description}
           </p>
         </header>
@@ -163,13 +163,13 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
         <div class="prose prose-lg dark:prose-invert max-w-none
           prose-headings:text-secondary-900 dark:prose-headings:text-white
           prose-p:text-secondary-700 dark:prose-p:text-secondary-300
-          prose-a:text-primary-600 dark:prose-a:text-primary-400
+          prose-a:text-primary-700 dark:prose-a:text-primary-400
           prose-strong:text-secondary-900 dark:prose-strong:text-white
           prose-ul:text-secondary-700 dark:prose-ul:text-secondary-300
           prose-ol:text-secondary-700 dark:prose-ol:text-secondary-300
           prose-li:text-secondary-700 dark:prose-li:text-secondary-300
-          prose-blockquote:border-primary-500 prose-blockquote:text-secondary-600 dark:prose-blockquote:text-secondary-400
-          prose-code:text-primary-600 dark:prose-code:text-primary-400
+          prose-blockquote:border-primary-500 prose-blockquote:text-secondary-700 dark:prose-blockquote:text-secondary-400
+          prose-code:text-primary-700 dark:prose-code:text-primary-400
           prose-pre:bg-secondary-900 dark:prose-pre:bg-secondary-800
         ">
           <Content />
@@ -180,7 +180,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
           <div class="mt-12 pt-8 border-t border-secondary-200 dark:border-secondary-700">
             <div class="flex flex-wrap gap-2">
               {post.data.tags.map((tag: string) => (
-                <span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+                <span class="px-3 py-1 text-sm bg-secondary-100 dark:bg-secondary-800 text-secondary-700 dark:text-secondary-200 rounded-full">
                   #{tag}
                 </span>
               ))}
@@ -195,7 +195,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
             <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
               Bleiben Sie informiert
             </h3>
-            <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+            <p class="text-secondary-700 dark:text-secondary-400 mb-4">
               Erhalten Sie praktische Automatisierungstipps und Brancheneinblicke direkt in Ihr Postfach.
             </p>
             <a
@@ -214,7 +214,7 @@ const showFAQDemo = slug === "faq-assistent-ki-support"
             <h3 class="text-xl font-bold text-secondary-900 dark:text-white mb-3">
               Bereit zu automatisieren?
             </h3>
-            <p class="text-secondary-600 dark:text-secondary-400 mb-4">
+            <p class="text-secondary-700 dark:text-secondary-400 mb-4">
               Lassen Sie uns in einem kostenlosen Strategiegespräch besprechen, wie Automatisierung Ihrem Unternehmen helfen kann.
             </p>
             <a

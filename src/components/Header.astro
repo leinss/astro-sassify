@@ -85,7 +85,7 @@ const enPath = getLocalizedPath("en")
       <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
         <a
           href={`${basePath}/`}
-          class="flex items-center text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+          class="flex items-center text-secondary-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >
           {t.header.home}
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform" :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,29 +103,29 @@ const enPath = getLocalizedPath("en")
           class="absolute left-0 mt-2 w-44 bg-white dark:bg-secondary-900 rounded-lg shadow-lg ring-1 ring-black/5 dark:ring-white/10 py-2 z-50"
           x-cloak
         >
-          <a href={`${basePath}/#problem`} class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t.header.problem}</a>
-          <a href={`${basePath}/#solution`} class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t.header.solution}</a>
-          <a href={`${basePath}/#about`} class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t.header.about}</a>
-          <a href={`${basePath}/#faq`} class="block px-4 py-2 text-sm text-secondary-600 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{t.header.faq}</a>
+          <a href={`${basePath}/#problem`} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400 transition-colors">{t.header.problem}</a>
+          <a href={`${basePath}/#solution`} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400 transition-colors">{t.header.solution}</a>
+          <a href={`${basePath}/#about`} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400 transition-colors">{t.header.about}</a>
+          <a href={`${basePath}/#faq`} class="block px-4 py-2 text-sm text-secondary-700 dark:text-secondary-300 hover:bg-primary-50 dark:hover:bg-primary-900/30 hover:text-primary-700 dark:hover:text-primary-400 transition-colors">{t.header.faq}</a>
         </div>
       </div>
 
       <!-- Services - prominent standalone link -->
       <a
         href={`${basePath}/services/`}
-        class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+        class="text-secondary-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >{t.header.services}</a
       >
 
       <a
         href={`${portfolioPath}/`}
-        class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+        class="text-secondary-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >{t.header.portfolio}</a
       >
 
       <a
         href={`${basePath}/blog/`}
-        class="text-secondary-900 hover:text-primary-600 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
+        class="text-secondary-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-400 font-semibold transition-colors"
         >{t.header.blog}</a
       >
     </nav>
@@ -139,7 +139,7 @@ const enPath = getLocalizedPath("en")
       <!-- Dark mode toggle - visible on larger screens -->
       <button
         x-on:click="darkMode = !darkMode"
-        class="hidden sm:flex p-2 rounded-full text-secondary-500 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
+        class="hidden sm:flex p-2 rounded-full text-secondary-700 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
         aria-label="Toggle dark mode"
       >
         <svg
@@ -182,7 +182,9 @@ const enPath = getLocalizedPath("en")
       <div x-data="{ open: false, showAllPages: false }" @keydown.escape.window="open = false">
         <button
           @click="open = !open"
-          class="lg:hidden p-2 rounded-md text-secondary-600 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500"
+          :aria-expanded="open ? 'true' : 'false'"
+          aria-controls="mobile-menu"
+          class="lg:hidden p-2 rounded-md text-secondary-700 hover:text-secondary-900 dark:text-secondary-300 dark:hover:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle menu"
         >
           <svg
@@ -216,6 +218,7 @@ const enPath = getLocalizedPath("en")
         </button>
 
         <div
+          id="mobile-menu"
           x-show="open"
           @click.away="open = false"
           x-transition:enter="transition ease-out duration-200"
@@ -240,25 +243,25 @@ const enPath = getLocalizedPath("en")
             <a
               href={`${basePath}/#problem`}
               @click="open = false"
-              class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400"
+              class="block px-3 py-1.5 text-xs text-secondary-700 dark:text-secondary-400 hover:text-primary-700 dark:hover:text-primary-400"
               >{t.header.problem}</a
             >
             <a
               href={`${basePath}/#solution`}
               @click="open = false"
-              class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400"
+              class="block px-3 py-1.5 text-xs text-secondary-700 dark:text-secondary-400 hover:text-primary-700 dark:hover:text-primary-400"
               >{t.header.solution}</a
             >
             <a
               href={`${basePath}/#about`}
               @click="open = false"
-              class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400"
+              class="block px-3 py-1.5 text-xs text-secondary-700 dark:text-secondary-400 hover:text-primary-700 dark:hover:text-primary-400"
               >{t.header.about}</a
             >
             <a
               href={`${basePath}/#faq`}
               @click="open = false"
-              class="block px-3 py-1.5 text-xs text-secondary-500 dark:text-secondary-400 hover:text-primary-600 dark:hover:text-primary-400"
+              class="block px-3 py-1.5 text-xs text-secondary-700 dark:text-secondary-400 hover:text-primary-700 dark:hover:text-primary-400"
               >{t.header.faq}</a
             >
           </div>

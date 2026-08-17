@@ -170,14 +170,14 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
           ></h3>
           <p
             class="mb-4"
-            :class="success ? 'text-secondary-600 dark:text-secondary-300' : 'text-red-600 dark:text-red-400'"
+            :class="success ? 'text-secondary-700 dark:text-secondary-300' : 'text-red-600 dark:text-red-400'"
             x-text="message"
           ></p>
           <button
             x-show="!success"
             type="button"
             @click="submitted = false; message = ''"
-            class="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+            class="text-primary-700 dark:text-primary-400 hover:underline font-medium"
           >
             {lang === "de" ? "Erneut versuchen" : "Try again"}
           </button>
@@ -186,7 +186,7 @@ const LIST_UUID = "56525a08-c916-4c7c-ae2c-36481da13071"
 
       <div class="mt-6 text-center text-sm text-secondary-700 dark:text-secondary-400">
         {t.newsletter.privacy_note}{" "}
-        <a href={`${basePath}/${lang === "de" ? "datenschutzerklaerung" : "privacy-policy"}`} class="text-primary-600 dark:text-primary-400 hover:underline">
+        <a href={`${basePath}/${lang === "de" ? "datenschutzerklaerung" : "privacy-policy"}`} class="text-primary-700 dark:text-primary-400 hover:underline">
           {lang === "de" ? "Datenschutzerklärung" : "Privacy Policy"}
         </a>.
       </div>

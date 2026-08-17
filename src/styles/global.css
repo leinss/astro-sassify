@@ -129,7 +129,7 @@
 }
 
 @utility btn-outline {
-  @apply btn border-2 border-primary-500 dark:border-primary-400 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white dark:hover:text-white text-primary-600 dark:text-primary-400;
+  @apply btn border-2 border-primary-500 dark:border-primary-400 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-white dark:hover:text-white text-primary-700 dark:text-primary-400;
 }
 
 @utility container-custom {
@@ -343,4 +343,21 @@
 /* Focus styles for keyboard navigation */
 :focus-visible {
   @apply outline-hidden ring-2 ring-primary-500 dark:ring-primary-400;
+}
+
+/* Inside a highlighted block the background is dark, so the accent colour used
+   for inline code dropped to 2.73:1. Shiki sets its own colours on the token
+   spans; inheriting gives the rest the block's foreground. */
+.prose pre code,
+.prose pre code span:not([style*="color"]) {
+  color: inherit;
+}
+
+/* Ten case-study posts open with a two-column spec table written as `| | |`,
+   because markdown has no syntax for a table without a header. That emits
+   `<th></th><th></th>`, and a screen reader announces two unnamed columns
+   before any content. Astro 7 no longer runs rehype plugins by default, so
+   this is done here: hide the row only when no header cell has content. */
+.prose thead:not(:has(th:not(:empty))) {
+  display: none;
 }
