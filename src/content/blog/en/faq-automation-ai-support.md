@@ -1,6 +1,6 @@
 ---
 title: "24/7 AI Support Without the Night Shift: FAQ Automation for Your Business"
-description: "How to automate repetitive support questions with n8n, OpenAI embeddings, and Claude, and focus your time on the requests that actually need you."
+description: "How to automate repetitive support questions with n8n and a retrieval-grounded assistant, and focus your time on the requests that actually need you."
 pubDate: 2026-05-14
 category: automation
 tags: ["faq", "support", "ai", "rag", "n8n", "vector-database"]
@@ -10,7 +10,7 @@ lang: en
 alternateSlug: "faq-assistent-ki-support"
 ---
 
-> **Short answer:** An AI FAQ assistant answers repetitive support questions automatically using RAG: it searches your knowledge base for the most relevant entries, then has Claude write a reply based only on those sources. When its confidence is low it escalates to a human. This handles the 70-80% of enquiries that are predictable, 24/7.
+> **Short answer:** An AI FAQ assistant answers repetitive support questions automatically using RAG: it searches your knowledge base for the most relevant entries, then has a model write a reply based only on those sources. When nothing matches well enough it escalates to a human instead of guessing. It handles the predictable share of your inbox, around the clock.
 
 Opening hours. Pricing. How long does delivery take? What happens after I submit my request? For your customers, these are important questions. For you, they're the same four sentences you've typed for the twentieth time this week.
 
@@ -20,7 +20,7 @@ A full support inbox isn't an anomaly. It's a pattern, and patterns can be autom
 
 Answering support requests manually creates a dilemma: fast responses require time that's needed elsewhere, but slow responses frustrate customers, even when the answer is simple.
 
-The frustrating part: most of these questions are predictable. For many small businesses, 70-80% of incoming enquiries revolve around the same topics. The knowledge to answer them already exists, it just isn't in the right system yet.
+The frustrating part: most of these questions are predictable. Before you build anything, tag a fortnight of your own inbox by topic and you will see the shape of it: a handful of questions covering most of the volume, and a long tail that genuinely needs you. That count is also the business case, and it is yours rather than a number from someone else's support desk.
 
 That's exactly where the **FAQ Assistant** comes in. It's part of my [communication automation](/en/services/communication-automation/) work, and you can try it live in the demo below or on the [live demos page](/en/projects/).
 
@@ -40,31 +40,31 @@ The process runs in four steps:
 Customer asks a question
     │
     ▼
-Question is embedded
-(OpenAI Embeddings → numeric vector)
+Search the knowledge base
+for the best-matching entries
     │
     ▼
-Retrieve closest matching entries
-from the knowledge base
+The model formulates a reply
+based only on the retrieved sources
     │
-    ▼
-Claude formulates a reply
-based on the retrieved sources
+    ├── Good matches ──→ Send reply directly
     │
-    ├── High confidence ──→ Send reply directly
-    │
-    └── Low confidence  ──→ Escalate to a human
+    └── Nothing matches ──→ Escalate to a human
 ```
 
-Embedding sounds technical, but it's the core of how this works: every question and every knowledge entry is converted into a numeric vector. Similar meanings produce similar numbers. This lets the system recognise that "When are you open?" and "Weekend opening hours?" are asking the same thing, even though the wording is different.
+**How the search works is a decision worth understanding, because it is the part people assume.** The textbook approach is embeddings: every question and every knowledge entry becomes a numeric vector, similar meanings produce similar numbers, and the system can tell that "When are you open?" and "Weekend opening hours?" are the same question. That is what the downloadable workflow does, and it is the right default for a large or multilingual corpus.
+
+The assistant running on this site does something simpler: Postgres full-text search over the same entries, with no embedding call at all. On a knowledge base of this size it returns the same passages, costs nothing per question, and removes one API dependency from the answer path. Both are RAG. The grounding comes from the model only seeing what the search returned, not from vectors specifically.
+
+Start with full-text search. Move to embeddings when you can show it is missing questions, which is a thing you can measure rather than assume.
 
 ## Safety through confidence scoring
 
 Not every question is clear-cut. What happens when the AI is uncertain?
 
-For each reply, the assistant internally scores how well the retrieved knowledge entries match the incoming question. If this score falls below a defined threshold, the request isn't answered automatically: it's escalated: to a human, a ticketing system, or a defined fallback address.
+For each reply, the assistant scores how well the retrieved knowledge entries match the incoming question. If nothing clears the bar, the request isn't answered automatically: it's escalated: to a human, a ticketing system, or a defined fallback address.
 
-This isn't a weakness. It's the design. An assistant that knows what it doesn't know is more trustworthy than one that always invents an answer.
+The case that decides whether an assistant is trustworthy is the question your corpus cannot answer. Handled badly it produces an empty response, or worse, a confident invention. In this build the search returning nothing is a real branch: the model is handed no context, and it says so and points at a human. That path is worth testing first, before the happy one. Ask it something you know is not in the knowledge base and watch what comes back.
 
 ## Demo: Try the FAQ Assistant
 
@@ -76,21 +76,24 @@ A look at concrete time savings:
 
 | Task | Manual | With FAQ Assistant |
 |------|--------|---------------------|
-| Answer a pricing enquiry | 5 min | ~3 sec |
-| Clarify onboarding questions | 10 min | ~3 sec |
+| Answer a pricing enquiry | Minutes, once you get to it | Seconds |
+| Clarify onboarding questions | Minutes, plus the context switch | Seconds |
 | Recurring support questions | Daily | Automatic |
 | Response time | Business hours | 24/7 |
 
-At five recurring enquiries per day, five days a week, that's over 200 hours saved per year, for questions whose answers have been the same for months.
+The saving is your own count times your own handling time. Twenty-five repetitive enquiries a week at five minutes each is roughly two hours a week, or around a hundred hours a year, on questions whose answers have not changed in months. Run that sum on the tally you took above rather than on my example.
+
+The part that does not show up in a table: out of hours. A question answered at 11pm on a Sunday is not a time saving, it is a reply the customer would otherwise have waited two days for.
 
 ## GDPR: what happens to the data
 
 Support requests can contain sensitive information. Transparency isn't optional here:
 
-- **EU data storage**: the vector database runs on Supabase in a European region. No data leaves the EU without your authorisation.
-- **No logging without consent**: requests are used for processing, not stored permanently, unless you explicitly enable that.
+- **Where the knowledge base sits**: on the demo instance it is a Postgres database on my own hardware in Germany. In a build for you it sits wherever you decide, and Postgres means you can take it with you.
+- **Where the question goes**: to whichever model the workflow calls. The demo on this page sends it to Kimi (Moonshot); the downloadable workflow is wired to Claude (Anthropic); a self-hosted model sends it nowhere. If the questions your customers ask are sensitive, that choice is the whole GDPR conversation, so make it before you build, not after.
+- **Retention is a setting**: n8n keeps execution data until you tell it not to, so configure pruning rather than assuming a question disappears once the reply is sent.
+- **Contracts**: whichever provider you pick, get the data processing agreement, and read what they say about training on your inputs. Do not take a blog post's word for it, including this one.
 - **Full control over the knowledge base**: you maintain what the assistant knows. No black-box behaviour: you see every entry and can change or remove it at any time.
-- **DPA with Anthropic**: AI processing via Claude is covered by a Data Processing Agreement, keeping you GDPR-compliant.
 
 ## What you can customise
 
@@ -103,23 +106,23 @@ The FAQ Assistant is not an off-the-shelf product, it adapts to your operation:
 
 ## Download the workflows
 
-> **Not screenshots: the real workflows.** These are the exact n8n JSONs, exported from a running instance. Import them and inspect every node yourself.
+> **Not screenshots: the real workflows.** These are n8n JSONs: import them and inspect every node yourself.
 
 The FAQ Assistant consists of two n8n workflows:
 
 - **Reply workflow**: processes incoming questions and returns answers  
   [Download faq-assistent.json](/workflows/faq-assistent.json)
 
-- **Ingestion workflow**: reads your knowledge base and writes it into the vector database  
+- **Ingestion workflow**: reads your knowledge base and writes it into the store  
   [Download faq-ingestion.json](/workflows/faq-ingestion.json)
 
-After importing into your n8n instance and setting up a Supabase database, you'll be up and running within one to two hours. The SQL setup for the vector database is available in the [GitHub repository](https://github.com/leinss).
+These are the portable versions: they embed the question and do a vector search, so they run on a standard Supabase setup with your own keys. As described above, my instance answers with full-text search instead, and the [technical teardown](https://leinss.xyz/blog/en/faq-assistant-technical/) covers both. After importing and setting up the database, expect an hour or two before the first grounded answer.
 
 ## Technical detail
 
-If you're interested in the implementation details: why PostgreSQL full-text search instead of a vector database, how the OR search logic works, and which n8n item-splitting pitfalls to watch out for:
+If you're interested in the implementation details: why PostgreSQL full-text search instead of a vector database, what the grounding node actually assembles, and the n8n empty-result pitfall that silently returns nothing:
 
-→ **[Building a RAG FAQ Assistant with n8n, vector search, and Kimi K2](https://leinss.xyz/blog/en/faq-assistant-technical/)** *(leinss.xyz)*
+→ **[How I built a RAG FAQ assistant with n8n and Kimi](https://leinss.xyz/blog/en/faq-assistant-technical/)** *(leinss.xyz)*
 
 Related reading: [automating customer communication without losing the human touch](/en/blog/automating-communication/).
 

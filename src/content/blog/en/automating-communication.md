@@ -12,7 +12,7 @@ alternateSlug: "kommunikation-automatisieren-menschlich-bleiben"
 
 > **Short answer:** You can automate customer communication without sounding robotic by having AI read each inquiry, classify it, and draft a genuinely personalised first reply in under two minutes, while routing complaints and sensitive cases straight to a human. Done right, you respond faster and more personally than most manual email.
 
-The first email matters. Responding to an inquiry within 5 minutes gives you a **21x higher contact rate** than waiting an hour. Most businesses respond in hours or days.
+The first email matters. The widely cited figure is a **21x higher qualification rate** when you respond within five minutes rather than half an hour, from the Harvard Business Review write-up of the Lead Response Management study. Treat the multiple as directional and the direction as solid: the odds fall away sharply while the enquiry is still warm. Most businesses respond in hours or days.
 
 The problem isn't lack of will, it's lack of time. That's where good automation earns its keep. My [communication automation](/en/services/communication-automation/) work is built around this, and you can watch a [lead-response demo](/en/projects/) run live.
 
@@ -53,6 +53,8 @@ The AI writes a reply that:
 - Proposes a concrete next step (discovery call, demo, info material)
 - Matches the sender's language (DE/EN auto-detected)
 
+Here is what that looks like. The enquiry below is invented, the reply is what the workflow produces from it, and you can run the same thing yourself on the [demos page](/en/projects/) with an enquiry of your own.
+
 **Example input:**
 ```
 Name: James Miller
@@ -81,7 +83,7 @@ Best,
 Tobias Leinss
 ```
 
-This response was generated in under 90 seconds, and reads more personally than most manual emails I see.
+Two model calls produced that: one to classify, one to write. The point is not the speed, it is that the reply answers the actual question instead of acknowledging receipt.
 
 ## What should you never automate?
 
@@ -118,7 +120,7 @@ The workflow runs on [n8n](https://n8n.io) and uses the Moonshot Kimi K2 API for
 4. **AI response generation** writes the personalized email
 5. **Email delivery** via SMTP or SendGrid
 
-Average processing time: 60-90 seconds from form submit to sent email.
+Two sequential model calls dominate the run, so the wait is a matter of seconds rather than minutes. Submit the demo form and time it yourself.
 
 ## ROI at a Glance
 
@@ -129,7 +131,7 @@ Average processing time: 60-90 seconds from form submit to sent email.
 | Outside office hours: no response | 24/7 first response |
 | Conversion at &gt; 1h: very low | Conversion window captured |
 
-At 10 qualified inquiries per week, the system saves **2-3 hours** and measurably improves contact rates.
+At 10 qualified inquiries per week, drafting time drops from a couple of hours to the few minutes it takes to read each draft before it goes. Whether it improves your contact rate is something to measure against your own before-and-after, not something to take from a table.
 
 ## Download the Workflow
 
