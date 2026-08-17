@@ -79,10 +79,10 @@ const t = {
     </span>
     <h3 class="text-lg font-bold text-secondary-900 dark:text-white">{t.title}</h3>
   </div>
-  <p class="text-secondary-600 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
+  <p class="text-secondary-700 dark:text-secondary-400 text-sm mb-6">{t.subtitle}</p>
 
   <div class="mb-4">
-    <p class="text-xs font-medium text-secondary-500 dark:text-secondary-400 mb-2">{t.sampleLabel}</p>
+    <p class="text-xs font-medium text-secondary-700 dark:text-secondary-400 mb-2">{t.sampleLabel}</p>
     <div class="flex flex-wrap gap-2">
       {t.samples.map(q => (
         <button type="button" data-sample={q}
@@ -107,7 +107,7 @@ const t = {
   </div>
 
   <div id="faq-loading" class="hidden mt-6 text-center py-8">
-    <div class="inline-flex items-center gap-3 text-secondary-500 dark:text-secondary-400">
+    <div class="inline-flex items-center gap-3 text-secondary-700 dark:text-secondary-400">
       <svg class="animate-spin w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -144,7 +144,7 @@ const t = {
         <div class="w-24 h-2 bg-secondary-200 dark:bg-secondary-700 rounded-full overflow-hidden">
           <div id="faq-conf-bar" class="h-full rounded-full transition-all duration-500" style="width: 0%"></div>
         </div>
-        <span id="faq-conf-pct" class="text-xs font-medium text-secondary-600 dark:text-secondary-300 w-8 text-right"></span>
+        <span id="faq-conf-pct" class="text-xs font-medium text-secondary-700 dark:text-secondary-300 w-8 text-right"></span>
       </div>
     </div>
 
@@ -163,7 +163,7 @@ const t = {
   </div>
 
   <p class="mt-4 text-xs text-secondary-400 dark:text-secondary-500">{t.privacy}</p>
-  <p class="mt-1 text-xs font-medium text-secondary-500 dark:text-secondary-400">{t.selfHosted}</p>
+  <p class="mt-1 text-xs font-medium text-secondary-700 dark:text-secondary-400">{t.selfHosted}</p>
 </div>
 
 <script define:vars={{ WEBHOOK_URL, t, lang, calUrl, SAMPLE, TIMEOUT_MS }}>

@@ -58,25 +58,25 @@ const t = i18n[lang].portfolio
     <h3 class="text-xl font-bold text-secondary-900 dark:text-white">
       {title}
     </h3>
-    <p class="text-primary-600 dark:text-primary-400 font-medium mb-4">
+    <p class="text-primary-700 dark:text-primary-400 font-medium mb-4">
       {tagline}
     </p>
 
     <div class="space-y-3 text-sm grow">
       <div>
-        <span class="block font-semibold text-secondary-500 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
+        <span class="block font-semibold text-secondary-700 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
           {t.problem_label}
         </span>
         <p class="text-secondary-700 dark:text-secondary-300">{problem}</p>
       </div>
       <div>
-        <span class="block font-semibold text-secondary-500 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
+        <span class="block font-semibold text-secondary-700 dark:text-secondary-400 uppercase tracking-wide text-xs mb-0.5">
           {t.solution_label}
         </span>
         <p class="text-secondary-700 dark:text-secondary-300">{solution}</p>
       </div>
       <div class="flex items-start gap-2 p-3 rounded-lg bg-primary-50 dark:bg-primary-900/20">
-        <IoCheckmarkCircle className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-0.5" />
+        <IoCheckmarkCircle className="w-5 h-5 text-primary-700 dark:text-primary-400 shrink-0 mt-0.5" />
         <div>
           <span class="block font-semibold text-primary-700 dark:text-primary-300 uppercase tracking-wide text-xs mb-0.5">
             {t.result_label}
@@ -89,7 +89,7 @@ const t = i18n[lang].portfolio
     <!-- Tags -->
     <div class="flex flex-wrap gap-2 mt-4">
       {tags.map((tag) => (
-        <span class="px-2.5 py-1 text-xs bg-secondary-100 dark:bg-secondary-800 text-secondary-600 dark:text-secondary-400 rounded-full">
+        <span class="px-2.5 py-1 text-xs bg-secondary-100 dark:bg-secondary-800 text-secondary-700 dark:text-secondary-200 rounded-full">
           {tag}
         </span>
       ))}
@@ -98,7 +98,7 @@ const t = i18n[lang].portfolio
     <!-- CTA -->
     <a
       href={href}
-      class="mt-5 inline-flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold group-hover:gap-3 transition-all"
+      class="mt-5 inline-flex items-center gap-2 text-primary-700 dark:text-primary-400 font-semibold group-hover:gap-3 transition-all"
     >
       {t.demo_cta}
       <BsArrowRight className="w-4 h-4" />
