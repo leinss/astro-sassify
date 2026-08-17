@@ -67,6 +67,15 @@ const {
 
     <!-- Fonts self-hosted via @fontsource (imported in the layout frontmatter) -->
 
+    <!-- Feed discovery. Without this a reader has to guess the URL, which is
+         why the German feed went unnoticed and the English one was missing. -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={lang === "de" ? "Leinss Consulting: Blog" : "Leinss Consulting: Blog (English)"}
+      href={`/${lang}/rss.xml`}
+    />
+
     <ClientRouter />
   </head>
 
