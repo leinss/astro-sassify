@@ -10,9 +10,9 @@ lang: de
 alternateSlug: "case-study-support-triage"
 ---
 
-> **Kurz gesagt:** Eine KI-Triage-Schicht sitzt zwischen Ihren Kunden und Ihrem Support-Team. Sie liest jede eingehende Nachricht, bewertet die Dringlichkeit, vergibt eine Kategorie, leitet in den richtigen Slack-Kanal weiter und beantwortet die Routinefälle selbst: mit Konfidenzschwellen und Sentiment-Prüfung, damit alles Zweifelhafte bei einem Menschen landet. Gebaut auf n8n und Claude, mit lokalem Ollama-Vorfilter, um die API-Rechnung klein zu halten.
+> **Kurz gesagt:** Eine KI-Triage-Schicht sitzt zwischen Ihren Kunden und Ihrem Support-Team. Sie liest jede eingehende Nachricht, bewertet die Dringlichkeit, vergibt eine Kategorie, leitet in den richtigen Slack-Kanal weiter und beantwortet die Routinefälle selbst, mit Konfidenzschwellen und Sentiment-Prüfung, damit alles Zweifelhafte bei einem Menschen landet. Gebaut auf n8n und Claude, mit lokalem Ollama-Vorfilter, um die API-Rechnung klein zu halten.
 
-> **Was das hier ist:** ein Referenz-Build: die Architektur, die Prompts und die exakte n8n-Datei, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build. Die Architektur, die Prompts und die exakte n8n-Datei, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Demos ausprobieren →](/de/projekte/)**.
 
 ## Das Problem dahinter
 
@@ -308,7 +308,7 @@ Dieser Starter implementiert Klassifizierung und Routing. Eine vollständige Imp
 
 ## Technische Details
 
-Für eine detaillierte technische Anleitung zum Aufbau von Kundenservice-Bots mit n8n, siehe meinen persönlichen Blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** (EN): behandelt Intent-Klassifizierung, Kontext-Retrieval und Antwortgenerierung.
+Für eine detaillierte technische Anleitung zum Aufbau von Kundenservice-Bots mit n8n, siehe meinen persönlichen Blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)** (EN), der Intent-Klassifizierung, Kontext-Retrieval und Antwortgenerierung behandelt.
 
 ## Ihr nächster Schritt
 

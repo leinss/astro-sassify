@@ -114,7 +114,7 @@ The workflow is downloadable from the [reference build](/en/blog/case-study-invo
 
 ## See the whole build
 
-**[Reference Build: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)**: the full pipeline: intake, extraction, validation rules, DATEV export, and the n8n workflow to download. It is written up as an architecture you can inspect and carries no client figures.
+**[Reference Build: AI-Powered Invoice Processing](/en/blog/case-study-invoice-processing/)** covers the full pipeline: intake, extraction, validation rules, DATEV export, and the n8n workflow to download. It is written up as an architecture you can inspect and carries no client figures.
 
 ## Next Steps
 

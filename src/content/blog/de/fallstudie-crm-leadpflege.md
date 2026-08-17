@@ -12,7 +12,7 @@ alternateSlug: "case-study-crm-lead-nurturing"
 
 > **Kurz gesagt:** Jeder eingehende Lead (Website-Formular, LinkedIn, Eventliste) landet an einer Stelle, wird von einem Modell, das Freitext lesen kann, gegen Ihre echten Qualifizierungskriterien bewertet und löst eine zum Score passende Follow-up-Sequenz aus. Der Vertrieb sieht eine sortierte Warteschlange samt Begründung statt eines Postfachs. Gebaut auf n8n mit Notion als CRM, das Scoring übernimmt Claude oder ein lokales Ollama-Modell.
 
-> **Was das hier ist:** ein Referenz-Build: die Architektur, der Scoring-Prompt und die Sequenzlogik, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Lead-Response-Demo ansehen →](/de/projekte/)**.
+> **Was das hier ist:** ein Referenz-Build. Die Architektur, der Scoring-Prompt und die Sequenzlogik, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Lead-Response-Demo ansehen →](/de/projekte/)**.
 
 ## Das Problem dahinter
 

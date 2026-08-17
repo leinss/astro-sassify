@@ -199,7 +199,7 @@
           {
             "name": "AI Feature Integration Sprint",
             "timeline": "2 weeks",
-            "tagline": "One AI feature shipped to production: not just a demo.",
+            "tagline": "One AI feature shipped to production, not just a demo.",
             "example": "For example: a chatbot or knowledge base built from your own documents, automated invoice extraction, data cleaning, or an automated reception line.",
             "includes": [
               "One AI/LLM feature integrated into your existing app",
@@ -353,14 +353,14 @@
       "result_label": "Result",
       "demo_cta": "Try the demo",
       "cta_title": "See what this could do for your business",
-      "cta_subtitle": "Book a free 20-minute call. Describe one process that eats your time, and I'll tell you whether it's automatable: and roughly how.",
+      "cta_subtitle": "Book a free 20-minute call. Describe one process that eats your time, and I'll tell you whether it's automatable, and roughly how.",
       "cta_button": "Book your free call",
       "projects": {
         "invoice": {
           "title": "AI Invoice Reader",
           "tagline": "From PDF to booked data in seconds",
           "problem": "Teams retype invoice data into accounting software by hand: slow, error-prone, and impossible to audit.",
-          "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward: with a human-review path for anything uncertain.",
+          "solution": "A workflow reads each invoice with a vision model, extracts vendor, amount, VAT and line items, validates them, and routes clean data onward, with a human-review path for anything uncertain.",
           "result": "A scanned invoice becomes validated, structured data in seconds: try it on your own document above.",
           "tags": [
             "Vision AI",
@@ -773,14 +773,14 @@
       "result_label": "Ergebnis",
       "demo_cta": "Demo ausprobieren",
       "cta_title": "Sehen Sie, was das für Ihr Unternehmen leisten kann",
-      "cta_subtitle": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. Beschreiben Sie einen Prozess, der Zeit frisst, und ich sage Ihnen, ob er automatisierbar ist: und grob wie.",
+      "cta_subtitle": "Buchen Sie ein kostenloses 20-Minuten-Gespräch. Beschreiben Sie einen Prozess, der Zeit frisst, und ich sage Ihnen, ob er automatisierbar ist, und grob wie.",
       "cta_button": "Kostenloses Gespräch buchen",
       "projects": {
         "invoice": {
           "title": "KI-Rechnungsleser",
           "tagline": "Vom PDF zu verbuchten Daten in Sekunden",
           "problem": "Teams tippen Rechnungsdaten manuell in die Buchhaltung: langsam, fehleranfällig und ohne Prüfspur.",
-          "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter: mit Prüfpfad für alles Unklare.",
+          "solution": "Ein Workflow liest jede Rechnung mit einem Vision-Modell, extrahiert Lieferant, Betrag, USt. und Positionen, validiert sie und leitet saubere Daten weiter, mit Prüfpfad für alles Unklare.",
           "result": "Aus einer gescannten Rechnung werden in Sekunden validierte, strukturierte Daten: testen Sie es oben mit einem eigenen Dokument.",
           "tags": [
             "Vision-KI",
@@ -791,7 +791,7 @@
         "lead": {
           "title": "Blitz-Antwort für Leads",
           "tagline": "Jeden Lead in Minuten beantworten, nicht in Stunden",
-          "problem": "Leads, die Stunden auf Antwort warten, werden kalt: und Anfragen nach Feierabend gehen über Nacht verloren.",
+          "problem": "Leads, die Stunden auf Antwort warten, werden kalt, und Anfragen nach Feierabend gehen über Nacht verloren.",
           "solution": "Jeder eingehende Lead wird bewertet und innerhalb von Minuten mit einer persönlichen, markengerechten Antwort beantwortet, auf Geschäftszeiten geplant und mit Folgeaufgabe im CRM protokolliert.",
           "result": "Ein eingehender Lead erhält in unter einer Minute eine bewertete, personalisierte Antwort: zu jeder Uhrzeit.",
           "tags": [
@@ -828,7 +828,7 @@
           "title": "KI-Support-Assistent",
           "tagline": "Sofortige, belegte Antworten aus Ihrer Wissensbasis",
           "problem": "Support-Teams beantworten dieselben Fragen immer wieder, während Kunden auf Antwort warten.",
-          "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert: und eskaliert an einen Menschen, wenn es unsicher ist.",
+          "solution": "Ein Retrieval-Workflow durchsucht Ihre Wissensbasis, und ein LLM liefert eine knappe, mit Quellen belegte Antwort samt Konfidenzwert, und eskaliert an einen Menschen, wenn es unsicher ist.",
           "result": "Häufige Fragen werden sofort beantwortet, mit Quellen, rund um die Uhr.",
           "tags": [
             "Retrieval",
