@@ -1,6 +1,6 @@
 ---
 title: "Escaping Spreadsheet Hell: Auto-Clean Contact Lists with n8n and AI"
-description: "How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and Claude, instead of spending hours on manual data work."
+description: "How to clean, normalize, and deduplicate messy contact lists in seconds using n8n and an LLM, instead of spending hours on manual data work."
 pubDate: 2026-01-22
 category: automation
 tags: ["spreadsheets", "excel", "contacts", "data-cleaning", "n8n", "ai"]
@@ -10,7 +10,7 @@ lang: en
 alternateSlug: "von-tabellen-zu-systemen"
 ---
 
-> **Short answer:** To clean a messy contact list automatically, feed the CSV to a workflow that sends each row to Claude and returns structured JSON: trimmed whitespace, lowercased emails, phone numbers in one format, properly capitalised names, matched company names, and duplicates removed, including fuzzy matches. Cleaning 100 contacts drops from hours to about 20 seconds.
+> **Short answer:** To clean a messy contact list automatically, feed the CSV to a workflow that sends it to a language model under a strict prompt and returns structured JSON: trimmed whitespace, lowercased emails, phone numbers in one format, properly capitalised names, matched company names, and duplicates removed, including fuzzy matches. The work drops from an afternoon to about the time it takes to read the change log.
 
 Every business has one: the contact list that grew over years. Names with inconsistent capitalization, email addresses in ALL CAPS, phone numbers in four different formats, company names sometimes "LLC" and sometimes "llc": and somewhere in there, duplicate entries hiding.
 
@@ -29,7 +29,7 @@ The result: the CRM that was supposed to solve the problem becomes the problem i
 
 ## The Spreadsheet Rescuer: Automated Data Cleaning with AI
 
-This workflow solves exactly that. You upload your CSV data (or paste it directly), and n8n sends it to Claude, which:
+This workflow solves exactly that. You upload your CSV data (or paste it directly), and n8n sends it to a language model, which:
 
 1. Removes **leading and trailing whitespace**
 2. Normalizes **email addresses** (lowercase) and checks syntactic validity
@@ -53,8 +53,8 @@ Test it with sample data or your own. This is one of several [document & data wo
 [Validate Input]
   - Empty? Too large? → Error
         ↓
-[Claude API (Clean Data)]
-  - Tool-use: structured JSON output
+[LLM API (Clean Data)]
+  - Strict prompt: JSON output only
   - Prompt defines cleaning rules
         ↓
 [Format Result]
@@ -65,18 +65,20 @@ Test it with sample data or your own. This is one of several [document & data wo
   - headers, cleaned_rows, changes, stats
 ```
 
-The key: Claude returns the result as structured JSON via tool-use, not as text. This makes the output reliably parseable no matter how many special characters are in the data.
+The key: the model is pinned by its system prompt to return a JSON object and nothing else, and a code node parses that and fails loudly if the shape is wrong. This is what makes the output usable no matter how many special characters are in the data. The demo instance runs Kimi k2.5 in JSON mode; the same workflow works against Claude with tool-use, which enforces the shape at the API rather than in the prompt.
 
-## Time Savings in Numbers
+## Where the time goes
 
 | Task | Manual | With Workflow |
 |------|--------|---------------|
-| Clean 100 contacts | 2-4 hours | ~20 seconds |
-| Clean 1,000 contacts | 1-2 days | ~3 minutes |
-| Find duplicates | 30 min per 100 | Automatic |
-| Normalize phone numbers | 1 min per number | In batch |
+| Clean a few hundred contacts | An afternoon of find-and-replace | One run, plus reading the change log |
+| Find duplicates | Sort, squint, repeat | Automatic, including near-matches |
+| Normalize phone numbers | One at a time | In batch |
+| Do it again next month | The same afternoon | The same one run |
 
-For monthly-maintained lists: **annual savings of 10-30 hours** per person.
+Rather than quote you a stopwatch figure from my machine, run the demo on a sample of your own list. That tells you both the speed and, more usefully, whether the rules it applies are the ones you want.
+
+The honest caveat: fuzzy duplicate matching is a judgement call, and a model will occasionally merge two people who share a name or keep two records that are the same person. Read the change log before you import the result. That is the step nobody puts in the time table.
 
 ## Customization Options
 
@@ -89,21 +91,21 @@ The workflow is a starting point. Common extensions:
 
 ## Privacy Note
 
-Data is used exclusively for AI processing and not stored afterward. The workflow runs on a self-hosted n8n server. For production use, add your own API key and run the workflow on your own instance.
+The demo runs on my self-hosted n8n, and the rows you paste go to the model provider it calls. Two things follow. Do not paste a real customer list into a public demo, mine or anyone's: use a sample. And in a production build, n8n retains execution data until you configure pruning, so set that policy deliberately if the data is personal.
 
 ## Download the Workflow
 
-> **Not a screenshot: the real workflow.** This is the exact n8n JSON, exported from a running instance. Import it into your own n8n and inspect every node yourself.
+> **Not a screenshot: the real workflow.** This is the n8n JSON: import it into your own n8n and inspect every node yourself.
 >
 > [Download n8n Workflow (JSON)](/workflows/excel-retter.json)
 
-Import: n8n → Workflows → Import from File → Upload JSON → Set credentials (Anthropic API Key)
+Import: n8n → Workflows → Import from File → Upload JSON → Set credentials (the API key of whichever model provider you point it at)
 
 ## Technical detail
 
-If you're interested in the implementation details: why Kimi k2.5 instead of Claude tool-use, how RFC 4180-compliant CSV quoting works in JavaScript, and which prompt engineering techniques ensure reliable JSON output:
+If you're interested in the implementation details: which rules belong in a prompt and which belong in code, how the request is assembled, and why the parse step is where the reliability lives:
 
-→ **[Spreadsheet Rescuer: CSV Cleaning with n8n and Kimi k2.5](https://leinss.xyz/blog/en/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
+→ **[How I clean messy spreadsheets with an LLM and n8n](https://leinss.xyz/blog/en/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
 Related reading: the [multi-platform inventory sync reference build](/en/blog/case-study-ecommerce-sync/), which is the same problem at four-system scale.
 

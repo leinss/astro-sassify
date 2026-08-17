@@ -1,6 +1,6 @@
 ---
 title: "Excel-Hölle verlassen: Kontaktlisten automatisch bereinigen mit n8n und KI"
-description: "Wie Sie mit n8n und Claude messy Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen, statt Stunden manuell zu arbeiten."
+description: "Wie Sie mit n8n und einem Sprachmodell unordentliche Kontaktlisten in Sekunden bereinigen, normalisieren und Duplikate entfernen, statt Stunden manuell zu arbeiten."
 pubDate: 2026-01-22
 category: automation
 tags: ["tabellen", "excel", "kontakte", "datenbereinigung", "n8n", "ki"]
@@ -10,7 +10,7 @@ lang: de
 alternateSlug: "from-spreadsheets-to-systems"
 ---
 
-> **Kurz gesagt:** Um eine unordentliche Kontaktliste automatisch zu bereinigen, geben Sie die CSV an einen Workflow, der jede Zeile an Claude schickt und strukturiertes JSON zurückliefert: bereinigte Leerzeichen, klein geschriebene E-Mails, Telefonnummern in einem Format, korrekt kapitalisierte Namen, zusammengeführte Firmennamen und entfernte Duplikate, auch Fuzzy-Matches. 100 Kontakte zu bereinigen sinkt von Stunden auf rund 20 Sekunden.
+> **Kurz gesagt:** Um eine unordentliche Kontaktliste automatisch zu bereinigen, geben Sie die CSV an einen Workflow, der sie unter einem strengen Prompt an ein Sprachmodell schickt und strukturiertes JSON zurückliefert: bereinigte Leerzeichen, klein geschriebene E-Mails, Telefonnummern in einem Format, korrekt kapitalisierte Namen, zusammengeführte Firmennamen und entfernte Duplikate, auch Fuzzy-Matches. Aus einem Nachmittag Arbeit wird ungefähr die Zeit, die Sie brauchen, um das Änderungsprotokoll zu lesen.
 
 Jedes Unternehmen hat sie: die Kontaktliste, die über Jahre gewachsen ist. Namen mit unterschiedlicher Schreibweise, E-Mail-Adressen in Großbuchstaben, Telefonnummern in vier verschiedenen Formaten, Firmennamen die mal "GmbH" und mal "gmbh" heißen, und irgendwo stecken doppelte Einträge drin.
 
@@ -29,7 +29,7 @@ Das Ergebnis: das CRM-System, das das Problem lösen sollte, wird selbst zum Pro
 
 ## Der Excel-Retter: Automatische Datenbereinigung mit KI
 
-Der Workflow löst genau dieses Problem. Sie laden Ihre CSV-Daten hoch (oder fügen sie direkt ein), und n8n schickt sie an Claude, der:
+Der Workflow löst genau dieses Problem. Sie laden Ihre CSV-Daten hoch (oder fügen sie direkt ein), und n8n schickt sie an ein Sprachmodell, das:
 
 1. **Leerzeichen** am Anfang und Ende entfernt
 2. **E-Mail-Adressen** normalisiert (Kleinbuchstaben) und auf syntaktische Gültigkeit prüft
@@ -53,8 +53,8 @@ Testen Sie es mit Beispieldaten oder Ihren eigenen. Das ist einer von mehreren [
 [Eingabe validieren]
   - Leer? Zu groß? → Fehler
         ↓
-[Claude API (Daten bereinigen)]
-  - Tool-Use: strukturierte JSON-Ausgabe
+[LLM-API (Daten bereinigen)]
+  - Strenger Prompt: nur JSON-Ausgabe
   - Prompt definiert Bereinigungsregeln
         ↓
 [Ergebnis formatieren]
@@ -65,18 +65,20 @@ Testen Sie es mit Beispieldaten oder Ihren eigenen. Das ist einer von mehreren [
   - headers, cleaned_rows, changes, stats
 ```
 
-Der Clou: Claude gibt das Ergebnis als strukturiertes JSON über Tool-Use zurück, nicht als Text. Das macht die Ausgabe zuverlässig parsebar, egal wie viele Sonderzeichen in den Daten stecken.
+Der Clou: Das Modell ist per System-Prompt darauf festgelegt, ein JSON-Objekt und sonst nichts zurückzugeben, und ein Code-Node parst das und scheitert laut, wenn die Form nicht stimmt. Das macht die Ausgabe brauchbar, egal wie viele Sonderzeichen in den Daten stecken. Die Demo-Instanz nutzt Kimi k2.5 im JSON-Modus; derselbe Workflow läuft gegen Claude mit Tool-Use, das die Form an der API erzwingt statt im Prompt.
 
-## Zeitersparnis in Zahlen
+## Wohin die Zeit geht
 
 | Aufgabe | Manuell | Mit Workflow |
 |---------|---------|--------------|
-| 100 Kontakte bereinigen | 2-4 Stunden | ~20 Sekunden |
-| 1.000 Kontakte | 1-2 Tage | ~3 Minuten |
-| Duplikate finden | Halbstunde pro 100 | Automatisch |
-| Telefonnummern normalisieren | 1 Min. pro Nummer | Im Batch |
+| Ein paar hundert Kontakte bereinigen | Ein Nachmittag Suchen und Ersetzen | Ein Lauf plus das Änderungsprotokoll lesen |
+| Duplikate finden | Sortieren, schauen, wiederholen | Automatisch, auch Fast-Treffer |
+| Telefonnummern normalisieren | Eine nach der anderen | Im Batch |
+| Nächsten Monat wieder | Derselbe Nachmittag | Derselbe eine Lauf |
 
-Bei monatlich gepflegten Listen: **Jahresersparnis 10-30 Stunden** für eine Person.
+Statt Ihnen eine Stoppuhr-Zahl von meiner Maschine zu nennen: Lassen Sie die Demo über eine Stichprobe Ihrer eigenen Liste laufen. Das zeigt Ihnen das Tempo und, nützlicher, ob die angewandten Regeln die sind, die Sie wollen.
+
+Die ehrliche Einschränkung: Fuzzy-Duplikate sind eine Ermessensfrage, und ein Modell führt gelegentlich zwei Personen mit gleichem Namen zusammen oder behält zwei Datensätze derselben Person. Lesen Sie das Änderungsprotokoll, bevor Sie das Ergebnis importieren. Diesen Schritt hat keine Zeittabelle drin.
 
 ## Anpassungsmöglichkeiten
 
@@ -89,21 +91,21 @@ Der Workflow ist ein Startpunkt. Häufige Erweiterungen:
 
 ## DSGVO-Hinweis
 
-Die Daten werden ausschließlich für die KI-Verarbeitung genutzt und danach nicht gespeichert. Der Workflow läuft auf einem selbst-gehosteten n8n-Server in Deutschland. Für den produktiven Einsatz sollten Sie Ihren eigenen API-Key hinterlegen und den Workflow auf Ihrer eigenen Instanz betreiben.
+Die Demo läuft auf meinem selbst gehosteten n8n in Deutschland, und die Zeilen, die Sie einfügen, gehen an den Modellanbieter, den sie aufruft. Daraus folgt zweierlei. Fügen Sie keine echte Kundenliste in eine öffentliche Demo ein, weder in meine noch in eine andere: nehmen Sie eine Stichprobe. Und im produktiven Aufbau hält n8n Ausführungsdaten vor, bis Sie das Pruning konfigurieren. Setzen Sie diese Regel bewusst, wenn die Daten personenbezogen sind.
 
 ## Workflow herunterladen
 
-> **Kein Screenshot. Der echte Workflow.** Das ist die exakte n8n-JSON, aus einer laufenden Instanz exportiert. Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
+> **Kein Screenshot. Der echte Workflow.** Das ist die n8n-JSON: Importieren Sie sie in Ihr eigenes n8n und prüfen Sie jeden Node selbst.
 >
 > [n8n-Workflow herunterladen (JSON)](/workflows/excel-retter.json)
 
-Importieren: n8n → Workflows → Import from File → JSON hochladen → Credentials setzen (Anthropic API Key)
+Importieren: n8n → Workflows → Import from File → JSON hochladen → Credentials setzen (API-Key des Anbieters, auf den Sie den Workflow zeigen lassen)
 
 ## Technische Details
 
-Wenn Sie die Implementierungsdetails interessieren: warum Kimi k2.5 statt Claude Tool-Use, wie RFC 4180-konformes CSV-Quoting in JavaScript funktioniert und welche Prompt-Engineering-Techniken für zuverlässige JSON-Ausgabe sorgen:
+Wenn Sie die Implementierungsdetails interessieren: welche Regeln in einen Prompt gehören und welche in Code, wie die Anfrage aufgebaut wird, und warum die Zuverlässigkeit im Parse-Schritt steckt:
 
-→ **[Excel-Retter: CSV-Bereinigung mit n8n und Kimi k2.5](https://leinss.xyz/blog/de/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
+→ **[Wie ich unordentliche Tabellen mit einem LLM und n8n bereinige](https://leinss.xyz/blog/de/spreadsheet-cleaning-technical/)** *(leinss.xyz)*
 
 Zum Weiterlesen: der [Referenz-Build zum Multi-Plattform-Bestandsabgleich](/de/blog/fallstudie-ecommerce-sync/), dasselbe Problem im Maßstab von vier Systemen.
 
