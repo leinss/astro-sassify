@@ -49,7 +49,7 @@ const num = new Intl.NumberFormat(locale)
         <h2 class="text-3xl font-bold text-secondary-900 dark:text-white mb-3">
           {t.title}
         </h2>
-        <p class="text-secondary-600 dark:text-secondary-300">{t.subtitle}</p>
+        <p class="text-secondary-700 dark:text-secondary-300">{t.subtitle}</p>
       </div>
 
       <div
@@ -73,7 +73,7 @@ const num = new Intl.NumberFormat(locale)
                 <label for="roi-hours" class="text-sm font-medium text-secondary-700 dark:text-secondary-300">
                   {t.hours_label}
                 </label>
-                <span class="text-sm font-bold text-primary-600 dark:text-primary-400">
+                <span class="text-sm font-bold text-primary-700 dark:text-primary-400">
                   <span x-text="hours">{d.hours}</span> h
                 </span>
               </div>
@@ -96,7 +96,7 @@ const num = new Intl.NumberFormat(locale)
                 <label for="roi-cost" class="text-sm font-medium text-secondary-700 dark:text-secondary-300">
                   {t.cost_label}
                 </label>
-                <span class="text-sm font-bold text-primary-600 dark:text-primary-400" x-text="fmtEur(cost)">{eur.format(DEFAULT_HOURLY_EUR)}</span>
+                <span class="text-sm font-bold text-primary-700 dark:text-primary-400" x-text="fmtEur(cost)">{eur.format(DEFAULT_HOURLY_EUR)}</span>
               </div>
               <input
                 id="roi-cost"
@@ -117,7 +117,7 @@ const num = new Intl.NumberFormat(locale)
                 <label for="roi-automation" class="text-sm font-medium text-secondary-700 dark:text-secondary-300">
                   {t.automation_label}
                 </label>
-                <span class="text-sm font-bold text-primary-600 dark:text-primary-400">
+                <span class="text-sm font-bold text-primary-700 dark:text-primary-400">
                   <span x-text="automation">{d.automationPct}</span> %
                 </span>
               </div>
@@ -138,16 +138,16 @@ const num = new Intl.NumberFormat(locale)
 
           <!-- Result -->
           <div class="rounded-xl bg-primary-50 dark:bg-primary-900/20 p-6 text-center flex flex-col justify-center">
-            <p class="text-sm font-medium text-secondary-600 dark:text-secondary-400">
+            <p class="text-sm font-medium text-secondary-700 dark:text-secondary-400">
               {t.savings_label}
             </p>
             <p
-              class="text-4xl md:text-5xl font-extrabold text-primary-600 dark:text-primary-400 my-2 tabular-nums"
+              class="text-4xl md:text-5xl font-extrabold text-primary-700 dark:text-primary-400 my-2 tabular-nums"
               x-text="fmtEur(savings)"
             >{eur.format(initialSavings)}</p>
-            <p class="text-sm text-secondary-500 dark:text-secondary-400">{t.per_year}</p>
+            <p class="text-sm text-secondary-700 dark:text-secondary-400">{t.per_year}</p>
             <div class="mt-5 pt-5 border-t border-primary-100 dark:border-primary-800">
-              <p class="text-sm text-secondary-600 dark:text-secondary-400">
+              <p class="text-sm text-secondary-700 dark:text-secondary-400">
                 {t.hours_saved_label}
               </p>
               <p class="text-2xl font-bold text-secondary-900 dark:text-white tabular-nums">
@@ -157,7 +157,7 @@ const num = new Intl.NumberFormat(locale)
           </div>
         </div>
 
-        <p class="mt-6 text-xs text-secondary-500 dark:text-secondary-400 text-center">
+        <p class="mt-6 text-xs text-secondary-700 dark:text-secondary-400 text-center">
           {t.disclaimer}
         </p>
 
