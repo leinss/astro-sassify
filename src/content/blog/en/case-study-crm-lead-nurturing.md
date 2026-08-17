@@ -12,7 +12,7 @@ alternateSlug: "fallstudie-crm-leadpflege"
 
 > **Short answer:** Every lead that arrives (website form, LinkedIn, event list) lands in one place, gets scored against your actual qualification criteria by a model that can read free text, and triggers a follow-up sequence matched to that score. The rep sees a ranked queue with the reasoning attached, instead of an inbox. Built on n8n with Notion as the CRM, and Claude or a local Ollama model doing the scoring.
 
-> **What this is:** a reference build: the architecture, the scoring prompt, and the sequence logic, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[watch the lead-response demo →](/en/projects/)**.
+> **What this is:** a reference build. The architecture, the scoring prompt and the sequence logic, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[watch the lead-response demo →](/en/projects/)**.
 
 ## The problem it solves
 

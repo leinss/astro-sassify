@@ -12,7 +12,7 @@ alternateSlug: "case-study-invoice-processing"
 
 > **Kurz gesagt:** Ein Vision-Modell liest jede Rechnung (PDF, Scan oder Handyfoto) und gibt strukturierte Daten zurück: Lieferant, Steuernummer, Netto, USt., Positionen. Geschäftsregeln prüfen Rechenwerk und Steuersatz, bevor irgendetwas exportiert wird, und alles, bei dem das Modell unsicher ist, geht in eine Prüfliste statt in Ihre Buchhaltung. Gebaut auf n8n mit Claude Vision: oder vollständig on-premise mit Ollama und DeepSeek-OCR, wenn die Daten das Haus nicht verlassen dürfen.
 
-> **Was das hier ist:** ein Referenz-Build: die Architektur, das Extraktionsschema und die Validierungsregeln, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Geben Sie der Demo eine eigene Rechnung →](/de/blog/rechnungsverarbeitung-automatisieren/)**.
+> **Was das hier ist:** ein Referenz-Build. Die Architektur, das Extraktionsschema und die Validierungsregeln, aufgeschrieben, damit Sie die Technik beurteilen können. Es stehen keine Kundenzahlen darin. Prüfen können Sie das laufende System: **[Geben Sie der Demo eine eigene Rechnung →](/de/blog/rechnungsverarbeitung-automatisieren/)**.
 
 ## Das Problem dahinter
 

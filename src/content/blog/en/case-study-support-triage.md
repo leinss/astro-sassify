@@ -12,7 +12,7 @@ alternateSlug: "fallstudie-support-triage"
 
 > **Short answer:** An AI triage layer sits between your customers and your support team. It reads every incoming message, scores urgency, assigns a category, routes it to the right Slack channel, and answers the routine ones itself, with confidence thresholds and sentiment checks so anything doubtful reaches a human. Built on n8n and Claude, with a local Ollama pre-filter to keep the API bill down.
 
-> **What this is:** a reference build: the architecture, the prompts, and the exact n8n workflow, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
+> **What this is:** a reference build. The architecture, the prompts and the exact n8n workflow, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
 ## The problem it solves
 
@@ -306,7 +306,7 @@ This starter implements classification and routing. A full implementation would 
 
 ## Technical detail
 
-For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)**: covers intent classification, context retrieval, and response generation.
+For a detailed technical walkthrough on building customer service bots with n8n, see my personal blog: **[Building Customer Service Bots with n8n](https://leinss.xyz/blog/en/n8n-customer-service/)**, which covers intent classification, context retrieval and response generation.
 
 ## Your turn
 

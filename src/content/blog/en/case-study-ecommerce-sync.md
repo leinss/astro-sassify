@@ -12,7 +12,7 @@ alternateSlug: "fallstudie-ecommerce-sync"
 
 > **Short answer:** One system holds the real stock number and every sales channel reads from it. A sale on any platform fires a webhook, the hub decrements the central count, and pushes the new figure to the other three within seconds. Product content is written once and adapted per marketplace. Built on n8n with Airtable as the source of truth.
 
-> **What this is:** a reference build: the architecture, the conflict-resolution rules, and the failure handling, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
+> **What this is:** a reference build. The architecture, the conflict-resolution rules and the failure handling, written up so you can judge the engineering. There are no client figures here. What you can check yourself is the running system: **[try the demos →](/en/projects/)**.
 
 ## The problem it solves
 
