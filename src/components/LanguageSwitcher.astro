@@ -86,6 +86,7 @@ const otherLang = lang === "en" ? "de" : "en"
   href={alternateHref || (lang === "en" ? dePath : enPath)}
   class="language-switcher focus:outline-hidden focus:ring-2 focus:ring-primary-500 rounded-full text-secondary-700 hover:text-secondary-700 dark:text-secondary-400 dark:hover:text-secondary-200"
   aria-label={t.header.switch_language}
+  data-lang-target={otherLang}
 >
   <IoLanguage className="lang-icon" />
   <div class="lang-stack">
@@ -93,6 +94,26 @@ const otherLang = lang === "en" ? "de" : "en"
     <span class="other-lang">{otherLang.toUpperCase()}</span>
   </div>
 </a>
+
+<script>
+  // Record the language the visitor picks, so the next arrival at "/" opens in
+  // it rather than in whatever the browser reports. Read back in
+  // src/pages/index.astro; that page is the only one that redirects.
+  //
+  // Bound per element rather than once per document because the switcher is
+  // rendered twice, in the desktop header and in the mobile menu.
+  document
+    .querySelectorAll<HTMLAnchorElement>("[data-lang-target]")
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        try {
+          localStorage.setItem("preferredLang", link.dataset.langTarget!)
+        } catch {
+          // Storage blocked; navigation still works, the choice is not kept.
+        }
+      })
+    })
+</script>
 
 <style>
   .language-switcher {
