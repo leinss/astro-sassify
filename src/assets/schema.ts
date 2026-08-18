@@ -2,7 +2,7 @@
 // Centralises the canonical site URL and the schema shapes so the emitted data
 // never drifts from the visible content of each component.
 
-export const SITE_URL = "https://leinss-consulting.de";
+export const SITE_URL = "https://consulting.leinss.xyz";
 
 /**
  * Convert the lightweight markdown used in FAQ answers (blank-line paragraphs

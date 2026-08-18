@@ -7,16 +7,16 @@ Leinss Consulting automates repetitive work across four areas: CRM & sales, docu
 The site is bilingual: German pages live under `/de/`, English under `/en/`. English URLs are listed below; replace `/en/` with `/de/` for the German equivalent.
 
 ## Services
-- [CRM & Sales Automation](https://leinss-consulting.de/en/services/crm-sales-automation/): Lead scoring, smart assignment, multi-channel follow-ups, pipeline-stage automation, real-time CRM sync.
-- [Document & Data Workflows](https://leinss-consulting.de/en/services/document-workflows/): Invoice extraction and booking, automated report generation, contract data extraction, form processing, approval workflows.
-- [Communication Automation](https://leinss-consulting.de/en/services/communication-automation/): Customer onboarding sequences, intelligent ticket routing, appointment reminders, status notifications, feedback/NPS automation.
-- [Integrations & APIs](https://leinss-consulting.de/en/services/integrations-apis/): Real-time CRM↔ERP sync, e-commerce integration, custom API development, webhook triggers, data-warehouse reporting.
+- [CRM & Sales Automation](https://consulting.leinss.xyz/en/services/crm-sales-automation/): Lead scoring, smart assignment, multi-channel follow-ups, pipeline-stage automation, real-time CRM sync.
+- [Document & Data Workflows](https://consulting.leinss.xyz/en/services/document-workflows/): Invoice extraction and booking, automated report generation, contract data extraction, form processing, approval workflows.
+- [Communication Automation](https://consulting.leinss.xyz/en/services/communication-automation/): Customer onboarding sequences, intelligent ticket routing, appointment reminders, status notifications, feedback/NPS automation.
+- [Integrations & APIs](https://consulting.leinss.xyz/en/services/integrations-apis/): Real-time CRM↔ERP sync, e-commerce integration, custom API development, webhook triggers, data-warehouse reporting.
 
 ## Live demos, reference builds & case studies
-- [Projects & live AI demos](https://leinss-consulting.de/en/projects/): AI invoice reader, lightning lead response, meeting-minutes bot, spreadsheet rescue, AI support assistant. Each one runs live on your own input, and ships the n8n workflow it runs on.
+- [Projects & live AI demos](https://consulting.leinss.xyz/en/projects/): AI invoice reader, lightning lead response, meeting-minutes bot, spreadsheet rescue, AI support assistant. Each one runs live on your own input, and ships the n8n workflow it runs on.
 
 ## Blog
-- [Automation blog](https://leinss-consulting.de/en/blog/): Practical, no-code-friendly guides on automating SMB processes with n8n and AI (CRM, documents, communication, integrations), plus reference builds and one real client case study.
+- [Automation blog](https://consulting.leinss.xyz/en/blog/): Practical, no-code-friendly guides on automating SMB processes with n8n and AI (CRM, documents, communication, integrations), plus reference builds and one real client case study.
 
 ## Contact
 - [Book a free strategy call (English)](https://cal.com/tobias-leinss/strategymeeting)
