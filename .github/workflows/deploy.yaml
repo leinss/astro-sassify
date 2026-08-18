@@ -37,8 +37,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint Blog Parity
-        run: pnpm run lint:blog-parity
+      # One step, so a check added to `lint` runs in CI without editing this
+      # file. The link check is not part of `lint`: it reads dist/ and so
+      # belongs to the build, which runs it.
+      - name: Lint
+        run: pnpm run lint
 
       - name: Type Check
         run: pnpm exec astro check

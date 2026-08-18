@@ -8,6 +8,7 @@
     "build": "node scripts/blog-parity-lint.mjs && node scripts/check-inline-spacing.mjs && astro build && node scripts/check-internal-links.mjs",
     "preview": "astro build && astro preview",
     "astro": "astro",
+    "lint": "pnpm run lint:blog-parity && pnpm run lint:spacing",
     "lint:blog-parity": "node scripts/blog-parity-lint.mjs",
     "lint:spacing": "node scripts/check-inline-spacing.mjs",
     "lint:links": "node scripts/check-internal-links.mjs",
