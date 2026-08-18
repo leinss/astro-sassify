@@ -28,7 +28,7 @@ export const feed = (lang: Lang) =>
 
     return rss({
       ...META[lang],
-      site: context.site ?? "https://leinss-consulting.de",
+      site: context.site ?? "https://consulting.leinss.xyz",
       items: posts.map((p) => ({
         title: p.data.title,
         description: p.data.description,

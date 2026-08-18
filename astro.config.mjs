@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://leinss-consulting.de",
+  site: "https://consulting.leinss.xyz",
   // Static output for GitHub Pages (newsletter uses Listmonk public API directly)
   output: "static",
   integrations: [

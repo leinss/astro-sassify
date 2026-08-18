@@ -1,4 +1,4 @@
-# Content Plan — leinss-consulting.de
+# Content Plan — consulting.leinss.xyz
 
 Editorial calendar for the bilingual (DE/EN) blog. Every post ships as a
 language pair with bidirectional `alternateSlug`, an answer block at the top
