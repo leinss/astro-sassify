@@ -1,7 +1,10 @@
 ---
-// Root redirect with browser locale detection
-// German browsers → /de/
-// All others → /en/
+// Root redirect. A language the visitor chose beats the one their browser
+// reports, because the choice is the more recent and more deliberate signal.
+// Falls back to browser locale: German browsers → /de/, all others → /en/.
+//
+// Only this page redirects. A deep link always renders the language it names,
+// so a shared URL cannot open in a different language than the sender saw.
 ---
 
 <!doctype html>
@@ -17,11 +20,18 @@
     </noscript>
     <script is:inline>
       (function () {
-        // Get browser language (e.g., "de", "de-DE", "en-US")
-        const lang = navigator.language || navigator.userLanguage || "de"
-        const isGerman = lang.toLowerCase().startsWith("de")
-        // Redirect based on browser locale
-        window.location.replace(isGerman ? "/de/" : "/en/")
+        var chosen = null
+        try {
+          chosen = localStorage.getItem("preferredLang")
+        } catch (e) {
+          // Storage blocked; fall through to browser locale.
+        }
+        if (chosen !== "de" && chosen !== "en") {
+          // Browser language, e.g. "de", "de-DE", "en-US".
+          var reported = navigator.language || navigator.userLanguage || "de"
+          chosen = reported.toLowerCase().indexOf("de") === 0 ? "de" : "en"
+        }
+        window.location.replace("/" + chosen + "/")
       })()
     </script>
   </head>
