@@ -13,7 +13,7 @@ pnpm astro check  # TypeScript validation
 
 ## Architecture
 
-**Bilingual Astro 5 site** for Leinss Consulting (leinss-consulting.de) with static output for GitHub Pages.
+**Bilingual Astro 5 site** for Leinss Consulting (consulting.leinss.xyz) with static output for GitHub Pages.
 
 ### Routing & i18n
 
